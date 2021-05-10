@@ -1,0 +1,55 @@
+{
+    "teams":[
+        {
+            "id" : 1,
+            "name": "IBM",
+            "desc": "ceci est la description de l equipe de IBM",
+            "isPrivate": false,
+            "picture": "pictureOfCat",
+            "salons": [
+                {
+                    "id":1,
+                    "name":"General",
+                    "desc": "ceci est le salon General de l equipe IBM"
+                },
+                {
+                    "id":2,
+                    "name":"Nourriture",
+                    "desc": "ceci est le salon Nourriture de l equipe IBM"
+                }
+            ]
+        },
+        {
+            "id" : 2,
+            "name": "Semifir",
+            "desc": "ceci est la description de l equipe de Semifir",
+            "isPrivate": false,
+            "picture": "pictureOfDog",
+            "salons": [
+                {
+                    "id":3,
+                    "name":"General",
+                    "desc": "ceci est le salon General de l equipe Semifir"
+                }
+            ]
+        }
+    ],
+
+    "salons": [
+        {
+            "id":1,
+            "name":"General",
+            "desc": "ceci est le salon General de l equipe IBM"
+        },
+        {
+            "id":2,
+            "name":"Nourriture",
+            "desc": "ceci est le salon Nourriture de l equipe IBM"
+        },
+        {
+            "id":3,
+            "name":"General",
+            "desc": "ceci est le salon General de l equipe Semifir"
+        }
+    ]
+}
