@@ -19,6 +19,9 @@ import { SalonSummaryComponent } from './pages/params/salon/salon-summary/salon-
 import { SalonPermissionsComponent } from './pages/params/salon/salon-permissions/salon-permissions.component';
 import { AddTeamComponent } from './pages/params/admin/add-team/add-team.component';
 import { AddUserComponent } from './pages/params/admin/add-user/add-user.component';
+import { SidebarAdminComponent } from './components/superAdmin/sidebar-admin/sidebar-admin.component';
+import { ParametresComponent } from './pages/parametres/parametres.component';
+import { TemplateComponent } from './pages/template/template.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { AddUserComponent } from './pages/params/admin/add-user/add-user.compone
     SalonSummaryComponent,
     SalonPermissionsComponent,
     AddTeamComponent,
-    AddUserComponent
+    AddUserComponent,
+    SidebarAdminComponent,
+    ParametresComponent,
+    TemplateComponent
   ],
   imports: [
     BrowserModule,

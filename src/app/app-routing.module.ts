@@ -2,15 +2,22 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ParametresComponent } from './pages/parametres/parametres.component';
+import { AddTeamComponent } from './pages/params/admin/add-team/add-team.component';
 import { PrivateMsgComponent } from './pages/private-msg/private-msg.component';
 import { TeamSelectComponent } from './pages/team-select/team-select.component';
+import { TemplateComponent } from './pages/template/template.component';
 
 const routes: Routes = [
-  { path: "privateMessages", component: PrivateMsgComponent },
-  { path: "teamSelect", component: TeamSelectComponent },
+  {path:"parametres", component: ParametresComponent, children:[
+    {path:"addTeam", component: AddTeamComponent}
+  ]},
 
-  { path: "teamMessages/:idTeam/:idSalon", component: PrivateMsgComponent },
-
+  {path:"home", component: TemplateComponent, children:[
+    {path:"teamSelect", component:TeamSelectComponent},
+    { path: "privateMessages", component: PrivateMsgComponent },
+    { path: "teamMessages/:idTeam/:idSalon", component: PrivateMsgComponent },
+  ]},
 
   { path: "login", component: LoginComponent },
   { path: "404", component: NotFoundComponent },

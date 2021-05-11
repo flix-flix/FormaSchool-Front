@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddTeamComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }
