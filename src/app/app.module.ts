@@ -23,6 +23,8 @@ import { SidebarAdminComponent } from './components/superAdmin/sidebar-admin/sid
 import { ParametresComponent } from './pages/parametres/parametres.component';
 import { TemplateComponent } from './pages/template/template.component';
 import { ProfilComponent } from './components/global/profil/profil.component';
+import { TeamMenuComponent } from './components/team/team-menu/team-menu.component';
+import { SalonButtonComponent } from './components/team/salon-button/salon-button.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { ProfilComponent } from './components/global/profil/profil.component';
     SidebarAdminComponent,
     ParametresComponent,
     TemplateComponent,
-    ProfilComponent
+    ProfilComponent,
+    TeamMenuComponent,
+    SalonButtonComponent
   ],
   imports: [
     BrowserModule,
