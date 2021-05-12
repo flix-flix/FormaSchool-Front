@@ -22,6 +22,7 @@ import { AddUserComponent } from './pages/params/admin/add-user/add-user.compone
 import { SidebarAdminComponent } from './components/superAdmin/sidebar-admin/sidebar-admin.component';
 import { ParametresComponent } from './pages/parametres/parametres.component';
 import { TemplateComponent } from './pages/template/template.component';
+import { ProfilComponent } from './components/global/profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { TemplateComponent } from './pages/template/template.component';
     AddUserComponent,
     SidebarAdminComponent,
     ParametresComponent,
-    TemplateComponent
+    TemplateComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
