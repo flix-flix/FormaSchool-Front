@@ -5,18 +5,22 @@
 
     width: 4rem;
     height: 100%;
-    padding: 0rem 1rem;
+    padding: 0 .5rem;
 
-    background-color: rgb(85, 85, 85);
+    background-color: #4D729E;
 }
 
-#side_menu img {
+.img_div {
     width: 4rem;
     height: 4rem;
-    
-    padding: .5rem;
+    margin-top: .5rem;
+}
+
+.img_button {
+    width: 4rem;
+    height: 4rem;
 }
 
 .img_button:hover {
-    background-color: rgb(139, 139, 139);
+    background-color: #92BADE;
 }
