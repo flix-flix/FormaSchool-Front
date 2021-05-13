@@ -6,6 +6,7 @@
     <div id="team_name">IBM</div>
 
     <div id="salons">
-        <app-salon-button *ngFor="let salon of salons" [salon]="salon"></app-salon-button>
+        <app-salon-button *ngFor="let salon of salons" [salon]="salon" (switchSalon)="switchToSalon($event)">
+        </app-salon-button>
     </div>
 </div>

@@ -27,6 +27,7 @@ import { TeamMenuComponent } from './components/team/team-menu/team-menu.compone
 import { SalonButtonComponent } from './components/team/salon-button/salon-button.component';
 import { MessageComponent } from './features/messages/components/message/message.component';
 import { LineDateComponent } from './features/messages/components/line-date/line-date.component';
+import { MsgThreadComponent } from './features/messages/components/msg-thread/msg-thread.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { LineDateComponent } from './features/messages/components/line-date/line
     TeamMenuComponent,
     SalonButtonComponent,
     MessageComponent,
-    LineDateComponent
+    LineDateComponent,
+    MsgThreadComponent
   ],
   imports: [
     BrowserModule,

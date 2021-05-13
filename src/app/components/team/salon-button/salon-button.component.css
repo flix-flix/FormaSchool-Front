@@ -9,10 +9,15 @@
     font-size: 1.2rem;
 }
 
-
-.salon.selected, .salon:hover  {
+.salon:hover  {
     background-color: #92BADE;
 }
+
+.salon.selected {
+    background-color: #4D729E;
+}
+
+/* ===== Hide/Show params ===== */
 
 .params {
     opacity: 0;
