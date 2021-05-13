@@ -22,6 +22,11 @@ import { AddUserComponent } from './pages/params/admin/add-user/add-user.compone
 import { SidebarAdminComponent } from './components/superAdmin/sidebar-admin/sidebar-admin.component';
 import { ParametresComponent } from './pages/parametres/parametres.component';
 import { TemplateComponent } from './pages/template/template.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
+import {InputTextModule} from 'primeng/inputtext';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -48,7 +53,13 @@ import { TemplateComponent } from './pages/template/template.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AccordionModule,
+    InputTextModule,
+    InputTextareaModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

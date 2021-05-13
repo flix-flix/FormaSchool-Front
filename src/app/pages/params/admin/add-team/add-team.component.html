@@ -1,1 +1,24 @@
-<p>add-team works!</p>
+
+<form [formGroup]="teamForm" (ngSubmit)="save()">
+
+    <span class="p-float-label">
+        <input id="float-input" type="text"  formControlName="picture" pInputText> 
+        <label for="float-input">Logo de l'équipe</label>
+    </span>
+
+    <span class="p-float-label">
+        <input id="float-input" type="text"  formControlName="name" pInputText> 
+        <label for="float-input">Nom de l'équipe</label>
+    </span>
+
+    <span class="p-float-label">
+        <textarea [rows]="5" [cols]="30" formControlName="desc" pInputTextarea autoResize="autoResize"></textarea>
+        <label for="float-input">Description de l'équipe</label>
+    </span>
+    
+    <span id="span_button">
+        <button type="submit">Enregistrer</button>
+    </span>
+</form>
+
+
