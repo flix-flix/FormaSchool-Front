@@ -28,6 +28,15 @@ import { SalonButtonComponent } from './components/team/salon-button/salon-butto
 import { MessageComponent } from './features/messages/components/message/message.component';
 import { LineDateComponent } from './features/messages/components/line-date/line-date.component';
 import { MsgThreadComponent } from './features/messages/components/msg-thread/msg-thread.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AccordionModule } from 'primeng/accordion';     //accordion and accordion tab
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { HttpClientModule } from '@angular/common/http';
+import { ButtonModule } from 'primeng/button';
+import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
+
+
 
 @NgModule({
   declarations: [
@@ -56,11 +65,19 @@ import { MsgThreadComponent } from './features/messages/components/msg-thread/ms
     SalonButtonComponent,
     MessageComponent,
     LineDateComponent,
-    MsgThreadComponent
+    MsgThreadComponent,
+    AddUserToTeamComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AccordionModule,
+    InputTextModule,
+    InputTextareaModule,
+    HttpClientModule,
+    ButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

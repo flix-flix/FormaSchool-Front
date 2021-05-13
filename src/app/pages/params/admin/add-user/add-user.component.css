@@ -1,0 +1,18 @@
+
+form:first-child{
+    margin-top: 40px;  
+    margin-left:10%;
+}
+div span{
+    margin-top: 30px;
+}
+
+input{
+    background-color: #A2D0EA;
+}
+label{
+    color: #10516D;
+}
+button{
+    margin-top: 30px;
+}

@@ -1,1 +1,28 @@
-<p>add-user works!</p>
+<form [formGroup]="userForm" (ngSubmit)="save()">
+
+    <span class="p-float-label">
+        <input id="float-input" type="text"  formControlName="picture" pInputText> 
+        <label for="float-input">Image de Profil</label>
+    </span>
+
+    <div>
+        <span class="p-float-label">
+            <input id="float-input" type="text"  formControlName="firstname" pInputText> 
+            <label for="float-input">Prénom</label>
+        </span>
+        <span class="p-float-label">
+            <input id="float-input" type="text"  formControlName="lastname" pInputText> 
+            <label for="float-input">Nom</label>
+        </span>
+        <span class="p-float-label">
+            <input id="float-input" type="email"  formControlName="email" pInputText> 
+            <label for="float-input">Email</label>
+        </span>
+        <span class="p-float-label">
+            <input id="float-input" type="text"  formControlName="password" pInputText> 
+            <label for="float-input">Mot de passe</label>
+        </span>
+    </div>
+
+    <button pButton pRipple type="submit" label="Créer" class="p-button-rounded p-button-info"></button>
+</form>

@@ -1,55 +1,110 @@
 {
-    "teams":[
+  "teams": [
+    {
+      "id": 1,
+      "name": "IBM",
+      "desc": "ceci est la description de l equipe de IBM",
+      "isPrivate": false,
+      "picture": "pictureOfCat",
+      "salons": [
         {
-            "id" : 1,
-            "name": "IBM",
-            "desc": "ceci est la description de l equipe de IBM",
-            "isPrivate": false,
-            "picture": "pictureOfCat",
-            "salons": [
-                {
-                    "id":1,
-                    "name":"General",
-                    "desc": "ceci est le salon General de l equipe IBM"
-                },
-                {
-                    "id":2,
-                    "name":"Nourriture",
-                    "desc": "ceci est le salon Nourriture de l equipe IBM"
-                }
-            ]
+          "id": 1,
+          "name": "General",
+          "desc": "ceci est le salon General de l equipe IBM"
         },
         {
-            "id" : 2,
-            "name": "Semifir",
-            "desc": "ceci est la description de l equipe de Semifir",
-            "isPrivate": false,
-            "picture": "pictureOfDog",
-            "salons": [
-                {
-                    "id":3,
-                    "name":"General",
-                    "desc": "ceci est le salon General de l equipe Semifir"
-                }
-            ]
+          "id": 2,
+          "name": "Nourriture",
+          "desc": "ceci est le salon Nourriture de l equipe IBM"
         }
-    ],
-
-    "salons": [
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Semifir",
+      "desc": "ceci est la description de l equipe de Semifir",
+      "isPrivate": false,
+      "picture": "pictureOfDog",
+      "salons": [
         {
-            "id":1,
-            "name":"General",
-            "desc": "ceci est le salon General de l equipe IBM"
-        },
-        {
-            "id":2,
-            "name":"Nourriture",
-            "desc": "ceci est le salon Nourriture de l equipe IBM"
-        },
-        {
-            "id":3,
-            "name":"General",
-            "desc": "ceci est le salon General de l equipe Semifir"
+          "id": 3,
+          "name": "General",
+          "desc": "ceci est le salon General de l equipe Semifir"
         }
-    ]
+      ]
+    },
+    {
+      "picture": "sii_picture",
+      "name": "SII",
+      "desc": "Ceci est la description de l'équipe de SII",
+      "isPrivate": false,
+      "salons": [
+        {
+          "_name": "General",
+          "_desc": "Description par default à la creation",
+          "id": 5
+        }
+      ],
+      "id": 3
+    }
+  ],
+  "salons": [
+    {
+      "id": 1,
+      "name": "General",
+      "desc": "ceci est le salon General de l equipe IBM"
+    },
+    {
+      "id": 2,
+      "name": "Nourriture",
+      "desc": "ceci est le salon Nourriture de l equipe IBM"
+    },
+    {
+      "id": 3,
+      "name": "General",
+      "desc": "ceci est le salon General de l equipe Semifir"
+    },
+    {
+      "_name": "General",
+      "_desc": "Description par default à la creation",
+      "id": 4
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstname": "Alex",
+      "lastname": "Dupont",
+      "password": "tintin",
+      "email": "alexdupont@gmail.com",
+      "create": "2021-04-13T13:51:33.067Z",
+      "picture": "picture of a cat"
+    },
+    {
+      "firstname": "Jason",
+      "lastname": "Vennin",
+      "password": "toto",
+      "email": "totogfkgkf",
+      "picture": "imagedechien",
+      "create": "2021-05-13T13:51:33.067Z",
+      "id": 2
+    }
+  ],
+  "user_has_team": [
+    {
+      "id": 1,
+      "userId": 1,
+      "teamId": 1
+    },
+    {
+      "userId": 2,
+      "teamId": 1,
+      "id": 2
+    },
+    {
+      "userId": 2,
+      "teamId": 2,
+      "id": 3
+    }
+  ]
 }
