@@ -1,6 +1,9 @@
 <div id="row">
     <app-team-menu></app-team-menu>
     <div id="main">
-
+        <div *ngFor="let day of msgs" class="day">
+            <app-line-date *ngIf="day.length != 0" [date]="day[0].date" class="center"></app-line-date>
+            <app-message *ngFor="let msg of day" [msg]="msg" class="center"></app-message>
+        </div>
     </div>
 </div>

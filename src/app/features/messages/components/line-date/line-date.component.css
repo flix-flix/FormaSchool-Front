@@ -1,0 +1,10 @@
+.line {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    font-weight: bold;
+    font-family: sans-serif;
+
+    color: #1E346D;
+}

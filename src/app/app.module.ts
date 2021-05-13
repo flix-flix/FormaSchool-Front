@@ -25,6 +25,8 @@ import { TemplateComponent } from './pages/template/template.component';
 import { ProfilComponent } from './components/global/profil/profil.component';
 import { TeamMenuComponent } from './components/team/team-menu/team-menu.component';
 import { SalonButtonComponent } from './components/team/salon-button/salon-button.component';
+import { MessageComponent } from './features/messages/components/message/message.component';
+import { LineDateComponent } from './features/messages/components/line-date/line-date.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { SalonButtonComponent } from './components/team/salon-button/salon-butto
     TemplateComponent,
     ProfilComponent,
     TeamMenuComponent,
-    SalonButtonComponent
+    SalonButtonComponent,
+    MessageComponent,
+    LineDateComponent
   ],
   imports: [
     BrowserModule,

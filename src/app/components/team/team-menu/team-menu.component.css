@@ -4,13 +4,15 @@
     
     width: 16rem;
     height: 100%;
-    padding: 2rem;
+    padding: 0 1rem;
     
     background-color: #7295BF;
 }
 
 #team_logo_center {
     text-align: center;
+
+    margin-top: 2rem;
 }
 
 #team_logo {
