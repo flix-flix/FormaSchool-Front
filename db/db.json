@@ -69,5 +69,16 @@
       "_desc": "Description par default à la creation",
       "id": 4
     }
+  ],
+  "users":[
+    {
+      "id": 1,
+      "firstname": "Alex",
+      "lastname": "Dupont",
+      "password": "tintin",
+      "email": "alexdupont@gmail.com",
+      "create": "Tue Jul 22 2008 12:11:04 GMT-0700 (Pacific Daylight Time)",
+      "picture": "picture of a cat"
+    }
   ]
 }
