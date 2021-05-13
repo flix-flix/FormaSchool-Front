@@ -23,11 +23,11 @@ import { SidebarAdminComponent } from './components/superAdmin/sidebar-admin/sid
 import { ParametresComponent } from './pages/parametres/parametres.component';
 import { TemplateComponent } from './pages/template/template.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
-import {InputTextModule} from 'primeng/inputtext';
-import {InputTextareaModule} from 'primeng/inputtextarea';
+import { AccordionModule } from 'primeng/accordion';     //accordion and accordion tab
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { HttpClientModule } from '@angular/common/http';
-import {ButtonModule} from 'primeng/button';
+import { ButtonModule } from 'primeng/button';
 import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
 
 @NgModule({
@@ -63,7 +63,7 @@ import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/ad
     InputTextModule,
     InputTextareaModule,
     HttpClientModule,
-    ButtonModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
