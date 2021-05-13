@@ -3,7 +3,14 @@
         <img id="team_logo" src="../../../../assets/images/_remove/teams/0.png" alt="">
     </div>
 
-    <div id="team_name">IBM</div>
+    <div id="team_name_line">
+        <div id="lol"></div>
+        <div id="team_name">IBM</div>
+        <div>
+            <img id="team_param" src="../../../../assets/images/icons/team_settings.png" alt="teamParams"
+                (click)="openTeamParams()">
+        </div>
+    </div>
 
     <div id="salons">
         <app-salon-button *ngFor="let salon of salons" [salon]="salon" (switchSalon)="switchToSalon($event)">

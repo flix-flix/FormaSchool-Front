@@ -24,4 +24,8 @@ export class TeamMenuComponent implements OnInit {
 
     this.switchSalon.emit(event);
   }
+
+  openTeamParams = () => {
+    alert("TODO team parameters");
+  }
 }
