@@ -1,0 +1,31 @@
+#col {
+    display: flex;
+    flex-direction: column;
+    
+    width: 16rem;
+    height: 100%;
+    padding: 0 1rem;
+    
+    background-color: #7295BF;
+}
+
+#team_logo_center {
+    text-align: center;
+
+    margin-top: 2rem;
+}
+
+#team_logo {
+    width: 8rem;
+    height: 8rem;
+}
+
+#team_name {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+}

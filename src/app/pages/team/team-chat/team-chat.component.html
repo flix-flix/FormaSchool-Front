@@ -1,1 +1,4 @@
-<p>team-chat works!</p>
+<div id="row">
+    <app-team-menu [salons]="salons" (switchSalon)="switchToSalon($event)"></app-team-menu>
+    <app-msg-thread *ngFor="let salon of salons" [salon]="salon" [class.display]="salon.isSelect"></app-msg-thread>
+</div>

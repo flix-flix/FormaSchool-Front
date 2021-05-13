@@ -1,0 +1,35 @@
+#row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 100%;
+}
+
+#profil_img {
+    height: 4rem;
+    width: 4rem;
+    margin-right: 1rem;
+    
+    border-radius: 50%;
+}
+
+#profil_name {
+    display: flex;
+    flex-direction: row;
+    
+    white-space: nowrap;
+
+    margin-right: 1rem;
+    
+    font-family: sans-serif;
+    font-weight: bold;
+    
+    color: #84C9E7;
+}
+
+#profil_params {
+    height: 2rem;
+    width: 2rem;
+    margin-right: 1rem;
+}

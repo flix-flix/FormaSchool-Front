@@ -8,20 +8,25 @@ import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/ad
 import { AddUserComponent } from './pages/params/admin/add-user/add-user.component';
 import { PrivateMsgComponent } from './pages/private-msg/private-msg.component';
 import { TeamSelectComponent } from './pages/team-select/team-select.component';
+import { TeamChatComponent } from './pages/team/team-chat/team-chat.component';
 import { TemplateComponent } from './pages/template/template.component';
 
 const routes: Routes = [
-  {path:"parametres", component: ParametresComponent, children:[
-    {path:"addTeam", component: AddTeamComponent},
-    {path:"addUser", component:AddUserComponent},
-    {path:"addUserToTeam", component:AddUserToTeamComponent}
-  ]},
+  {
+    path: "parametres", component: ParametresComponent, children: [
+      { path: "addTeam", component: AddTeamComponent },
+      { path: "addUser", component: AddUserComponent },
+      { path: "addUserToTeam", component: AddUserToTeamComponent }
+    ]
+  },
 
-  {path:"home", component: TemplateComponent, children:[
-    {path:"teamSelect", component:TeamSelectComponent},
-    { path: "privateMessages", component: PrivateMsgComponent },
-    { path: "teamMessages/:idTeam/:idSalon", component: PrivateMsgComponent },
-  ]},
+  {
+    path: "home", component: TemplateComponent, children: [
+      { path: "teamSelect", component: TeamSelectComponent },
+      { path: "teamMessages/:idTeam/:idSalon", component: TeamChatComponent },
+      { path: "privateMessages", component: PrivateMsgComponent },
+    ]
+  },
 
   { path: "login", component: LoginComponent },
   { path: "404", component: NotFoundComponent },
