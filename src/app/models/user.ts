@@ -2,6 +2,7 @@ import { Team } from "./team";
 
 export class User{
 
+    private _id: number;
     private _firstname: string;
     private _lastname: string;
     private _password: string;
@@ -54,5 +55,11 @@ export class User{
     }
     public set picture(value: string) {
         this._picture = value;
+    }
+    public get id(): number {
+        return this._id;
+    }
+    public set id(value: number) {
+        this._id = value;
     }
 }

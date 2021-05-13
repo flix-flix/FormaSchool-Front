@@ -27,6 +27,8 @@ import {AccordionModule} from 'primeng/accordion';     //accordion and accordion
 import {InputTextModule} from 'primeng/inputtext';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import { HttpClientModule } from '@angular/common/http';
+import {ButtonModule} from 'primeng/button';
+import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { HttpClientModule } from '@angular/common/http';
     AddUserComponent,
     SidebarAdminComponent,
     ParametresComponent,
-    TemplateComponent
+    TemplateComponent,
+    AddUserToTeamComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ import { HttpClientModule } from '@angular/common/http';
     AccordionModule,
     InputTextModule,
     InputTextareaModule,
-    HttpClientModule
+    HttpClientModule,
+    ButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,13 +4,17 @@ import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ParametresComponent } from './pages/parametres/parametres.component';
 import { AddTeamComponent } from './pages/params/admin/add-team/add-team.component';
+import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
+import { AddUserComponent } from './pages/params/admin/add-user/add-user.component';
 import { PrivateMsgComponent } from './pages/private-msg/private-msg.component';
 import { TeamSelectComponent } from './pages/team-select/team-select.component';
 import { TemplateComponent } from './pages/template/template.component';
 
 const routes: Routes = [
   {path:"parametres", component: ParametresComponent, children:[
-    {path:"addTeam", component: AddTeamComponent}
+    {path:"addTeam", component: AddTeamComponent},
+    {path:"addUser", component:AddUserComponent},
+    {path:"addUserToTeam", component:AddUserToTeamComponent}
   ]},
 
   {path:"home", component: TemplateComponent, children:[

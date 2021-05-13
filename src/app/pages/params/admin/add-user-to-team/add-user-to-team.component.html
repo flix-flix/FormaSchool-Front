@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+
+    <label>Choisir un Utilisateur:</label>
+
+    <select formControlName="userForm"  multiple=true>
+        <option *ngFor="let user of users" [value]="user">{{user.firstname}} {{user.lastname}}</option>
+    </select>
+
+    <label>Choisir une Equipe:</label>
+
+    <select formControlName="teamForm"  multiple=true>
+        <option *ngFor="let team of teams" [value]="team">{{team.name}}</option>
+    </select>
+
+    <button type="submit">Save</button>
+</form>
+
