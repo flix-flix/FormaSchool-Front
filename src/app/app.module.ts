@@ -35,6 +35,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
+import {ListboxModule} from 'primeng/listbox';
 
 
 
@@ -77,7 +78,8 @@ import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/ad
     InputTextModule,
     InputTextareaModule,
     HttpClientModule,
-    ButtonModule
+    ButtonModule,
+    ListboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
