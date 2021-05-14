@@ -1,20 +1,16 @@
-export class User{
+export class creationUser{
 
-    private _id: number;
     private _firstname: string;
-    private _lastname: string;
+    private _lastname: string; 
     private _password: string;
     private _email: string;
-    private _create: Date;
     private _picture: string;
     
-
-    constructor(firstname:string, lastname:string, password:string, email:string, create:Date, picture:string){
+    constructor(firstname:string, lastname:string, password:string, email:string, picture:string){
         this._firstname = firstname;
         this._lastname = lastname;
         this._password = password;
         this._email = email;
-        this._create = create;
         this._picture = picture;
     }
 
@@ -42,22 +38,11 @@ export class User{
     public set email(value: string) {
         this._email = value;
     }
-    public get create(): Date {
-        return this._create;
-    }
-    public set create(value: Date) {
-        this._create = value;
-    }
     public get picture(): string {
         return this._picture;
     }
     public set picture(value: string) {
         this._picture = value;
     }
-    public get id(): number {
-        return this._id;
-    }
-    public set id(value: number) {
-        this._id = value;
-    }
+    
 }
