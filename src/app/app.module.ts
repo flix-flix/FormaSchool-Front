@@ -35,11 +35,12 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
-import { TeamPageComponent } from './pages/params/team/team-page/team-page.component';
+import { TeamPageComponent } from './pages/params/team/team-page/team-page.component'
 import { TeamSidebarComponent } from './pages/params/team/team-sidebar/team-sidebar.component';
 import { SalonSidebarComponent } from './pages/params/salon/salon-sidebar/salon-sidebar.component';
 import { SalonPageComponent } from './pages/params/salon/salon-page/salon-page.component';
-
+import { LineUserMembersComponent } from './features/params/team/components/line-user-members/line-user-members.component';
+import { LineRoleMembersComponent } from './features/params/team/components/line-role-members/line-role-members.component';
 
 
 @NgModule({
@@ -75,7 +76,9 @@ import { SalonPageComponent } from './pages/params/salon/salon-page/salon-page.c
     TeamSidebarComponent,
     SalonSidebarComponent,
     SalonPageComponent,
-    
+    LineUserMembersComponent,
+    LineRoleMembersComponent,
+
   ],
   imports: [
     BrowserModule,
