@@ -5,7 +5,7 @@
       "name": "IBM",
       "desc": "ceci est la description de l equipe de IBM",
       "isPrivate": false,
-      "picture": "pictureOfCat",
+      "picture": "../src/assets/images/_remove/teams/0.png",
       "salons": [
         {
           "id": 1,

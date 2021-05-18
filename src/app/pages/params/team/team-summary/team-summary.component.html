@@ -1,22 +1,31 @@
-<div>
-    <h3>Picture: {{ team.picture }} </h3>
-    <h3>Name: {{ team.name }} </h3>
-    <h3>Description: {{ team.desc }} </h3>
+<div id="global">
+    <h1 id="title"> INFORMATIONS</h1>
+
+    <!--
+         
+        <span class="p-float-label">
+            <input id="float-input" type="text" value="{{ team.picture }}" pInputText>
+        </span>
+    -->
+    <div id="inputs">
+        <div>
+            <img src="../../../../../assets/images/_remove/teams/0.png" alt="">
+        </div>
+
+        <div class="info">
+            <label for="float-input">TEAM NAME</label>
+            <span class="p-float-label">
+                <input id="float-input" type="text" value="{{ team.name }}" pInputText>
+            </span>
+        </div>
+
+        <div class="info">
+            <label for="float-input">TEAM DESCRIPTION</label>
+            <span class="p-float-label">
+                <textarea [rows]="5" [cols]="30" value="{{ team.desc }}" pInputTextarea
+                    autoResize="autoResize"></textarea>
+            </span>
+        </div>
+    </div>
+
 </div>
-
-
-
-<span class="p-float-label">
-    <input id="float-input" type="text" placeholder="{{ team.picture }}" pInputText>
-    <label for="float-input"></label>
-</span>
-
-<span class="p-float-label">
-    <input id="float-input" type="text" placeholder="{{ team.name }}" pInputText>
-    <label for="float-input"></label>
-</span>
-
-<span class="p-float-label">
-    <textarea [rows]="5" [cols]="30" placeholder="{{ team.picture }}" pInputTextarea autoResize="autoResize"></textarea>
-    <label for="float-input"></label>
-</span>
