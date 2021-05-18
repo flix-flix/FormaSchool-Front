@@ -1,5 +1,8 @@
 <div id="global">
     <label>{{ user.nom }}</label>
     <label>{{ user.prenom }}</label>
-    <!--  <app-line-user-members *ngFor="let role of roles" [role]="role"></app-line-user-members>-->
+
+    <app-line-role-members *ngFor="let role of user.roles" [role]="role"></app-line-role-members>
+    <p-listbox [options]="roles" [(ngModel)]="selectedRole" optionLabel="nom"></p-listbox>
+    <button type="button" (click)="ajouteRole()">+</button>
 </div>

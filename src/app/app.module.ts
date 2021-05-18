@@ -41,6 +41,7 @@ import { SalonSidebarComponent } from './pages/params/salon/salon-sidebar/salon-
 import { SalonPageComponent } from './pages/params/salon/salon-page/salon-page.component';
 import { LineUserMembersComponent } from './features/params/team/components/line-user-members/line-user-members.component';
 import { LineRoleMembersComponent } from './features/params/team/components/line-role-members/line-role-members.component';
+import { ListboxModule } from 'primeng/listbox';
 
 
 @NgModule({
@@ -89,7 +90,8 @@ import { LineRoleMembersComponent } from './features/params/team/components/line
     InputTextModule,
     InputTextareaModule,
     HttpClientModule,
-    ButtonModule
+    ButtonModule,
+    ListboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

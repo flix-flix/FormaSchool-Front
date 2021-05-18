@@ -13,12 +13,25 @@ export class LineUserMembersComponent implements OnInit {
     { nom: "Stagiaire" },
     { nom: "Formateur" },
     { nom: "Delegué" },
-    { nom: "Connard" }
   ]
 
-
+  selectedRole;
 
   constructor() { }
+
+
+  ajouteRole = () => {
+    for (let indexRole = 0; indexRole = this.roles.length; indexRole++) {
+      /*for (let indexUser = 0; indexUser = this.user.roles.length; indexUser++) {
+        if (this.user.roles[indexUser] == this.roles[indexRole]) {
+          continue here;
+        }
+      }
+      this.possibleRoles.push(this.roles[indexRole])*/
+      this.roles.filter(role => !this.user.role.include(role))
+    }
+
+  }
 
   ngOnInit(): void {
   }

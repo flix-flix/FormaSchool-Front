@@ -9,6 +9,11 @@ export class LineRoleMembersComponent implements OnInit {
 
   @Input() role;
 
+  roles = [
+    { nom: "Stagiaire" },
+    { nom: "Formateur" },
+    { nom: "Delegué" }
+  ]
 
   constructor() { }
 
