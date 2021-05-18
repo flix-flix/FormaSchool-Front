@@ -11,6 +11,9 @@ export class UserLinkTeam{
         this._lastname = lastname;
         this._picture = picture;
     }
+    public get search():string {
+        return `${this._firstname} ${this._lastname}`
+    }
     public get id(): number {
         return this._id;
     }

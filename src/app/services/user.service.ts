@@ -7,7 +7,7 @@ import { UserLinkTeam } from '../models/userLinkTeam';
   providedIn: 'root'
 })
 export class UserService {
-  
+
   count = 10;
   users = [
     {
@@ -18,7 +18,7 @@ export class UserService {
       email: "alexdupont@gmail.com",
       picture: "picture of a cat",
       create: new Date("2019-01-16"),
-      teams:[1,2]
+      teams: [1, 2]
     },
     {
       id: 2,
@@ -28,7 +28,7 @@ export class UserService {
       email: "totogfkgkf",
       picture: "picture of a dog",
       create: new Date("2020-01-16"),
-      teams:[1]
+      teams: [1]
     }
   ]
 
@@ -38,13 +38,29 @@ export class UserService {
     This function return a quick presentation of each user. It contain lastname, firstname, id and picture
     return : an array of UserLinkTeam object
   */
-  findAllPresentation = () : UserLinkTeam[] => {
+  findAllPresentation = (): UserLinkTeam[] => {
     let res: UserLinkTeam[] = [];
     this.users.forEach(user => {
-      let data = new UserLinkTeam(user.id,user.firstname, user.lastname, user.picture);
+      let data = new UserLinkTeam(user.id, user.firstname, user.lastname, user.picture);
       res.push(data);
     });
     return res;
+  }
+
+  /**
+   * This function return a quick presentation of each user which arent in the team refered by the id.
+   * @param id the id of the team
+   * @returns a list of UserLinkTeam which dont have the team
+   */
+  listUserLinkTeam = (id: number): UserLinkTeam[] => {
+    return this.users
+      .filter(user => !user.teams.includes(id))
+      .map(userDetail => new UserLinkTeam(
+        userDetail.id,
+        userDetail.firstname,
+        userDetail.lastname,
+        userDetail.picture)
+      );
   }
 
   /*
@@ -53,10 +69,10 @@ export class UserService {
     idTeam: the id of the team you want to linked
     idUser: the id of the user you want to linked
   */
-  saveLink = (idTeam:number, idUser:number):number => {
+  saveLink = (idTeam: number, idUser: number): number => {
     let res = -1;
     this.users.forEach(user => {
-      if(user.id == idUser){
+      if (user.id == idUser) {
         user.teams.push(idTeam);
         res = 0;
       }
@@ -69,7 +85,7 @@ export class UserService {
     Param: A creationUser object (firstname, lastname, password, email and picture)
     Return: A number which is the id of the user created
   */
-  save = (user:creationUser) : number => {
+  save = (user: creationUser): number => {
     let data = {
       id: this.count++,
       firstname: user.firstname,

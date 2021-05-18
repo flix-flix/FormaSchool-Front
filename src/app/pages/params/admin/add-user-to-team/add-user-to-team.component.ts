@@ -12,31 +12,30 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AddUserToTeamComponent implements OnInit {
 
-  form : FormGroup;
   users: UserLinkTeam[];
   teams: TeamLinkUser[];
+  selectedUser:UserLinkTeam[] = []
+  selectedTeam:TeamLinkUser;
+
   
 
-  constructor(private fb : FormBuilder, private userService:UserService, private teamService:TeamService) {
-    this.form = this.fb.group({
-      userForm:[UserLinkTeam],
-      teamForm:[TeamLinkUser],
-    })
+  constructor(private userService:UserService, private teamService:TeamService) {
    }
 
   ngOnInit(): void {
-    this.users = this.userService.findAllPresentation();
     this.teams = this.teamService.findAllPresentation();
-    console.log(this.teams);
   }
 
+  refreshUser = () => {
+    if(this.selectedTeam!=null){
+      this.users = this.userService.listUserLinkTeam(this.selectedTeam.id)
+    }
+  }
   save = () => {
-    this.form.get("userForm").value.forEach(user => {
-      this.form.get("teamForm").value.forEach(team => {
-        let retour1 = this.userService.saveLink(team.id, user.id);
-        let retour2 = this.teamService.saveLink(team.id,user.id);
+    this.selectedUser.forEach(user => {
+        let retour1 = this.userService.saveLink(this.selectedTeam.id, user.id);
+        let retour2 = this.teamService.saveLink(this.selectedTeam.id,user.id);
         alert(`retour 1: ${retour1} retour 2: ${retour2}`);
-      });
     });
   }
 
