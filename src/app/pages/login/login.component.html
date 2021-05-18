@@ -1,1 +1,24 @@
-<p>login works!</p>
+<div id="all">
+    <h3> Merci de vous identifier </h3>
+    <div>
+        <form [formGroup]="userProfile" (ngSubmit)="onSubmit()">
+    
+            <label>
+                <!-- Login : -->
+                <input type="text" formControlName="login" id="login"
+                    placeholder="Taper votre login ICI" size="24" maxlength="10">
+            </label>
+
+            <label>
+                <!-- Mot de passe : -->
+                <input type="password" formControlName="password" id="password" 
+                placeholder="Taper votre mot de passe ICI" size="24" maxlength="10">
+            </label>
+
+            <button class="unmask" type="submit"> Envoyer </button>
+
+        </form>
+    </div>
+</div>
+
+

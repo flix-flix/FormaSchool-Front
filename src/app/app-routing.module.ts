@@ -26,12 +26,14 @@ const routes: Routes = [
       { path: "teamSelect", component: TeamSelectComponent },
       { path: "teamMessages/:idTeam/:idSalon", component: TeamChatComponent },
       { path: "privateMessages", component: PrivateMsgComponent },
+      { path: "404", component: NotFoundComponent },
+      { path: "login", component: LoginComponent },
     ]
   },
 
-  { path: "login", component: LoginComponent },
-  { path: "404", component: NotFoundComponent },
-  { path: "**", redirectTo: "404" }
+
+  
+  { path: "**", redirectTo: "home/404" }
 ];
 
 @NgModule({
