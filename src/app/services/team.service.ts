@@ -15,7 +15,7 @@ export class TeamService {
       id: 1,
       name: "IBM",
       desc: "ceci est la description de l equipe de IBM",
-      picture: "pictureOfCat",
+      picture: "1",
       salons: [1,2,3],
       users:[1,2,3,4]
     },
@@ -23,7 +23,7 @@ export class TeamService {
       id: 2,
       name: "Semifir",
       desc: "ceci est la description de l equipe de Semifir",
-      picture: "pictureOfDog",
+      picture: "4",
       salons: [1,2,3],
       users:[1,2,3,4]
     }
@@ -79,4 +79,16 @@ export class TeamService {
     this.teams.push(data);
     return data.id;
   }
+
+  afficheEquipes = (id:number) : TeamLinkUser[] => {
+    let res = [];
+    res.push(new TeamLinkUser(1,"IBM","1.png"))
+    res.push(new TeamLinkUser(1,"IDP","2.jpg"))
+    res.push(new TeamLinkUser(1,"M2i","3.png"))
+    res.push(new TeamLinkUser(1,"Semifir","4.png"))
+    return res;
+
+  }
 }
+
+

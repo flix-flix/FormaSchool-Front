@@ -1,2 +1,6 @@
 <!-- <p>team-select works en haut</p> -->
-<app-team-mini *ngFor="let x of exemple"></app-team-mini>
+<!-- <app-team-mini *ngFor="let x of exemple"></app-team-mini> -->
+<div *ngFor="let equipe of teams">
+    <h3> {{equipe.name}}</h3>
+    <img src="../../../assets/images/_remove/teams/{{equipe.picture}}" alt="">
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-team-select',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamSelectComponent implements OnInit {
 // c'est ici qu'il faut ajouter liste compléte des équipes
-exemple = [1,2,3,4,5]
-  constructor() { }
+teams = []
+  constructor(private service : TeamService) { }
 
   ngOnInit(): void {
+    this.teams = this.service.afficheEquipes(0);
   }
 
 }
