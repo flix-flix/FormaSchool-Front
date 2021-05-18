@@ -14,9 +14,10 @@ import { TemplateComponent } from './pages/template/template.component';
 const routes: Routes = [
   {
     path: "parametres", component: ParametresComponent, children: [
-      { path: "addTeam", component: AddTeamComponent },
       { path: "addUser", component: AddUserComponent },
-      { path: "addUserToTeam", component: AddUserToTeamComponent }
+      { path: "addTeam", component: AddTeamComponent },
+      { path: "addUserToTeam", component: AddUserToTeamComponent },
+      { path: "**", redirectTo: "addUser" }
     ]
   },
 

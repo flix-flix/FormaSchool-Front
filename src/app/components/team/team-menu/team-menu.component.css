@@ -4,6 +4,7 @@
     
     width: 16rem;
     height: 100%;
+    max-height: 100%;
     padding: 0 1rem;
     
     background-color: #7295BF;
@@ -20,12 +21,39 @@
     height: 8rem;
 }
 
-#team_name {
-    text-align: center;
+#team_name_line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
     margin-top: 1rem;
     margin-bottom: 2rem;
+}
 
+#lol {
+    width: 1.5rem;
+}
+
+#team_name {
+    text-align: center;
+    
     font-family: sans-serif;
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+#team_param {
+    width: 1.5rem;
+    height: 1.5rem;
+
+    opacity: 0;
+}
+
+#team_name_line:hover #team_param {
+    opacity: 1;
+}
+
+#salons {
+    overflow-y: auto;
 }
