@@ -35,7 +35,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
-import { TeamMiniComponent } from './components/team/team-mini/team-mini.component';
+import {ListboxModule} from 'primeng/listbox';
 
 
 
@@ -67,8 +67,7 @@ import { TeamMiniComponent } from './components/team/team-mini/team-mini.compone
     MessageComponent,
     LineDateComponent,
     MsgThreadComponent,
-    AddUserToTeamComponent,
-    TeamMiniComponent
+    AddUserToTeamComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +78,8 @@ import { TeamMiniComponent } from './components/team/team-mini/team-mini.compone
     InputTextModule,
     InputTextareaModule,
     HttpClientModule,
-    ButtonModule
+    ButtonModule,
+    ListboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

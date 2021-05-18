@@ -1,17 +1,23 @@
-<form [formGroup]="form" (ngSubmit)="save()">
+<div>
 
-    <label>Choisir un Utilisateur:</label>
+    <p-listbox (onChange)="refreshUser()" [(ngModel)]="selectedTeam" [options]="teams" [metaKeySelection]="false"
+        [checkbox]="true" [filter]="true" optionLabel="name" [listStyle]="{'max-height':'250px'}"
+        [style]="{'width':'15rem'}">
+        <ng-template let-team pTemplate="team">
+            <div class="team-item">
+                <div>{{team.name}}</div>
+            </div>
+        </ng-template>
+    </p-listbox>
 
-    <select formControlName="userForm"  multiple=true>
-        <option *ngFor="let user of users" [value]="user">{{user.firstname}} {{user.lastname}}</option>
-    </select>
+    <p-listbox [(ngModel)]="selectedUser" [options]="users" [metaKeySelection]="false" [checkbox]="true" [filter]="true"
+        optionLabel="search" [multiple]="true" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}">
+        <ng-template let-user pTemplate="user">
+            <div class="user-item">
+                <div>{{user.firstname}} {{user.lastname}}</div>
+            </div>
+        </ng-template>
+    </p-listbox>
 
-    <label>Choisir une Equipe:</label>
-
-    <select formControlName="teamForm"  multiple=true>
-        <option *ngFor="let team of teams" [value]="team">{{team.name}}</option>
-    </select>
-
-    <button type="submit">Save</button>
-</form>
-
+    <button type="button" (click)="save()">L'ajouter à l'équipe</button>
+</div>
