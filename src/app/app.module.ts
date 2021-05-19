@@ -36,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
 import { MsgWriterComponent } from './features/messages/components/msg-writer/msg-writer.component';
+import { ListboxModule } from 'primeng/listbox';
 
 
 
@@ -79,7 +80,8 @@ import { MsgWriterComponent } from './features/messages/components/msg-writer/ms
     InputTextModule,
     InputTextareaModule,
     HttpClientModule,
-    ButtonModule
+    ButtonModule,
+    ListboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
