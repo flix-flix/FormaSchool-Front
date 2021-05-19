@@ -1,6 +1,4 @@
-<div id="all">
+<form [formGroup]="msgGroup" (ngSubmit)="sendMsg()">
+    <input id="input_msg" type="text" placeholder="Envoyer un message dans Général" formControlName="msg">
     <img id="plus" src="../../../../../assets/images/icons/msg/plus2.png" alt="joinFile" (click)="buttonJoinFile()">
-    <form [formGroup]="msgGroup" (ngSubmit)="sendMsg()">
-        <input id="input_msg" type="text" placeholder="Envoyer un message dans Général" formControlName="msg">
-    </form>
-</div>
+</form>
