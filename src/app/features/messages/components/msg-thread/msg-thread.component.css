@@ -7,7 +7,7 @@
 
     overflow-y: auto;
 
-    background-color: #92BADE;
+    background-color: var(--background);
 }
 
 .center {

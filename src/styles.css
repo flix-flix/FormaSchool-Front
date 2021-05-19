@@ -1,7 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
 * {
     padding: 0;
     margin: 0;
+
+    --header: #4D729E; 
+    --menu: #7295BF; 
+    --background: #92BADE;
+    --font_1: #84C9E7;
+    --font_2: #1E346D;
 }
 
 html {

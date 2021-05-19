@@ -16,14 +16,14 @@ form {
     font-weight: bold;
     font-size: 1.2rem;
 
-    color: #84C9E7;
-    background-color:#4D729E;
+    color: var(--font_1);
+    background-color: var(--header);
     
     border: none;
 }
 
 #input_msg::placeholder {
-    color: #84C9E7;
+    color: var(--font_1);
 }
 
 #plus {
