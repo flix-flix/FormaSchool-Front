@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Message } from '../../models/message';
 
 @Component({
@@ -6,7 +6,8 @@ import { Message } from '../../models/message';
   templateUrl: './msg-thread.component.html',
   styleUrls: ['./msg-thread.component.css']
 })
-export class MsgThreadComponent implements OnInit {
+export class MsgThreadComponent implements OnInit, AfterViewChecked {
+  @ViewChild("scrollMe") private myScrollContainer: ElementRef;
 
   @Input() salon;
 
@@ -19,6 +20,21 @@ export class MsgThreadComponent implements OnInit {
     this.groupMsgByDay();
   }
 
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // =========================================================================================
+
+  /** Group messages with same day */
   groupMsgByDay = () => {
     this.msgs = [];
     let date = new Date(0);
@@ -31,7 +47,22 @@ export class MsgThreadComponent implements OnInit {
       this.msgs[this.msgs.length - 1].push(this.salon.msgs[i]);
     }
   }
+
+  // TODO remove when back
+  /** */
+  addMsg = (msg) => {
+    if (this.msgs.length == 0 || !isSameDay(msg.date, this.msgs[this.msgs.length - 1][0].date))
+      this.msgs.push([]);
+    this.msgs[this.msgs.length - 1].push(msg);
+  }
+
+  /** */
+  sendMsg = (text) => {
+    this.addMsg(new Message(count++, 0, new Date(), text));
+  }
 }
+
+let count = 100;
 
 /** Returns true if the 2 datetime are on the same day */
 const isSameDay = (date1, date2) => {

@@ -1,4 +1,4 @@
-#col {
+#msg-thread-col {
     display: flex;
     flex-direction: column;
  
@@ -23,8 +23,4 @@
 
 app-line-date {
     margin: .5rem 0;
-}
-
-#margin_lol {
-    min-height: 1rem;
 }

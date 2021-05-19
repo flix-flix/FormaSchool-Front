@@ -35,6 +35,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
+import { MsgWriterComponent } from './features/messages/components/msg-writer/msg-writer.component';
 
 
 
@@ -66,7 +67,8 @@ import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/ad
     MessageComponent,
     LineDateComponent,
     MsgThreadComponent,
-    AddUserToTeamComponent
+    AddUserToTeamComponent,
+    MsgWriterComponent
   ],
   imports: [
     BrowserModule,
