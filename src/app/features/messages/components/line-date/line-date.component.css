@@ -6,5 +6,5 @@
     font-weight: bold;
     font-family: sans-serif;
 
-    color: #1E346D;
+    color: var(--font_2);
 }

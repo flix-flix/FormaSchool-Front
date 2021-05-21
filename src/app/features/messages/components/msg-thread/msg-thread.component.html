@@ -1,7 +1,7 @@
-<div id="col">
+<div id="msg-thread-col" #scrollMe>
     <div *ngFor="let day of msgs" class="day">
         <app-line-date *ngIf="day.length != 0" [date]="day[0].date" class="center"></app-line-date>
         <app-message *ngFor="let msg of day" [msg]="msg" class="center"></app-message>
     </div>
-    <div id="margin_lol"></div>
+    <app-msg-writer (msgEmit)="sendMsg($event)"></app-msg-writer>
 </div>

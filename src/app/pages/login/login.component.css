@@ -24,6 +24,36 @@ form{
     height: 100%;
     width: 100%;
 }
+input{
+    background-color: burlywood;
+    border-color: brown;
+    color: black;
+}
+
+button {
+    background-color: mediumvioletred;
+    color: white;
+    border-style: solid 3px;
+    border-color: turquoise;
+
+  /* background-color: slateblue;
+  color: white;
+  border: 2px solid chartreuse;
+  border-radius: 60px;
+  text-shadow:none;  */
+  }
+  
+  button:hover { 
+    background-color: tomato;
+    color: white;
+    border-style: solid 3px;
+    border-color: wheat;
+  /* background-color: chocolate;
+  color: white;
+  border: 3px solid yellow;
+  border-radius: 80px;
+  text-shadow:none; */
+  }
 
 .password + .unmask {
     position:absolute;

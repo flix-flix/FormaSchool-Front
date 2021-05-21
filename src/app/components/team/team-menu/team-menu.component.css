@@ -7,7 +7,7 @@
     max-height: 100%;
     padding: 0 1rem;
     
-    background-color: #7295BF;
+    background-color: var(--menu);
 }
 
 #team_logo_center {
