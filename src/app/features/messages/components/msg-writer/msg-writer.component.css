@@ -4,7 +4,7 @@ form {
     width: 90%;
     height: 100%;
     
-    margin: 1rem auto;
+    margin: .75rem auto;
 }
 
 #input_msg {
@@ -26,12 +26,19 @@ form {
     color: var(--font_1);
 }
 
-#plus {
+.icon {
     position: absolute;
     
     top: .5rem;
-    left: .5rem;
 
     width: 2rem;
     height: 2rem;
+}
+
+#plus {
+    left: .5rem;
+}
+
+#emoji {
+    right: .5rem;
 }

@@ -23,6 +23,10 @@ export class MsgWriterComponent implements OnInit {
     alert("TODO join file");
   }
 
+  buttonAddEmoji = () => {
+    alert("TODO add emoji");
+  }
+
   sendMsg = () => {
     this.msgEmit.emit(this.msgGroup.value.msg);
     this.msgGroup.controls["msg"].setValue("");
