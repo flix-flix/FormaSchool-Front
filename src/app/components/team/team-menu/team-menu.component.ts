@@ -10,6 +10,7 @@ export class TeamMenuComponent implements OnInit {
   @Output() switchSalon = new EventEmitter<number>();
 
   @Input() salons: { id: number, name: string, isSelect: boolean }[];
+  @Input() teamId: number;
 
   select = 0;
 

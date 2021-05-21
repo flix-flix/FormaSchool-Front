@@ -24,7 +24,7 @@ const routes: Routes = [
   {
     path: "home", component: TemplateComponent, children: [
       { path: "teamSelect", component: TeamSelectComponent },
-      { path: "teamMessages/:idTeam/:idSalon", component: TeamChatComponent },
+      { path: "teamMessages/:teamId/:salonId", component: TeamChatComponent },
       { path: "privateMessages", component: PrivateMsgComponent },
       { path: "404", component: NotFoundComponent },
       { path: "login", component: LoginComponent },
@@ -32,7 +32,7 @@ const routes: Routes = [
   },
 
 
-  
+
   { path: "**", redirectTo: "home/404" }
 ];
 

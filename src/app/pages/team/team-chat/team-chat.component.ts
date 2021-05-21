@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Message } from 'src/app/features/messages/models/message';
 
 @Component({
@@ -7,6 +8,9 @@ import { Message } from 'src/app/features/messages/models/message';
   styleUrls: ['./team-chat.component.css']
 })
 export class TeamChatComponent implements OnInit {
+
+  teamId: number = 0;
+  salonId: number = 0;
 
   salons = [
     {
@@ -34,9 +38,13 @@ export class TeamChatComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.teamId = +params.get("teamId");
+      this.salonId = +params.get("salonId");
+    });
   }
 
   switchToSalon = (event) => {
