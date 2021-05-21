@@ -14,7 +14,7 @@ export class Message {
     // ===============================================
 
     public getSenderStr = (): string => {
-        return "Utilisateur " + this.id;
+        return "Utilisateur " + this.sender;
     }
 
     public getTimeStr = (): string => {
