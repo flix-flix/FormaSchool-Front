@@ -1,5 +1,7 @@
-<form [formGroup]="msgGroup" (ngSubmit)="sendMsg()">
-    <input id="input_msg" type="text" placeholder="Envoyer un message dans Général" formControlName="msg">
+<form [formGroup]="msgGroup">
+    <textarea id="input_msg" formControlName="msg" placeholder="Envoyer un message dans Général" [rows]="1"
+        pInputTextarea autoResize="autoResize" (keydown.enter)="pressEnter($event)"></textarea>
+
     <img id="plus" class="icon" src="../../../../../assets/images/icons/msg/plus.png" alt="joinFile"
         (click)="buttonJoinFile()">
     <img id="emoji" class="icon" src="../../../../../assets/images/icons/msg/emoji.png" alt="addEmoji"

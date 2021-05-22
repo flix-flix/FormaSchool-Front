@@ -31,4 +31,9 @@ export class MsgWriterComponent implements OnInit {
     this.msgEmit.emit(this.msgGroup.value.msg);
     this.msgGroup.controls["msg"].setValue("");
   }
+
+  pressEnter = (event) => {
+    event.preventDefault();
+    this.sendMsg();
+  }
 }
