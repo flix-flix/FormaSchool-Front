@@ -6,6 +6,7 @@ import { ParametresComponent } from './pages/parametres/parametres.component';
 import { AddTeamComponent } from './pages/params/admin/add-team/add-team.component';
 import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
 import { AddUserComponent } from './pages/params/admin/add-user/add-user.component';
+import { TeamLogsComponent } from './pages/params/team/team-logs/team-logs.component';
 import { PrivateMsgComponent } from './pages/private-msg/private-msg.component';
 import { TeamSelectComponent } from './pages/team-select/team-select.component';
 import { TeamChatComponent } from './pages/team/team-chat/team-chat.component';
@@ -20,7 +21,7 @@ const routes: Routes = [
       { path: "**", redirectTo: "addUser" }
     ]
   },
-
+  { path: "logs", component: TeamLogsComponent },
   {
     path: "home", component: TemplateComponent, children: [
       { path: "teamSelect", component: TeamSelectComponent },
@@ -32,7 +33,7 @@ const routes: Routes = [
   },
 
 
-  
+
   { path: "**", redirectTo: "home/404" }
 ];
 

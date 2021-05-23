@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Log } from '../models/log';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class LogService {
   logs = [
     {
       id: 1,
+      picture: "0",
       firstname: "Jason",
       lastname: "Vennin",
       date: new Date("2019-01-16"),
@@ -17,6 +19,7 @@ export class LogService {
     },
     {
       id: 2,
+      picture: "1",
       firstname: "Jacques",
       lastname: "Chirac",
       date: new Date("2021-05-04"),
@@ -24,6 +27,7 @@ export class LogService {
     },
     {
       id: 3,
+      picture: "1",
       firstname: "Jacques",
       lastname: "Chirac",
       date: new Date("2021-05-04"),
@@ -31,6 +35,7 @@ export class LogService {
     },
     {
       id: 4,
+      picture: "0",
       firstname: "Jason",
       lastname: "Vennin",
       date: new Date("2021-05-04"),
@@ -40,4 +45,15 @@ export class LogService {
 
   constructor() { }
 
+  /**
+   * This function return all log
+   * @returns return a list of log object (picture, firstname, lastname, date, desc)
+   */
+  findAll = (): Log[] => {
+    let res: Log[] = [];
+    this.logs.map(log => {
+      res.push(new Log(log.picture, log.firstname, log.lastname, log.date, log.desc));
+    });
+    return res;
+  }
 }
