@@ -33,12 +33,12 @@ export class AddRoleComponent implements OnInit {
       let role: Role = new Role(this.roleForm.get("name").value,
         this.roleForm.get("color").value,
         this.listOfRights);
-      let idRetour: number = this.roleService.save(role);
+      //TODO replace 1 by the id of the actual team
+      let idRetour: number = this.roleService.save(1, role);
       alert(`Le role a bien été crée avec l'id ${idRetour}`);
     }
     else {
       alert("Le nom ne peut pas être vide");
     }
   }
-
 }

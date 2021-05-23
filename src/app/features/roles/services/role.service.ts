@@ -16,6 +16,7 @@ export class RoleService {
   roles = [
     {
       id: 1,
+      teamId: 1,
       name: "everyone",
       color: "#A2D0EA",
       rights: [
@@ -27,6 +28,7 @@ export class RoleService {
     },
     {
       id: 2,
+      teamId: 1,
       name: "SuperRole",
       color: "#B2D4EA",
       rights: [
@@ -51,11 +53,13 @@ export class RoleService {
   /**
    * This function allows us to save a role
    * @param role a Role object (name, color, list of rights)
+   * @param teamId the id of the team which contain the role
    * @returns a number which is the id of the role created
    */
-  save = (role: Role): number => {
+  save = (teamId: number, role: Role): number => {
     let data = {
       id: this.count++,
+      teamId: teamId,
       name: role.name,
       color: role.color,
       rights: role.rights
