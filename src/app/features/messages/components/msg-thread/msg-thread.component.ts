@@ -26,7 +26,7 @@ export class MsgThreadComponent implements OnInit {
     if (this.msgComponents?.changes != undefined)
       this.msgComponents.changes.subscribe(() => {
         this.scrollToBottom();
-      })
+      });
   }
 
   /** Scroll the view to the last message */
@@ -57,18 +57,9 @@ export class MsgThreadComponent implements OnInit {
   // TODO Allow the message to be added before
   /** Add the message to the day-grouped messages */
   addMsg = (msg) => {
-    msg = this.processMsg(msg);
-
     if (this.msgs.length == 0 || !isSameDay(msg.date, this.msgs[this.msgs.length - 1][0].date))
       this.msgs.push([]);
     this.msgs[this.msgs.length - 1].push(msg);
-  }
-
-  /** Process the message content to add html balises */
-  processMsg = (msg: Message) => {
-    let html = msg.content.replace(/\n/g, "<br>");
-
-    return new Message(msg.id, msg.sender, msg.date, html);
   }
 
   // =========================================================================================

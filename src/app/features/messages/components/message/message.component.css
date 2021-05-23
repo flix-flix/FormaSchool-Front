@@ -26,7 +26,6 @@
 .text {
     display: flex;
     flex-direction: column;
-
 }
 
 .top {
@@ -51,4 +50,22 @@
 
 .content {
     color:black;
+}
+
+/* ================ innerHTML =================== */
+
+.bold {
+    font-weight: bold;
+}
+
+.under {
+    text-decoration: underline;
+}
+
+.strike {
+    text-decoration: line-through;
+}
+
+.italic {
+    font-style: italic;
 }
