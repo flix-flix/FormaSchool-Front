@@ -37,6 +37,10 @@ import { ButtonModule } from 'primeng/button';
 import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
 import { MsgWriterComponent } from './features/messages/components/msg-writer/msg-writer.component';
 import { ListboxModule } from 'primeng/listbox';
+import { AddRoleComponent } from './features/roles/add-role/add-role.component';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 
 
@@ -69,7 +73,8 @@ import { ListboxModule } from 'primeng/listbox';
     LineDateComponent,
     MsgThreadComponent,
     AddUserToTeamComponent,
-    MsgWriterComponent
+    MsgWriterComponent,
+    AddRoleComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +86,10 @@ import { ListboxModule } from 'primeng/listbox';
     InputTextareaModule,
     HttpClientModule,
     ButtonModule,
-    ListboxModule
+    ListboxModule,
+    ColorPickerModule,
+    BrowserAnimationsModule,
+    InputSwitchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddRoleComponent } from './features/roles/add-role/add-role.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ParametresComponent } from './pages/parametres/parametres.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: "**", redirectTo: "addUser" }
     ]
   },
+  { path: "addRole", component: AddRoleComponent },
 
   {
     path: "home", component: TemplateComponent, children: [
@@ -32,7 +34,7 @@ const routes: Routes = [
   },
 
 
-  
+
   { path: "**", redirectTo: "home/404" }
 ];
 
