@@ -8,6 +8,7 @@ import { Message } from '../../models/message';
 })
 export class MsgThreadComponent implements OnInit {
   @ViewChild("scrollMe") private msgThread: ElementRef;
+  @ViewChild("writer") private msgWriter: ElementRef;
   @ViewChildren("msgs") private msgComponents: QueryList<any>;
 
   @Input() salon;
@@ -56,15 +57,32 @@ export class MsgThreadComponent implements OnInit {
   // TODO Allow the message to be added before
   /** Add the message to the day-grouped messages */
   addMsg = (msg) => {
+    msg = this.processMsg(msg);
+
     if (this.msgs.length == 0 || !isSameDay(msg.date, this.msgs[this.msgs.length - 1][0].date))
       this.msgs.push([]);
     this.msgs[this.msgs.length - 1].push(msg);
   }
 
+  /** Process the message content to add html balises */
+  processMsg = (msg: Message) => {
+    let html = msg.content.replace(/\n/g, "<br>");
+
+    return new Message(msg.id, msg.sender, msg.date, html);
+  }
+
+  // =========================================================================================
+
   // TODO [service]
   /** Send the written message  */
   sendMsg = (text) => {
     this.addMsg(new Message(nextId++, 0, new Date(), text));
+  }
+
+  /** Called on msgwriter (keyup) */
+  keyUp = (event) => {
+    if (event.keyCode == 13)// Enter
+      this.scrollToBottom();
   }
 }
 // TODO [back]
