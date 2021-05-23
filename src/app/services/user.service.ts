@@ -34,10 +34,10 @@ export class UserService {
 
   constructor() { }
 
-  /*
-    This function return a quick presentation of each user. It contain lastname, firstname, id and picture
-    return : an array of UserLinkTeam object
-  */
+  /**
+   * This function return a quick presentation of each user. It contain lastname, firstname, id and picture
+   * @returns an array of UserLinkTeam object
+   */
   findAllPresentation = (): UserLinkTeam[] => {
     let res: UserLinkTeam[] = [];
     this.users.forEach(user => {
@@ -63,12 +63,12 @@ export class UserService {
       );
   }
 
-  /*
-    This function allows us to link a team to a user. It return -1 if the user does not exist in the base,
-    else it return 0 if its ok !
-    idTeam: the id of the team you want to linked
-    idUser: the id of the user you want to linked
-  */
+  /**
+   * This function allows us to link a team to a user
+   * @param idTeam the id of the team you want to linked
+   * @param idUser the id of the user you want to linked
+   * @returns It return -1 if the user does not exist in the base, else it return 0 if its ok !
+   */
   saveLink = (idTeam: number, idUser: number): number => {
     let res = -1;
     this.users.forEach(user => {
@@ -80,11 +80,11 @@ export class UserService {
     return res;
   }
 
-  /*
-    this function allows us to save a user. It return a number wich is the id of the user created
-    Param: A creationUser object (firstname, lastname, password, email and picture)
-    Return: A number which is the id of the user created
-  */
+  /**
+   * This function allows us to save a user
+   * @param user A creationUser object (firstname, lastname, password, email and picture)
+   * @returns A number which is the id of the user created
+   */
   save = (user: creationUser): number => {
     let data = {
       id: this.count++,

@@ -1,17 +1,20 @@
-export class UserLinkTeam{
+export class UserLinkTeam {
 
     private _id: number;
     private _lastname: string;
     private _firstname: string;
     private _picture: string;
 
-    constructor(id:number, firstname:string, lastname:string, picture:string){
+    constructor(id: number, firstname: string, lastname: string, picture: string) {
         this._id = id;
         this._firstname = firstname;
         this._lastname = lastname;
         this._picture = picture;
     }
-    public get search():string {
+    /**
+     * This function is needed to filter on lastname AND firstname
+     */
+    public get search(): string {
         return `${this._firstname} ${this._lastname}`
     }
     public get id(): number {
