@@ -4,26 +4,30 @@ form {
     width: 90%;
     height: 100%;
     
-    margin: .75rem auto;
+    margin: 0 auto;
+}
+
+#input_msg:enabled {
+    box-shadow: none;
 }
 
 #input_msg {
     width: 100%;
     min-height: 3rem;
     max-height: 20rem;
-    padding: .75rem 3rem;
+    padding: .5rem 3rem;
     
     overflow-y: auto !important;
-
 
     font-weight: bold;
     font-size: 1.2rem;
 
     color: var(--font_1);
     background-color: var(--header);
-    
-    border: none;
+
+    border: solid .2rem var(--font_2);
 }
+
 
 #input_msg::placeholder {
     color: var(--font_1);
@@ -31,11 +35,12 @@ form {
 
 /* ========= Scrollbar ========= */
 #input_msg::-webkit-scrollbar {
-    width: 5px;
+    width: 9px;
 }
 
 #input_msg::-webkit-scrollbar-thumb {
-    background: var(--font_2); 
+    background: var(--font_2);
+    border: 2px solid var(--header);
     border-radius: 20px;
 }
 
