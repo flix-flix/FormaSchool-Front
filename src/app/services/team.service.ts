@@ -1,5 +1,6 @@
 
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { creationTeam } from '../models/creationTeam';
 import { TeamLinkUser } from '../models/teamLinkUser';
 
@@ -88,6 +89,13 @@ export class TeamService {
     res.push(new TeamLinkUser(1, "Semifir", "4.png"))
     return res;
 
+  }
+
+  findNamePicDescById = (teamId: number): Observable<creationTeam> => {
+    return new Observable<creationTeam>(obs => {
+      obs.next(new creationTeam("IBM", "Desc Ibm", "1.png"));
+      obs.complete();
+    });
   }
 
 }

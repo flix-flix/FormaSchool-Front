@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { creationTeam } from 'src/app/models/creationTeam';
 import { Team } from 'src/app/models/team';
 import { TeamService } from 'src/app/services/team.service';
 
@@ -10,16 +11,15 @@ import { TeamService } from 'src/app/services/team.service';
 })
 export class TeamSummaryComponent implements OnInit {
 
-  team : Team;
-
+  team: creationTeam;
   constructor(
-    private service : TeamService,
-    private route : ActivatedRoute,
+    private service: TeamService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params =>{
-      this.service.findById(params.get("id")).subscribe(data =>{
+    this.route.paramMap.subscribe(params => {
+      this.service.findNamePicDescById(+params.get("id")).subscribe(data => {
         this.team = data;
       })
     });
