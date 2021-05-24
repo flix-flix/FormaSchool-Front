@@ -22,18 +22,18 @@ const routes: Routes = [
   },
 
   {
-    path: "home", component: TemplateComponent, children: [
+    path: "", component: TemplateComponent, children: [
       { path: "teamSelect", component: TeamSelectComponent },
       { path: "teamMessages/:teamId/:salonId", component: TeamChatComponent },
       { path: "privateMessages", component: PrivateMsgComponent },
       { path: "404", component: NotFoundComponent },
       { path: "login", component: LoginComponent },
+      // TODO redirectTo: lastVisitedPage (+guard login)
+      { path: "", redirectTo: "teamMessages/1/1", pathMatch: "full" },
     ]
   },
 
-
-
-  { path: "**", redirectTo: "home/404" }
+  { path: "**", redirectTo: "404" }
 ];
 
 @NgModule({
