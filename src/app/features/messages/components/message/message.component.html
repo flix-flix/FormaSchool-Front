@@ -9,4 +9,18 @@
         </div>
         <div class="content" [innerHtml]="msg.html"></div>
     </div>
+
+    <div id="icons">
+        <img class="msg_icon" src="../../../../../assets/images/icons/msg/emojiReact.png" alt="emoji" (click)="emoji()">
+
+        <img class="msg_icon" src="../../../../../assets/images/icons/msg/edit.png" alt="edit"
+            *ngIf="msg.sender.id == 1" (click)="edit()">
+        <img class="msg_icon" src="../../../../../assets/images/icons/msg/delete.png" alt="delete"
+            *ngIf="msg.sender.id == 1" (click)="delete()">
+
+        <img class="msg_icon" src="../../../../../assets/images/icons/msg/reply.png" alt="reply"
+            *ngIf="msg.sender.id != 1" (click)="reply()">
+        <img class="msg_icon" src="../../../../../assets/images/icons/msg/other.png" alt="other"
+            *ngIf="msg.sender.id != 1" (click)="other()">
+    </div>
 </div>

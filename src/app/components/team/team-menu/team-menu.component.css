@@ -10,6 +10,21 @@
     background-color: var(--menu);
 }
 
+/* border-top */
+#col::before {
+    position: relative;
+    content: "";
+
+    left: -1rem;
+    top: 0;
+
+    width: calc(100% + 2rem);
+    height: 2px;
+
+    background-color: var(--font_2);
+    filter: brightness(150%);
+}
+
 #team_logo_center {
     text-align: center;
 

@@ -1,5 +1,4 @@
 import { UserLinkTeam } from "src/app/models/userLinkTeam";
-import { UserService } from "src/app/services/user.service";
 
 export class Message {
     private _id: number;

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Message } from 'src/app/features/messages/models/message';
 import { Salon } from 'src/app/features/team/services/models/salon';
 import { TeamService } from 'src/app/services/team.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-team-chat',
