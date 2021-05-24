@@ -105,10 +105,11 @@ export class UserService {
   // TODO [back]
 
   static generateUserNamePicture = (userId: number): UserLinkTeam => {
-    if (userId in _users)
-      return new UserLinkTeam(_users[userId].id, _users[userId].firstname, _users[userId].lastname, _users[userId].picture);
-    console.log("teamId doesn't exist:", userId);
-    return undefined;
+    if (!(userId in _users)) {
+      console.log("userId doesn't exist:", userId);
+      return undefined;
+    }
+    return new UserLinkTeam(_users[userId].id, _users[userId].firstname, _users[userId].lastname, _users[userId].picture);
   }
 }
 

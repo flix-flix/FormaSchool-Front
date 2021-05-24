@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Salon } from '../features/team/services/models/salon';
+import { SalonService } from '../features/team/services/salon.service';
 import { creationTeam } from '../models/creationTeam';
 import { TeamLinkUser } from '../models/teamLinkUser';
 
@@ -89,7 +91,17 @@ export class TeamService {
     return res;
   }
 
-  /** Returns the name and the picture of the given team */
+  // ================================================================================================
+
+  /** Returns the list of the salons for the given team */
+  static findAllSalonsOfTeam = (teamId: number): Observable<Salon[]> => {
+    return new Observable<Salon[]>(obs => {
+      obs.next(TeamService.generateListSalonOfTeam(teamId));
+      obs.complete();
+    });
+  }
+
+  /** Returns the name and the picture for the given team */
   static findNamePictureById = (teamId: number): Observable<TeamLinkUser> => {
     return new Observable<TeamLinkUser>(obs => {
       obs.next(TeamService.generateTeamNamePicture(teamId));
@@ -100,11 +112,24 @@ export class TeamService {
   // ================================================================================================
   // TODO [back]
 
+  static generateListSalonOfTeam = (teamId): Salon[] => {
+    if (!(teamId in _teams)) {
+      console.log("teamId doesn't exist:", teamId);
+      return undefined;
+    }
+
+    let salons = [];
+    for (let salonIndex in _teams[teamId].salons)
+      salons.push(SalonService.generateSalon(_teams[teamId].salons[salonIndex]));
+    return salons;
+  }
+
   static generateTeamNamePicture = (teamId: number): TeamLinkUser => {
-    if (teamId in _teams)
-      return new TeamLinkUser(_teams[teamId].id, _teams[teamId].name, _teams[teamId].picture);
-    console.log("teamId doesn't exist:", teamId);
-    return undefined;
+    if (!(teamId in _teams)) {
+      console.log("teamId doesn't exist:", teamId);
+      return undefined;
+    }
+    return new TeamLinkUser(_teams[teamId].id, _teams[teamId].name, _teams[teamId].picture);
   }
 }
 
