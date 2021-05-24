@@ -1,6 +1,6 @@
-<div class="salon" (click)="selectSalon()" [class.selected]="salon.isSelect">
+<div class="salon" routerLink="../{{salon.id}}" [class.selected]="salonId == salon.id">
     <div>{{salon.name}}</div>
 
-    <img class=" params" src="../../../../assets/images/icons/salon_settings.png" alt="salon_settings"
+    <img class="params" src="../../../../assets/images/icons/salon_settings.png" alt="salon_settings"
         (click)="openSalonParams($event)">
 </div>

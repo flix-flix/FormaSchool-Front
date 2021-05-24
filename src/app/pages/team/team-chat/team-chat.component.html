@@ -1,4 +1,7 @@
 <div id="row">
-    <app-team-menu [salons]="salons" [teamId]="teamId" (switchSalon)="switchToSalon($event)"></app-team-menu>
-    <app-msg-thread *ngFor="let salon of salons" [salon]="salon" [class.display]="salon.isSelect"></app-msg-thread>
+    <app-team-menu [salons]="salons" [teamId]="teamId" [salonId]="salonId" (switchSalon)="switchToSalon($event)">
+    </app-team-menu>
+
+    <app-msg-thread *ngFor="let salon of salons" [salon]="salon" [class.display]="salon.id == salonId">
+    </app-msg-thread>
 </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TeamLinkUser } from 'src/app/models/teamLinkUser';
 import { TeamService } from 'src/app/services/team.service';
 
@@ -9,26 +9,16 @@ import { TeamService } from 'src/app/services/team.service';
 })
 export class TeamMenuComponent implements OnInit {
 
-  @Output() switchSalon = new EventEmitter<number>();
-
-  @Input() salons: { id: number, name: string, isSelect: boolean }[];
+  @Input() salons: { id: number, name: string }[];
   @Input() teamId: number;
+  @Input() salonId: number;
 
   team: TeamLinkUser;
-  // TODO [Remove]
-  select = 0;
 
   constructor() { }
 
   ngOnInit(): void {
     TeamService.findNamePictureById(this.teamId).subscribe(json => this.team = json);
-  }
-
-  switchToSalon = (event) => {
-    this.salons[this.select].isSelect = false;
-    this.salons[this.select = event].isSelect = true;
-
-    this.switchSalon.emit(event);
   }
 
   openTeamParams = () => {

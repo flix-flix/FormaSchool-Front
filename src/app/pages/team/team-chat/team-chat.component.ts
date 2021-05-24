@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Message } from 'src/app/features/messages/models/message';
-import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,8 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class TeamChatComponent implements OnInit {
 
-  teamId: number = 0;
-  salonId: number = 0;
+  teamId: number;
+  salonId: number;
 
   // TODO [Remove]
   users = [UserService.generateUserNamePicture(1), UserService.generateUserNamePicture(2),
@@ -21,7 +20,7 @@ export class TeamChatComponent implements OnInit {
   // TODO [Remove]
   salons = [
     {
-      id: 0, name: "Général", isSelect: true, msgs:
+      id: 1, name: "Général", msgs:
         [
           new Message(0, this.users[0], new Date("2021-05-01T17:35:21"), "Salut"),
           new Message(1, this.users[1], new Date("2021-05-01T17:37:31"), "Bien ou bien ?"),
@@ -36,13 +35,13 @@ export class TeamChatComponent implements OnInit {
         ]
     },
     {
-      id: 1, name: "Nourriture", isSelect: false, msgs: [
+      id: 2, name: "Nourriture", msgs: [
         new Message(10, this.users[0], new Date("2021-05-01T17:35:21"), "Welsh"),
         new Message(11, this.users[1], new Date("2021-05-04T09:27:07"), "Frites !"),
       ]
     },
     {
-      id: 2, name: "Lorem", isSelect: false, msgs: [
+      id: 3, name: "Lorem", msgs: [
         new Message(20, this.users[0], new Date("2021-10-10T22:11:00"), `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.
       Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar. Nulla sollicitudin. Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, in tempus sapien eros vitae ligula. Pellentesque rhoncus nunc et augue. Integer id felis. Curabitur aliquet pellentesque diam. Integer quis metus vitae elit lobortis egestas. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi vel erat non mauris convallis vehicula. Nulla et sapien. Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. Mauris ullamcorper felis vitae erat. Proin feugiat, augue non elementum posuere, metus purus iaculis lectus, et tristique ligula justo vitae magna.
       
