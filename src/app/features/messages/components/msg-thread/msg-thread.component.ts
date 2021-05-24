@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Message } from '../../models/message';
 
@@ -9,24 +10,34 @@ import { Message } from '../../models/message';
 })
 export class MsgThreadComponent implements OnInit {
   @ViewChild("scrollMe") private msgThread: ElementRef;
-  @ViewChildren("msgs") private msgComponents: QueryList<any>;
 
   @Input() salon;
 
   /** Messages grouped by date and sorted by time */
   msgs: Message[][];
 
-  constructor() { }
+  /** true: the thread has been scrolled down on init */
+  scrolledDownOnInit = false;
+  /** true: currently displayed salon */
+  isDisplayed: boolean;
+
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.groupMsgByDay();
+
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.isDisplayed = this.salon.id == +params.get("salonId");
+    });
   }
 
-  ngAfterViewInit() {
-    if (this.msgComponents?.changes != undefined)
-      this.msgComponents.changes.subscribe(() => {
-        this.scrollToBottom();
-      });
+  ngAfterViewChecked() {
+    // TODO [Improve] show un-read messages
+    // On loading: scroll down to the last message
+    if (this.isDisplayed && !this.scrolledDownOnInit) {
+      this.scrollToBottom();
+      this.scrolledDownOnInit = true;
+    }
   }
 
   /** Scroll the view to the last message */
