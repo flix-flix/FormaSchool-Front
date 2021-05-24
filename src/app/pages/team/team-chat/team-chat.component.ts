@@ -23,7 +23,7 @@ export class TeamChatComponent implements OnInit {
 
           new Message(4, 1, new Date("2021-05-02T09:07:46"), "123**456**789"),
           new Message(5, 2, new Date("2021-05-02T09:08:01"), "123**456**789**123**456"),
-          new Message(6, 3, new Date("2021-05-02T09:08:27"), "text*under*text"),
+          new Message(6, 3, new Date("2021-05-02T09:08:27"), "text*italic*text"),
 
           new Message(7, 0, new Date("2021-05-02T09:12:51"), "Normal\n\n**Bold**\n\n*Italic*\n\n__Under__\n\n~~Strike~~\n\n***__~~All~~__***"),
         ]

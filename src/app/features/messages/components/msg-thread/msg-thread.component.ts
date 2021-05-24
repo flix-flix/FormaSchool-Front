@@ -8,7 +8,6 @@ import { Message } from '../../models/message';
 })
 export class MsgThreadComponent implements OnInit {
   @ViewChild("scrollMe") private msgThread: ElementRef;
-  @ViewChild("writer") private msgWriter: ElementRef;
   @ViewChildren("msgs") private msgComponents: QueryList<any>;
 
   @Input() salon;
