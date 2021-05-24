@@ -1,11 +1,11 @@
 <div id="col">
     <div id="team_logo_center">
-        <img id="team_logo" src="../../../../assets/images/_remove/teams/{{teamId}}.png" alt="">
+        <img id="team_logo" src="../../../../assets/images/_remove/teams/{{team.picture}}" alt="">
     </div>
 
     <div id="team_name_line">
         <div id="lol"></div>
-        <div id="team_name">IBM</div>
+        <div id="team_name">{{team.name}}</div>
         <div>
             <img id="team_param" src="../../../../assets/images/icons/team_settings.png" alt="teamParams"
                 (click)="openTeamParams()">
