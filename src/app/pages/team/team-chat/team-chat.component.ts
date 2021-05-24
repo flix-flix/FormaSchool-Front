@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Message } from 'src/app/features/messages/models/message';
 
 @Component({
@@ -8,6 +9,9 @@ import { Message } from 'src/app/features/messages/models/message';
 })
 export class TeamChatComponent implements OnInit {
 
+  teamId: number = 0;
+  salonId: number = 0;
+
   salons = [
     {
       id: 0, name: "Général", isSelect: true, msgs:
@@ -16,6 +20,12 @@ export class TeamChatComponent implements OnInit {
           new Message(1, 1, new Date("2021-05-01T17:37:31"), "Bien ou bien ?"),
           new Message(2, 2, new Date("2021-05-01T17:43:07"), "Hi, salut les mecs"),
           new Message(3, 3, new Date("2021-05-02T09:07:44"), "Guys ?"),
+
+          new Message(4, 1, new Date("2021-05-02T09:07:46"), "123**456**789"),
+          new Message(5, 2, new Date("2021-05-02T09:08:01"), "123**456**789**123**456"),
+          new Message(6, 3, new Date("2021-05-02T09:08:27"), "text*italic*text"),
+
+          new Message(7, 0, new Date("2021-05-02T09:12:51"), "Normal\n\n**Bold**\n\n*Italic*\n\n__Under__\n\n~~Strike~~\n\n***__~~All~~__***"),
         ]
     },
     {
@@ -34,9 +44,13 @@ export class TeamChatComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.teamId = +params.get("teamId");
+      this.salonId = +params.get("salonId");
+    });
   }
 
   switchToSalon = (event) => {

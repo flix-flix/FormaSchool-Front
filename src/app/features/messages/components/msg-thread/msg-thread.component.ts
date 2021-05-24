@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Message } from '../../models/message';
 
 @Component({
@@ -7,6 +7,8 @@ import { Message } from '../../models/message';
   styleUrls: ['./msg-thread.component.css']
 })
 export class MsgThreadComponent implements OnInit {
+  @ViewChild("scrollMe") private msgThread: ElementRef;
+  @ViewChildren("msgs") private msgComponents: QueryList<any>;
 
   @Input() salon;
 
@@ -19,6 +21,25 @@ export class MsgThreadComponent implements OnInit {
     this.groupMsgByDay();
   }
 
+  ngAfterViewInit() {
+    if (this.msgComponents?.changes != undefined)
+      this.msgComponents.changes.subscribe(() => {
+        this.scrollToBottom();
+      });
+  }
+
+  /** Scroll the view to the last message */
+  scrollToBottom(): void {
+    try {
+      this.msgThread.nativeElement.scrollTop = this.msgThread.nativeElement.scrollHeight;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // =========================================================================================
+
+  /** Group messages with same day */
   groupMsgByDay = () => {
     this.msgs = [];
     let date = new Date(0);
@@ -31,7 +52,31 @@ export class MsgThreadComponent implements OnInit {
       this.msgs[this.msgs.length - 1].push(this.salon.msgs[i]);
     }
   }
+
+  // TODO Allow the message to be added before
+  /** Add the message to the day-grouped messages */
+  addMsg = (msg) => {
+    if (this.msgs.length == 0 || !isSameDay(msg.date, this.msgs[this.msgs.length - 1][0].date))
+      this.msgs.push([]);
+    this.msgs[this.msgs.length - 1].push(msg);
+  }
+
+  // =========================================================================================
+
+  // TODO [service]
+  /** Send the written message  */
+  sendMsg = (text) => {
+    this.addMsg(new Message(nextId++, 0, new Date(), text));
+  }
+
+  /** Called on msgwriter (keyup) */
+  keyUp = (event) => {
+    if (event.keyCode == 13)// Enter
+      this.scrollToBottom();
+  }
 }
+// TODO [back]
+let nextId = 100;
 
 /** Returns true if the 2 datetime are on the same day */
 const isSameDay = (date1, date2) => {

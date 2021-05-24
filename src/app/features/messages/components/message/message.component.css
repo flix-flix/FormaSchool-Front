@@ -7,11 +7,12 @@
 
     font-family: sans-serif;
 
-    background-color: #4D729E;
+    background-color: var(--header);
 }
 
 .msg:hover {
-    background-color: #5a7ba3;
+    /* TODO only background must be brighter */
+    filter: brightness(115%);
 }
 
 .author_img {
@@ -25,7 +26,6 @@
 .text {
     display: flex;
     flex-direction: column;
-
 }
 
 .top {
@@ -40,7 +40,7 @@
     
     font-weight: bold;
     
-    color: #84C9E7;
+    color: var(--font_1);
 }
 
 .time {
@@ -50,4 +50,22 @@
 
 .content {
     color:black;
+}
+
+/* ================ innerHTML =================== */
+
+.bold {
+    font-weight: bold;
+}
+
+.under {
+    text-decoration: underline;
+}
+
+.strike {
+    text-decoration: line-through;
+}
+
+.italic {
+    font-style: italic;
 }

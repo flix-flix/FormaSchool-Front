@@ -42,7 +42,7 @@ import { SalonPageComponent } from './pages/params/salon/salon-page/salon-page.c
 import { LineUserMembersComponent } from './features/params/team/components/line-user-members/line-user-members.component';
 import { LineRoleMembersComponent } from './features/params/team/components/line-role-members/line-role-members.component';
 import { ListboxModule } from 'primeng/listbox';
-
+import { MsgWriterComponent } from './features/messages/components/msg-writer/msg-writer.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +79,7 @@ import { ListboxModule } from 'primeng/listbox';
     SalonPageComponent,
     LineUserMembersComponent,
     LineRoleMembersComponent,
-
+    MsgWriterComponent
   ],
   imports: [
     BrowserModule,

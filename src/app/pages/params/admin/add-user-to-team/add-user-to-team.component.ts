@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ControlContainer, FormBuilder, FormGroup } from '@angular/forms';
-import { Team } from 'src/app/models/team';
-import { User } from 'src/app/models/user';
-import { AddUserToTeamService } from 'src/app/services/add-user-to-team.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { TeamLinkUser } from 'src/app/models/teamLinkUser';
+import { UserLinkTeam } from 'src/app/models/userLinkTeam';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -13,37 +12,31 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AddUserToTeamComponent implements OnInit {
 
-  form : FormGroup;
-  users: User[];
-  teams: Team[];
+  users: UserLinkTeam[];
+  teams: TeamLinkUser[];
+  selectedUser:UserLinkTeam[] = []
+  selectedTeam:TeamLinkUser;
+
   
 
-  constructor(private fb : FormBuilder, private userService:UserService, private teamService:TeamService, private service:AddUserToTeamService) {
-    this.form = this.fb.group({
-      userForm:[User],
-      teamForm:[Team],
-    })
+  constructor(private userService:UserService, private teamService:TeamService) {
    }
 
   ngOnInit(): void {
-    this.userService.findAll().subscribe(data =>{
-      this.users = data;
-    });
-    this.teamService.findAll().subscribe(data =>{
-      this.teams = data;
-    });
+    this.teams = this.teamService.findAllPresentation();
   }
 
+  refreshUser = () => {
+    if(this.selectedTeam!=null){
+      this.users = this.userService.listUserLinkTeam(this.selectedTeam.id)
+    }
+  }
   save = () => {
-    this.form.get("userForm").value.forEach(user => {
-      this.form.get("teamForm").value.forEach(team => {
-        let data:{userId: number, teamId: number} = {userId:undefined, teamId:undefined};
-        data.userId = user.id;
-        data.teamId = team.id;
-        this.service.save(data).subscribe();
-      });
+    this.selectedUser.forEach(user => {
+        let retour1 = this.userService.saveLink(this.selectedTeam.id, user.id);
+        let retour2 = this.teamService.saveLink(this.selectedTeam.id,user.id);
+        alert(`retour 1: ${retour1} retour 2: ${retour2}`);
     });
-    alert("Le ou les liens ont été fait :)");
   }
 
 }

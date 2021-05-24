@@ -1,0 +1,88 @@
+#all {
+  display:flex;
+  align-items: center;
+  justify-content:center ;
+  flex-direction: column;
+  background-color: #6595B8;
+  height: 100%;
+} 
+
+h3{
+
+    color: black;
+    font-size: 14px;
+    background-color: #6595B8;
+}
+
+form{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    color: springgreen;
+    font-size: 16px;
+    background-color: #6595B8;
+    height: 100%;
+    width: 100%;
+}
+input{
+    background-color: burlywood;
+    border-color: brown;
+    color: black;
+}
+
+button {
+    background-color: mediumvioletred;
+    color: white;
+    border-style: solid 3px;
+    border-color: turquoise;
+
+  /* background-color: slateblue;
+  color: white;
+  border: 2px solid chartreuse;
+  border-radius: 60px;
+  text-shadow:none;  */
+  }
+  
+  button:hover { 
+    background-color: tomato;
+    color: white;
+    border-style: solid 3px;
+    border-color: wheat;
+  /* background-color: chocolate;
+  color: white;
+  border: 3px solid yellow;
+  border-radius: 80px;
+  text-shadow:none; */
+  }
+
+.password + .unmask {
+    position:absolute;
+    right: 68px; top: 7px;
+    width: 25px;
+    height: 25px;
+    text-indent: -9999px;
+    background: #aaa;
+    border-radius: 50%;
+  }
+
+.password + .unmask:before {
+    content: "";
+    position:absolute;
+    top:4px; left:4px;
+    z-index:1;
+    width: 17px;
+    height: 17px;
+    background: #e3e3e3;
+    border-radius: 50%;
+  }
+
+  .password[type="text"] + .unmask:after {
+    content: "";
+    position:absolute;
+    top:6px; left: 8px;
+    z-index:2;
+    width: 13px;
+    height: 13px;
+    background: #aaa;
+    border-radius: 50%;
+  } 

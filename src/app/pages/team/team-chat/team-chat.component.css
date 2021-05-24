@@ -6,10 +6,12 @@
     height: 100%;
 }
 
+/* Hide salons, only display the class "display" */
 app-msg-thread {
     display: none;
     
     width: 100%;
+    border-top: 2px solid var(--font_2);
 }
 
 .display {

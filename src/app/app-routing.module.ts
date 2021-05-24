@@ -30,29 +30,30 @@ const routes: Routes = [
   },
 
   {
-    path: "home", component: TemplateComponent, children: [
+    path: "", component: TemplateComponent, children: [
       { path: "teamSelect", component: TeamSelectComponent },
-      { path: "teamMessages/:idTeam/:idSalon", component: TeamChatComponent },
+      { path: "teamMessages/:teamId/:salonId", component: TeamChatComponent },
       { path: "privateMessages", component: PrivateMsgComponent },
-      
-
     ]
   },
 
   {
     path: "team", component: TeamPageComponent, children: [
-      {path : "teamSummary/:id" ,component : TeamSummaryComponent},
-      {path : "teamRoles" ,component : TeamRolesComponent},
-      {path : "teamMembers" ,component : TeamMembersComponent},
-      {path : "teamEmojis" ,component : TeamEmojisComponent},
-      {path : "teamLogs" ,component : TeamLogsComponent},
-         ]
+      { path: "teamSummary/:id", component: TeamSummaryComponent },
+      { path: "teamRoles", component: TeamRolesComponent },
+      { path: "teamMembers", component: TeamMembersComponent },
+      { path: "teamEmojis", component: TeamEmojisComponent },
+      { path: "teamLogs", component: TeamLogsComponent },
+    ]
   },
-  {path : "salonSummary/:id" ,component : SalonSummaryComponent},
-  {path : "salonPermission:" ,component : SalonPermissionsComponent},
 
-  { path: "login", component: LoginComponent },
+  { path: "salonSummary/:id", component: SalonSummaryComponent },
+  { path: "salonPermission:", component: SalonPermissionsComponent },
+
   { path: "404", component: NotFoundComponent },
+  { path: "login", component: LoginComponent },
+  // TODO redirectTo: lastVisitedPage (+guard login)
+  { path: "", redirectTo: "teamMessages/1/1", pathMatch: "full" },
   { path: "**", redirectTo: "404" }
 ];
 
