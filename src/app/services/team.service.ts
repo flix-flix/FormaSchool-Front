@@ -38,7 +38,7 @@ export class TeamService {
     This function allows us to link a user to a team. It return -1 if the user does not exist in the base,
     else it return 0 if its ok !
     idTeam: the id of the team you want to linked
-    idUser: the id of the user you want to linked
+    idUser: the id of the user yosu want to linked
   */
   saveLink = (idTeam: number, idUser: number): number => {
     let res = -1;
@@ -89,6 +89,15 @@ export class TeamService {
     res.push(new TeamLinkUser(1, "M2i", "3.png"))
     res.push(new TeamLinkUser(1, "Semifir", "4.png"))
     return res;
+  }
+
+  // ================================================================================================
+
+  findNamePicDescById = (teamId: number): Observable<creationTeam> => {
+    return new Observable<creationTeam>(obs => {
+      obs.next(new creationTeam("IBM", "Desc Ibm", "1.png"));
+      obs.complete();
+    });
   }
 
   // ================================================================================================
