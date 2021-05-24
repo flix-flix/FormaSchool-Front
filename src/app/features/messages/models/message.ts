@@ -1,14 +1,15 @@
-import { HtmlParser } from "@angular/compiler";
+import { UserLinkTeam } from "src/app/models/userLinkTeam";
+import { UserService } from "src/app/services/user.service";
 
 export class Message {
     private _id: number;
-    private _sender: number;
+    private _sender: UserLinkTeam;
     private _date: Date;
     private _content: string;
 
     private _html: string;
 
-    constructor(id: number, sender: number, date: Date, content: string) {
+    constructor(id: number, sender: UserLinkTeam, date: Date, content: string) {
         this._id = id;
         this._sender = sender;
         this._date = date;
@@ -19,10 +20,7 @@ export class Message {
 
     // ===============================================
 
-    public getSenderStr = (): string => {
-        return "Utilisateur " + this.sender;
-    }
-
+    /** Returns the time (hh:mm) */
     public getTimeStr = (): string => {
         return nf.format(this.date.getHours()) + ":" + nf.format(this.date.getMinutes());
     }
@@ -37,11 +35,11 @@ export class Message {
         this._id = id;
     }
 
-    public get sender(): number {
+    public get sender(): UserLinkTeam {
         return this._sender;
     }
 
-    public set sender(sender: number) {
+    public set sender(sender: UserLinkTeam) {
         this._sender = sender;
     }
 

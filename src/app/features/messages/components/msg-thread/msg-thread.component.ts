@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 import { Message } from '../../models/message';
 
 @Component({
@@ -66,7 +67,9 @@ export class MsgThreadComponent implements OnInit {
   // TODO [service]
   /** Send the written message  */
   sendMsg = (text) => {
-    this.addMsg(new Message(nextId++, 0, new Date(), text));
+    // TODO [Improve] server get user from session
+    let user = UserService.generateUserNamePicture(1);
+    this.addMsg(new Message(nextId++, user, new Date(), text));
   }
 
   /** Called on msgwriter (keyup) */

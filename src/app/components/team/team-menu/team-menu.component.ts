@@ -18,11 +18,10 @@ export class TeamMenuComponent implements OnInit {
   // TODO [Remove]
   select = 0;
 
-  constructor(private teamService: TeamService) {
-  }
+  constructor() { }
 
   ngOnInit(): void {
-    this.teamService.findNamePictureById(this.teamId).subscribe(json => this.team = json);
+    TeamService.findNamePictureById(this.teamId).subscribe(json => this.team = json);
   }
 
   switchToSalon = (event) => {

@@ -1,10 +1,10 @@
 <div class="msg">
     <div>
-        <img class="author_img" src="../../../../../assets/images/_remove/users/{{msg.sender}}.jpg" alt="">
+        <img class="author_img" src="../../../../../assets/images/_remove/users/{{msg.sender.picture}}" alt="">
     </div>
     <div class="content">
         <div class="top">
-            <span class="sender">{{msg.getSenderStr()}}</span>
+            <span class="sender">{{msg.sender.firstname}} {{msg.sender.lastname}}</span>
             <span class="time">{{msg.getTimeStr()}}</span>
         </div>
         <div class="content" [innerHtml]="msg.html"></div>
