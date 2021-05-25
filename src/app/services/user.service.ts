@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { creationUser } from '../models/creationUser';
 import { UserLinkTeam } from '../models/userLinkTeam';
@@ -8,7 +7,9 @@ import { UserLinkTeam } from '../models/userLinkTeam';
 })
 export class UserService {
 
-  count = 10;
+  nextId = 10;
+
+  // TODO [Remove]
   users = [
     {
       id: 1,
@@ -87,7 +88,7 @@ export class UserService {
    */
   save = (user: creationUser): number => {
     let data = {
-      id: this.count++,
+      id: this.nextId++,
       firstname: user.firstname,
       lastname: user.lastname,
       password: user.password,
@@ -99,4 +100,61 @@ export class UserService {
     this.users.push(data);
     return data.id;
   }
+
+  // ================================================================================================
+  // TODO [back]
+
+  static generateUserNamePicture = (userId: number): UserLinkTeam => {
+    if (!(userId in _users)) {
+      console.log("userId doesn't exist:", userId);
+      return undefined;
+    }
+    return new UserLinkTeam(_users[userId].id, _users[userId].firstname, _users[userId].lastname, _users[userId].picture);
+  }
+}
+
+// TODO [back]
+let _users: {
+  [id: number]: { id: number, firstname: string, lastname: string, password: string, email: string, picture: string, create: Date, teams: number[] }
+} = {
+  1: {
+    id: 1,
+    firstname: "Félix",
+    lastname: "Burie",
+    password: "tintin",
+    email: "felix@gmail.com",
+    picture: "0.jpg",
+    create: new Date("2019-01-16"),
+    teams: [1, 2, 10]
+  },
+  2: {
+    id: 2,
+    firstname: "Jason",
+    lastname: "Vennin",
+    password: "toto",
+    email: "jason@gmail.com",
+    picture: "1.jpg",
+    create: new Date("2020-01-16"),
+    teams: [1, 2, 10]
+  },
+  10: {
+    id: 3,
+    firstname: "Luca",
+    lastname: "Novelli",
+    password: "lulu",
+    email: "luca@orange.fr",
+    picture: "2.jpg",
+    create: new Date("2020-03-07"),
+    teams: [1, 3, 10]
+  },
+  20: {
+    id: 4,
+    firstname: "Bouchaib",
+    lastname: "Faham",
+    password: "bobo",
+    email: "bouchaib@sfr.fr",
+    picture: "3.jpg",
+    create: new Date("2020-02-22"),
+    teams: [1, 3, 10]
+  },
 }

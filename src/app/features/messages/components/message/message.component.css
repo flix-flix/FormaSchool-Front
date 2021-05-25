@@ -1,4 +1,6 @@
 .msg {
+    position: relative;
+
     display: flex;
     flex-direction: row;
 
@@ -23,11 +25,7 @@
     border-radius: 50%;
 }
 
-.text {
-    display: flex;
-    flex-direction: column;
-
-}
+/* ================ msg =================== */
 
 .top {
     display: flex;
@@ -51,4 +49,60 @@
 
 .content {
     color:black;
+}
+
+/* ================ icons =================== */
+
+#icons {
+    position: absolute;
+    right: -1rem;
+    top: -1rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    
+    opacity: 0;
+
+    border-radius: 5px;
+
+    background-color: var(--font_2);
+}
+
+.msg:hover #icons {
+    opacity: 1;
+}
+
+.msg_icon {
+    position: relative;
+    
+    width: 2rem;
+    height: 2rem;
+    
+    padding: .2rem;
+    margin: .2rem;
+
+    border-radius: 5px;
+}
+
+.msg_icon:hover {
+    border: 2px solid var(--menu);
+}
+
+/* ================ innerHTML =================== */
+
+.bold {
+    font-weight: bold;
+}
+
+.under {
+    text-decoration: underline;
+}
+
+.strike {
+    text-decoration: line-through;
+}
+
+.italic {
+    font-style: italic;
 }

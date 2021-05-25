@@ -1,5 +1,7 @@
-
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Salon } from '../features/team/services/models/salon';
+import { SalonService } from '../features/team/services/salon.service';
 import { creationTeam } from '../models/creationTeam';
 import { TeamLinkUser } from '../models/teamLinkUser';
 
@@ -8,8 +10,9 @@ import { TeamLinkUser } from '../models/teamLinkUser';
 })
 export class TeamService {
 
-  count: number = 10;
+  nextId: number = 10;
 
+  // TODO [Remove]
   teams = [
     {
       id: 1,
@@ -27,7 +30,7 @@ export class TeamService {
       salons: [1, 2, 3],
       users: [1, 2, 3, 4]
     }
-  ]
+  ];
 
   constructor() { }
 
@@ -68,7 +71,7 @@ export class TeamService {
    */
   save = (team: creationTeam): number => {
     let data = {
-      id: this.count++,
+      id: this.nextId++,
       name: team.name,
       desc: team.desc,
       picture: team.picture,
@@ -86,8 +89,92 @@ export class TeamService {
     res.push(new TeamLinkUser(1, "M2i", "3.png"))
     res.push(new TeamLinkUser(1, "Semifir", "4.png"))
     return res;
+  }
 
+  // ================================================================================================
+
+  findNamePicDescById = (teamId: number): Observable<creationTeam> => {
+    return new Observable<creationTeam>(obs => {
+      obs.next(new creationTeam("IBM", "Desc Ibm", "1.png"));
+      obs.complete();
+    });
+  }
+
+  // ================================================================================================
+
+  /** Returns the list of the salons for the given team */
+  static findAllSalonsOfTeam = (teamId: number): Observable<Salon[]> => {
+    return new Observable<Salon[]>(obs => {
+      obs.next(TeamService.generateListSalonOfTeam(teamId));
+      obs.complete();
+    });
+  }
+
+  /** Returns the name and the picture for the given team */
+  static findNamePictureById = (teamId: number): Observable<TeamLinkUser> => {
+    return new Observable<TeamLinkUser>(obs => {
+      obs.next(TeamService.generateTeamNamePicture(teamId));
+      obs.complete();
+    });
+  }
+
+  // ================================================================================================
+  // TODO [back]
+
+  static generateListSalonOfTeam = (teamId): Salon[] => {
+    if (!(teamId in _teams)) {
+      console.log("teamId doesn't exist:", teamId);
+      return undefined;
+    }
+
+    let salons = [];
+    for (let salonIndex in _teams[teamId].salons)
+      salons.push(SalonService.generateSalon(_teams[teamId].salons[salonIndex]));
+    return salons;
+  }
+
+  static generateTeamNamePicture = (teamId: number): TeamLinkUser => {
+    if (!(teamId in _teams)) {
+      console.log("teamId doesn't exist:", teamId);
+      return undefined;
+    }
+    return new TeamLinkUser(_teams[teamId].id, _teams[teamId].name, _teams[teamId].picture);
   }
 }
 
-
+// TODO [back]
+let _teams: { [id: number]: { id: number, name: string, desc: string, picture: string, salons: number[], users: number[] } } =
+{
+  1: {
+    id: 1,
+    name: "IBM",
+    desc: "International Business Machines Corporation",
+    picture: "1.png",
+    salons: [1, 2, 3],
+    users: [1, 2, 10, 20]
+  },
+  2: {
+    id: 2,
+    name: "IDP",
+    desc: "Invest in Digital People",
+    picture: "2.jpg",
+    salons: [10],
+    users: [1, 2]
+  },
+  3: {
+    id: 3,
+    name: "M2i",
+    desc: "M2i formations, Hauts-de-France",
+    picture: "3.png",
+    salons: [20],
+    users: [10, 20]
+  },
+  10: {
+    id: 10,
+    name: "Semifir",
+    desc: "Ceci est la description de l'équipe Semifir",
+    picture: "4.png",
+    salons: [30, 31, 32],
+    users: [10, 20, 2, 1]
+  }
+};

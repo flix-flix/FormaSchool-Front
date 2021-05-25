@@ -1,19 +1,18 @@
 <div id="col">
     <div id="team_logo_center">
-        <img id="team_logo" src="../../../../assets/images/_remove/teams/0.png" alt="">
+        <img id="team_logo" src="../../../../assets/images/_remove/teams/{{team.picture}}" alt="">
     </div>
 
     <div id="team_name_line">
         <div id="lol"></div>
-        <div id="team_name">IBM</div>
+        <div id="team_name">{{team.name}}</div>
         <div>
             <img id="team_param" src="../../../../assets/images/icons/team_settings.png" alt="teamParams"
-                (click)="openTeamParams()">
+                routerLink="/team/teamSummary/1">
         </div>
     </div>
 
     <div id="salons">
-        <app-salon-button *ngFor="let salon of salons" [salon]="salon" (switchSalon)="switchToSalon($event)">
-        </app-salon-button>
+        <app-salon-button *ngFor="let salon of salons" [salon]="salon" [salonId]=salonId></app-salon-button>
     </div>
 </div>

@@ -1,4 +1,6 @@
-import { AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 import { Message } from '../../models/message';
 
 @Component({
@@ -6,27 +8,42 @@ import { Message } from '../../models/message';
   templateUrl: './msg-thread.component.html',
   styleUrls: ['./msg-thread.component.css']
 })
-export class MsgThreadComponent implements OnInit, AfterViewChecked {
-  @ViewChild("scrollMe") private myScrollContainer: ElementRef;
+export class MsgThreadComponent implements OnInit {
+  @ViewChild("scrollMe") private msgThread: ElementRef;
 
   @Input() salon;
 
   /** Messages grouped by date and sorted by time */
   msgs: Message[][];
 
-  constructor() { }
+  /** true: the thread has been scrolled down on init */
+  scrolledDownOnInit = false;
+  /** true: currently displayed salon */
+  isDisplayed: boolean;
+
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.groupMsgByDay();
+
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.isDisplayed = this.salon.id == +params.get("salonId");
+    });
   }
 
   ngAfterViewChecked() {
-    this.scrollToBottom();
+    // TODO [Improve] show un-read messages
+    // On loading: scroll down to the last message
+    if (this.isDisplayed && !this.scrolledDownOnInit) {
+      this.scrollToBottom();
+      this.scrolledDownOnInit = true;
+    }
   }
 
+  /** Scroll the view to the last message */
   scrollToBottom(): void {
     try {
-      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+      this.msgThread.nativeElement.scrollTop = this.msgThread.nativeElement.scrollHeight;
     } catch (err) {
       console.log(err);
     }
@@ -48,21 +65,32 @@ export class MsgThreadComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  // TODO remove when back
-  /** */
+  // TODO Allow the message to be added before
+  /** Add the message to the day-grouped messages */
   addMsg = (msg) => {
     if (this.msgs.length == 0 || !isSameDay(msg.date, this.msgs[this.msgs.length - 1][0].date))
       this.msgs.push([]);
     this.msgs[this.msgs.length - 1].push(msg);
   }
 
-  /** */
+  // =========================================================================================
+
+  // TODO [service]
+  /** Send the written message  */
   sendMsg = (text) => {
-    this.addMsg(new Message(count++, 0, new Date(), text));
+    // TODO [Improve] server get user from session
+    let user = UserService.generateUserNamePicture(1);
+    this.addMsg(new Message(nextId++, user, new Date(), text));
+  }
+
+  /** Called on msgwriter (keyup) */
+  keyUp = (event) => {
+    if (event.keyCode == 13)// Enter
+      this.scrollToBottom();
   }
 }
-
-let count = 100;
+// TODO [back]
+let nextId = 100;
 
 /** Returns true if the 2 datetime are on the same day */
 const isSameDay = (date1, date2) => {
