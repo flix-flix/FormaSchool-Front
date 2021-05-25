@@ -23,44 +23,50 @@ import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-templat
 const routes: Routes = [
   {
     path: "", component: TemplateComponent, children: [
-      { path: "teamSelect", component: TeamSelectComponent },
-      { path: "teamMessages/:teamId/:salonId", component: TeamChatComponent },
+      { path: "login", component: LoginComponent },
+
       { path: "privateMessages", component: PrivateMsgComponent },
 
+      { path: "teamSelect", component: TeamSelectComponent },
+      { path: "teamMessages/:teamId/:salonId", component: TeamChatComponent },
+
+
       { path: "404", component: NotFoundComponent },
-      { path: "login", component: LoginComponent },
 
       // TODO redirectTo: lastVisitedPage (+guard login)
       { path: "", redirectTo: "teamMessages/1/1", pathMatch: "full" },
     ]
   },
 
-  // TODO Add path params
-  // {path: "params", component: ParamsTemplateComponent, children: [
   {
-    path: "admin", component: ParamsAdminTemplateComponent, children: [
-      { path: "addUser", component: AddUserComponent },
-      { path: "addTeam", component: AddTeamComponent },
-      { path: "addUserToTeam", component: AddUserToTeamComponent },
-      { path: "**", redirectTo: "addUser" }
+    path: "params", children: [
+      {
+        path: "admin", component: ParamsAdminTemplateComponent, children: [
+          { path: "createUser", component: AddUserComponent },
+          { path: "createTeam", component: AddTeamComponent },
+          { path: "addUserToTeam", component: AddUserToTeamComponent },
+          { path: "**", redirectTo: "createUser" }
+        ]
+      },
+      {
+        path: "team/:teamId", component: ParamsTeamTemplateComponent, children: [
+          { path: "summary", component: TeamSummaryComponent },
+          { path: "roles", component: TeamRolesComponent },
+          { path: "members", component: TeamMembersComponent },
+          { path: "emojis", component: TeamEmojisComponent },
+          { path: "logs", component: TeamLogsComponent },
+          { path: "**", redirectTo: "summary" }
+        ]
+      },
+      {
+        path: "salon/:salonId", component: ParamsSalonTemplateComponent, children: [
+          { path: "summary", component: SalonSummaryComponent },
+          { path: "permissions:", component: SalonPermissionsComponent },
+          { path: "**", redirectTo: "summary" }
+        ]
+      },
     ]
   },
-  {
-    path: "team", component: ParamsTeamTemplateComponent, children: [
-      { path: "teamSummary/:id", component: TeamSummaryComponent },
-      { path: "teamRoles", component: TeamRolesComponent },
-      { path: "teamMembers", component: TeamMembersComponent },
-      { path: "teamEmojis", component: TeamEmojisComponent },
-      { path: "teamLogs", component: TeamLogsComponent },
-    ]
-  },
-  {
-    path: "salon", component: ParamsSalonTemplateComponent, children: [
-      { path: "salonSummary/:id", component: SalonSummaryComponent },
-      { path: "salonPermission:", component: SalonPermissionsComponent },
-    ]
-  },
-  // ]},
 
   { path: "**", redirectTo: "404" }
 ];
