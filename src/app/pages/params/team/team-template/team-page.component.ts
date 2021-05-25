@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './team-page.component.html',
   styleUrls: ['./team-page.component.css']
 })
-export class TeamPageComponent implements OnInit {
+export class ParamsTeamTemplateComponent implements OnInit {
 
   constructor() { }
 

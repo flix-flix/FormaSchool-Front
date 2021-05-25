@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ParametresComponent } from './parametres.component';
+import { ParamsAdminTemplateComponent } from './parametres.component';
 
 describe('ParametresComponent', () => {
-  let component: ParametresComponent;
-  let fixture: ComponentFixture<ParametresComponent>;
+  let component: ParamsAdminTemplateComponent;
+  let fixture: ComponentFixture<ParamsAdminTemplateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ParametresComponent ]
+      declarations: [ParamsAdminTemplateComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ParametresComponent);
+    fixture = TestBed.createComponent(ParamsAdminTemplateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

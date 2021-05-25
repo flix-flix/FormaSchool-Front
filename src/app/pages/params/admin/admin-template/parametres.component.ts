@@ -5,7 +5,7 @@ import { Component, OnInit, Output } from '@angular/core';
   templateUrl: './parametres.component.html',
   styleUrls: ['./parametres.component.css']
 })
-export class ParametresComponent implements OnInit {
+export class ParamsAdminTemplateComponent implements OnInit {
 
   constructor() { }
 
