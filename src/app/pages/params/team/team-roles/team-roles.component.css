@@ -1,0 +1,61 @@
+section{
+    background-color: #6595B8;
+    height: 100%;
+    padding: 50px;
+}
+input{
+    background-color: #A2D0EA;
+}
+
+label{
+    color: #10516D;
+}
+
+.p-float-label{
+   margin-left: 120px;
+   margin-bottom: 20px;
+}
+.colorSpan{
+    background-color: #A2D0EA;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 120px;
+    margin-left: 120px; 
+}
+button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 120px;
+    margin-left: 120px; 
+}
+
+.rightsContainer{   
+    display: flex;
+    flex-direction: column;
+}
+.rights{
+    background-color: #A2D0EA;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 120px;
+    margin-left: 120px;  
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+    background: #1cb301;
+}
+::ng-deep .p-inputswitch .p-inputswitch-slider {
+    background: #d60b0b;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 30px;
+}
+::ng-deep .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider{
+    background: #1cb301;
+}
+::ng-deep .p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider{
+    background: #d60b0b;
+}

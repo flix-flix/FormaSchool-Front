@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddRoleComponent } from './add-role.component';
+import { TeamSidebarComponent } from './team-sidebar.component';
 
-describe('AddRoleComponent', () => {
-  let component: AddRoleComponent;
-  let fixture: ComponentFixture<AddRoleComponent>;
+describe('TeamSidebarComponent', () => {
+  let component: TeamSidebarComponent;
+  let fixture: ComponentFixture<TeamSidebarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddRoleComponent ]
+      declarations: [ TeamSidebarComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddRoleComponent);
+    fixture = TestBed.createComponent(TeamSidebarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

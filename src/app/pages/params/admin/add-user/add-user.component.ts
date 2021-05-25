@@ -12,25 +12,25 @@ export class AddUserComponent implements OnInit {
 
   userForm: FormGroup;
 
-  constructor(private fb:FormBuilder, private userService:UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService) {
     this.userForm = this.fb.group({
-      firstname:[''],
-      lastname:[''],
-      password:[''],
-      email:[''],
-      picture:['']
+      firstname: [''],
+      lastname: [''],
+      password: [''],
+      email: [''],
+      picture: ['']
     })
-   }
-
-  ngOnInit(): void {
-    
   }
 
-  /*
-    This function allows us to save a user
-  */
+  ngOnInit(): void {
+
+  }
+
+  /**
+   * This function allows us to save a user
+   */
   save = () => {
-    let user:creationUser= this.userForm.value;
+    let user: creationUser = this.userForm.value;
     let idRetour = this.userService.save(user);
     alert(`L'utilisateur a bien été créé avec l'id ${idRetour}`)
   }

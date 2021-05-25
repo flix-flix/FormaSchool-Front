@@ -1,0 +1,27 @@
+::ng-deep .p-listbox .p-listbox-header {
+    padding: 0.5rem 1rem;
+    border-bottom: 0 none;
+    color: #10516D;
+    background: #A2D0EA;
+    margin: 0;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+::ng-deep .p-inputtext{
+    color: #10516D;
+    background: #A2D0EA;
+    border: 1px solid #487bad;
+}
+
+::ng-deep .p-listbox {
+    background: #A2D0EA;
+    color: #10516D;
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+    margin: 40px;
+}
+
+button{
+    margin-left: 80%;
+}

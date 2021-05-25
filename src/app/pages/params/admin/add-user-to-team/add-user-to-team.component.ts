@@ -14,28 +14,35 @@ export class AddUserToTeamComponent implements OnInit {
 
   users: UserLinkTeam[];
   teams: TeamLinkUser[];
-  selectedUser:UserLinkTeam[] = []
-  selectedTeam:TeamLinkUser;
+  selectedUser: UserLinkTeam[] = []
+  selectedTeam: TeamLinkUser;
 
-  
 
-  constructor(private userService:UserService, private teamService:TeamService) {
-   }
+
+  constructor(private userService: UserService, private teamService: TeamService) {
+  }
 
   ngOnInit(): void {
     this.teams = this.teamService.findAllPresentation();
   }
 
+  /**
+   * This function is used when a team is selected, it refresh the list of users to show
+   */
   refreshUser = () => {
-    if(this.selectedTeam!=null){
+    if (this.selectedTeam != null) {
       this.users = this.userService.listUserLinkTeam(this.selectedTeam.id)
     }
   }
+
+  /**
+   * This function allows us to save the link between a team and a user/users 
+   */
   save = () => {
     this.selectedUser.forEach(user => {
-        let retour1 = this.userService.saveLink(this.selectedTeam.id, user.id);
-        let retour2 = this.teamService.saveLink(this.selectedTeam.id,user.id);
-        alert(`retour 1: ${retour1} retour 2: ${retour2}`);
+      let retour1 = this.userService.saveLink(this.selectedTeam.id, user.id);
+      let retour2 = this.teamService.saveLink(this.selectedTeam.id, user.id);
+      alert(`retour 1: ${retour1} retour 2: ${retour2}`);
     });
   }
 

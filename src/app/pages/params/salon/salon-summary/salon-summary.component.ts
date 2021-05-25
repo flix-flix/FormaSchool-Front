@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-salon-summary',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalonSummaryComponent implements OnInit {
 
-  constructor() { }
+  salon = { name: "General", desc: "Ciao" }
+
+  constructor(
+
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
+    /*   this.route.paramMap.subscribe(params => {
+        this.service.findById(params.get("id")).subscribe(data => {
+          this.salon = data;
+        })
+      });*/
   }
 
 }
