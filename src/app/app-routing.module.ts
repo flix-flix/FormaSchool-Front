@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { ParametresComponent } from './pages/parametres/parametres.component';
+import { LoginComponent } from './pages/home/login/login.component';
+import { NotFoundComponent } from './pages/home/not-found/not-found.component';
+import { ParametresComponent } from './pages/params/params-template/parametres.component';
 import { AddTeamComponent } from './pages/params/admin/add-team/add-team.component';
 import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
 import { AddUserComponent } from './pages/params/admin/add-user/add-user.component';
@@ -14,10 +14,10 @@ import { TeamMembersComponent } from './pages/params/team/team-members/team-memb
 import { TeamPageComponent } from './pages/params/team/team-page/team-page.component';
 import { TeamRolesComponent } from './pages/params/team/team-roles/team-roles.component';
 import { TeamSummaryComponent } from './pages/params/team/team-summary/team-summary.component';
-import { PrivateMsgComponent } from './pages/private-msg/private-msg.component';
-import { TeamSelectComponent } from './pages/team-select/team-select.component';
-import { TeamChatComponent } from './pages/team/team-chat/team-chat.component';
-import { TemplateComponent } from './pages/template/template.component';
+import { PrivateMsgComponent } from './pages/home/private-msg/private-msg.component';
+import { TeamSelectComponent } from './pages/home/team-select/team-select.component';
+import { TeamChatComponent } from './pages/home/team/team-chat/team-chat.component';
+import { TemplateComponent } from './pages/home/home-template/template.component';
 
 const routes: Routes = [
   {
