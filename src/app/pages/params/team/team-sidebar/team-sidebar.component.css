@@ -1,0 +1,25 @@
+#side_menu {
+    display: flex;
+    flex-direction: column;
+    width: 10rem;
+    height: 100%;
+    padding: 0rem 1rem;
+    background-color: #4d729e;
+}
+
+a{
+    text-decoration: none;
+    padding:5px;
+    padding-right: 10px;
+}
+#side_menu div{
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+#side_menu div:first-child{
+    margin-top: 15px;
+}
+a:hover {
+    background-color: rgb(90, 133, 199);
+}

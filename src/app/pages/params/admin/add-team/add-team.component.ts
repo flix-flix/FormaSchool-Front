@@ -12,23 +12,23 @@ export class AddTeamComponent implements OnInit {
 
   teamForm: FormGroup;
 
-  constructor(private fb:FormBuilder, private teamService:TeamService) {
+  constructor(private fb: FormBuilder, private teamService: TeamService) {
     this.teamForm = this.fb.group({
-      picture:[''],
-      name:[''],
-      desc:['']
+      picture: [''],
+      name: [''],
+      desc: ['']
     })
-   }
+  }
 
   ngOnInit(): void {
-    
+
   }
-  /*
-    This function allows us to save a team with one default salon : Salon call General
-  */
+  /**
+   * This function allows us to save a team
+   */
   save = () => {
-    let team:creationTeam = this.teamForm.value;
-    let idRetour:number  = this.teamService.save(team);
+    let team: creationTeam = this.teamForm.value;
+    let idRetour: number = this.teamService.save(team);
     alert(`team creer avec comme id ${idRetour}`);
   }
 

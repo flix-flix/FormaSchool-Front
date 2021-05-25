@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-salon-button',
@@ -8,17 +8,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class SalonButtonComponent implements OnInit {
 
   @Input() salon;
-  @Output() switchSalon = new EventEmitter<number>()
+  @Input() salonId: number;
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  selectSalon = () => {
-    if (this.salon.select)
-      return;
-    this.switchSalon.emit(this.salon.id);
   }
 
   openSalonParams = (event) => {

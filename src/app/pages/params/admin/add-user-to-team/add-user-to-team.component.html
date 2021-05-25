@@ -2,7 +2,7 @@
 
     <p-listbox (onChange)="refreshUser()" [(ngModel)]="selectedTeam" [options]="teams" [metaKeySelection]="false"
         [checkbox]="true" [filter]="true" optionLabel="name" [listStyle]="{'max-height':'250px'}"
-        [style]="{'width':'15rem'}">
+        [style]="{'width':'100rem'}">
         <ng-template let-team pTemplate="team">
             <div class="team-item">
                 <div>{{team.name}}</div>
@@ -11,7 +11,7 @@
     </p-listbox>
 
     <p-listbox [(ngModel)]="selectedUser" [options]="users" [metaKeySelection]="false" [checkbox]="true" [filter]="true"
-        optionLabel="search" [multiple]="true" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}">
+        optionLabel="search" [multiple]="true" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100rem'}">
         <ng-template let-user pTemplate="user">
             <div class="user-item">
                 <div>{{user.firstname}} {{user.lastname}}</div>
@@ -19,5 +19,6 @@
         </ng-template>
     </p-listbox>
 
-    <button type="button" (click)="save()">L'ajouter à l'équipe</button>
+    <button pButton pRipple type="button" (click)="save()" label="Ajouter à l'équipe"
+        class="p-button-rounded p-button-info"></button>
 </div>

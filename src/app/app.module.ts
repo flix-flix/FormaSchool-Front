@@ -35,10 +35,18 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
-import { MsgWriterComponent } from './features/messages/components/msg-writer/msg-writer.component';
+import { TeamPageComponent } from './pages/params/team/team-page/team-page.component'
+import { TeamSidebarComponent } from './pages/params/team/team-sidebar/team-sidebar.component';
+import { SalonSidebarComponent } from './pages/params/salon/salon-sidebar/salon-sidebar.component';
+import { SalonPageComponent } from './pages/params/salon/salon-page/salon-page.component';
+import { LineUserMembersComponent } from './features/params/team/components/line-user-members/line-user-members.component';
+import { LineRoleMembersComponent } from './features/params/team/components/line-role-members/line-role-members.component';
 import { ListboxModule } from 'primeng/listbox';
-import { PanelModule } from 'primeng/panel';
+import { ColorPickerModule } from 'primeng/colorpicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { MsgWriterComponent } from './features/messages/components/msg-writer/msg-writer.component';
+import { PanelModule } from 'primeng/panel';
 
 
 
@@ -71,7 +79,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LineDateComponent,
     MsgThreadComponent,
     AddUserToTeamComponent,
-    MsgWriterComponent
+    TeamPageComponent,
+    TeamSidebarComponent,
+    SalonSidebarComponent,
+    SalonPageComponent,
+    LineUserMembersComponent,
+    LineRoleMembersComponent,
+    MsgWriterComponent,
+    TeamRolesComponent
   ],
   imports: [
     BrowserModule,
@@ -84,8 +99,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     ButtonModule,
     ListboxModule,
-    PanelModule,
-    BrowserAnimationsModule
+    ColorPickerModule,
+    BrowserAnimationsModule,
+    InputSwitchModule,
+    PanelModule
   ],
   providers: [],
   bootstrap: [AppComponent]
