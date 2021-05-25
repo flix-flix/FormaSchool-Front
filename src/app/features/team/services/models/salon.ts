@@ -17,8 +17,7 @@ export class Salon {
         return this._id;
     }
 
-    public set id(id: number
-    ) {
+    public set id(id: number) {
         this._id = id;
     }
 
@@ -26,8 +25,7 @@ export class Salon {
         return this._name;
     }
 
-    public set name(name: string
-    ) {
+    public set name(name: string) {
         this._name = name;
     }
 

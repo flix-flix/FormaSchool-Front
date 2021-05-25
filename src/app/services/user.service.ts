@@ -106,7 +106,7 @@ export class UserService {
 
   static generateUserNamePicture = (userId: number): UserLinkTeam => {
     if (!(userId in _users)) {
-      console.log("userId doesn't exist:", userId);
+      console.error("userId doesn't exist:", userId);
       return undefined;
     }
     return new UserLinkTeam(_users[userId].id, _users[userId].firstname, _users[userId].lastname, _users[userId].picture);

@@ -123,7 +123,7 @@ export class TeamService {
 
   static generateListSalonOfTeam = (teamId): Salon[] => {
     if (!(teamId in _teams)) {
-      console.log("teamId doesn't exist:", teamId);
+      console.error("teamId doesn't exist:", teamId);
       return undefined;
     }
 
@@ -135,7 +135,7 @@ export class TeamService {
 
   static generateTeamNamePicture = (teamId: number): TeamLinkUser => {
     if (!(teamId in _teams)) {
-      console.log("teamId doesn't exist:", teamId);
+      console.error("teamId doesn't exist:", teamId);
       return undefined;
     }
     return new TeamLinkUser(_teams[teamId].id, _teams[teamId].name, _teams[teamId].picture);

@@ -22,9 +22,8 @@ export class MessageService {
   // TODO [back]
 
   static generateMessage = (msgId: number): Message => {
-    console.log("msgId:", msgId);
     if (!(msgId in msgs)) {
-      console.log("msgId doesn't exist:", msgId);
+      console.error("msgId doesn't exist:", msgId);
       return undefined;
     }
     return new Message(msgs[msgId].id, users[msgs[msgId].sender], new Date(msgs[msgId].date), msgs[msgId].content);

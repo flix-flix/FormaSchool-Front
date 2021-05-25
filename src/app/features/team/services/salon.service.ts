@@ -25,7 +25,7 @@ export class SalonService {
 
   static generateSalon = (salonId: number): Salon => {
     if (!(salonId in salons)) {
-      console.log("salonId doesn't exist:", salonId);
+      console.error("salonId doesn't exist:", salonId);
       return undefined;
     }
 
