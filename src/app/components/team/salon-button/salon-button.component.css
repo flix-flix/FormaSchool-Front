@@ -10,11 +10,11 @@
 }
 
 .salon:hover  {
-    background-color: #92BADE;
+    background-color: var(--background);
 }
 
 .salon.selected {
-    background-color: #4D729E;
+    background-color: var(--header);
 }
 
 /* ===== Hide/Show params ===== */
