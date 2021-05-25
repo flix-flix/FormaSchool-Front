@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SidebarComponent } from './components/global/sidebar/sidebar.component';
-import { HeaderComponent } from './components/global/header/header.component';
+import { SidebarComponent } from './features/global/sidebar/sidebar.component';
+import { HeaderComponent } from './features/global/header/header.component';
 import { NotFoundComponent } from './pages/home/not-found/not-found.component';
 import { PrivateMsgComponent } from './pages/home/private-msg/private-msg.component';
 import { TeamSelectComponent } from './pages/home/team-select/team-select.component';
@@ -19,12 +19,12 @@ import { SalonSummaryComponent } from './pages/params/salon/salon-summary/salon-
 import { SalonPermissionsComponent } from './pages/params/salon/salon-permissions/salon-permissions.component';
 import { AddTeamComponent } from './pages/params/admin/add-team/add-team.component';
 import { AddUserComponent } from './pages/params/admin/add-user/add-user.component';
-import { SidebarAdminComponent } from './components/superAdmin/sidebar-admin/sidebar-admin.component';
+import { SidebarAdminComponent } from './features/params/admin/components/sidebar-admin/sidebar-admin.component';
 import { ParamsAdminTemplateComponent } from './pages/params/admin/admin-template/parametres.component';
 import { TemplateComponent } from './pages/home/home-template/template.component';
-import { ProfilComponent } from './components/global/profil/profil.component';
-import { TeamMenuComponent } from './components/team/team-menu/team-menu.component';
-import { SalonButtonComponent } from './components/team/salon-button/salon-button.component';
+import { ProfilComponent } from './features/global/profil/profil.component';
+import { TeamMenuComponent } from './features/team/components/team-menu/team-menu.component';
+import { SalonButtonComponent } from './features/team/components/salon-button/salon-button.component';
 import { MessageComponent } from './features/messages/components/message/message.component';
 import { LineDateComponent } from './features/messages/components/line-date/line-date.component';
 import { MsgThreadComponent } from './features/messages/components/msg-thread/msg-thread.component';
