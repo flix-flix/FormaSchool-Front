@@ -34,6 +34,12 @@ const routes: Routes = [
       { path: "teamSelect", component: TeamSelectComponent },
       { path: "teamMessages/:teamId/:salonId", component: TeamChatComponent },
       { path: "privateMessages", component: PrivateMsgComponent },
+
+      { path: "404", component: NotFoundComponent },
+      { path: "login", component: LoginComponent },
+
+      // TODO redirectTo: lastVisitedPage (+guard login)
+      { path: "", redirectTo: "teamMessages/1/1", pathMatch: "full" },
     ]
   },
 
@@ -50,10 +56,6 @@ const routes: Routes = [
   { path: "salonSummary/:id", component: SalonSummaryComponent },
   { path: "salonPermission:", component: SalonPermissionsComponent },
 
-  { path: "404", component: NotFoundComponent },
-  { path: "login", component: LoginComponent },
-  // TODO redirectTo: lastVisitedPage (+guard login)
-  { path: "", redirectTo: "teamMessages/1/1", pathMatch: "full" },
   { path: "**", redirectTo: "404" }
 ];
 
