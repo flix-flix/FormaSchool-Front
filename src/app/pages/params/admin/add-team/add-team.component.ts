@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { creationTeam } from 'src/app/models/creationTeam';
+import { teamNameDescPict } from 'src/app/models/teamNameDescPict';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class AddTeamComponent implements OnInit {
    * This function allows us to save a team
    */
   save = () => {
-    let team: creationTeam = this.teamForm.value;
+    let team: teamNameDescPict = this.teamForm.value;
     let idRetour: number = this.teamService.save(team);
     alert(`team creer avec comme id ${idRetour}`);
   }

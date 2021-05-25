@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { creationTeam } from 'src/app/models/creationTeam';
-import { Team } from 'src/app/models/team';
+import { teamNameDescPict } from 'src/app/models/teamNameDescPict';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -11,7 +10,8 @@ import { TeamService } from 'src/app/services/team.service';
 })
 export class TeamSummaryComponent implements OnInit {
 
-  team: creationTeam;
+  team: teamNameDescPict;
+
   constructor(
     private service: TeamService,
     private route: ActivatedRoute,
@@ -30,5 +30,4 @@ export class TeamSummaryComponent implements OnInit {
       this.router.navigate(['/teams']);
     });
   }*/
-
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { creationUser } from 'src/app/models/creationUser';
+import { userCreation } from 'src/app/models/userCreation';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class AddUserComponent implements OnInit {
    * This function allows us to save a user
    */
   save = () => {
-    let user: creationUser = this.userForm.value;
+    let user: userCreation = this.userForm.value;
     let idRetour = this.userService.save(user);
     alert(`L'utilisateur a bien été créé avec l'id ${idRetour}`)
   }

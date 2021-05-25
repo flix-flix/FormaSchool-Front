@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Salon } from '../features/team/services/models/salon';
 import { SalonService } from '../features/team/services/salon.service';
-import { creationTeam } from '../models/creationTeam';
-import { TeamLinkUser } from '../models/teamLinkUser';
+import { teamNameDescPict } from '../models/teamNameDescPict';
+import { TeamNamePict } from '../models/teamNamePict';
 
 @Injectable({
   providedIn: 'root'
@@ -55,10 +55,10 @@ export class TeamService {
    * This function return a quick presentation of each team. It contain name, picture and the id
    * @returns an array of TeamLinkUser object
    */
-  findAllPresentation = (): TeamLinkUser[] => {
-    let res: TeamLinkUser[] = [];
+  findAllPresentation = (): TeamNamePict[] => {
+    let res: TeamNamePict[] = [];
     this.teams.forEach(team => {
-      let data = new TeamLinkUser(team.id, team.name, team.picture);
+      let data = new TeamNamePict(team.id, team.name, team.picture);
       res.push(data);
     });
     return res;
@@ -69,7 +69,7 @@ export class TeamService {
    * @param team A creationTeam object (name, desc and picture)
    * @returns A number which is the id of the team created
    */
-  save = (team: creationTeam): number => {
+  save = (team: teamNameDescPict): number => {
     let data = {
       id: this.nextId++,
       name: team.name,
@@ -82,20 +82,20 @@ export class TeamService {
     return data.id;
   }
 
-  afficheEquipes = (id: number): TeamLinkUser[] => {
+  afficheEquipes = (id: number): TeamNamePict[] => {
     let res = [];
-    res.push(new TeamLinkUser(1, "IBM", "1.png"))
-    res.push(new TeamLinkUser(1, "IDP", "2.jpg"))
-    res.push(new TeamLinkUser(1, "M2i", "3.png"))
-    res.push(new TeamLinkUser(1, "Semifir", "4.png"))
+    res.push(new TeamNamePict(1, "IBM", "1.png"))
+    res.push(new TeamNamePict(1, "IDP", "2.jpg"))
+    res.push(new TeamNamePict(1, "M2i", "3.png"))
+    res.push(new TeamNamePict(1, "Semifir", "4.png"))
     return res;
   }
 
   // ================================================================================================
 
-  findNamePicDescById = (teamId: number): Observable<creationTeam> => {
-    return new Observable<creationTeam>(obs => {
-      obs.next(new creationTeam("IBM", "Desc Ibm", "1.png"));
+  findNamePicDescById = (teamId: number): Observable<teamNameDescPict> => {
+    return new Observable<teamNameDescPict>(obs => {
+      obs.next(new teamNameDescPict("IBM", "Desc Ibm", "1.png"));
       obs.complete();
     });
   }
@@ -111,8 +111,8 @@ export class TeamService {
   }
 
   /** Returns the name and the picture for the given team */
-  static findNamePictureById = (teamId: number): Observable<TeamLinkUser> => {
-    return new Observable<TeamLinkUser>(obs => {
+  static findNamePictureById = (teamId: number): Observable<TeamNamePict> => {
+    return new Observable<TeamNamePict>(obs => {
       obs.next(TeamService.generateTeamNamePicture(teamId));
       obs.complete();
     });
@@ -133,12 +133,12 @@ export class TeamService {
     return salons;
   }
 
-  static generateTeamNamePicture = (teamId: number): TeamLinkUser => {
+  static generateTeamNamePicture = (teamId: number): TeamNamePict => {
     if (!(teamId in _teams)) {
       console.error("teamId doesn't exist:", teamId);
       return undefined;
     }
-    return new TeamLinkUser(_teams[teamId].id, _teams[teamId].name, _teams[teamId].picture);
+    return new TeamNamePict(_teams[teamId].id, _teams[teamId].name, _teams[teamId].picture);
   }
 }
 

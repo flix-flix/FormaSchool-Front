@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TeamLinkUser } from 'src/app/models/teamLinkUser';
+import { TeamNamePict } from 'src/app/models/teamNamePict';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class TeamMenuComponent implements OnInit {
   @Input() teamId: number;
   @Input() salonId: number;
 
-  team: TeamLinkUser;
+  team: TeamNamePict;
 
   constructor() { }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { TeamLinkUser } from 'src/app/models/teamLinkUser';
-import { UserLinkTeam } from 'src/app/models/userLinkTeam';
+import { TeamNamePict } from 'src/app/models/teamNamePict';
+import { UserNamePict } from 'src/app/models/userNamePict';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -12,10 +12,10 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AddUserToTeamComponent implements OnInit {
 
-  users: UserLinkTeam[];
-  teams: TeamLinkUser[];
-  selectedUser: UserLinkTeam[] = []
-  selectedTeam: TeamLinkUser;
+  users: UserNamePict[];
+  teams: TeamNamePict[];
+  selectedUser: UserNamePict[] = []
+  selectedTeam: TeamNamePict;
 
 
 

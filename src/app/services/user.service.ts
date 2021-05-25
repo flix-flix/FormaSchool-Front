@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { creationUser } from '../models/creationUser';
-import { UserLinkTeam } from '../models/userLinkTeam';
+import { userCreation } from '../models/userCreation';
+import { UserNamePict } from '../models/userNamePict';
 
 @Injectable({
   providedIn: 'root'
@@ -39,10 +39,10 @@ export class UserService {
    * This function return a quick presentation of each user. It contain lastname, firstname, id and picture
    * @returns an array of UserLinkTeam object
    */
-  findAllPresentation = (): UserLinkTeam[] => {
-    let res: UserLinkTeam[] = [];
+  findAllPresentation = (): UserNamePict[] => {
+    let res: UserNamePict[] = [];
     this.users.forEach(user => {
-      let data = new UserLinkTeam(user.id, user.firstname, user.lastname, user.picture);
+      let data = new UserNamePict(user.id, user.firstname, user.lastname, user.picture);
       res.push(data);
     });
     return res;
@@ -53,10 +53,10 @@ export class UserService {
    * @param id the id of the team
    * @returns a list of UserLinkTeam which dont have the team
    */
-  listUserLinkTeam = (id: number): UserLinkTeam[] => {
+  listUserLinkTeam = (id: number): UserNamePict[] => {
     return this.users
       .filter(user => !user.teams.includes(id))
-      .map(userDetail => new UserLinkTeam(
+      .map(userDetail => new UserNamePict(
         userDetail.id,
         userDetail.firstname,
         userDetail.lastname,
@@ -86,7 +86,7 @@ export class UserService {
    * @param user A creationUser object (firstname, lastname, password, email and picture)
    * @returns A number which is the id of the user created
    */
-  save = (user: creationUser): number => {
+  save = (user: userCreation): number => {
     let data = {
       id: this.nextId++,
       firstname: user.firstname,
@@ -104,12 +104,12 @@ export class UserService {
   // ================================================================================================
   // TODO [back]
 
-  static generateUserNamePicture = (userId: number): UserLinkTeam => {
+  static generateUserNamePicture = (userId: number): UserNamePict => {
     if (!(userId in _users)) {
       console.error("userId doesn't exist:", userId);
       return undefined;
     }
-    return new UserLinkTeam(_users[userId].id, _users[userId].firstname, _users[userId].lastname, _users[userId].picture);
+    return new UserNamePict(_users[userId].id, _users[userId].firstname, _users[userId].lastname, _users[userId].picture);
   }
 }
 

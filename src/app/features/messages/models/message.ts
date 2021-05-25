@@ -1,14 +1,14 @@
-import { UserLinkTeam } from "src/app/models/userLinkTeam";
+import { UserNamePict } from "src/app/models/userNamePict";
 
 export class Message {
     private _id: number;
-    private _sender: UserLinkTeam;
+    private _sender: UserNamePict;
     private _date: Date;
     private _content: string;
 
     private _html: string;
 
-    constructor(id: number, sender: UserLinkTeam, date: Date, content: string) {
+    constructor(id: number, sender: UserNamePict, date: Date, content: string) {
         this._id = id;
         this._sender = sender;
         this._date = date;
@@ -34,11 +34,11 @@ export class Message {
         this._id = id;
     }
 
-    public get sender(): UserLinkTeam {
+    public get sender(): UserNamePict {
         return this._sender;
     }
 
-    public set sender(sender: UserLinkTeam) {
+    public set sender(sender: UserNamePict) {
         this._sender = sender;
     }
 
