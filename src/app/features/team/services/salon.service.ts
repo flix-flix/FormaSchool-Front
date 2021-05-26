@@ -43,6 +43,13 @@ let salons: { [id: number]: { id: number, name: string, msgs: number[] } } = {
   3: { id: 3, name: "Lorem", msgs: [40] },
 
   // IDP
+  10: { id: 10, name: "Pole Emploi", msgs: [100, 101, 102] },
+
   // M2i
+  20: { id: 20, name: "Secrétaria", msgs: [200, 201] },
+
   // Semifir
+  30: { id: 30, name: "Java", msgs: [300, 301, 302, 303] },
+  31: { id: 31, name: "SQL", msgs: [320, 321, 322] },
+  32: { id: 32, name: "Angular", msgs: [340, 341] },
 };
