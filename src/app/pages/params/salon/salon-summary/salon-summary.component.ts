@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SalonNameDesc } from 'src/app/features/params/salon/model/salonNameDesc';
+import { SalonService } from 'src/app/features/team/services/salon.service';
 
 
 @Component({
@@ -9,19 +11,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SalonSummaryComponent implements OnInit {
 
-  salon = { name: "General", desc: "Ciao" }
+  salon: SalonNameDesc;
 
   constructor(
-
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    /*   this.route.paramMap.subscribe(params => {
-        this.service.findById(params.get("id")).subscribe(data => {
-          this.salon = data;
-        })
-      });*/
+    this.route.paramMap.subscribe(params => {
+      SalonService.findNameDescById(+params.get("id")).subscribe(data => {
+        this.salon = data;
+      })
+    });
+
   }
 
 }
