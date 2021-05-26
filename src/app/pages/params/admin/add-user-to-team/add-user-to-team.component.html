@@ -1,8 +1,6 @@
 <div>
-
     <p-listbox (onChange)="refreshUser()" [(ngModel)]="selectedTeam" [options]="teams" [metaKeySelection]="false"
-        [checkbox]="true" [filter]="true" optionLabel="name" [listStyle]="{'max-height':'250px'}"
-        [style]="{'width':'100rem'}">
+        [checkbox]="true" [filter]="true" optionLabel="name">
         <ng-template let-team pTemplate="team">
             <div class="team-item">
                 <div>{{team.name}}</div>
@@ -11,7 +9,7 @@
     </p-listbox>
 
     <p-listbox [(ngModel)]="selectedUser" [options]="users" [metaKeySelection]="false" [checkbox]="true" [filter]="true"
-        optionLabel="search" [multiple]="true" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100rem'}">
+        optionLabel="search" [multiple]="true">
         <ng-template let-user pTemplate="user">
             <div class="user-item">
                 <div>{{user.firstname}} {{user.lastname}}</div>
