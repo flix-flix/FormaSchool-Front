@@ -28,6 +28,7 @@ export class MessageService {
     }
     return new Message(msgs[msgId].id, users[msgs[msgId].sender], new Date(msgs[msgId].date), msgs[msgId].content);
   }
+
 }
 
 // ================================================================================================

@@ -1,2 +1,17 @@
-<h3>Name: {{ salon.name }} </h3>
-<h3>Description: {{ salon.desc }} </h3>
+<div id="global">
+    <h1 id="title"> SALON INFORMATIONS</h1>
+
+    <div class="info">
+        <label for="float-input">SALON NAME</label>
+        <span class="p-float-label">
+            <input id="float-input" type="text" value="{{ salon.name }}" pInputText>
+        </span>
+    </div>
+
+    <div class="info">
+        <label for="float-input">SALON DESCRIPTION</label>
+        <span class="p-float-label">
+            <textarea [rows]="5" [cols]="30" value="{{ salon.desc }}" pInputTextarea autoResize="autoResize"></textarea>
+        </span>
+    </div>
+</div>
