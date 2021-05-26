@@ -1,23 +1,41 @@
 <section>
-    <form [formGroup]="roleForm">
-        <span id="input" class="p-float-label">
-            <input id="float-input" type="text" formControlName="name" pInputText>
-            <label for="float-input">Nom du rôle</label>
-        </span>
-        <span class="colorSpan">
-            <label>Couleur :</label>
-            <p-colorPicker formControlName="color"></p-colorPicker>
-        </span>
-
-    </form>
-
-    <div class="rightsContainer">
-        <span class="rights" *ngFor="let right of listOfRights">
-            <label>{{right.desc}}</label>
-            <p-inputSwitch [(ngModel)]="right.value"></p-inputSwitch>
-        </span>
+    <div id="menu">
+        <p-button class="roleIcon" icon="pi pi-check" (click)="addNewRole()"></p-button>
+        <div class="roles" *ngFor="let role of roles" (click)="roleChoosen(role.id)">
+            <div class="circle" style.backgroundColor={{role.color}} style="height: 30px;
+            width: 30px;
+            border-radius: 60%;"> </div>
+            <div class="roleName">
+                {{role.name}}
+            </div>
+        </div>
     </div>
 
-    <button pButton pRipple type="button" (click)="save()" label="Créer"
-        class="p-button-rounded p-button-info"></button>
+    <div id="content">
+        <span id="input" class="p-float-label">
+            <input id="float-input" type="text" [(ngModel)]="role.name" pInputText>
+            <label for="float-input">Nom du rôle</label>
+        </span>
+        <div>
+            <span class="colorSpan">
+                <label>Couleur :</label>
+                <p-colorPicker [(ngModel)]="role.color"></p-colorPicker>
+            </span>
+            <div class="circle" (click)="updateColor('#00c0d1')" style="height: 30px;
+            width: 30px;
+            background-color: #00c0d1;
+            border-radius: 60%;"> </div>
+        </div>
+
+        <div class="rightsContainer">
+            <span class="rights" *ngFor="let right of role.rights">
+                <label>{{right.desc}}</label>
+                <p-inputSwitch [(ngModel)]="right.value"></p-inputSwitch>
+            </span>
+        </div>
+
+        <button pButton pRipple type="button" (click)="update()" label="Sauvegarder"
+            class="p-button-rounded p-button-info"></button>
+    </div>
+
 </section>

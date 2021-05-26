@@ -1,8 +1,25 @@
 section{
     background-color: #6595B8;
     height: 100%;
-    padding: 50px;
+    display: flex;
 }
+#menu{
+    height: 100%;
+    width: 10%;
+    background-color: #275575;
+}
+
+.roles{
+    margin: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.roleName{
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
 input{
     background-color: #A2D0EA;
 }
@@ -23,6 +40,22 @@ label{
     margin-right: 120px;
     margin-left: 120px; 
 }
+.roleIcon ::ng-deep .p-button.p-button-icon-only {
+    width: 20px;
+    padding: 0.5rem 0;
+}
+.roleIcon ::ng-deep .p-button {
+    color: #ffffff;
+    background: #2b8a55;
+    border: 1px solid #2196F3;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 60px;
+    height: 15px;
+    margin-left: 85%;
+}
+
 button{
     margin-top: 20px;
     margin-bottom: 20px;
