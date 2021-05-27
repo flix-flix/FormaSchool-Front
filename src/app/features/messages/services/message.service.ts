@@ -28,6 +28,7 @@ export class MessageService {
     }
     return new Message(msgs[msgId].id, users[msgs[msgId].sender], new Date(msgs[msgId].date), msgs[msgId].content);
   }
+
 }
 
 // ================================================================================================
@@ -65,6 +66,29 @@ let msgs: { [id: number]: { id: number, sender: number, date: string, content: s
       Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac euismod nibh nisl eu lectus. Fusce vulputate sem at sapien. Vivamus leo. Aliquam euismod libero eu enim. Nulla nec felis sed leo placerat imperdiet. Aenean suscipit nulla in justo. Suspendisse cursus rutrum augue. Nulla tincidunt tincidunt mi. Curabitur iaculis, lorem vel rhoncus faucibus, felis magna fermentum augue, et ultricies lacus lorem varius purus. Curabitur eu amet.`},
 
   // ================== IDP ========================
+  // Pole Emploi
+  100: { id: 100, sender: 1, date: "2021-01-05T07:07:35", content: "Bonjour" },
+  101: { id: 100, sender: 3, date: "2021-03-05T09:12:43", content: "Salut" },
+  102: { id: 100, sender: 2, date: "2021-05-05T15:17:45", content: "Coucou" },
+
   // ================== M2i ========================
+  // Secretaria
+  200: { id: 200, sender: 4, date: "2021-05-02T19:47:35", content: "Tuto pour le __souligné__" },
+  201: { id: 201, sender: 3, date: "2021-05-05T07:12:35", content: "et celui pour l'*italique*" },
+
   // ================== Semifir ========================
+  // Java
+  300: { id: 300, sender: 2, date: "2021-05-05T07:12:35", content: 'List<String> teams = new ArrayList<>(List.of("FormaSchool", "JDR", "Médicaments", "Tinder Jeux"));' },
+  301: { id: 301, sender: 1, date: "2021-05-05T07:13:35", content: 'String nbTeams = "" + teams.size();' },
+  302: { id: 302, sender: 4, date: "2021-05-05T07:13:36", content: 'System.out.println(String.join(", ", lilist));' },
+  303: { id: 303, sender: 3, date: "2021-05-05T07:13:37", content: "teams.stream().forEach(System.out::println);" },
+
+  // SQL
+  320: { id: 320, sender: 3, date: "2021-05-05T23:51:35", content: "**SELECT** * **FROM** Teams" },
+  321: { id: 321, sender: 2, date: "2021-05-05T23:51:36", content: "**DROP DATABASE** FormaSchool" },
+  322: { id: 322, sender: 3, date: "2021-05-05T23:52:37", content: "Savoir effectuer des requêtes n’est pas trop difficile, mais il convient de véritablement comprendre comment fonctionne le stockage des données et la façon dont elles sont lues pour **__optimiser les performances__**. Les optimisations sont basées dans 2 catégories: les bons choix à faire lorsqu’il faut définir la **__structure de la base de données__** et les méthodes les plus adaptées pour **__lire les données__**." },
+
+  // Angular
+  340: { id: 340, sender: 4, date: "2021-05-05T07:01:35", content: "**@Input()** team" },
+  341: { id: 341, sender: 3, date: "2021-05-05T12:02:36", content: '**routerLink**="/404"' },
 };

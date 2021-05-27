@@ -90,7 +90,7 @@ export class MsgThreadComponent implements OnInit {
   }
 }
 // TODO [back]
-let nextId = 100;
+let nextId = 1_000;
 
 /** Returns true if the 2 datetime are on the same day */
 const isSameDay = (date1, date2) => {
