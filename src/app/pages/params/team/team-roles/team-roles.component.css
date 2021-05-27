@@ -24,6 +24,10 @@ section{
 .roles{
     margin: 15px;
     display: flex;
+    padding: 15px;
+}
+.roles:hover{
+    background-color: #003b55;
 }
 
 .roleName{
