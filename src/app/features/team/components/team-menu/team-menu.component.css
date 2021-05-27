@@ -72,3 +72,14 @@
 #salons {
     overflow-y: auto;
 }
+
+/* ========= Scrollbar ========= */
+#salons::-webkit-scrollbar {
+    width: 9px;
+}
+
+#salons::-webkit-scrollbar-thumb {
+    background: var(--header);
+    border: 2px solid var(--menu);
+    border-radius: 20px;
+}

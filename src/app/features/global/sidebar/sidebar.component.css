@@ -4,6 +4,7 @@
     align-items: center;
 
     overflow-y: auto;
+    overflow-x: hidden;
 
     width: 5rem;
     height: 100%;
@@ -33,4 +34,15 @@
     margin: .5rem 0;
 
     border-bottom: 2px solid black;
+}
+
+/* ========= Scrollbar ========= */
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--font_2);
+    border: 2px solid var(--header);
+    border-radius: 20px;
 }
