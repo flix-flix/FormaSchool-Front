@@ -1,12 +1,15 @@
 section{
     display: flex;
     height: 100%;
-    width:100%;
+    width: 100%;
+}
+#content{
+    width: 100%;
+    height: 100%;
     background-color: #6595B8;
 }
-
-#router{
+#sidebar{
+    width: 20rem;
     height: 100%;
-    width:100%;
 }
 
