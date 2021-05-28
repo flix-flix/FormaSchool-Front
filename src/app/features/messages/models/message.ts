@@ -1,4 +1,5 @@
 import { UserNamePict } from "src/app/models/userNamePict";
+import { EmojiService } from "src/app/services/emoji.service";
 
 export class Message {
     private _id: number;
@@ -15,6 +16,8 @@ export class Message {
         this._content = content;
 
         this._html = Message.processHtml(content);
+
+        this._html = EmojiService.processEmoji(this._html);
     }
 
     // ===============================================

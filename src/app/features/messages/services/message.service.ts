@@ -51,12 +51,15 @@ let msgs: { [id: number]: { id: number, sender: number, date: string, content: s
   6: { id: 6, sender: 3, date: "2021-05-02T09:08:27", content: "text*italic*text" },
 
   7: { id: 7, sender: 1, date: "2021-05-05T17:18:19", content: "Normal\n\n**Bold**\n\n*Italic*\n\n__Under__\n\n~~Strike~~\n\n***__~~All~~__***" },
+  8: { id: 8, sender: 3, date: "2021-05-28T00:50:11", content: "C'est le feu :fire:\nLe :fire:" },
+  9: { id: 9, sender: 2, date: "2021-05-28T00:50:25", content: ":victory_hand: EZ !! :victory_hand:" },
+  10: { id: 10, sender: 4, date: "2021-05-28T00:50:11", content: "C'est le feu :fire:\nC'est le feu :fire:\nC'est le feu\nC'est le feu" },
 
   // Nourriture
-  20: { id: 20, sender: 1, date: "2021-05-01T17:35:21", content: "Welsh" },
-  21: { id: 21, sender: 2, date: "2021-05-04T09:27:07", content: "Frites !" },
-  22: { id: 22, sender: 4, date: "2021-05-04T10:01:21", content: "Hamburger" },
-  23: { id: 23, sender: 3, date: "2021-05-05T07:12:35", content: "Kebab" },
+  20: { id: 20, sender: 1, date: "2021-05-01T17:35:21", content: ":beer_mug: :wine_glass: :cocktail_glass:" },
+  21: { id: 21, sender: 2, date: "2021-05-04T09:27:07", content: "Frites ! :french_fries: :french_fries:" },
+  22: { id: 22, sender: 4, date: "2021-05-04T10:01:21", content: ":hamburger: Hamburger :hamburger:" },
+  23: { id: 23, sender: 3, date: "2021-05-05T07:12:35", content: "P'tit dej' :cookie: :croissant:" },
 
   // Lorem
   40: {
