@@ -25,15 +25,14 @@ export class EmojiService {
    * @param deep The number of folder deeper than /assets
    */
   static processEmoji = (content: string, deep: number): string => {
-    let html = "";
-    let search = ":";
-    let first = 0, second = 0, prev = 0;
-    let name;
+    let html = ""; // return string
+    let search = ":"; // TODO regex
+    let first = 0, second = 0, prev = 0; // first ':', second ':', prev: current char index
+    let name; // name of the potential emoji
 
     while ((first = EmojiService.indexOf(content, search, prev)) != -1
       && (second = EmojiService.indexOf(content, search, first + 1)) != -1) {
       name = content.substring(first + 1, second);
-      console.log(name)
       html += EmojiService.inSpan(content.substring(prev, first));
 
       let _emojis = Object.values(emojis).filter(elem => elem.name == name);
@@ -49,6 +48,8 @@ export class EmojiService {
     return html + EmojiService.inSpan(content.substring(prev));
   }
 
+  // TODO Usefull ?
+  /** Returns the text within a span._text */
   static inSpan = (content: string): string => {
     return `<span class="_text">${content}</span>`
   }
@@ -80,11 +81,6 @@ export class EmojiService {
       return undefined;
     }
     return new EmojiNamePict(emojis[emojiId].id, emojis[emojiId].name, emojis[emojiId].picture);
-  }
-
-  // TODO [Remove]
-  static getEmojis = () => {
-    return emojis;
   }
 }
 
