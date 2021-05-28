@@ -1,1 +1,31 @@
-<p>salon-permissions works!</p>
+<select name="pets" id="pet-select" *ngFor="let user of users">
+    <option value="">--Please choose an option--</option>
+    <option>{{user.firstname}} {{user.lastname}}</option>
+</select>
+
+
+
+
+<section>
+    <form [formGroup]="roleForm">
+        <span id="input" class="p-float-label">
+            <input id="float-input" type="text" formControlName="name" pInputText>
+            <label for="float-input">Nom du rôle</label>
+        </span>
+        <span class="colorSpan">
+            <label>Couleur :</label>
+            <p-colorPicker formControlName="color"></p-colorPicker>
+        </span>
+
+    </form>
+
+    <div class="rightsContainer">
+        <span class="rights" *ngFor="let right of listOfRights">
+            <label>{{right.desc}}</label>
+            <p-inputSwitch [(ngModel)]="right.value"></p-inputSwitch>
+        </span>
+    </div>
+
+    <button pButton pRipple type="button" (click)="save()" label="Créer"
+        class="p-button-rounded p-button-info"></button>
+</section>

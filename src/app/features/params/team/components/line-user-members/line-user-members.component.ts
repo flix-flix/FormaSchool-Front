@@ -28,7 +28,7 @@ export class LineUserMembersComponent implements OnInit {
         }
       }
       this.possibleRoles.push(this.roles[indexRole])*/
-      this.roles.filter(this.user.roles.inc)
+      this.roles.filter(this.user.roles.include())
     }
 
   }
