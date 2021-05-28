@@ -13,8 +13,7 @@
 }
 
 .msg:hover {
-    /* TODO only background must be brighter */
-    filter: brightness(115%);
+    background-color: rgba(var(--_header), .9);
 }
 
 .author_img {

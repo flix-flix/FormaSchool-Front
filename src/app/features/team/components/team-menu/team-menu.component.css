@@ -21,8 +21,7 @@
     width: calc(100% + 2rem);
     height: 2px;
 
-    background-color: var(--font_2);
-    filter: brightness(150%);
+    background-color: rgba(var(--_font_2), .6);
 }
 
 #team_logo_center {
