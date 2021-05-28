@@ -19,7 +19,12 @@ export class EmojiService {
   // ================================================================================================
   // Smart
 
-  static processEmoji = (content: string): string => {
+  /**
+   * Returns the html representation (with img tag) of the given text
+   * @param content The string to process
+   * @param deep The number of folder deeper than /assets
+   */
+  static processEmoji = (content: string, deep: number): string => {
     let html = "";
     let search = ":";
     let first = 0, second = 0, prev = 0;
@@ -29,19 +34,23 @@ export class EmojiService {
       && (second = EmojiService.indexOf(content, search, first + 1)) != -1) {
       name = content.substring(first + 1, second);
       console.log(name)
-      html += content.substring(prev, first);
+      html += EmojiService.inSpan(content.substring(prev, first));
 
       let _emojis = Object.values(emojis).filter(elem => elem.name == name);
       if (_emojis.length != 0) {
         let emoji = _emojis[0];
-        html += `<img class="emoji_msg" src="../../../../../assets/images/_remove/${emoji.picture}" alt=":${emoji.name}:">`;
+        html += `<img class="emoji" src="${"../".repeat(deep)}assets/images/_remove/${emoji.picture}" alt=":${emoji.name}:">`;
         prev = second + 1;
       } else
         prev = first + 1;
     }
 
     // Add the remaining content
-    return html + content.substring(prev);
+    return html + EmojiService.inSpan(content.substring(prev));
+  }
+
+  static inSpan = (content: string): string => {
+    return `<span class="_text">${content}</span>`
   }
 
   // ================================================================================================

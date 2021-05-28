@@ -17,7 +17,7 @@ export class Message {
 
         this._html = Message.processHtml(content);
 
-        this._html = EmojiService.processEmoji(this._html);
+        this._html = EmojiService.processEmoji(this._html, 4);
     }
 
     // ===============================================

@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { EmojiService } from 'src/app/services/emoji.service';
 
 @Component({
   selector: 'app-salon-button',
   templateUrl: './salon-button.component.html',
-  styleUrls: ['./salon-button.component.css']
+  styleUrls: ['./salon-button.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SalonButtonComponent implements OnInit {
 
@@ -13,6 +15,7 @@ export class SalonButtonComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.salon.html = EmojiService.processEmoji(this.salon.name, 4);
   }
 
   openSalonParams = (event) => {
