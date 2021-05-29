@@ -7,7 +7,12 @@
             <span class="sender">{{msg.sender.firstname}} {{msg.sender.lastname}}</span>
             <span class="time">{{msg.getTimeStr()}}</span>
         </div>
+
         <div class="text" [innerHtml]="msg.html"></div>
+
+        <div id="emojis">
+            <app-emoji *ngFor="let emoji of emojis" [emoji]="emoji"></app-emoji>
+        </div>
     </div>
 
     <div id="icons">
