@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { createRole } from 'src/app/features/roles/models/createRole';
 import { Role } from 'src/app/features/roles/models/role';
+import { RoleWithoutRights } from 'src/app/features/roles/models/roleWithoutRights';
 import { RoleService } from 'src/app/features/roles/services/role.service';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-team-roles',
@@ -10,35 +13,56 @@ import { RoleService } from 'src/app/features/roles/services/role.service';
 })
 export class TeamRolesComponent implements OnInit {
 
-  roleForm: FormGroup;
-  listOfRights: { desc: string, value: boolean }[];
+  role: Role;
+  roles: RoleWithoutRights[];
 
-  constructor(private fb: FormBuilder, private roleService: RoleService) {
-    this.roleForm = this.fb.group({
-      name: [''],
-      color: [''],
-      rights: this.fb.array([true])
-    })
+  constructor(private roleService: RoleService, private teamService: TeamService) {
   }
 
   ngOnInit(): void {
-    this.listOfRights = this.roleService.getListOfRights();
+    this.refreshRoles();
+    this.roleChoosen(this.roles[0].id);
   }
 
   /**
-   * This function allows us to save a role
+   * This function refresh the list of roles
    */
-  save = () => {
-    if (this.roleForm.get("name").value != "" && this.roleForm.get("name").value != null) {
-      let role: Role = new Role(this.roleForm.get("name").value,
-        this.roleForm.get("color").value,
-        this.listOfRights);
-      //TODO replace 1 by the id of the actual team
-      let idRetour: number = this.roleService.save(1, role);
-      alert(`Le role a bien été crée avec l'id ${idRetour}`);
-    }
-    else {
-      alert("Le nom ne peut pas être vide");
-    }
+  refreshRoles = () => {
+    this.roles = [];
+    let rolesId: number[] = this.teamService.findRolesByTeamId(1);
+    rolesId.forEach(id => {
+      this.roles.push(this.roleService.findWithoutRightsById(id));
+    });
+  }
+
+  /**
+   * This function refresh the page with the role choosen
+   * @param id the id of the role choosen
+   */
+  roleChoosen = (id: number) => {
+    let newRole: Role = this.roleService.findRoleById(id);
+    this.role = newRole;
+  }
+
+  /**
+   * This function allows you to create a new role
+   */
+  addNewRole = () => {
+    let idRole: number = this.roleService.save(new createRole("nouveau role", "#A2D0EA"));
+    //TODO include the teamId instead of "1"
+    this.teamService.addRoleToTeam(1, idRole);
+    this.refreshRoles();
+  }
+
+  /**
+   * This function allows us to update a role
+   */
+  update = () => {
+    this.roleService.update(this.role);
+    this.refreshRoles();
+  }
+
+  updateColor = (color: string) => {
+    this.role.color = color;
   }
 }

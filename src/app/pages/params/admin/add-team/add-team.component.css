@@ -1,6 +1,5 @@
 span{
-    margin-bottom: 30px;
-    margin-left: 40px;
+    margin: 40px;
 }
 
 button{
@@ -10,8 +9,15 @@ button{
 input{
     background-color: #A2D0EA;
 }
+input:hover{
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2)
+}
 textarea{
     background-color: #A2D0EA;
+    width: 50%;
+}
+textarea:hover{
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2)
 }
 
 label{

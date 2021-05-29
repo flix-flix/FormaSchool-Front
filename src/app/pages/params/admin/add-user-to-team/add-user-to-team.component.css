@@ -3,7 +3,6 @@
     border-bottom: 0 none;
     color: #10516D;
     background: #A2D0EA;
-    margin: 0;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
 }
@@ -20,6 +19,11 @@
     border: 1px solid #ced4da;
     border-radius: 3px;
     margin: 40px;
+    width: 90%;
+}
+
+::ng-deep .p-listbox:hover{
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2)
 }
 
 button{

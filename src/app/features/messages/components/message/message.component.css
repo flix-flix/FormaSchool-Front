@@ -50,6 +50,9 @@
 .content {
     color:black;
 }
+.text{
+    line-height: 1.4rem;
+}
 
 /* ================ icons =================== */
 
@@ -105,4 +108,11 @@
 
 .italic {
     font-style: italic;
+}
+
+.emoji {
+    width: 1.5rem;
+    height: 1.5rem;
+    
+    vertical-align: middle;
 }

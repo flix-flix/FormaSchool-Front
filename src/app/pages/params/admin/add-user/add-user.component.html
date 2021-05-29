@@ -1,28 +1,29 @@
 <form [formGroup]="userForm" (ngSubmit)="save()">
 
-    <span class="p-float-label">
-        <input id="float-input" type="text"  formControlName="picture" pInputText> 
+    <span id="picture" class="p-float-label">
+        <input id="float-input" type="text" formControlName="picture" pInputText>
         <label for="float-input">Image de Profil</label>
     </span>
 
     <div>
-        <span class="p-float-label">
-            <input id="float-input" type="text"  formControlName="firstname" pInputText> 
+        <span id="firstname" class="p-float-label">
+            <input id="float-input" type="text" formControlName="firstname" required pInputText>
             <label for="float-input">Prénom</label>
         </span>
-        <span class="p-float-label">
-            <input id="float-input" type="text"  formControlName="lastname" pInputText> 
+        <span id="lastname" class="p-float-label">
+            <input id="float-input" type="text" formControlName="lastname" required pInputText>
             <label for="float-input">Nom</label>
         </span>
-        <span class="p-float-label">
-            <input id="float-input" type="email"  formControlName="email" pInputText> 
+        <span id="email" class="p-float-label">
+            <input id="float-input" type="email" formControlName="email" required pInputText>
             <label for="float-input">Email</label>
         </span>
-        <span class="p-float-label">
-            <input id="float-input" type="text"  formControlName="password" pInputText> 
+        <span id="pwd" class="p-float-label">
+            <input id="float-input" type="text" formControlName="password" required pInputText>
             <label for="float-input">Mot de passe</label>
         </span>
+        <button pButton pRipple type="submit" label="Créer" class="p-button-rounded p-button-info"></button>
     </div>
 
-    <button pButton pRipple type="submit" label="Créer" class="p-button-rounded p-button-info"></button>
+
 </form>

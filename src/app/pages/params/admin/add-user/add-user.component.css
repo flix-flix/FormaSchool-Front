@@ -1,18 +1,22 @@
-
-form:first-child{
-    margin-top: 40px;  
-    margin-left:10%;
+span{
+    margin: 35px;
 }
-div span{
-    margin-top: 30px;
+div{
+    display: flex;
+    flex-wrap: wrap;
 }
-
 input{
     background-color: #A2D0EA;
 }
+
+input:hover{
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2)
+}
+
 label{
     color: #10516D;
 }
 button{
-    margin-top: 30px;
+    margin: 35px;
 }
+

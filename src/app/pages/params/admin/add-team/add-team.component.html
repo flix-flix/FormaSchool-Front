@@ -6,12 +6,12 @@
     </span>
 
     <span class="p-float-label">
-        <input id="float-input" type="text" formControlName="name" pInputText>
+        <input id="float-input" type="text" formControlName="name" required pInputText>
         <label for="float-input">Nom de l'équipe</label>
     </span>
 
     <span class="p-float-label">
-        <textarea [rows]="10" [cols]="100" formControlName="desc" pInputTextarea autoResize="autoResize"></textarea>
+        <textarea [rows]="10" formControlName="desc" pInputTextarea autoResize="autoResize"></textarea>
         <label for="float-input">Description de l'équipe</label>
     </span>
 

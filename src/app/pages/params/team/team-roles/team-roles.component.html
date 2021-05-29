@@ -1,23 +1,72 @@
 <section>
-    <form [formGroup]="roleForm">
-        <span id="input" class="p-float-label">
-            <input id="float-input" type="text" formControlName="name" pInputText>
-            <label for="float-input">Nom du rôle</label>
-        </span>
-        <span class="colorSpan">
-            <label>Couleur :</label>
-            <p-colorPicker formControlName="color"></p-colorPicker>
-        </span>
-
-    </form>
-
-    <div class="rightsContainer">
-        <span class="rights" *ngFor="let right of listOfRights">
-            <label>{{right.desc}}</label>
-            <p-inputSwitch [(ngModel)]="right.value"></p-inputSwitch>
-        </span>
+    <div id="menu">
+        <p-button class="addRole" icon="pi pi-check" (click)="addNewRole()"></p-button>
+        <div class="roles" *ngFor="let role of roles" (click)="roleChoosen(role.id)">
+            <div class="circle" style.backgroundColor={{role.color}} style="height: 15px;
+            width: 15px;
+            border-radius: 60%;"> </div>
+            <div class="roleName">
+                {{role.name}}
+            </div>
+        </div>
     </div>
 
-    <button pButton pRipple type="button" (click)="save()" label="Créer"
-        class="p-button-rounded p-button-info"></button>
+    <div id="content">
+        <span id="input" class="p-float-label">
+            <input id="float-input" type="text" [(ngModel)]="role.name" pInputText>
+            <label for="float-input">Nom du rôle</label>
+        </span>
+        <div class="colorPicker">
+            <span class="colorSpan">
+                <label>Couleur:</label>
+                <p-colorPicker [(ngModel)]="role.color"></p-colorPicker>
+            </span>
+            <div class="colorExample">
+                <div class="circleExample" (click)="updateColor('#00c0d1')" style="height: 30px;
+            width: 30px;
+            background-color: #00c0d1 ;
+            border-radius: 20%;"> </div>
+                <div class="circle" (click)="updateColor('#02ff4e')" style="height: 30px;
+            width: 30px;
+            background-color: #02ff4e ;
+            border-radius: 20%;"> </div>
+                <div class="circle" (click)="updateColor('#ff0000')" style="height: 30px;
+            width: 30px;
+            background-color: #ff0000 ;
+            border-radius: 20%;"> </div>
+                <div class="circle" (click)="updateColor('#674dfc')" style="height: 30px;
+            width: 30px;
+            background-color: #674dfc ;
+            border-radius: 20%;"> </div>
+                <div class="circle" (click)="updateColor('#f539e5')" style="height: 30px;
+            width: 30px;
+            background-color: #f539e5 ;
+            border-radius: 20%;"> </div>
+                <div class="circle" (click)="updateColor('#f3a54b')" style="height: 30px;
+            width: 30px;
+            background-color: #f3a54b ;
+            border-radius: 20%;"> </div>
+                <div class="circle" (click)="updateColor('#faf735')" style="height: 30px;
+            width: 30px;
+            background-color: #faf735 ;
+            border-radius: 20%;"> </div>
+                <div class="circle" (click)="updateColor('#a7a7a7')" style="height: 30px;
+            width: 30px;
+            background-color: #a7a7a7 ;
+            border-radius: 20%;"> </div>
+            </div>
+
+        </div>
+
+        <div class="rightsContainer">
+            <span class="rights" *ngFor="let right of role.rights">
+                <label>{{right.desc}}</label>
+                <p-inputSwitch [(ngModel)]="right.value"></p-inputSwitch>
+            </span>
+        </div>
+
+        <button pButton pRipple type="button" (click)="update()" label="Sauvegarder"
+            class="p-button-rounded p-button-info"></button>
+    </div>
+
 </section>
