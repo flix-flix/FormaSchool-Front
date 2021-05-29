@@ -47,6 +47,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { MsgWriterComponent } from './features/messages/components/msg-writer/msg-writer.component';
 import { PanelModule } from 'primeng/panel';
 import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-template/salon-template.component';
+import { EmojiComponent } from './features/messages/components/emoji/emoji.component';
 
 
 
@@ -86,7 +87,8 @@ import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-templat
     LineRoleMembersComponent,
     MsgWriterComponent,
     TeamRolesComponent,
-    ParamsSalonTemplateComponent
+    ParamsSalonTemplateComponent,
+    EmojiComponent
   ],
   imports: [
     BrowserModule,

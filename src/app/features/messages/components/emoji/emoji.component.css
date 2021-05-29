@@ -1,0 +1,28 @@
+.react {
+    display: flex;
+    align-items: center;
+
+    padding: 0 .5rem;
+    margin-right: .2rem;
+    margin-bottom: .2rem;
+    
+    border-radius: .7rem;
+
+    background-color: var(--menu);
+    border: 1px solid var(--menu);/* same size than .on */
+}
+
+/* User has used this emoji */
+.react.on {
+    box-shadow: inset 0px 0px 0px 1px var(--font_2);
+    border-color: var(--font_2);
+}
+
+.react:hover {
+    background-color: var(--background);
+}
+
+.react .emoji {
+    width: 1.5rem;
+    height: 1.5rem;
+}
