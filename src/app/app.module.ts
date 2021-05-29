@@ -47,6 +47,10 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { MsgWriterComponent } from './features/messages/components/msg-writer/msg-writer.component';
 import { PanelModule } from 'primeng/panel';
 import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-template/salon-template.component';
+import { TableModule } from 'primeng/table';
+import { ToolbarModule } from 'primeng/toolbar';
+import { DialogModule } from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 
@@ -102,7 +106,11 @@ import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-templat
     ColorPickerModule,
     BrowserAnimationsModule,
     InputSwitchModule,
-    PanelModule
+    PanelModule,
+    TableModule,
+    ToolbarModule,
+    DialogModule,
+    ConfirmDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

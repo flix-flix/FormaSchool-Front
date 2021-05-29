@@ -85,9 +85,22 @@ export class TeamService {
   afficheEquipes = (id: number): TeamNamePict[] => {
     let res = [];
     res.push(new TeamNamePict(1, "IBM", "1.png"))
-    res.push(new TeamNamePict(1, "IDP", "2.jpg"))
-    res.push(new TeamNamePict(1, "M2i", "3.png"))
-    res.push(new TeamNamePict(1, "Semifir", "4.png"))
+    res.push(new TeamNamePict(2, "IDP", "2.jpg"))
+    res.push(new TeamNamePict(3, "M2i", "3.png"))
+    res.push(new TeamNamePict(10, "Semifir", "4.png"))
+    res.push(new TeamNamePict(5, "Semifir", "4.png"))
+    res.push(new TeamNamePict(6, "Semifir", "4.png"))
+    res.push(new TeamNamePict(7, "Semifir", "4.png"))
+    res.push(new TeamNamePict(8, "Semifir", "4.png"))
+    res.push(new TeamNamePict(8, "Semifir", "4.png"))
+    res.push(new TeamNamePict(9, "IBM", "1.png"))
+    res.push(new TeamNamePict(11, "IDP", "2.jpg"))
+    res.push(new TeamNamePict(12, "M2i", "3.png"))
+    res.push(new TeamNamePict(13, "IBM", "1.png"))
+    res.push(new TeamNamePict(14, "IDP", "2.jpg"))
+    res.push(new TeamNamePict(15, "M2i", "3.png"))
+    res.push(new TeamNamePict(16, "IBM", "1.png"))
+    res.push(new TeamNamePict(17, "IDP", "2.jpg"))
     return res;
   }
 
@@ -140,10 +153,28 @@ export class TeamService {
     }
     return new TeamNamePict(_teams[teamId].id, _teams[teamId].name, _teams[teamId].picture);
   }
+
+  /**
+   * Add a role to the team
+   * @param teamId id of the team
+   * @param roleId id of the role
+   */
+  addRoleToTeam = (teamId: number, roleId: number) => {
+    _teams[teamId].roles.push(roleId);
+  }
+
+  /**
+   * Return the list of id which are role's id
+   * @param teamId 
+   * @returns a list of number
+   */
+  findRolesByTeamId = (teamId: number): number[] => {
+    return _teams[teamId].roles;
+  }
 }
 
 // TODO [back]
-let _teams: { [id: number]: { id: number, name: string, desc: string, picture: string, salons: number[], users: number[] } } =
+let _teams: { [id: number]: { id: number, name: string, desc: string, picture: string, salons: number[], users: number[], roles: number[] } } =
 {
   1: {
     id: 1,
@@ -151,7 +182,8 @@ let _teams: { [id: number]: { id: number, name: string, desc: string, picture: s
     desc: "International Business Machines Corporation",
     picture: "1.png",
     salons: [1, 2, 3],
-    users: [1, 2, 10, 20]
+    users: [1, 2, 10, 20],
+    roles: [1, 2]
   },
   2: {
     id: 2,
@@ -159,7 +191,8 @@ let _teams: { [id: number]: { id: number, name: string, desc: string, picture: s
     desc: "Invest in Digital People",
     picture: "2.jpg",
     salons: [10],
-    users: [1, 2]
+    users: [1, 2],
+    roles: []
   },
   3: {
     id: 3,
@@ -167,7 +200,8 @@ let _teams: { [id: number]: { id: number, name: string, desc: string, picture: s
     desc: "M2i formations, Hauts-de-France",
     picture: "3.png",
     salons: [20],
-    users: [10, 20]
+    users: [10, 20],
+    roles: []
   },
   10: {
     id: 10,
@@ -175,6 +209,7 @@ let _teams: { [id: number]: { id: number, name: string, desc: string, picture: s
     desc: "Ceci est la description de l'équipe Semifir",
     picture: "4.png",
     salons: [30, 31, 32],
-    users: [10, 20, 2, 1]
+    users: [10, 20, 2, 1],
+    roles: []
   }
 };

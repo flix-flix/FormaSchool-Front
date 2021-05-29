@@ -4,6 +4,7 @@ import { createRole } from 'src/app/features/roles/models/createRole';
 import { Role } from 'src/app/features/roles/models/role';
 import { RoleWithoutRights } from 'src/app/features/roles/models/roleWithoutRights';
 import { RoleService } from 'src/app/features/roles/services/role.service';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-team-roles',
@@ -15,7 +16,7 @@ export class TeamRolesComponent implements OnInit {
   role: Role;
   roles: RoleWithoutRights[];
 
-  constructor(private roleService: RoleService) {
+  constructor(private roleService: RoleService, private teamService: TeamService) {
   }
 
   ngOnInit(): void {
@@ -27,7 +28,11 @@ export class TeamRolesComponent implements OnInit {
    * This function refresh the list of roles
    */
   refreshRoles = () => {
-    this.roles = this.roleService.findAllWithoutRights();
+    this.roles = [];
+    let rolesId: number[] = this.teamService.findRolesByTeamId(1);
+    rolesId.forEach(id => {
+      this.roles.push(this.roleService.findWithoutRightsById(id));
+    });
   }
 
   /**
@@ -43,8 +48,9 @@ export class TeamRolesComponent implements OnInit {
    * This function allows you to create a new role
    */
   addNewRole = () => {
+    let idRole: number = this.roleService.save(new createRole("nouveau role", "#A2D0EA"));
     //TODO include the teamId instead of "1"
-    this.roleService.save(1, new createRole("nouveau role", "#A2D0EA"));
+    this.teamService.addRoleToTeam(1, idRole);
     this.refreshRoles();
   }
 

@@ -15,11 +15,10 @@ export class RoleService {
     { desc: "Editer les messages des autres", value: false }
   ];
 
-  roles: { [id: number]: { id: number, teamId: number, name: string, color: string, rights: { desc: string, value: boolean }[] } } =
+  roles: { [id: number]: { id: number, name: string, color: string, rights: { desc: string, value: boolean }[] } } =
     {
       1: {
         id: 1,
-        teamId: 1,
         name: "everyone",
         color: "#A2D0EA",
         rights: [
@@ -31,7 +30,6 @@ export class RoleService {
       },
       2: {
         id: 2,
-        teamId: 1,
         name: "SuperRole",
         color: "#E1FF04",
         rights: [
@@ -72,15 +70,12 @@ export class RoleService {
   }
 
   /**
-   * This function get all role in base without rights
-   * @returns list of RoleWithoutRights
+   * This function return the roleObjectWithoutRights you re looking for
+   * @param roleId the id you re looking for
+   * @returns Return a roleWithoutRights object 
    */
-  findAllWithoutRights = (): RoleWithoutRights[] => {
-    let res: RoleWithoutRights[] = [];
-    Object.values(this.roles).map(element => {
-      res.push(this.generateRoleWithoutRights(element.id));
-    })
-    return res;
+  findWithoutRightsById = (roleId: number): RoleWithoutRights => {
+    return this.generateRoleWithoutRights(roleId);
   }
 
   /**
@@ -118,10 +113,9 @@ export class RoleService {
    * @param teamId the id of the team which contain the role
    * @returns a number which is the id of the role created
    */
-  save = (teamId: number, role: createRole): number => {
+  save = (role: createRole): number => {
     let data = {
       id: this.nextId++,
-      teamId: teamId,
       name: role.name,
       color: role.color,
       rights: this.defaultList
