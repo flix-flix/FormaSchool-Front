@@ -58,7 +58,7 @@ export class UserService {
    */
   findAllUserRoles = (): UserHasRole[] => {
     let result: UserHasRole[] = [];
-    this.users.forEach(user => {
+    Object.values(_users).forEach(user => {
       result.push(UserService.generateUserWithRole(user.id));
     });
     return result;
@@ -168,7 +168,7 @@ let _users: {
     roles: [1, 2]
   },
   10: {
-    id: 3,
+    id: 10,
     firstname: "Luca",
     lastname: "Novelli",
     password: "lulu",
@@ -179,7 +179,7 @@ let _users: {
     roles: [3]
   },
   20: {
-    id: 4,
+    id: 20,
     firstname: "Bouchaib",
     lastname: "Faham",
     password: "bobo",

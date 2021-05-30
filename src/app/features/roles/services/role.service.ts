@@ -61,12 +61,12 @@ export class RoleService {
    * @param roleId the id of the role you re looking for
    * @returns a RoleWithoutRights object with the id you were looking for
    */
-  generateRoleWithoutRights = (roleId: number): RoleWithoutRights => {
-    if (!(roleId in this.roles)) {
+  static generateRoleWithoutRights = (roleId: number): RoleWithoutRights => {
+    if (!(roleId in _roles)) {
       console.error("roleId doesn't exist:", roleId);
       return undefined;
     }
-    return new RoleWithoutRights(roleId, this.roles[roleId].name, this.roles[roleId].color);
+    return new RoleWithoutRights(roleId, _roles[roleId].name, _roles[roleId].color);
   }
 
   /**
@@ -74,8 +74,8 @@ export class RoleService {
    * @param roleId the id you re looking for
    * @returns Return a roleWithoutRights object 
    */
-  findWithoutRightsById = (roleId: number): RoleWithoutRights => {
-    return this.generateRoleWithoutRights(roleId);
+  static findWithoutRightsById = (roleId: number): RoleWithoutRights => {
+    return RoleService.generateRoleWithoutRights(roleId);
   }
 
   /**
@@ -178,7 +178,7 @@ let _roles = {
   3: {
     id: 3,
     teamId: 1,
-    name: "Null",
+    name: "Delegué",
     color: "#FFFFFFF",
     rights: [
       { desc: "Créer/Editer salon(déplacer salon)", value: false },
