@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { createRole } from 'src/app/features/roles/models/createRole';
-import { Role } from 'src/app/features/roles/models/role';
-import { RoleWithoutRights } from 'src/app/features/roles/models/roleWithoutRights';
-import { RoleService } from 'src/app/features/roles/services/role.service';
+import { ActivatedRoute } from '@angular/router';
+import { createRole } from 'src/app/features/params/team/roles/models/createRole';
+import { Role } from 'src/app/features/params/team/roles/models/role';
+import { RoleWithoutRights } from 'src/app/features/params/team/roles/models/roleWithoutRights';
+import { RoleService } from 'src/app/features/params/team/roles/services/role.service';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class TeamRolesComponent implements OnInit {
   role: Role;
   roles: RoleWithoutRights[];
 
-  constructor(private roleService: RoleService, private teamService: TeamService) {
+  constructor(private roleService: RoleService, private teamService: TeamService, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {

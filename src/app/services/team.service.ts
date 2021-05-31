@@ -183,7 +183,7 @@ let _teams: { [id: number]: { id: number, name: string, desc: string, picture: s
     picture: "1.png",
     salons: [1, 2, 3],
     users: [1, 2, 10, 20],
-    roles: [1, 2]
+    roles: [1, 2, 3]
   },
   2: {
     id: 2,

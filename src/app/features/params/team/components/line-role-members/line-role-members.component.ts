@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Role } from 'src/app/features/roles/models/role';
-import { RoleService } from 'src/app/features/roles/services/role.service';
+import { Role } from 'src/app/features/params/team/roles/models/role';
+import { RoleService } from 'src/app/features/params/team/roles/services/role.service';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
