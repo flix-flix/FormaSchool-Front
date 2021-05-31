@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { createRole } from 'src/app/features/roles/models/createRole';
-import { Role } from 'src/app/features/roles/models/role';
-import { RoleService } from 'src/app/features/roles/services/role.service';
+import { createRole } from 'src/app/features/params/team/roles/models/createRole';
+import { Role } from 'src/app/features/params/team/roles/models/role';
+import { RoleService } from 'src/app/features/params/team/roles/services/role.service';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 

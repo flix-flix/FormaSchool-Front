@@ -12,7 +12,7 @@ export class RoleService {
     { desc: "Créer/Editer salon(déplacer salon)", value: false },
     { desc: "Créer/Editer role", value: false },
     { desc: "Permettre de mentionner", value: false },
-    { desc: "Editer les messages des autres", value: false }
+    { desc: "Supprimer les messages des autres", value: false }
   ];
 
 
@@ -135,7 +135,7 @@ let roles = {
       { desc: "Créer/Editer salon(déplacer salon)", value: false },
       { desc: "Créer/Editer role", value: true },
       { desc: "Permettre de mentionner", value: false },
-      { desc: "Editer les messages des autres", value: true }
+      { desc: "Supprimer les messages des autres", value: true }
     ]
   },
   2: {
@@ -147,7 +147,7 @@ let roles = {
       { desc: "Créer/Editer salon(déplacer salon)", value: true },
       { desc: "Créer/Editer role", value: true },
       { desc: "Permettre de mentionner", value: true },
-      { desc: "Editer les messages des autres", value: true }
+      { desc: "Supprimer les messages des autres", value: true }
     ]
   },
   3: {
@@ -159,7 +159,7 @@ let roles = {
       { desc: "Créer/Editer salon(déplacer salon)", value: false },
       { desc: "Créer/Editer role", value: false },
       { desc: "Permettre de mentionner", value: false },
-      { desc: "Editer les messages des autres", value: false }
+      { desc: "Supprimer les messages des autres", value: false }
     ]
   }
 }

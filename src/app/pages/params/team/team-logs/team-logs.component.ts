@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Log } from 'src/app/features/logs/models/log';
-import { LogService } from 'src/app/features/logs/services/log.service';
+import { Log } from 'src/app/features/params/team/logs/models/log';
+import { LogService } from 'src/app/features/params/team/logs/services/log.service';
 
 @Component({
   selector: 'app-team-logs',
