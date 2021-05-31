@@ -18,8 +18,9 @@ export class SalonSummaryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      SalonService.findNameDescById(+params.get("id")).subscribe(data => {
+    this.route.parent.paramMap.subscribe(params => { console.log(params.get("salonId")) })
+    this.route.parent.paramMap.subscribe(params => {
+      SalonService.findNameDescById(+ params.get("salonId")).subscribe(data => {
         this.salon = data;
       })
     });

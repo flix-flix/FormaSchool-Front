@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { userCreation } from '../models/userCreation';
 import { UserNamePict } from '../models/userNamePict';
+import { UserHasRole } from '../models/userHasRole';
+import { RoleService } from '../features/roles/services/role.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,8 @@ export class UserService {
       email: "alexdupont@gmail.com",
       picture: "picture of a cat",
       create: new Date("2019-01-16"),
-      teams: [1, 2]
+      teams: [1, 2],
+      roles: [3]
     },
     {
       id: 2,
@@ -29,7 +32,8 @@ export class UserService {
       email: "totogfkgkf",
       picture: "picture of a dog",
       create: new Date("2020-01-16"),
-      teams: [1]
+      teams: [1],
+      roles: [1, 2]
     }
   ]
 
@@ -46,6 +50,18 @@ export class UserService {
       res.push(data);
     });
     return res;
+  }
+
+  /**
+   * This function return a presentation of each user. It contain lastname, firstname, id and role
+   * @returns an array ofobject
+   */
+  findAllUserRoles = (): UserHasRole[] => {
+    let result: UserHasRole[] = [];
+    Object.values(_users).forEach(user => {
+      result.push(UserService.generateUserWithRole(user.id));
+    });
+    return result;
   }
 
   /**
@@ -95,7 +111,8 @@ export class UserService {
       email: user.password,
       picture: user.picture,
       create: new Date(),
-      teams: []
+      teams: [],
+      roles: []
     }
     this.users.push(data);
     return data.id;
@@ -103,6 +120,17 @@ export class UserService {
 
   // ================================================================================================
   // TODO [back]
+
+  static generateUserWithRole = (userId): UserHasRole => {
+    if (!(userId in _users)) {
+      console.error("userId doesn't exist:", userId);
+      return undefined;
+    }
+    let roles = [];
+    for (let roleIndex in _users[userId].roles)
+      roles.push(RoleService.generateRoleName(_users[userId].roles[roleIndex]));
+    return new UserHasRole(_users[userId].id, _users[userId].lastname, _users[userId].firstname, roles);
+  }
 
   static generateUserNamePicture = (userId: number): UserNamePict => {
     if (!(userId in _users)) {
@@ -115,7 +143,7 @@ export class UserService {
 
 // TODO [back]
 let _users: {
-  [id: number]: { id: number, firstname: string, lastname: string, password: string, email: string, picture: string, create: Date, teams: number[] }
+  [id: number]: { id: number, firstname: string, lastname: string, password: string, email: string, picture: string, create: Date, teams: number[], roles: number[] }
 } = {
   1: {
     id: 1,
@@ -125,7 +153,8 @@ let _users: {
     email: "felix@gmail.com",
     picture: "0.jpg",
     create: new Date("2019-01-16"),
-    teams: [1, 2, 10]
+    teams: [1, 2, 10],
+    roles: [1]
   },
   2: {
     id: 2,
@@ -135,26 +164,29 @@ let _users: {
     email: "jason@gmail.com",
     picture: "1.jpg",
     create: new Date("2020-01-16"),
-    teams: [1, 2, 10]
+    teams: [1, 2, 10],
+    roles: [1, 2]
   },
   10: {
-    id: 3,
+    id: 10,
     firstname: "Luca",
     lastname: "Novelli",
     password: "lulu",
     email: "luca@orange.fr",
     picture: "2.jpg",
     create: new Date("2020-03-07"),
-    teams: [1, 3, 10]
+    teams: [1, 3, 10],
+    roles: [3]
   },
   20: {
-    id: 4,
+    id: 20,
     firstname: "Bouchaib",
     lastname: "Faham",
     password: "bobo",
     email: "bouchaib@sfr.fr",
     picture: "3.jpg",
     create: new Date("2020-02-22"),
-    teams: [1, 3, 10]
+    teams: [1, 3, 10],
+    roles: [2, 3]
   },
 }

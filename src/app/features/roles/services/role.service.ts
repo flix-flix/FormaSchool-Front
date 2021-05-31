@@ -61,12 +61,12 @@ export class RoleService {
    * @param roleId the id of the role you re looking for
    * @returns a RoleWithoutRights object with the id you were looking for
    */
-  generateRoleWithoutRights = (roleId: number): RoleWithoutRights => {
-    if (!(roleId in this.roles)) {
+  static generateRoleWithoutRights = (roleId: number): RoleWithoutRights => {
+    if (!(roleId in _roles)) {
       console.error("roleId doesn't exist:", roleId);
       return undefined;
     }
-    return new RoleWithoutRights(roleId, this.roles[roleId].name, this.roles[roleId].color);
+    return new RoleWithoutRights(roleId, _roles[roleId].name, _roles[roleId].color);
   }
 
   /**
@@ -74,8 +74,8 @@ export class RoleService {
    * @param roleId the id you re looking for
    * @returns Return a roleWithoutRights object 
    */
-  findWithoutRightsById = (roleId: number): RoleWithoutRights => {
-    return this.generateRoleWithoutRights(roleId);
+  static findWithoutRightsById = (roleId: number): RoleWithoutRights => {
+    return RoleService.generateRoleWithoutRights(roleId);
   }
 
   /**
@@ -122,5 +122,69 @@ export class RoleService {
     }
     this.roles[data.id] = data;
     return data.id;
+  }
+
+  static generateRoleName = (roleId: number): Role => {
+    if (!(roleId in _roles)) {
+      console.error("roleId doesn't exist:", roleId);
+      return undefined;
+    }
+    return new Role(_roles[roleId].id, _roles[roleId].name, _roles[roleId].color, _roles[roleId].rights);
+  }
+
+  /**
+  * This function allows us to save a role
+  * @param role a createRole object (name, color, list of rights)
+  * @param teamId the id of the team which contain the role
+  * @returns a number which is the id of the role created
+  */
+  saveUpdateRole = (role: Role): number => {
+    let data = {
+      id: this.nextId++,
+      name: role.name,
+      color: role.color,
+      rights: this.defaultList
+    }
+    this.roles[data.id] = data;
+    return data.id;
+  }
+}
+
+let _roles = {
+  1: {
+    id: 1,
+    teamId: 1,
+    name: "everyone",
+    color: "#A2D0EA",
+    rights: [
+      { desc: "Créer/Editer salon(déplacer salon)", value: false },
+      { desc: "Créer/Editer role", value: true },
+      { desc: "Permettre de mentionner", value: false },
+      { desc: "Editer les messages des autres", value: true }
+    ]
+  },
+  2: {
+    id: 2,
+    teamId: 1,
+    name: "SuperRole",
+    color: "#B2D4EA",
+    rights: [
+      { desc: "Créer/Editer salon(déplacer salon)", value: true },
+      { desc: "Créer/Editer role", value: true },
+      { desc: "Permettre de mentionner", value: true },
+      { desc: "Editer les messages des autres", value: true }
+    ]
+  },
+  3: {
+    id: 3,
+    teamId: 1,
+    name: "Delegué",
+    color: "#FFFFFFF",
+    rights: [
+      { desc: "Créer/Editer salon(déplacer salon)", value: false },
+      { desc: "Créer/Editer role", value: false },
+      { desc: "Permettre de mentionner", value: false },
+      { desc: "Editer les messages des autres", value: false }
+    ]
   }
 }

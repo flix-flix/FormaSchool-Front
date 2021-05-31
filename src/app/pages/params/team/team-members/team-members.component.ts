@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Role } from 'src/app/features/roles/models/role';
+import { UserHasRole } from 'src/app/models/userHasRole';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-team-members',
@@ -7,18 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamMembersComponent implements OnInit {
 
+  roles: Role[];
+  users: UserHasRole[];
 
-  users = [
-    { nom: "Vennin", prenom: "Jason", age: 12, team: "Ibm", roles: [0, 2] },
-    { nom: "Novelli ", prenom: "Luca", age: 12, team: "Ibm", roles: [1] },
-    { nom: "Burie", prenom: "Felix", age: 12, team: "Ibm", roles: [0, 1, 2] },
-    { nom: "Fahad", prenom: "Bouchaib", age: 12, team: "Ibm", roles: [2] },
-  ]
-
-
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.users = this.userService.findAllUserRoles();
   }
+
+
+
 
 }
