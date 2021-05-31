@@ -85,9 +85,22 @@ export class TeamService {
   afficheEquipes = (id: number): TeamNamePict[] => {
     let res = [];
     res.push(new TeamNamePict(1, "IBM", "1.png"))
-    res.push(new TeamNamePict(1, "IDP", "2.jpg"))
-    res.push(new TeamNamePict(1, "M2i", "3.png"))
-    res.push(new TeamNamePict(1, "Semifir", "4.png"))
+    res.push(new TeamNamePict(2, "IDP", "2.jpg"))
+    res.push(new TeamNamePict(3, "M2i", "3.png"))
+    res.push(new TeamNamePict(10, "Semifir", "4.png"))
+    res.push(new TeamNamePict(5, "Semifir", "4.png"))
+    res.push(new TeamNamePict(6, "Semifir", "4.png"))
+    res.push(new TeamNamePict(7, "Semifir", "4.png"))
+    res.push(new TeamNamePict(8, "Semifir", "4.png"))
+    res.push(new TeamNamePict(8, "Semifir", "4.png"))
+    res.push(new TeamNamePict(9, "IBM", "1.png"))
+    res.push(new TeamNamePict(11, "IDP", "2.jpg"))
+    res.push(new TeamNamePict(12, "M2i", "3.png"))
+    res.push(new TeamNamePict(13, "IBM", "1.png"))
+    res.push(new TeamNamePict(14, "IDP", "2.jpg"))
+    res.push(new TeamNamePict(15, "M2i", "3.png"))
+    res.push(new TeamNamePict(16, "IBM", "1.png"))
+    res.push(new TeamNamePict(17, "IDP", "2.jpg"))
     return res;
   }
 

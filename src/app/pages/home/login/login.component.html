@@ -1,24 +1,22 @@
 <div id="all">
-    <!-- <h3> Merci de vous identifier </h3> -->
+    <img src="../../../assets/images/logo.png" alt="">
     <div>
         <form [formGroup]="userProfile" (ngSubmit)="onSubmit()">
-    
-            <label>
+
+            <label id="label">
                 <!-- Login : -->
-                <input type="text" formControlName="login" id="login"
-                    placeholder="Taper votre login ICI" size="24" maxlength="10">
+                <input type="text" formControlName="login" id="login" placeholder="Taper votre login ICI" size="28"
+                    maxlength="26">
             </label>
 
-            <label>
+            <label id="label">
                 <!-- Mot de passe : -->
-                <input type="password" formControlName="password" id="password" 
-                placeholder="Taper votre mot de passe ICI" size="24" maxlength="10">
+                <input type="password" formControlName="password" id="password"
+                    placeholder="Taper votre mot de passe ICI" size="28" maxlength="22">
             </label>
 
-            <button class="unmask" type="submit" id="bouton"> Envoyer </button>
+            <button type="submit" id="bouton"> Envoyer </button>
 
         </form>
     </div>
 </div>
-
-
