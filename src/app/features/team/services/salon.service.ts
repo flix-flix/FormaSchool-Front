@@ -55,7 +55,7 @@ export class SalonService {
 
 let salons: { [id: number]: { id: number, name: string, desc: string, msgs: number[] } } = {
   // IBM
-  1: { id: 1, name: "Général", desc: "Messages en tout genre", msgs: [19, 18, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
+  1: { id: 1, name: "Général", desc: "Messages en tout genre", msgs: [19, 18, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] },
   2: { id: 2, name: "Nourriture:pizza:", desc: "Comment se pété le bide", msgs: [20, 21, 22, 23] },
   3: { id: 3, name: "Lorem", desc: "Lorem, encore et toujours...", msgs: [40] },
 

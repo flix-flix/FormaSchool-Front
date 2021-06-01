@@ -1,3 +1,4 @@
+import { File } from "src/app/models/file";
 import { UserNamePict } from "src/app/models/userNamePict";
 import { EmojiService } from "src/app/services/emoji.service";
 
@@ -6,14 +7,16 @@ export class Message {
     private _sender: UserNamePict;
     private _date: Date;
     private _content: string;
+    private _file: File;
 
     private _html: string;
 
-    constructor(id: number, sender: UserNamePict, date: Date, content: string) {
+    constructor(id: number, sender: UserNamePict, date: Date, content: string, file: File) {
         this._id = id;
         this._sender = sender;
         this._date = date;
         this._content = content;
+        this._file = file;
 
         this._html = Message.processHtml(content);
 
@@ -60,6 +63,16 @@ export class Message {
     public set content(content: string) {
         this._content = content;
     }
+
+    public get file(): File {
+        return this._file;
+    }
+
+    public set file(file: File) {
+        this._file = file;
+    }
+
+    // =====
 
     public get html(): string {
         return this._html;

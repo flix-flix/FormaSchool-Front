@@ -80,7 +80,7 @@ export class MsgThreadComponent implements OnInit {
   sendMsg = (text) => {
     // TODO [Improve] server get user from session
     let user = UserService.generateUserNamePicture(1);
-    this.addMsg(new Message(nextId++, user, new Date(), text));
+    this.addMsg(new Message(nextId++, user, new Date(), text, undefined));
   }
 
   /** Called on msgwriter (keyup) */

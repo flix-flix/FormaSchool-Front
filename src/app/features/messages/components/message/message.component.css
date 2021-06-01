@@ -54,6 +54,12 @@
     line-height: 1.4rem;
 }
 
+.msg_shared_img {
+    height: 10rem;
+
+    border-radius: .2rem;
+}
+
 /* ================ emojis =================== */
 
 #emojis {

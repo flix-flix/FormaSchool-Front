@@ -2,6 +2,7 @@
     <div>
         <img class="author_img" src="../../../../../assets/images/_remove/users/{{msg.sender.picture}}" alt="">
     </div>
+
     <div class="content">
         <div class="top">
             <span class="sender">{{msg.sender.firstname}} {{msg.sender.lastname}}</span>
@@ -10,11 +11,29 @@
 
         <div class="text" [innerHtml]="msg.html"></div>
 
+        <!-- File -->
+        <ng-container *ngIf="msg.file != undefined">
+            <ng-container *ngIf="msg.file != undefined && msg.file.isImage(); then img; else file"></ng-container>
+
+            <ng-template #img>
+                <img src="../../../../../assets/images/_remove/sharedFiles/{{msg.file.path}}" alt="sharedFile"
+                    class="msg_shared_img">
+            </ng-template>
+
+            <ng-template #file>
+                <div>
+                    [file linked]
+                </div>
+            </ng-template>
+        </ng-container>
+
+        <!-- Reactions -->
         <div id="emojis">
             <app-emoji *ngFor="let emoji of emojis" [emoji]="emoji"></app-emoji>
         </div>
     </div>
 
+    <!-- Icons on hover -->
     <div id="icons">
         <img class="msg_icon" src="../../../../../assets/images/icons/msg/emojiReact.png" alt="emoji" (click)="emoji()">
 
