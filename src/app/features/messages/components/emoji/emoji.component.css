@@ -1,4 +1,5 @@
 .react {
+    position: relative;
     display: flex;
     align-items: center;
 
@@ -25,4 +26,48 @@
 .react .emoji {
     width: 1.5rem;
     height: 1.5rem;
+}
+
+.react .bold {
+    font-weight: bold;
+}
+
+/* ========== tooltip ========== */
+
+.react_tooltip {
+    position: absolute;
+    bottom: 2.7rem;
+    left: -3.5rem;
+
+    z-index: 10;
+    
+    display: none;
+    
+    width: 10rem;
+    padding: .5rem;
+    
+    font-size: .8rem;
+
+    border-radius: .2rem;
+    
+    color: var(--font_1);
+    background-color: var(--font_2);
+}
+
+.react:hover .react_tooltip {
+    display: block;
+}
+
+.react_tooltip::after {
+    position: absolute;
+    bottom: -1rem;
+    left: 4rem;
+
+    z-index: 11;
+
+    content: "";
+    
+    border-right: 1rem solid transparent;
+    border-left: 1rem solid transparent;
+    border-top: 1rem solid var(--font_2);
 }

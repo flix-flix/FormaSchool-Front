@@ -13,7 +13,7 @@ export class MessageComponent implements OnInit {
 
   emojis: { name: string, users: string[], on: boolean }[] = [
     { name: "red_apple", users: ["Félix", "Luca"], on: true },
-    { name: "shamrock", users: ["Félix", "Luca", "Jason", "Bouchaib"], on: false },
+    { name: "shamrock", users: ["Luca", "Jason", "Bouchaib"], on: false },
     { name: "bagel", users: ["Félix", "Luca", "Jason", "Bouchaib"], on: false },
   ];
 
