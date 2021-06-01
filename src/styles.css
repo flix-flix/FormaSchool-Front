@@ -2,17 +2,27 @@
     padding: 0;
     margin: 0;
 
+    /* ===== R, G, B =====*/
     --_header: 77, 114, 158;
     --_menu: 114, 149, 191; 
     --_background: 146, 186, 222;
+
     --_font_1: 132, 201, 231;
     --_font_2: 30, 52, 109;
+    
+    --_black: 0, 0, 0;
+    --_white: 255, 255, 255;
 
+    /* ===== RGB ===== */
     --header: rgb(var(--_header)); 
     --menu: rgb(var(--_menu)); 
     --background: rgb(var(--_background));
+
     --font_1: rgb(var(--_font_1));
     --font_2: rgb(var(--_font_2));
+    
+    --black: rgb(var(--_black));
+    --white: rgb(var(--_white));
 }
 
 html {

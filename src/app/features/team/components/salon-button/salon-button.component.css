@@ -9,6 +9,8 @@
 
     font-family: sans-serif;
     font-size: 1.2rem;
+
+    color: var(--black);
 }
 
 .salon:hover  {

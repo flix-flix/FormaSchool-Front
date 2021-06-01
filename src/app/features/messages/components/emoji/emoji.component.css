@@ -9,6 +9,9 @@
     
     border-radius: .7rem;
 
+    font-weight: bold;
+
+    color: var(--font_2);
     background-color: var(--menu);
     border: 1px solid var(--menu);/* same size than .on */
 }
@@ -26,6 +29,7 @@
 .react .emoji {
     width: 1.5rem;
     height: 1.5rem;
+    margin-right: .1rem;
 }
 
 .react .bold {

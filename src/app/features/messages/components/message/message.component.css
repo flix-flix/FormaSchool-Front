@@ -42,16 +42,18 @@
 }
 
 .time {
-    font-size: .7rem;
     padding: .15rem 0rem;
-}
 
-.content {
-    color:black;
+    font-size: .7rem;
+    font-weight: bold;
+
+    color: var(--font_2);
 }
 
 .text{
     line-height: 1.4rem;
+    
+    color: var(--black);
 }
 
 .msg_shared_img {
