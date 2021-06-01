@@ -9,7 +9,7 @@ import { Message } from '../models/message';
 })
 export class MessageService {
 
-  constructor(private fileService: FileService) { }
+  constructor() { }
 
   /** Returns the message with the given id */
   static findById = (msgId: number): Observable<Message> => {
@@ -97,6 +97,9 @@ let msgs: { [id: number]: { id: number, sender: number, date: string, content: s
   320: { id: 320, sender: 3, date: "2021-05-05T23:51:35", content: "**SELECT** * **FROM** Teams", file: undefined },
   321: { id: 321, sender: 2, date: "2021-05-05T23:51:36", content: "**DROP DATABASE** FormaSchool", file: undefined },
   322: { id: 322, sender: 3, date: "2021-05-05T23:52:37", content: "Savoir effectuer des requêtes n’est pas trop difficile, mais il convient de véritablement comprendre comment fonctionne le stockage des données et la façon dont elles sont lues pour **__optimiser les performances__**. Les optimisations sont basées dans 2 catégories: les bons choix à faire lorsqu’il faut définir la **__structure de la base de données__** et les méthodes les plus adaptées pour **__lire les données__**.", file: undefined },
+
+  323: { id: 323, sender: 2, date: "2021-05-05T23:51:36", content: "`SELECT`, `FROM`, `DROP`, ...", file: undefined },
+  324: { id: 324, sender: 4, date: "2021-05-05T23:51:36", content: "Exemple de requete:\n```SELECT * FROM table\nWHERE .... .. ....\n GROUP .. .... ....\n ORDER BY .. ... ..```Voili voila :)", file: undefined },
 
   // Angular
   340: { id: 340, sender: 4, date: "2021-05-05T07:01:35", content: "**@Input()** team", file: undefined },

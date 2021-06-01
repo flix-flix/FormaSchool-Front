@@ -70,6 +70,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+
+    margin-top: .5rem;
 }
 
 /* ================ icons =================== */
@@ -112,6 +114,7 @@
 
 /* ================ innerHTML =================== */
 
+/* ===== style ===== */
 .bold {
     font-weight: bold;
 }
@@ -128,6 +131,26 @@
     font-style: italic;
 }
 
+/* ===== bloc ===== */
+
+.md_bloc, .md_bloc_inline {
+    padding: .25rem .5rem;
+    margin: .5rem 0;
+
+    border-radius: .2rem;
+
+    font-family: monospace;
+    font-size: 1rem;
+
+    color: var(--font_1);
+    background-color: var(--font_2);
+}
+
+.md_bloc {
+    display: block;
+}
+
+/* ===== emoji ===== */
 .emoji {
     width: 1.5rem;
     height: 1.5rem;
