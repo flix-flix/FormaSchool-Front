@@ -10,12 +10,13 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class TeamMembersComponent implements OnInit {
 
-  roles: Role[];
+
   users: UserHasRole[];
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+
     this.users = this.userService.findAllUserRoles();
   }
 

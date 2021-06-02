@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Role } from 'src/app/features/roles/models/role';
+import { RoleWithoutRights } from 'src/app/features/roles/models/roleWithoutRights';
 import { RoleService } from 'src/app/features/roles/services/role.service';
 import { TeamService } from 'src/app/services/team.service';
 
@@ -10,22 +11,15 @@ import { TeamService } from 'src/app/services/team.service';
 })
 export class LineRoleMembersComponent implements OnInit {
 
-  @Input() role: Role;
+  @Input() roleId: number;
+  role: RoleWithoutRights;
 
-
-  constructor(private roleService: RoleService, private teamService: TeamService) {
-  }
+  constructor() { }
 
   ngOnInit(): void {
 
-  }
-  /**
-   * This function refresh the page with the role choosen
-   * @param id the id of the role choosen
-   */
-  roleChoosen = (id: number) => {
-    let newRole: Role = this.roleService.findRoleById(id);
-    this.role = newRole;
+    console.log(this.roleId)
+    this.role = RoleService.findWithoutRightsById(this.roleId);
   }
 
 }
