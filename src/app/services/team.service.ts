@@ -40,7 +40,7 @@ export class TeamService {
    * @param idUser the id of the user you want to linked
    * @returns It return -1 if the team does not exist in the base, else it return 0 if its ok !
    */
-  saveLink = (idTeam: number, idUser: number): number => {
+  saveLink = (idTeam: number, idUser: number): Observable<number> => {
     let res = -1;
     this.teams.forEach(team => {
       if (team.id == idTeam) {
@@ -48,20 +48,26 @@ export class TeamService {
         res = 0;
       }
     });
-    return res;
+    return new Observable<number>(obs =>{
+      obs.next(res);
+      obs.complete();
+    });
   }
 
   /**
    * This function return a quick presentation of each team. It contain name, picture and the id
    * @returns an array of TeamLinkUser object
    */
-  findAllPresentation = (): TeamNamePict[] => {
+  findAllPresentation = (): Observable<TeamNamePict[]> => {
     let res: TeamNamePict[] = [];
     this.teams.forEach(team => {
       let data = new TeamNamePict(team.id, team.name, team.picture);
       res.push(data);
     });
-    return res;
+    return new Observable<TeamNamePict[]>(obs =>{
+      obs.next(res);
+      obs.complete();
+    });
   }
 
   /**
@@ -69,7 +75,7 @@ export class TeamService {
    * @param team A creationTeam object (name, desc and picture)
    * @returns A number which is the id of the team created
    */
-  save = (team: teamNameDescPict): number => {
+  save = (team: teamNameDescPict): Observable<number> => {
     let data = {
       id: this.nextId++,
       name: team.name,
@@ -79,7 +85,10 @@ export class TeamService {
       users: []
     };
     this.teams.push(data);
-    return data.id;
+    return new Observable<number>(obs =>{
+      obs.next(data.id);
+      obs.complete();
+    });
   }
 
   afficheEquipes = (id: number): TeamNamePict[] => {

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { TeamNamePict } from 'src/app/models/teamNamePict';
 import { UserNamePict } from 'src/app/models/userNamePict';
 import { TeamService } from 'src/app/services/team.service';
@@ -23,7 +22,9 @@ export class AddUserToTeamComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.teams = this.teamService.findAllPresentation();
+    this.teamService.findAllPresentation().subscribe(teamList => {
+      this.teams = teamList;
+    })
   }
 
   /**
@@ -39,9 +40,13 @@ export class AddUserToTeamComponent implements OnInit {
    * This function allows us to save the link between a team and a user/users 
    */
   save = () => {
+    let retour1;
+    let retour2;
     this.selectedUser.forEach(user => {
-      let retour1 = this.userService.saveLink(this.selectedTeam.id, user.id);
-      let retour2 = this.teamService.saveLink(this.selectedTeam.id, user.id);
+      this.teamService.saveLink(this.selectedTeam.id,user.id).subscribe(idRetour =>{
+        retour1 = idRetour;
+      });
+      retour1 = this.userService.saveLink(this.selectedTeam.id, user.id);
       alert(`retour 1: ${retour1} retour 2: ${retour2}`);
     });
   }
