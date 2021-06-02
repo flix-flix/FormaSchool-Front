@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Role } from 'src/app/features/roles/models/role';
-import { RoleWithoutRights } from 'src/app/features/roles/models/roleWithoutRights';
-import { RoleService } from 'src/app/features/roles/services/role.service';
-import { TeamService } from 'src/app/services/team.service';
+import { RoleService } from 'src/app/features/params/team/roles/services/role.service';
+import { RoleWithoutRights } from '../../roles/models/roleWithoutRights';
 
 @Component({
   selector: 'app-line-role-members',

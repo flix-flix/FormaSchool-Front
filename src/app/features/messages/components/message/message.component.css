@@ -13,8 +13,7 @@
 }
 
 .msg:hover {
-    /* TODO only background must be brighter */
-    filter: brightness(115%);
+    background-color: rgba(var(--_header), .9);
 }
 
 .author_img {
@@ -43,15 +42,36 @@
 }
 
 .time {
-    font-size: .7rem;
     padding: .15rem 0rem;
+
+    font-size: .7rem;
+    font-weight: bold;
+
+    color: var(--font_2);
 }
 
-.content {
-    color:black;
-}
 .text{
     line-height: 1.4rem;
+    
+    color: var(--black);
+}
+
+.msg_shared_img {
+    height: 10rem;
+
+    border-radius: .2rem;
+}
+
+/* ================ emojis =================== */
+
+#emojis {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    margin-top: .5rem;
 }
 
 /* ================ icons =================== */
@@ -94,6 +114,7 @@
 
 /* ================ innerHTML =================== */
 
+/* ===== style ===== */
 .bold {
     font-weight: bold;
 }
@@ -110,6 +131,26 @@
     font-style: italic;
 }
 
+/* ===== bloc ===== */
+
+.md_bloc, .md_bloc_inline {
+    padding: .25rem .5rem;
+    margin: .5rem 0;
+
+    border-radius: .2rem;
+
+    font-family: monospace;
+    font-size: 1rem;
+
+    color: var(--font_1);
+    background-color: var(--font_2);
+}
+
+.md_bloc {
+    display: block;
+}
+
+/* ===== emoji ===== */
 .emoji {
     width: 1.5rem;
     height: 1.5rem;

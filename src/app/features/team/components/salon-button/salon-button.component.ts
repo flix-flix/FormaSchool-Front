@@ -5,7 +5,7 @@ import { EmojiService } from 'src/app/services/emoji.service';
   selector: 'app-salon-button',
   templateUrl: './salon-button.component.html',
   styleUrls: ['./salon-button.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class SalonButtonComponent implements OnInit {
 

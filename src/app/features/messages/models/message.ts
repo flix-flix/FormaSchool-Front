@@ -1,3 +1,4 @@
+import { File } from "src/app/models/file";
 import { UserNamePict } from "src/app/models/userNamePict";
 import { EmojiService } from "src/app/services/emoji.service";
 
@@ -6,17 +7,18 @@ export class Message {
     private _sender: UserNamePict;
     private _date: Date;
     private _content: string;
+    private _file: File;
 
     private _html: string;
 
-    constructor(id: number, sender: UserNamePict, date: Date, content: string) {
+    constructor(id: number, sender: UserNamePict, date: Date, content: string, file: File) {
         this._id = id;
         this._sender = sender;
         this._date = date;
         this._content = content;
+        this._file = file;
 
         this._html = Message.processHtml(content);
-
         this._html = EmojiService.processEmoji(this._html, 4);
     }
 
@@ -61,14 +63,27 @@ export class Message {
         this._content = content;
     }
 
+    public get file(): File {
+        return this._file;
+    }
+
+    public set file(file: File) {
+        this._file = file;
+    }
+
+    // =====
+
     public get html(): string {
         return this._html;
     }
 
+    // ================================================================================================
+    // Smart
+
     /** Generate an HTML representation of the content (with tags if markdown is used)
-     * @param content The original string
-     * @param replace true: remove the markdown markers
-     */
+       * @param content The original string
+       * @param replace true: remove the markdown markers
+       */
     static processHtml = (content: string, replace: boolean = true): string => {
         let html = content.replace(/\n/g, "<br>");
 
@@ -77,22 +92,25 @@ export class Message {
         html = Message.processHtmlSpan(html, "__", "under", replace);
         html = Message.processHtmlSpan(html, "~~", "strike", replace);
 
+        html = Message.processHtmlSpan(html, "```", "md_bloc", replace);
+        html = Message.processHtmlSpan(html, /((?<!`)`{1}(?!`))/, "md_bloc_inline", replace);
+
         return html;
     }
 
     /**
-     * Add HTML tags for the given md marker
-     * 
-     * @param content The original string
-     * @param search The markdown marker
-     * @param clas The HTML class
-     * @param replace true: remove the markdown markers
-     * @returns A new string with the HTML tags
-     */
+    * Add HTML tags for the given md marker
+    * 
+    * @param content The original string
+    * @param search The markdown marker
+    * @param clas The HTML class
+    * @param replace true: remove the markdown markers
+    * @returns A new string with the HTML tags
+    */
     static processHtmlSpan = (content: string, search: string | RegExp, clas: string, replace: boolean = true): string => {
         let html = "";
         let first = 0, second = 0, prev = 0;
-        let len = typeof search === "string" ? search.length : (clas == "italic" ? 1 : 2);
+        let len = typeof search === "string" ? search.length : (["italic", "md_bloc_inline"].includes(clas) ? 1 : 2);
 
         // If contains 2 occurences of the given "md marker"
         while ((first = Message.indexOf(content, search, prev)) != -1
@@ -105,6 +123,9 @@ export class Message {
         // Add the remaining content
         return html + content.substring(prev);
     }
+
+    // ================================================================================================
+    // TODO [Utils]
 
     /** indexOf (string and regex) */
     static indexOf = (text: string, search: string | RegExp, start: number) => {

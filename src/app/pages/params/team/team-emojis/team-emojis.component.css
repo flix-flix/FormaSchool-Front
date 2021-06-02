@@ -18,7 +18,7 @@
 }
 
 .tabButton button{
-   margin-left: 5%;
+    margin-left: 5%;
     margin-right: 5%;
 }
 
@@ -31,6 +31,10 @@
     padding: 1rem;
     border-radius: 3px;
     margin-bottom: 10px;
+}
+
+::ng-deep .p-datatable-scrollable-header-box{
+    background-color: #63b1ff;
 }
 
 ::ng-deep .p-datatable .p-datatable-header {
@@ -59,4 +63,21 @@
 
 ::ng-deep .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
     background: #06844a;
+}
+
+/* ========= Scrollbar ========= */
+::ng-deep ::-webkit-scrollbar {
+    width: 16px;
+}
+
+::ng-deep ::-webkit-scrollbar-track{
+    background: #63b1ff; 
+}
+
+::ng-deep ::-webkit-scrollbar-thumb {
+    background: var(--header); 
+
+    border: solid 4px var(--background);
+    
+    border-radius: 200px;
 }

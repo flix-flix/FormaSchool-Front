@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { userCreation } from '../models/userCreation';
 import { UserNamePict } from '../models/userNamePict';
 import { UserHasRole } from '../models/userHasRole';
-import { RoleService } from '../features/roles/services/role.service';
+import { RoleService } from '../features/params/team/roles/services/role.service';
 
 @Injectable({
   providedIn: 'root'

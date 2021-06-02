@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CreatedEmoji } from 'src/app/features/createdEmoji/models/createdEmoji';
-import { CreatedEmojiWithoutId } from 'src/app/features/createdEmoji/models/createdEmojiWithoutId';
 import { CreatedEmojiService } from 'src/app/features/createdEmoji/services/created-emoji.service';
 import { UserService } from 'src/app/services/user.service';
 

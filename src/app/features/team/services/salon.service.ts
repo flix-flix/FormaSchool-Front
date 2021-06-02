@@ -55,7 +55,7 @@ export class SalonService {
 
 let salons: { [id: number]: { id: number, name: string, desc: string, msgs: number[] } } = {
   // IBM
-  1: { id: 1, name: "Général", desc: "Messages en tout genre", msgs: [19, 18, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
+  1: { id: 1, name: "Général", desc: "Messages en tout genre", msgs: [19, 18, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] },
   2: { id: 2, name: "Nourriture:pizza:", desc: "Comment se pété le bide", msgs: [20, 21, 22, 23] },
   3: { id: 3, name: "Lorem", desc: "Lorem, encore et toujours...", msgs: [40] },
 
@@ -67,6 +67,6 @@ let salons: { [id: number]: { id: number, name: string, desc: string, msgs: numb
 
   // Semifir
   30: { id: 30, name: "Java", desc: "Ce concept est à la base du slogan de Sun pour Java : WORA (Write Once, Run Anywhere)", msgs: [300, 301, 302, 303] },
-  31: { id: 31, name: "SQL", desc: "Le SQL (Structured Query Language) est un langage permettant de communiquer avec une base de données", msgs: [320, 321, 322] },
+  31: { id: 31, name: "SQL", desc: "Le SQL (Structured Query Language) est un langage permettant de communiquer avec une base de données", msgs: [320, 321, 322, 323, 324] },
   32: { id: 32, name: "Angular", desc: "Chaque version est prévue pour être compatible avec la version antérieure. Google a promis de faire des mises à jour deux fois par année.", msgs: [340, 341] },
 };

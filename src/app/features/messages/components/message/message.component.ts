@@ -5,11 +5,17 @@ import { Message } from '../../models/message';
   selector: 'app-message',
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class MessageComponent implements OnInit {
 
   @Input() msg: Message;
+
+  emojis: { name: string, users: string[], on: boolean }[] = [
+    { name: "red_apple", users: ["Félix", "Luca"], on: true },
+    { name: "shamrock", users: ["Luca", "Jason", "Bouchaib"], on: false },
+    { name: "bagel", users: ["Félix", "Luca", "Jason", "Bouchaib"], on: false },
+  ];
 
   constructor() { }
 
