@@ -52,6 +52,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { EmojiComponent } from './features/messages/components/emoji/emoji.component';
+import { LogComponent } from './features/params/team/logs/components/log/log.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { EmojiComponent } from './features/messages/components/emoji/emoji.compo
     MsgWriterComponent,
     TeamRolesComponent,
     ParamsSalonTemplateComponent,
-    EmojiComponent
+    EmojiComponent,
+    LogComponent
   ],
   imports: [
     BrowserModule,
