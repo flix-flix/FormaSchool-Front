@@ -38,12 +38,5 @@ export class AddTeamComponent implements OnInit {
     else {
       alert("Le nom de l'équipe doit être rempli")
     }
-
   }
-
-  test = () => {
-    console.log("toto");
-    console.log(this.picture);
-  }
-
 }
