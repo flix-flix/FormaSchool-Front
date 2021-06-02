@@ -6,7 +6,7 @@ import { Log } from '../models/log';
 })
 export class LogService {
 
-  count = 10;
+  nextId = 10;
 
   logs = [
     {
@@ -35,6 +35,46 @@ export class LogService {
     },
     {
       id: 4,
+      picture: "0",
+      firstname: "Jason",
+      lastname: "Vennin",
+      date: new Date("2021-05-04"),
+      desc: "a supprimé un salon",
+    },
+    {
+      id: 5,
+      picture: "0",
+      firstname: "Jason",
+      lastname: "Vennin",
+      date: new Date("2021-05-04"),
+      desc: "a supprimé un salon",
+    },
+    {
+      id: 6,
+      picture: "0",
+      firstname: "Jason",
+      lastname: "Vennin",
+      date: new Date("2021-05-04"),
+      desc: "a supprimé un salon",
+    },
+    {
+      id: 7,
+      picture: "0",
+      firstname: "Jason",
+      lastname: "Vennin",
+      date: new Date("2021-05-04"),
+      desc: "a supprimé un salon",
+    },
+    {
+      id: 8,
+      picture: "0",
+      firstname: "Jason",
+      lastname: "Vennin",
+      date: new Date("2021-05-04"),
+      desc: "a supprimé un salon",
+    },
+    {
+      id: 9,
       picture: "0",
       firstname: "Jason",
       lastname: "Vennin",
