@@ -40,8 +40,10 @@ export class EmojiService {
         let emoji = _emojis[0];
         html += `<img class="emoji" src="${"../".repeat(deep)}assets/images/_remove/${emoji.picture}" alt=":${emoji.name}:">`;
         prev = second + 1;
-      } else
+      } else {
+        html += ":";
         prev = first + 1;
+      }
     }
 
     // Add the remaining content

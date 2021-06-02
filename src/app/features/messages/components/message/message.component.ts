@@ -5,7 +5,7 @@ import { Message } from '../../models/message';
   selector: 'app-message',
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class MessageComponent implements OnInit {
 
