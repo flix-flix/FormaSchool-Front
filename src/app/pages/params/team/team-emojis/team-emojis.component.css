@@ -18,7 +18,7 @@
 }
 
 .tabButton button{
-   margin-left: 5%;
+    margin-left: 5%;
     margin-right: 5%;
 }
 
@@ -31,6 +31,10 @@
     padding: 1rem;
     border-radius: 3px;
     margin-bottom: 10px;
+}
+
+::ng-deep .p-datatable-scrollable-header-box{
+    background-color: #63b1ff;
 }
 
 ::ng-deep .p-datatable .p-datatable-header {
@@ -67,7 +71,7 @@
 }
 
 ::ng-deep ::-webkit-scrollbar-track{
-    border-radius: 200px;
+    background: #63b1ff; 
 }
 
 ::ng-deep ::-webkit-scrollbar-thumb {
