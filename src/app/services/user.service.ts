@@ -126,10 +126,7 @@ export class UserService {
       console.error("userId doesn't exist:", userId);
       return undefined;
     }
-    let roles = [];
-    for (let roleIndex in _users[userId].roles)
-      roles.push(RoleService.generateRoleName(_users[userId].roles[roleIndex]));
-    return new UserHasRole(_users[userId].id, _users[userId].lastname, _users[userId].firstname, roles);
+    return new UserHasRole(_users[userId].id, _users[userId].lastname, _users[userId].firstname, _users[userId].roles);
   }
 
   static generateUserNamePicture = (userId: number): UserNamePict => {

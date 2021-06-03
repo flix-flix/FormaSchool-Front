@@ -5,9 +5,9 @@ export class UserHasRole {
     private _id: number;
     private _lastname: string;
     private _firstname: string;
-    private _roles: Role[];
+    private _roles: number[];
 
-    constructor(id: number, firstname: string, lastname: string, roles: Role[]) {
+    constructor(id: number, firstname: string, lastname: string, roles: number[]) {
         this._id = id;
         this._firstname = firstname;
         this._lastname = lastname;
@@ -45,10 +45,10 @@ export class UserHasRole {
         this._firstname = value;
     }
 
-    public get roles(): Role[] {
+    public get roles(): number[] {
         return this._roles;
     }
-    public set roles(value: Role[]) {
+    public set roles(value: number[]) {
         this._roles = value;
     }
 

@@ -2,7 +2,7 @@
     <label>{{ user.lastname }}</label>
     <label>{{ user.firstname }}</label>
 
-    <app-line-role-members *ngFor="let role of user.roles" [role]="role"></app-line-role-members>
-    <p-listbox [options]="roles" [(ngModel)]="roleChoosen" optionLabel="nom"></p-listbox>
+    <app-line-role-members *ngFor="let role of user.roles" [roleId]="role"></app-line-role-members>
+    <p-listbox [options]="rolesMissing" [(ngModel)]="roleChoosen" optionLabel="name"></p-listbox>
     <button type="button" (click)="ajouteRole()">+</button>
 </div>
