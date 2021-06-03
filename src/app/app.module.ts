@@ -53,6 +53,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { EmojiComponent } from './features/messages/components/emoji/emoji.component';
 import { LogComponent } from './features/params/team/logs/components/log/log.component';
+import { ListLogComponent } from './features/params/team/logs/components/list-log/list-log.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { LogComponent } from './features/params/team/logs/components/log/log.com
     TeamRolesComponent,
     ParamsSalonTemplateComponent,
     EmojiComponent,
-    LogComponent
+    LogComponent,
+    ListLogComponent
   ],
   imports: [
     BrowserModule,

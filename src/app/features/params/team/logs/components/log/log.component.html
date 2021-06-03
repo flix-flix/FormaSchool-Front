@@ -1,1 +1,12 @@
-<p>log works!</p>
+<p-panel [toggleable]="true" collapsed=false>
+    <ng-template pTemplate="header">
+        <img src="../../../../../assets/images/_remove/users/{{log.picture}}.jpg" alt="">
+        <p>{{log.firstname}} {{log.lastname}}
+            {{log.date.getDate()}}/{{log.date.getMonth()}}/{{log.date.getFullYear()}}</p>
+    </ng-template>
+
+    <ng-template pTemplate="icons">
+        <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
+    </ng-template>
+    <p>{{log.desc}}</p>
+</p-panel>
