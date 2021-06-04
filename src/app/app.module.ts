@@ -54,6 +54,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { EmojiComponent } from './features/messages/components/emoji/emoji.component';
 import { LogComponent } from './features/params/team/logs/components/log/log.component';
 import { ListLogComponent } from './features/params/team/logs/components/list-log/list-log.component';
+import TabEmojiComponent from './features/params/team/emojis/components/tab-emoji/tab-emoji.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { ListLogComponent } from './features/params/team/logs/components/list-lo
     ParamsSalonTemplateComponent,
     EmojiComponent,
     LogComponent,
-    ListLogComponent
+    ListLogComponent,
+    TabEmojiComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { CreatedEmoji } from 'src/app/models/createdEmoji';
 import { UserNamePict } from 'src/app/models/userNamePict';
 import { UserService } from 'src/app/services/user.service';
-import { CreatedEmoji } from '../models/createdEmoji';
+
 
 @Injectable({
   providedIn: 'root'
