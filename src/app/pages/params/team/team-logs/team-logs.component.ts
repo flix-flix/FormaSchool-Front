@@ -14,7 +14,9 @@ export class TeamLogsComponent implements OnInit {
   constructor(private service: LogService) { }
 
   ngOnInit(): void {
-    this.logs = this.service.findAll();
+    this.service.findAll().subscribe(logs =>{
+      this.logs = logs;
+    })
     this.trieDate();
   }
 

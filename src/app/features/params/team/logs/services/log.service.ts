@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Log } from '../models/log';
 
 @Injectable({
@@ -89,11 +90,14 @@ export class LogService {
    * This function return all log
    * @returns return a list of log object (picture, firstname, lastname, date, desc)
    */
-  findAll = (): Log[] => {
+  findAll = (): Observable<Log[]> => {
     let res: Log[] = [];
     this.logs.map(log => {
       res.push(new Log(log.picture, log.firstname, log.lastname, log.date, log.desc));
     });
-    return res;
+    return new Observable<Log[]>(obs => {
+      obs.next(res);
+      obs.complete();
+    });
   }
 }
