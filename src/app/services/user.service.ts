@@ -148,7 +148,7 @@ let _users: {
     lastname: "Burie",
     password: "tintin",
     email: "felix@gmail.com",
-    picture: "0.jpg",
+    picture: "1.jpg",
     create: new Date("2019-01-16"),
     teams: [1, 2, 10],
     roles: [1]
@@ -159,7 +159,7 @@ let _users: {
     lastname: "Vennin",
     password: "toto",
     email: "jason@gmail.com",
-    picture: "1.jpg",
+    picture: "2.jpg",
     create: new Date("2020-01-16"),
     teams: [1, 2, 10],
     roles: [1, 2]
@@ -170,7 +170,7 @@ let _users: {
     lastname: "Novelli",
     password: "lulu",
     email: "luca@orange.fr",
-    picture: "2.jpg",
+    picture: "3.jpg",
     create: new Date("2020-03-07"),
     teams: [1, 3, 10],
     roles: [3]
@@ -181,7 +181,7 @@ let _users: {
     lastname: "Faham",
     password: "bobo",
     email: "bouchaib@sfr.fr",
-    picture: "3.jpg",
+    picture: "4.jpg",
     create: new Date("2020-02-22"),
     teams: [1, 3, 10],
     roles: [2, 3]
