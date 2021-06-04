@@ -8,7 +8,7 @@ form {
 }
 
 #input_msg:enabled {
-    box-shadow: none;
+    box-shadow: 5px 3px 5px var(--font_2);
 }
 
 #input_msg {

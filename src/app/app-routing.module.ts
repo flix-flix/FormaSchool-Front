@@ -33,8 +33,8 @@ const routes: Routes = [
 
       { path: "404", component: NotFoundComponent },
 
-      // TODO redirectTo: lastVisitedPage (+guard login)
-      { path: "", redirectTo: "teamMessages/1/1", pathMatch: "full" },
+      // TODO redirectTo: lastVisitSedPage (+guard login)
+      { path: "", redirectTo: "teamSelect", pathMatch: "full" },
     ]
   },
 

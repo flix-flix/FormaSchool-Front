@@ -10,6 +10,7 @@
     font-family: sans-serif;
 
     background-color: var(--header);
+    box-shadow: 2px 4px 3px var(--font_2);
 }
 
 .msg:hover {
@@ -83,11 +84,12 @@
 
     border-radius: 5px;
 
-    background-color: var(--font_2);
+    background-color: var(--menu);
 }
 
 .msg:hover #icons {
     opacity: 1;
+    box-shadow: 5px 5px 5px var(--font_2);
 }
 
 .msg_icon {
@@ -96,32 +98,26 @@
     width: 2rem;
     height: 2rem;
     
-    padding: .2rem;
+    padding: .1rem;
     margin: .2rem;
-
-    border-radius: 5px;
-}
-
-.msg_icon:hover {
-    border: 2px solid var(--menu);
 }
 
 /* ================ innerHTML =================== */
 
 /* ===== style ===== */
-.bold {
+::ng-deep.bold {
     font-weight: bold;
 }
 
-.under {
+::ng-deep.under {
     text-decoration: underline;
 }
 
-.strike {
+::ng-deep.strike {
     text-decoration: line-through;
 }
 
-.italic {
+::ng-deep.italic {
     font-style: italic;
 }
 
@@ -145,9 +141,10 @@
 }
 
 /* ===== emoji ===== */
-.emoji {
+.msg ::ng-deep.inline_emoji {
     width: 1.5rem;
     height: 1.5rem;
     
     vertical-align: middle;
+    filter: drop-shadow(3px 3px 3px var(--font_2));
 }

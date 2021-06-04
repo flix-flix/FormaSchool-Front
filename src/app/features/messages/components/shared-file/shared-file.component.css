@@ -15,7 +15,8 @@
     border-radius: .5rem;
 
     color: var(--font_2);
-    background-color: var(--font_1);
+    background-color: var(--background);
+    box-shadow: 5px 3px 5px var(--font_2);
 }
 
 .icon {
@@ -31,5 +32,5 @@
 }
 
 .download:hover {
-    background-color: var(--header);
+    /* background-color: var(--header); */
 }

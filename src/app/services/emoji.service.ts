@@ -38,7 +38,7 @@ export class EmojiService {
       let _emojis = Object.values(emojis).filter(elem => elem.name == name);
       if (_emojis.length != 0) {
         let emoji = _emojis[0];
-        html += `<img class="emoji" src="${"../".repeat(deep)}assets/images/_remove/${emoji.picture}" alt=":${emoji.name}:">`;
+        html += `<img class="inline_emoji" src="${"../".repeat(deep)}assets/images/_remove/${emoji.picture}" alt=":${emoji.name}:">`;
         prev = second + 1;
       } else {
         html += ":";

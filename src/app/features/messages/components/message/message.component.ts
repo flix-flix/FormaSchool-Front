@@ -1,11 +1,10 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Message } from '../../models/message';
 
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
-  styleUrls: ['./message.component.css'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit {
 

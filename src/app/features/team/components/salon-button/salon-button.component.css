@@ -22,11 +22,12 @@
 }
 
 /* ===== emoji ===== */
-.salon .emoji {
+.salon ::ng-deep.inline_emoji {
     width: 2rem;
     height: 2rem;
 
     vertical-align: middle;
+    filter: drop-shadow(3px 3px 3px var(--font_2));
 }
 
 /* ===== Hide/Show params ===== */

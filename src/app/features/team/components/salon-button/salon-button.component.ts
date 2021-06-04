@@ -1,11 +1,10 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EmojiService } from 'src/app/services/emoji.service';
 
 @Component({
   selector: 'app-salon-button',
   templateUrl: './salon-button.component.html',
-  styleUrls: ['./salon-button.component.css'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  styleUrls: ['./salon-button.component.css']
 })
 export class SalonButtonComponent implements OnInit {
 

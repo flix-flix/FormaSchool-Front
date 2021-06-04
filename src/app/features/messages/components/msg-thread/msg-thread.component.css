@@ -51,9 +51,9 @@ app-msg-writer {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--header); 
-
-    border: solid 4px var(--background);
-    
     border-radius: 200px;
+    
+    background: var(--header); 
+    
+    border: solid 4px var(--background);
 }
