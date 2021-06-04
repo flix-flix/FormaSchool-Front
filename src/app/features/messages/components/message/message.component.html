@@ -12,20 +12,7 @@
         <div class="text" [innerHtml]="msg.html"></div>
 
         <!-- File -->
-        <ng-container *ngIf="msg.file != undefined">
-            <ng-container *ngIf="msg.file != undefined && msg.file.isImage(); then img; else file"></ng-container>
-
-            <ng-template #img>
-                <img src="../../../../../assets/images/_remove/sharedFiles/{{msg.file.path}}" alt="sharedFile"
-                    class="msg_shared_img">
-            </ng-template>
-
-            <ng-template #file>
-                <div>
-                    [file linked]
-                </div>
-            </ng-template>
-        </ng-container>
+        <app-shared-file [file]="msg.file"></app-shared-file>
 
         <!-- Reactions -->
         <div id="emojis">

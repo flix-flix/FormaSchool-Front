@@ -56,12 +56,6 @@
     color: var(--black);
 }
 
-.msg_shared_img {
-    height: 10rem;
-
-    border-radius: .2rem;
-}
-
 /* ================ emojis =================== */
 
 #emojis {

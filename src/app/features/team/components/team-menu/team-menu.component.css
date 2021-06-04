@@ -79,6 +79,10 @@
     width: 9px;
 }
 
+::-webkit-scrollbar-track{
+    background-color: var(--menu);
+}
+
 #salons::-webkit-scrollbar-thumb {
     background: var(--header);
     border: 2px solid var(--menu);

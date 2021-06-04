@@ -55,6 +55,7 @@ import { EmojiComponent } from './features/messages/components/emoji/emoji.compo
 import { LogComponent } from './features/params/team/logs/components/log/log.component';
 import { ListLogComponent } from './features/params/team/logs/components/list-log/list-log.component';
 import TabEmojiComponent from './features/params/team/emojis/components/tab-emoji/tab-emoji.component';
+import { SharedFileComponent } from './features/messages/components/shared-file/shared-file.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,8 @@ import TabEmojiComponent from './features/params/team/emojis/components/tab-emoj
     EmojiComponent,
     LogComponent,
     ListLogComponent,
-    TabEmojiComponent
+    TabEmojiComponent,
+    SharedFileComponent
   ],
   imports: [
     BrowserModule,
