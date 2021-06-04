@@ -1,13 +1,20 @@
+div{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    background-color: var(--background);
+}
 /* ========= Scrollbar ========= */
-::ng-deep ::-webkit-scrollbar {
+.logsContainer::-webkit-scrollbar {
     width: 16px;
 }
 
-::ng-deep ::-webkit-scrollbar-track{
+.logsContainer::-webkit-scrollbar-track{
     background: var(--background); 
 }
 
-::ng-deep ::-webkit-scrollbar-thumb {
+.logsContainer::-webkit-scrollbar-thumb {
     background: var(--header); 
 
     border: solid 4px var(--background);

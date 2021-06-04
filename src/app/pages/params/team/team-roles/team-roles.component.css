@@ -145,3 +145,20 @@ button{
 ::ng-deep .p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider{
     background: #d60b0b;
 }
+
+/* ========= Scrollbar ========= */
+#content::-webkit-scrollbar {
+    width: 16px;
+}
+
+#content::-webkit-scrollbar-track{
+    background: #6595b8; 
+}
+
+#content::-webkit-scrollbar-thumb {
+    background: var(--background); 
+
+    border: solid 4px var(--header);
+    
+    border-radius: 200px;
+}
