@@ -47,7 +47,7 @@ app-msg-writer {
 }
 
 ::-webkit-scrollbar-track{
-    border-radius: 200px;
+    background-color: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
