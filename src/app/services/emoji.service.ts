@@ -129,6 +129,15 @@ export class EmojiService {
   }
 
   /**
+   * This function allws you to update the emoji
+   * @param emoji a Created Emoji that you want to update
+   */
+  updateCreatedEmoji = (emoji: CreatedEmoji) => {
+    createdEmojis[emoji.id].name = emoji.name;
+    createdEmojis[emoji.id].picture = emoji.picture;
+  }
+
+  /**
    * This function allow you to check is the alias is already used
    * @param name a string
    * @returns true if the database contains an emoji with the alias, otherwise it returns false

@@ -65,6 +65,9 @@ export default class TabEmojiComponent implements OnInit {
         this.emoji.id = this.service.addEmoji(this.emoji);
         this.emojis.push(this.emoji);
       }
+      else {
+        this.service.updateCreatedEmoji(this.emoji);
+      }
       this.emojiDialog = false;
       this.emoji = new CreatedEmoji(null, null, null, null);
     }
