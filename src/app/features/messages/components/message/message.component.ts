@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Message } from '../../models/message';
+import { MsgThreadComponent } from '../msg-thread/msg-thread.component';
 
 @Component({
   selector: 'app-message',
@@ -10,16 +11,10 @@ export class MessageComponent implements OnInit {
 
   @Input() msg: Message;
 
-  emojis: { name: string, users: string[], on: boolean }[] = [
-    { name: "red_apple", users: ["Félix", "Luca"], on: true },
-    { name: "shamrock", users: ["Luca", "Jason", "Bouchaib"], on: false },
-    { name: "bagel", users: ["Félix", "Luca", "Jason", "Bouchaib"], on: false },
-  ];
-
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
   }
+
+  ngOnInit(): void { }
 
   /** Open the emoji selector */
   emoji = () => {

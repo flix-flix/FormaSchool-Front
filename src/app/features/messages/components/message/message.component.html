@@ -16,7 +16,7 @@
 
         <!-- Reactions -->
         <div id="emojis">
-            <app-emoji *ngFor="let emoji of emojis" [emoji]="emoji"></app-emoji>
+            <app-emoji *ngFor="let react of msg.reactions" [emoji]="react"></app-emoji>
         </div>
     </div>
 

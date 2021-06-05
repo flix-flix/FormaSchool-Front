@@ -4,6 +4,7 @@ import { UserNamePict } from '../models/userNamePict';
 import { UserHasRole } from '../models/userHasRole';
 import { RoleService } from '../features/params/team/roles/services/role.service';
 import { Observable } from 'rxjs';
+import { UserName } from '../models/userName';
 
 @Injectable({
   providedIn: 'root'
@@ -127,6 +128,14 @@ export class UserService {
       return undefined;
     }
     return new UserNamePict(users[userId].id, users[userId].firstname, users[userId].lastname, users[userId].picture);
+  }
+
+  static generateUserName = (userId: number): UserName => {
+    if (!(userId in users)) {
+      console.error("userId doesn't exist:", userId);
+      return undefined;
+    }
+    return new UserName(users[userId].id, users[userId].firstname, users[userId].lastname);
   }
 }
 

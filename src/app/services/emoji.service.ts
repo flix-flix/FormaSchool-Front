@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EmojiNamePict } from '../features/messages/models/emojiNamePict';
+import { Reaction } from '../features/messages/models/reaction';
 import { CreatedEmoji } from '../models/createdEmoji';
 import { UserNamePict } from '../models/userNamePict';
 import { UserService } from './user.service';
@@ -128,7 +129,7 @@ export class EmojiService {
     return html + content.substring(prev);
   }
 
-  /** Returns the matching emoji is it exits, undefined otherwise */
+  /** Returns the matching emoji if it exits, undefined otherwise */
   static getEmoji = (name: string, teamId = -1): EmojiNamePict => {
     let _emojis = [emojisBase, emojisOrga, emojisTeam[teamId]];
 
@@ -137,6 +138,20 @@ export class EmojiService {
       let emojis = Object.values(_emojis[index]).filter(elem => elem.name == name);
       if (emojis.length != 0)
         return new EmojiNamePict(emojis[0].id, emojis[0].name, EmojiService.path[index] + emojis[0].picture);
+    }
+
+    return undefined;
+  }
+
+  /** Returns the name if it exits, undefined otherwise */
+  static getEmojiName = (emojiId: number): string => {
+    let _emojis = [emojisBase, emojisOrga, ...Object.values(emojisTeam)];
+
+    for (let index in _emojis) {
+      // TODO [Opti] -> search in dict
+      let emoji = Object.values(_emojis[index]).find(elem => elem.id == emojiId);
+      if (emoji != undefined)
+        return emoji.name;
     }
 
     return undefined;
@@ -169,6 +184,24 @@ export class EmojiService {
       return undefined;
     }
     return new EmojiNamePict(emojisBase[emojiId].id, emojisBase[emojiId].name, emojisBase[emojiId].picture);
+  }
+
+  static generateAllReactionOfMsg = (msgId: number): Reaction[] => {
+    let x = Object.values(reactions).filter(react => react.msgId == msgId)// select react of msg
+      .reduce((acc: Reaction[], _react) => {
+        let user = UserService.generateUserName(_react.userId);
+        let exist = acc.find(react => react.emojiId == _react.emojiId);
+
+        if (exist == undefined)
+          acc.push(new Reaction(_react.emojiId, EmojiService.getEmojiName(_react.emojiId), [user]))
+        else
+          exist.users.push(user);
+
+        return acc;
+      }, []);
+
+    console.log(msgId, x);
+    return x;
   }
 
   /**
@@ -247,41 +280,41 @@ let createdEmojis: { [id: number]: { id: number, teamId: number, name: string, p
 let emojisTeam: { [id: number]: { [id: number]: { id: number, name: string, picture: string } } } = {
   "-1": {},// If no teamId given
   1: {
-    1: {
-      id: 1,
+    100_001: {
+      id: 100_001,
       name: "bob",
       picture: "1/aa.png"
     },
-    2: {
-      id: 1,
+    100_002: {
+      id: 100_002,
       name: "rl",
       picture: "1/ab.png"
     },
-    3: {
-      id: 3,
+    100_003: {
+      id: 100_003,
       name: "ibm",
       picture: "1/ac.png"
     },
   },
   2: {
-    101: {
-      id: 101,
+    100_101: {
+      id: 100_101,
       name: "pe",
       picture: "2/ba.png"
     },
   },
   3: {
-    201: {
-      id: 201,
+    100_201: {
+      id: 100_201,
       name: "nike",
-      picture: "2/ca.png"
+      picture: "3/ca.png"
     },
   },
   10: {
-    301: {
-      id: 301,
+    100_301: {
+      id: 100_301,
       name: "bmw",
-      picture: "2/da.png"
+      picture: "10/da.png"
     },
   }
 };
@@ -290,13 +323,13 @@ let emojisTeam: { [id: number]: { [id: number]: { id: number, name: string, pict
 
 /** Emojis added by the organization (available for all the teams) */
 let emojisOrga: { [id: number]: { id: number, name: string, picture: string } } = {
-  1: {
-    id: 1,
+  10_001: {
+    id: 10_001,
     name: "m2i",
     picture: "1.png"
   },
-  2: {
-    id: 2,
+  10_002: {
+    id: 10_002,
     name: "semifir",
     picture: "2.png"
   },
@@ -537,3 +570,39 @@ let emojisBase: { [id: number]: { id: number, name: string, picture: string } } 
     picture: "zipper-mouth_face.png"
   }
 };
+
+// ================================================================================================
+
+/**  */
+let reactions: { userId: number, msgId: number, emojiId: number }[] = [
+  { userId: 1, msgId: 19, emojiId: 1 },
+  { userId: 1, msgId: 19, emojiId: 2 },
+  { userId: 1, msgId: 19, emojiId: 3 },
+  { userId: 2, msgId: 19, emojiId: 1 },
+
+  { userId: 1, msgId: 15, emojiId: 37 },
+  { userId: 2, msgId: 15, emojiId: 25 },
+  { userId: 2, msgId: 15, emojiId: 37 },
+
+  { userId: 1, msgId: 16, emojiId: 15 },
+  { userId: 10, msgId: 16, emojiId: 15 },
+  { userId: 20, msgId: 16, emojiId: 15 },
+  { userId: 1, msgId: 16, emojiId: 16 },
+  { userId: 10, msgId: 16, emojiId: 16 },
+  { userId: 20, msgId: 16, emojiId: 16 },
+
+  // Nourriture
+  { userId: 10, msgId: 20, emojiId: 10 },
+  { userId: 2, msgId: 20, emojiId: 3 },
+  { userId: 20, msgId: 20, emojiId: 3 },
+
+  { userId: 1, msgId: 21, emojiId: 23 },
+  { userId: 1, msgId: 22, emojiId: 23 },
+
+  { userId: 1, msgId: 23, emojiId: 23 },
+
+  // Lorem
+
+  // ===== Semifir =====
+
+];

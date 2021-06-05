@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { EmojiService } from 'src/app/services/emoji.service';
 import { FileService } from 'src/app/services/file.service';
 import { UserService } from 'src/app/services/user.service';
 import { Message } from '../models/message';
@@ -28,7 +29,7 @@ export class MessageService {
       return undefined;
     }
     let file = msgs[msgId].file == undefined ? undefined : FileService.generateFile(msgs[msgId].file);
-    return new Message(msgs[msgId].id, users[msgs[msgId].sender], new Date(msgs[msgId].date), msgs[msgId].content, file);
+    return new Message(msgs[msgId].id, users[msgs[msgId].sender], new Date(msgs[msgId].date), msgs[msgId].content, file, EmojiService.generateAllReactionOfMsg(msgId));
   }
 }
 
