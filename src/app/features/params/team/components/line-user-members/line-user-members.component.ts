@@ -4,6 +4,7 @@ import { RoleService } from 'src/app/features/params/team/roles/services/role.se
 import { UserHasRole } from 'src/app/models/userHasRole';
 import { TeamService } from 'src/app/services/team.service';
 
+
 @Component({
   selector: 'app-line-user-members',
   templateUrl: './line-user-members.component.html',
@@ -32,7 +33,9 @@ export class LineUserMembersComponent implements OnInit {
       rolesId = roles;
       rolesId.forEach(id => {
         if (!this.user.roles.includes(id)) {
-          this.rolesMissing.push(RoleService.findWithoutRightsById(id));
+          RoleService.findWithoutRightsById(id).subscribe(role => {
+            this.rolesMissing.push(role);
+          })
         }
       });
     });

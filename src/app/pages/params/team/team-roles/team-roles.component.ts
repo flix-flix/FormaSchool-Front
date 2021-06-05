@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { createRole } from 'src/app/features/params/team/roles/models/createRole';
 import { Role } from 'src/app/features/params/team/roles/models/role';
@@ -34,7 +33,9 @@ export class TeamRolesComponent implements OnInit {
     this.teamService.findRolesByTeamId(1).subscribe(roles => {
       rolesId = roles;
       rolesId.forEach(id => {
-        this.roles.push(RoleService.findWithoutRightsById(id));
+        RoleService.findWithoutRightsById(id).subscribe(role => {
+          this.roles.push(role);
+        })
       });
     });
   }
@@ -44,18 +45,22 @@ export class TeamRolesComponent implements OnInit {
    * @param id the id of the role choosen
    */
   roleChoosen = (id: number) => {
-    let newRole: Role = this.roleService.findRoleById(id);
-    this.role = newRole;
+    this.roleService.findRoleById(id).subscribe(role => {
+      this.role = role;
+    });
   }
 
   /**
    * This function allows you to create a new role
    */
   addNewRole = () => {
-    let idRole: number = this.roleService.save(new createRole("nouveau role", "#A2D0EA"));
-    //TODO include the teamId instead of "1"
-    this.teamService.addRoleToTeam(1, idRole);
-    this.refreshRoles();
+    let idRole: number;
+    this.roleService.save(new createRole("nouveau role", "#A2D0EA")).subscribe(retour => {
+      idRole = retour;
+      //TODO include the teamId instead of "1"
+      this.teamService.addRoleToTeam(1, idRole);
+      this.refreshRoles();
+    });
   }
 
   /**
