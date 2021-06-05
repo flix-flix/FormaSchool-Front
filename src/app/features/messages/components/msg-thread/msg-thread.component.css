@@ -5,7 +5,8 @@
     
     width: 100%;
     height: 100%;
-    
+    max-width: calc(100vw - 21rem);/* TODO calc */
+
     background-color: var(--background);
 }
 

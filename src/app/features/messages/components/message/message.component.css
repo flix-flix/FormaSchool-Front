@@ -57,7 +57,8 @@
 
 .text{
     line-height: 1.4rem;
-    
+    word-wrap: break-word;
+
     color: var(--black);
 }
 
