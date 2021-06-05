@@ -60,6 +60,7 @@ let msgs: { [id: number]: { id: number, sender: number, date: string, content: s
   12: { id: 12, sender: 2, date: "2021-05-28T07:52:11", content: "Java ?", file: 3 },
   13: { id: 13, sender: 3, date: "2021-05-28T07:52:35", content: "Regarde sur StackOverflow", file: 2 },
   14: { id: 14, sender: 4, date: "2021-05-28T07:54:11", content: "Regardez ça", file: 4 },
+  15: { id: 15, sender: 2, date: "2021-06-05T23:01:07", content: ":victory_hand: :rl: **>** :m2i: :victory_hand:", file: undefined },
 
   // Nourriture
   20: { id: 20, sender: 1, date: "2021-05-01T17:35:21", content: ":beer_mug: :wine_glass: :cocktail_glass:", file: undefined },
@@ -78,8 +79,10 @@ let msgs: { [id: number]: { id: number, sender: number, date: string, content: s
   // ================== IDP ========================
   // Pole Emploi
   100: { id: 100, sender: 1, date: "2021-01-05T07:07:35", content: "Bonjour", file: undefined },
-  101: { id: 100, sender: 3, date: "2021-03-05T09:12:43", content: "Salut", file: undefined },
-  102: { id: 100, sender: 2, date: "2021-05-05T15:17:45", content: "Coucou", file: undefined },
+  101: { id: 101, sender: 3, date: "2021-03-05T09:12:43", content: "Salut", file: undefined },
+  102: { id: 102, sender: 2, date: "2021-05-05T15:17:45", content: "Coucou", file: undefined },
+  103: { id: 103, sender: 2, date: "2021-05-05T15:18:22", content: ":rl: :rl:", file: undefined },
+  104: { id: 104, sender: 2, date: "2021-05-05T15:18:33", content: ":pe: **>** :m2i:", file: undefined },
 
   // ================== M2i ========================
   // Secretaria

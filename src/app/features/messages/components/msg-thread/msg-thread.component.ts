@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Salon } from 'src/app/features/team/services/models/salon';
 import { UserService } from 'src/app/services/user.service';
 import { Message } from '../../models/message';
 
@@ -11,7 +12,7 @@ import { Message } from '../../models/message';
 export class MsgThreadComponent implements OnInit {
   @ViewChild("scrollMe") private msgThread: ElementRef;
 
-  @Input() salon;
+  @Input() salon: Salon;
 
   /** Messages grouped by date and sorted by time */
   msgs: Message[][];
@@ -67,7 +68,8 @@ export class MsgThreadComponent implements OnInit {
 
   // TODO Allow the message to be added before
   /** Add the message to the day-grouped messages */
-  addMsg = (msg) => {
+  addMsg = (msg: Message) => {
+    msg.processEmoji(this.salon.teamId);
     if (this.msgs.length == 0 || !isSameDay(msg.date, this.msgs[this.msgs.length - 1][0].date))
       this.msgs.push([]);
     this.msgs[this.msgs.length - 1].push(msg);

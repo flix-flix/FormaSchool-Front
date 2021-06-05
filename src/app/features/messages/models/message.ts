@@ -19,7 +19,6 @@ export class Message {
         this._file = file;
 
         this._html = Message.processHtml(content);
-        this._html = EmojiService.processEmoji(this._html, 4);
     }
 
     // ===============================================
@@ -27,6 +26,10 @@ export class Message {
     /** Returns the time (hh:mm) */
     public getTimeStr = (): string => {
         return nf.format(this.date.getHours()) + ":" + nf.format(this.date.getMinutes());
+    }
+
+    public processEmoji = (teamId: number) => {
+        this._html = EmojiService.processEmoji(this._html, 5, teamId);
     }
 
     // ===============================================

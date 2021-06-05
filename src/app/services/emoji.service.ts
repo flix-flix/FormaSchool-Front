@@ -24,36 +24,41 @@ export class EmojiService {
    * @param content The string to process
    * @param deep The number of folder deeper than /assets
    */
-  static processEmoji = (content: string, deep: number): string => {
+  static processEmoji = (content: string, deep: number, teamId: number): string => {
     let html = ""; // return string
     let search = ":"; // TODO regex
     let first = 0, second = 0, prev = 0; // first ':', second ':', prev: current char index
-    let name; // name of the potential emoji
 
     while ((first = EmojiService.indexOf(content, search, prev)) != -1
       && (second = EmojiService.indexOf(content, search, first + 1)) != -1) {
-      name = content.substring(first + 1, second);
-      html += EmojiService.inSpan(content.substring(prev, first));
+      html += content.substring(prev, first);
 
-      let _emojis = Object.values(emojis).filter(elem => elem.name == name);
-      if (_emojis.length != 0) {
-        let emoji = _emojis[0];
-        html += `<img class="inline_emoji" src="${"../".repeat(deep)}assets/images/_remove/${emoji.picture}" alt=":${emoji.name}:">`;
-        prev = second + 1;
-      } else {
+      let emoji = EmojiService.getEmoji(content.substring(first + 1, second), teamId);
+      if (emoji == undefined) {// skip current ':' (move 1 forward)
         html += ":";
         prev = first + 1;
+      } else {
+        html += `<img class="inline_emoji" src="${"../".repeat(deep)}assets/images/_remove/${emoji.picture}" alt=":${emoji.name}:">`;
+        prev = second + 1;
       }
     }
 
     // Add the remaining content
-    return html + EmojiService.inSpan(content.substring(prev));
+    return html + content.substring(prev);
   }
 
-  // TODO Usefull ?
-  /** Returns the text within a span._text */
-  static inSpan = (content: string): string => {
-    return `<span class="_text">${content}</span>`
+  /** Returns the matching emoji is it exits, undefined otherwise */
+  static getEmoji = (name: string, teamId = -1): EmojiNamePict => {
+    let _emojis = [emojisBase, emojisOrga, emojisTeam[teamId]];
+
+    for (let index in _emojis) {
+      // TODO [Opti] -> search in dict
+      let emojis = Object.values(_emojis[index]).filter(elem => elem.name == name);
+      if (emojis.length != 0)
+        return new EmojiNamePict(emojis[0].id, emojis[0].name, emojis[0].picture);
+    }
+
+    return undefined;
   }
 
   // ================================================================================================
@@ -72,21 +77,79 @@ export class EmojiService {
 
   static generateAllEmojiNamePicture = (): EmojiNamePict[] => {
     let _emojis = [];
-    for (let emojiId in emojis)
+    for (let emojiId in emojisBase)
       _emojis.push(EmojiService.generateEmojiNamePicture(+emojiId));
     return _emojis;
   }
 
   static generateEmojiNamePicture = (emojiId: number): EmojiNamePict => {
-    if (!(emojiId in emojis)) {
+    if (!(emojiId in emojisBase)) {
       console.error("emojiId doesn't exist:", emojiId);
       return undefined;
     }
-    return new EmojiNamePict(emojis[emojiId].id, emojis[emojiId].name, emojis[emojiId].picture);
+    return new EmojiNamePict(emojisBase[emojiId].id, emojisBase[emojiId].name, emojisBase[emojiId].picture);
   }
 }
 
-let emojis: { [id: number]: { id: number, name: string, picture: string } } = {
+// ================================================================================================
+// TODO [back]
+
+let emojisTeam: { [id: number]: { [id: number]: { id: number, name: string, picture: string } } } = {
+  "-1": {},
+  1: {
+    1: {
+      id: 1,
+      name: "bob",
+      picture: "emojis/teams/1/aa.png"
+    },
+    2: {
+      id: 1,
+      name: "rl",
+      picture: "emojis/teams/1/ab.png"
+    },
+  },
+  2: {
+    101: {
+      id: 101,
+      name: "pe",
+      picture: "emojis/teams/2/ba.png"
+    },
+  },
+  3: {
+    201: {
+      id: 201,
+      name: "nike",
+      picture: "emojis/teams/2/ca.png"
+    },
+  },
+  10: {
+    301: {
+      id: 301,
+      name: "bmw",
+      picture: "emojis/teams/2/da.png"
+    },
+  }
+};
+
+
+// ================================================================================================
+
+let emojisOrga: { [id: number]: { id: number, name: string, picture: string } } = {
+  1: {
+    id: 1,
+    name: "m2i",
+    picture: "emojis/organisation/1.png"
+  },
+  2: {
+    id: 2,
+    name: "semifir",
+    picture: "emojis/organisation/2.png"
+  },
+};
+
+// ================================================================================================
+
+let emojisBase: { [id: number]: { id: number, name: string, picture: string } } = {
   1: {
     id: 1,
     name: "bagel",
