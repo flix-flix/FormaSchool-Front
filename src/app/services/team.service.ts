@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Salon } from '../features/team/services/models/salon';
-import { SalonService } from '../features/team/services/salon.service';
+import { Salon } from '../models/salon';
 import { teamNameDescPict } from '../models/teamNameDescPict';
 import { TeamNamePict } from '../models/teamNamePict';
+import { SalonService } from './salon.service';
 
 @Injectable({
   providedIn: 'root'

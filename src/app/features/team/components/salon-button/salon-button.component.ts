@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EmojiService } from 'src/app/services/emoji.service';
-import { Salon } from '../../services/models/salon';
+import { Salon } from '../../../../models/salon';
 
 @Component({
   selector: 'app-salon-button',

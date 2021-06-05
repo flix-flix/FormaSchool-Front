@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MessageService } from '../../messages/services/message.service';
-import { SalonNameDesc } from '../../params/salon/model/salonNameDesc';
-import { Salon } from './models/salon';
+import { MessageService } from '../features/messages/services/message.service';
+import { SalonNameDesc } from '../features/params/salon/model/salonNameDesc';
+import { Salon } from '../models/salon';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SalonNameDesc } from 'src/app/features/params/salon/model/salonNameDesc';
-import { SalonService } from 'src/app/features/team/services/salon.service';
+import { SalonService } from 'src/app/services/salon.service';
 
 
 @Component({

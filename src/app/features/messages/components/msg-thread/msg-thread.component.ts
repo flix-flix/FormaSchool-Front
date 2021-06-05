@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Salon } from 'src/app/features/team/services/models/salon';
+import { Salon } from 'src/app/models/salon';
 import { UserService } from 'src/app/services/user.service';
 import { Message } from '../../models/message';
 

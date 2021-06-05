@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Salon } from 'src/app/features/team/services/models/salon';
+import { Salon } from 'src/app/models/salon';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
