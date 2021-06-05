@@ -66,7 +66,7 @@ export default class TabEmojiComponent implements OnInit {
   saveEmoji = () => {
     this.submitted = true;
     let isUsed: boolean;
-    this.service.isNameAlreadyUse(this.emoji.name).subscribe(used => {
+    this.service.isNameAlreadyUse(this.emoji.id, this.emoji.name).subscribe(used => {
       isUsed = used;
     })
     if (!isUsed) {

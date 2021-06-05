@@ -160,9 +160,9 @@ export class EmojiService {
    * @param name a string
    * @returns true if the database contains an emoji with the alias, otherwise it returns false
    */
-  isNameAlreadyUse = (name: string): Observable<boolean> => {
+  isNameAlreadyUse = (id: number, name: string): Observable<boolean> => {
     return new Observable<boolean>(obs => {
-      obs.next(Object.values(createdEmojis).filter(element => element.name == name).length != 0);
+      obs.next(Object.values(createdEmojis).filter(element => element.name == name && element.id != id).length != 0);
       obs.complete();
     });
   }
