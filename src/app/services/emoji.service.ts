@@ -7,6 +7,9 @@ import { EmojiNamePict } from '../features/messages/models/emojiNamePict';
 })
 export class EmojiService {
 
+  /** path to the folder of the emojis [default, organization, team] */
+  static path = ["emojis/", "_remove/emojis/", "_remove/emojis_teams/"];
+
   constructor() { }
 
   static findAllNamePict = (): Observable<EmojiNamePict[]> => {
@@ -38,7 +41,7 @@ export class EmojiService {
         html += ":";
         prev = first + 1;
       } else {
-        html += `<img class="inline_emoji" src="${"../".repeat(deep)}assets/images/_remove/${emoji.picture}" alt=":${emoji.name}:">`;
+        html += `<img class="inline_emoji" src="${"../".repeat(deep)}assets/images/${emoji.picture}" alt=":${emoji.name}:">`;
         prev = second + 1;
       }
     }
@@ -55,7 +58,7 @@ export class EmojiService {
       // TODO [Opti] -> search in dict
       let emojis = Object.values(_emojis[index]).filter(elem => elem.name == name);
       if (emojis.length != 0)
-        return new EmojiNamePict(emojis[0].id, emojis[0].name, emojis[0].picture);
+        return new EmojiNamePict(emojis[0].id, emojis[0].name, EmojiService.path[index] + emojis[0].picture);
     }
 
     return undefined;
@@ -95,38 +98,43 @@ export class EmojiService {
 // TODO [back]
 
 let emojisTeam: { [id: number]: { [id: number]: { id: number, name: string, picture: string } } } = {
-  "-1": {},
+  "-1": {},// If no teamId given
   1: {
     1: {
       id: 1,
       name: "bob",
-      picture: "emojis/teams/1/aa.png"
+      picture: "1/aa.png"
     },
     2: {
       id: 1,
       name: "rl",
-      picture: "emojis/teams/1/ab.png"
+      picture: "1/ab.png"
+    },
+    3: {
+      id: 3,
+      name: "ibm",
+      picture: "1/ac.png"
     },
   },
   2: {
     101: {
       id: 101,
       name: "pe",
-      picture: "emojis/teams/2/ba.png"
+      picture: "2/ba.png"
     },
   },
   3: {
     201: {
       id: 201,
       name: "nike",
-      picture: "emojis/teams/2/ca.png"
+      picture: "2/ca.png"
     },
   },
   10: {
     301: {
       id: 301,
       name: "bmw",
-      picture: "emojis/teams/2/da.png"
+      picture: "2/da.png"
     },
   }
 };
@@ -138,12 +146,12 @@ let emojisOrga: { [id: number]: { id: number, name: string, picture: string } } 
   1: {
     id: 1,
     name: "m2i",
-    picture: "emojis/organisation/1.png"
+    picture: "1.png"
   },
   2: {
     id: 2,
     name: "semifir",
-    picture: "emojis/organisation/2.png"
+    picture: "2.png"
   },
 };
 
@@ -153,231 +161,231 @@ let emojisBase: { [id: number]: { id: number, name: string, picture: string } } 
   1: {
     id: 1,
     name: "bagel",
-    picture: "emojis/bagel.png"
+    picture: "bagel.png"
   },
   2: {
     id: 2,
     name: "beer_mug",
-    picture: "emojis/beer_mug.png"
+    picture: "beer_mug.png"
   },
   3: {
     id: 3,
     name: "beverage_box",
-    picture: "emojis/beverage_box.png"
+    picture: "beverage_box.png"
   },
   4: {
     id: 4,
     name: "birthday_cake",
-    picture: "emojis/birthday_cake.png"
+    picture: "birthday_cake.png"
   },
   5: {
     id: 5,
     name: "broccoli",
-    picture: "emojis/broccoli.png"
+    picture: "broccoli.png"
   },
   6: {
     id: 6,
     name: "bubble_tea",
-    picture: "emojis/bubble_tea.png"
+    picture: "bubble_tea.png"
   },
   7: {
     id: 7,
     name: "burrito",
-    picture: "emojis/burrito.png"
+    picture: "burrito.png"
   },
   8: {
     id: 8,
     name: "cherries",
-    picture: "emojis/cherries.png"
+    picture: "cherries.png"
   },
   9: {
     id: 9,
     name: "chocolate_bar",
-    picture: "emojis/chocolate_bar.png"
+    picture: "chocolate_bar.png"
   },
   10: {
     id: 10,
     name: "clinking_beer_mugs",
-    picture: "emojis/clinking_beer_mugs.png"
+    picture: "clinking_beer_mugs.png"
   },
   11: {
     id: 11,
     name: "cocktail_glass",
-    picture: "emojis/cocktail_glass.png"
+    picture: "cocktail_glass.png"
   },
   12: {
     id: 12,
     name: "cookie",
-    picture: "emojis/cookie.png"
+    picture: "cookie.png"
   },
   13: {
     id: 13,
     name: "croissant",
-    picture: "emojis/croissant.png"
+    picture: "croissant.png"
   },
   14: {
     id: 14,
     name: "cut_of_meat",
-    picture: "emojis/cut_of_meat.png"
+    picture: "cut_of_meat.png"
   },
   15: {
     id: 15,
     name: "fire",
-    picture: "emojis/fire.png"
+    picture: "fire.png"
   },
   16: {
     id: 16,
     name: "flexed_biceps",
-    picture: "emojis/flexed_biceps.png"
+    picture: "flexed_biceps.png"
   },
   17: {
     id: 17,
     name: "french_fries",
-    picture: "emojis/french_fries.png"
+    picture: "french_fries.png"
   },
   18: {
     id: 18,
     name: "frowning_face",
-    picture: "emojis/frowning_face.png"
+    picture: "frowning_face.png"
   },
   19: {
     id: 19,
     name: "frowning_face_with_open_mouth",
-    picture: "emojis/frowning_face_with_open_mouth.png"
+    picture: "frowning_face_with_open_mouth.png"
   },
   20: {
     id: 20,
     name: "grimacing_face",
-    picture: "emojis/grimacing_face.png"
+    picture: "grimacing_face.png"
   },
   21: {
     id: 21,
     name: "grinning_face_with_smiling_eyes",
-    picture: "emojis/grinning_face_with_smiling_eyes.png"
+    picture: "grinning_face_with_smiling_eyes.png"
   },
   22: {
     id: 22,
     name: "grinning_face_with_sweat",
-    picture: "emojis/grinning_face_with_sweat.png"
+    picture: "grinning_face_with_sweat.png"
   },
   23: {
     id: 23,
     name: "hamburger",
-    picture: "emojis/hamburger.png"
+    picture: "hamburger.png"
   },
   24: {
     id: 24,
     name: "hundred_points",
-    picture: "emojis/hundred_points.png"
+    picture: "hundred_points.png"
   },
   25: {
     id: 25,
     name: "microbe",
-    picture: "emojis/microbe.png"
+    picture: "microbe.png"
   },
   26: {
     id: 26,
     name: "middle_finger",
-    picture: "emojis/middle_finger.png"
+    picture: "middle_finger.png"
   },
   27: {
     id: 27,
     name: "OK_hand",
-    picture: "emojis/OK_hand.png"
+    picture: "OK_hand.png"
   },
   28: {
     id: 28,
     name: "pineapple",
-    picture: "emojis/pineapple.png"
+    picture: "pineapple.png"
   },
   29: {
     id: 29,
     name: "pizza",
-    picture: "emojis/pizza.png"
+    picture: "pizza.png"
   },
   30: {
     id: 30,
     name: "red_apple",
-    picture: "emojis/red_apple.png"
+    picture: "red_apple.png"
   },
   31: {
     id: 31,
     name: "sandwich",
-    picture: "emojis/sandwich.png"
+    picture: "sandwich.png"
   },
   32: {
     id: 32,
     name: "shamrock",
-    picture: "emojis/shamrock.png"
+    picture: "shamrock.png"
   },
   33: {
     id: 33,
     name: "sleeping_face",
-    picture: "emojis/sleeping_face.png"
+    picture: "sleeping_face.png"
   },
   34: {
     id: 34,
     name: "slot_machine",
-    picture: "emojis/slot_machine.png"
+    picture: "slot_machine.png"
   },
   35: {
     id: 35,
     name: "smiling_face_with_halo",
-    picture: "emojis/smiling_face_with_halo.png"
+    picture: "smiling_face_with_halo.png"
   },
   36: {
     id: 36,
     name: "spaghetti",
-    picture: "emojis/spaghetti.png"
+    picture: "spaghetti.png"
   },
   37: {
     id: 37,
     name: "stop_sign",
-    picture: "emojis/stop_sign.png"
+    picture: "stop_sign.png"
   },
   38: {
     id: 38,
     name: "tangerine",
-    picture: "emojis/tangerine.png"
+    picture: "tangerine.png"
   },
   39: {
     id: 39,
     name: "tomato",
-    picture: "emojis/tomato.png"
+    picture: "tomato.png"
   },
   40: {
     id: 40,
     name: "tropical_drink",
-    picture: "emojis/tropical_drink.png"
+    picture: "tropical_drink.png"
   },
   41: {
     id: 41,
     name: "upside-down_face",
-    picture: "emojis/upside-down_face.png"
+    picture: "upside-down_face.png"
   },
   42: {
     id: 42,
     name: "victory_hand",
-    picture: "emojis/victory_hand.png"
+    picture: "victory_hand.png"
   },
   43: {
     id: 43,
     name: "vulcan_salute",
-    picture: "emojis/vulcan_salute.png"
+    picture: "vulcan_salute.png"
   },
   44: {
     id: 44,
     name: "watermelon",
-    picture: "emojis/watermelon.png"
+    picture: "watermelon.png"
   },
   45: {
     id: 45,
     name: "wine_glass",
-    picture: "emojis/wine_glass.png"
+    picture: "wine_glass.png"
   },
   46: {
     id: 46,
     name: "zipper-mouth_face",
-    picture: "emojis/zipper-mouth_face.png"
+    picture: "zipper-mouth_face.png"
   }
 };
