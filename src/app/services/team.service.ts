@@ -147,8 +147,11 @@ export class TeamService {
    * @param teamId 
    * @returns a list of number
    */
-  findRolesByTeamId = (teamId: number): number[] => {
-    return teams[teamId].roles;
+  findRolesByTeamId = (teamId: number): Observable<number[]> => {
+    return new Observable<number[]>(obs => {
+      obs.next(teams[teamId].roles);
+      obs.complete();
+    });
   }
 }
 

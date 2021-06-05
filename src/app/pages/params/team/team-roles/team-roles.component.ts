@@ -30,9 +30,12 @@ export class TeamRolesComponent implements OnInit {
    */
   refreshRoles = () => {
     this.roles = [];
-    let rolesId: number[] = this.teamService.findRolesByTeamId(1);
-    rolesId.forEach(id => {
-      this.roles.push(RoleService.findWithoutRightsById(id));
+    let rolesId: number[];
+    this.teamService.findRolesByTeamId(1).subscribe(roles => {
+      rolesId = roles;
+      rolesId.forEach(id => {
+        this.roles.push(RoleService.findWithoutRightsById(id));
+      });
     });
   }
 

@@ -27,11 +27,14 @@ export class LineUserMembersComponent implements OnInit {
 
   findRoleMissing = () => {
     this.rolesMissing = [];
-    let rolesId: number[] = this.teamService.findRolesByTeamId(1);
-    rolesId.forEach(id => {
-      if (!this.user.roles.includes(id)) {
-        this.rolesMissing.push(RoleService.findWithoutRightsById(id));
-      }
+    let rolesId: number[];
+    this.teamService.findRolesByTeamId(1).subscribe(roles => {
+      rolesId = roles;
+      rolesId.forEach(id => {
+        if (!this.user.roles.includes(id)) {
+          this.rolesMissing.push(RoleService.findWithoutRightsById(id));
+        }
+      });
     });
     console.log(this.user.roles);
     console.log(this.user.roles.includes(1));
