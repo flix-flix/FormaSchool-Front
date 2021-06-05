@@ -42,6 +42,10 @@
     color: var(--font_1);
 }
 
+#left {
+    width: 100%;
+}
+
 .time {
     padding: .15rem 0rem;
 
@@ -123,21 +127,23 @@
 
 /* ===== bloc ===== */
 
-.md_bloc, .md_bloc_inline {
-    padding: .25rem .5rem;
+::ng-deep.md_bloc, ::ng-deep.md_bloc_inline {
+    padding: 0 .5rem;
     margin: .5rem 0;
-
+    
     border-radius: .2rem;
-
+    
     font-family: monospace;
     font-size: 1rem;
-
+    
     color: var(--font_1);
     background-color: var(--font_2);
 }
 
-.md_bloc {
+::ng-deep.md_bloc {
     display: block;
+    
+    padding: .25rem .5rem;
 }
 
 /* ===== emoji ===== */
