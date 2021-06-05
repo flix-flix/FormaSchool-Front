@@ -33,9 +33,12 @@ export class AddUserComponent implements OnInit {
    */
   save = () => {
     let user: userCreation = this.userForm.value;
-    let idRetour = this.userService.save(user);
+    let retour: number;
+    this.userService.save(user).subscribe(idRetour => {
+      retour = idRetour;
+    });
     this.logService.addLog(new Log(1, 3, 0, new Date(), `a creer l'utilisateur ${user.firstname} ${user.lastname}`));
-    alert(`L'utilisateur a bien été créé avec l'id ${idRetour}`)
+    alert(`L'utilisateur a bien été créé avec l'id ${retour}`)
   }
 
 }

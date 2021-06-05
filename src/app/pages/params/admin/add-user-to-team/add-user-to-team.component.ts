@@ -32,7 +32,9 @@ export class AddUserToTeamComponent implements OnInit {
    */
   refreshUser = () => {
     if (this.selectedTeam != null) {
-      this.users = this.userService.listUserLinkTeam(this.selectedTeam.id)
+      this.userService.listUserLinkTeam(this.selectedTeam.id).subscribe(users => {
+        this.users = users;
+      })
     }
   }
 
@@ -43,12 +45,15 @@ export class AddUserToTeamComponent implements OnInit {
     let retour1;
     let retour2;
     this.selectedUser.forEach(user => {
-      this.teamService.saveLink(this.selectedTeam.id,user.id).subscribe(idRetour =>{
+      this.teamService.saveLink(this.selectedTeam.id, user.id).subscribe(idRetour => {
         retour1 = idRetour;
       });
-      retour1 = this.userService.saveLink(this.selectedTeam.id, user.id);
+      this.userService.saveLink(this.selectedTeam.id, user.id).subscribe(idRetour => {
+        retour2 = idRetour
+      });
       alert(`retour 1: ${retour1} retour 2: ${retour2}`);
     });
+    this.refreshUser();
   }
 
 }

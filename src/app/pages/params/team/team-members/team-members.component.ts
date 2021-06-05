@@ -17,7 +17,9 @@ export class TeamMembersComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.users = this.userService.findAllUserRoles();
+    this.userService.findAllUserRoles().subscribe(users => {
+      this.users = users;
+    });
   }
 
 
