@@ -89,6 +89,7 @@ export class Message {
        */
     static processHtml = (content: string, replace: boolean = true): string => {
         let html = content.replace(/\n/g, "<br>");
+        html = html.replace(/ /g, "&nbsp;");
 
         html = Message.processHtmlSpan(html, "**", "bold", replace);
         html = Message.processHtmlSpan(html, /((?<!\*)\*{1}(?!\*))|\*{3}/, "italic", replace); // *italic* | ***italic***

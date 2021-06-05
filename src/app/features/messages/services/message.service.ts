@@ -60,7 +60,8 @@ let msgs: { [id: number]: { id: number, sender: number, date: string, content: s
   12: { id: 12, sender: 2, date: "2021-05-28T07:52:11", content: "Java ?", file: 3 },
   13: { id: 13, sender: 3, date: "2021-05-28T07:52:35", content: "Regarde sur StackOverflow", file: 2 },
   14: { id: 14, sender: 4, date: "2021-05-28T07:54:11", content: "Regardez ça", file: 4 },
-  15: { id: 15, sender: 2, date: "2021-06-05T23:01:07", content: ":victory_hand: :rl: **>** :m2i: :victory_hand:", file: undefined },
+  15: { id: 15, sender: 1, date: "2021-06-05T23:01:07", content: "**Distanciation               <->               Sociale**", file: undefined },
+  16: { id: 16, sender: 2, date: "2021-06-05T23:01:07", content: ":victory_hand: :rl: **>** :m2i: :victory_hand:", file: undefined },
 
   // Nourriture
   20: { id: 20, sender: 1, date: "2021-05-01T17:35:21", content: ":beer_mug: :wine_glass: :cocktail_glass:", file: undefined },
