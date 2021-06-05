@@ -16,6 +16,8 @@ export class TeamEmojisComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.emojis = this.service.findAllCreatedEmoji();
+    this.service.findCreatedEmojiByTeamId(1).subscribe(emojis => {
+      this.emojis = emojis;
+    });
   }
 }

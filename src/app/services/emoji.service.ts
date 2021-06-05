@@ -100,17 +100,31 @@ export class EmojiService {
       console.error("roleId doesn't exist:", emojiId);
       return undefined;
     }
-    return new CreatedEmoji(emojiId, createdEmojis[emojiId].name, createdEmojis[emojiId].picture, createdEmojis[emojiId].user);
+    return new CreatedEmoji(emojiId, createdEmojis[emojiId].teamId, createdEmojis[emojiId].name, createdEmojis[emojiId].picture, createdEmojis[emojiId].user);
   }
 
   /**
    * This function return you all element on type CreatedEmoji
    * @returns a list of CreatedEmoji which contain all element
    */
-  findAllCreatedEmoji = (): CreatedEmoji[] => {
+  findAllCreatedEmoji = (): Observable<CreatedEmoji[]> => {
     let res: CreatedEmoji[] = [];
     Object.values(createdEmojis).map(element => res.push(EmojiService.generateCreatedEmoji(element.id)));
-    return res;
+    return new Observable<CreatedEmoji[]>(obs => {
+      obs.next(res);
+      obs.complete();
+    });
+  }
+
+  findCreatedEmojiByTeamId = (teamId: number): Observable<CreatedEmoji[]> => {
+    let res: CreatedEmoji[] = [];
+    Object.values(createdEmojis)
+      .filter(emoji => emoji.teamId == teamId)
+      .map(emoji => res.push(EmojiService.generateCreatedEmoji(emoji.id)));
+    return new Observable<CreatedEmoji[]>(obs => {
+      obs.next(res);
+      obs.complete();
+    });
   }
 
   /**
@@ -118,14 +132,18 @@ export class EmojiService {
    * @param emoji a Created emoji that you want to add 
    * @returns the id created 
    */
-  addEmoji = (emoji: CreatedEmoji): number => {
+  addEmoji = (emoji: CreatedEmoji): Observable<number> => {
     createdEmojis[nextId] = {
       id: nextId,
+      teamId: emoji.teamId,
       name: emoji.name,
       picture: emoji.picture,
       user: emoji.user
     }
-    return nextId++;
+    return new Observable<number>(obs => {
+      obs.next(nextId++);
+      obs.complete();
+    });
   }
 
   /**
@@ -142,8 +160,11 @@ export class EmojiService {
    * @param name a string
    * @returns true if the database contains an emoji with the alias, otherwise it returns false
    */
-  isNameAlreadyUse = (name: string): boolean => {
-    return Object.values(createdEmojis).filter(element => element.name == name).length != 0;
+  isNameAlreadyUse = (name: string): Observable<boolean> => {
+    return new Observable<boolean>(obs => {
+      obs.next(Object.values(createdEmojis).filter(element => element.name == name).length != 0);
+      obs.complete();
+    });
   }
 
   /**
@@ -155,46 +176,54 @@ export class EmojiService {
   }
 }
 let nextId = 10;
-let createdEmojis: { [id: number]: { id: number, name: string, picture: string, user: UserNamePict } } =
+// teamId = 0 when it is for every team
+let createdEmojis: { [id: number]: { id: number, teamId: number, name: string, picture: string, user: UserNamePict } } =
 {
   1: {
     id: 1,
     name: "bmw",
+    teamId: 1,
     picture: "0",
     user: UserService.generateUserNamePicture(2)
   },
   2: {
     id: 2,
+    teamId: 1,
     name: "nike",
     picture: "1",
     user: UserService.generateUserNamePicture(2)
   },
   3: {
     id: 3,
+    teamId: 2,
     name: "insta",
     picture: "2",
     user: UserService.generateUserNamePicture(2)
   },
   4: {
     id: 4,
+    teamId: 0,
     name: "rocket",
     picture: "3",
     user: UserService.generateUserNamePicture(2)
   },
   5: {
     id: 5,
+    teamId: 1,
     name: "bob",
     picture: "4",
     user: UserService.generateUserNamePicture(2)
   },
   6: {
     id: 6,
+    teamId: 1,
     name: "boby",
     picture: "4",
     user: UserService.generateUserNamePicture(2)
   },
   7: {
     id: 7,
+    teamId: 1,
     name: "bobu",
     picture: "4",
     user: UserService.generateUserNamePicture(2)

@@ -30,15 +30,18 @@ export default class TabEmojiComponent implements OnInit {
    * This function refresh the list of emoji
    */
   refreshEmoji = () => {
-    this.emojis = this.service.findAllCreatedEmoji();
+    //TODO replace 1 by the current teamId
+    this.service.findCreatedEmojiByTeamId(1).subscribe(emojis => {
+      this.emojis = emojis;
+    });
   }
 
   /**
    * This function create a new CreatedEmoji empty and display the pop-up
    */
   openNew = () => {
-    //TODO replace the id 1 by the id of current user connected
-    this.emoji = new CreatedEmoji(null, null, null, UserService.generateUserNamePicture(1));
+    //TODO replace the id 1 by the id of current user connected and replace the current teamId
+    this.emoji = new CreatedEmoji(null, 1, null, null, UserService.generateUserNamePicture(1));
     this.submitted = false;
     this.emojiDialog = true;
   }
@@ -60,16 +63,23 @@ export default class TabEmojiComponent implements OnInit {
    */
   saveEmoji = () => {
     this.submitted = true;
-    if (!this.service.isNameAlreadyUse(this.emoji.name)) {
+    let isUsed: boolean;
+    this.service.isNameAlreadyUse(this.emoji.name).subscribe(used => {
+      isUsed = used;
+    })
+    if (!isUsed) {
       if (this.emoji.id == null) {
-        this.emoji.id = this.service.addEmoji(this.emoji);
+        this.service.addEmoji(this.emoji).subscribe(idRetour => {
+          this.emoji.id = idRetour;
+        });
         this.emojis.push(this.emoji);
       }
       else {
         this.service.updateCreatedEmoji(this.emoji);
       }
       this.emojiDialog = false;
-      this.emoji = new CreatedEmoji(null, null, null, null);
+      // TODO Replace 1 by the current teamId
+      this.emoji = new CreatedEmoji(null, 1, null, null, null);
     }
     else {
       alert("Alias deja utiliser");
@@ -100,7 +110,8 @@ export default class TabEmojiComponent implements OnInit {
    */
   deleteEmoji = (emojiId: number) => {
     this.service.deleteById(emojiId);
-    this.emoji = new CreatedEmoji(null, null, null, null);
+    // TODO Replace 1 by the current teamId
+    this.emoji = new CreatedEmoji(null, 1, null, null, null);
     this.refreshEmoji();
   }
 }
