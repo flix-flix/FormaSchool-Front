@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CreatedEmoji } from 'src/app/models/createdEmoji';
 import { EmojiService } from 'src/app/services/emoji.service';
 
@@ -11,12 +12,16 @@ import { EmojiService } from 'src/app/services/emoji.service';
 export class TeamEmojisComponent implements OnInit {
 
   emojis: CreatedEmoji[];
+  teamId: number;
 
-  constructor(private service: EmojiService) {
+  constructor(private service: EmojiService, private router: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.service.findCreatedEmojiByTeamId(1).subscribe(emojis => {
+    this.router.parent.paramMap.subscribe(params => {
+      this.teamId = +params.get("teamId");
+    })
+    this.service.findCreatedEmojiByTeamId(this.teamId).subscribe(emojis => {
       this.emojis = emojis;
     });
   }
