@@ -34,7 +34,7 @@
     width: 8rem;
     height: 8rem;
 
-    box-shadow: 5px 5px 5px var(--font_2);
+    filter: drop-shadow(5px 5px 5px var(--font_2));
 }
 
 #team_name_line {
