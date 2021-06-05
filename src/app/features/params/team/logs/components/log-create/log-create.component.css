@@ -1,0 +1,58 @@
+::ng-deep .p-panel .p-panel-header {
+    border: 1px solid #dee2e6;
+    padding: 1rem;
+    background: #6595B8;
+    color: #10516D;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+::ng-deep .p-panel .p-panel-content {
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    background: #6595B8;
+    color: #10516D;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top: 0 none;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+/*-----------------profil Container-----------------------------------*/
+.profil{
+    height: 50px;
+    border-radius: 60px;
+}
+.profilContainer{
+    display: flex;
+}
+.profilContainer>p{
+    margin-left: 50px;
+    margin-top: 5%;
+}
+/*-----------------Logo log Container-----------------------------------*/
+.circleExample{
+    height: 10px;
+    width: 10px;
+    border-radius: 60%;
+    position: relative;
+    right: 25%;
+    margin-top: 60%;
+}
+#type{
+    display:flex;
+}
+/*-----------------Team Container-----------------------------------*/
+.teamContainer{
+    display: flex;
+}
+.teamContainer img{
+    height: 50px;
+}
+.teamContainer p{
+    margin-top: 15%;
+    margin-left: 15%;
+}

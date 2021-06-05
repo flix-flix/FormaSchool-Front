@@ -13,6 +13,21 @@ export class ListLogComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.trieDate();
   }
 
+  /**
+   * This function sort the list by the attribute date
+   */
+  trieDate = () => {
+    this.logs.sort((obj1: Log, obj2: Log) => {
+      if (obj1.date < obj2.date) {
+        return 1;
+      }
+      if (obj1.date > obj2.date) {
+        return -1;
+      }
+      return 0;
+    });
+  }
 }

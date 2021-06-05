@@ -2,17 +2,25 @@ import { UserNamePict } from "src/app/models/userNamePict";
 
 export class CreatedEmoji {
     private _id: number;
+    private _teamId: number;
     private _name: string;
     private _picture: string;
     private _user: UserNamePict;
 
-    constructor(id: number, name: string, picture: string, user: UserNamePict) {
+    constructor(id: number, teamId: number, name: string, picture: string, user: UserNamePict) {
         this._id = id;
+        this._teamId = teamId;
         this._name = name;
         this._picture = picture;
         this._user = user;
     }
 
+    public get teamId(): number {
+        return this._teamId;
+    }
+    public set teamId(value: number) {
+        this._teamId = value;
+    }
     public get user(): UserNamePict {
         return this._user;
     }

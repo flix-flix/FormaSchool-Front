@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EmojiNamePict } from '../features/messages/models/emojiNamePict';
+import { CreatedEmoji } from '../models/createdEmoji';
+import { UserNamePict } from '../models/userNamePict';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +15,86 @@ export class EmojiService {
 
   constructor() { }
 
-  static findAllNamePict = (): Observable<EmojiNamePict[]> => {
+  // TODO [Unused]
+  private findAllNamePict = (): Observable<EmojiNamePict[]> => {
     return new Observable<EmojiNamePict[]>(obs => {
       obs.next(EmojiService.generateAllEmojiNamePicture());
       obs.complete();
     });
+  }
+
+  //========================================= Emoji Created ======================================
+
+  /**
+   * This function return you all element on type CreatedEmoji
+   * @returns a list of CreatedEmoji which contain all element
+   */
+  findAllCreatedEmoji = (): Observable<CreatedEmoji[]> => {
+    let res: CreatedEmoji[] = [];
+    Object.values(createdEmojis).map(element => res.push(EmojiService.generateCreatedEmoji(element.id)));
+    return new Observable<CreatedEmoji[]>(obs => {
+      obs.next(res);
+      obs.complete();
+    });
+  }
+
+  findCreatedEmojiByTeamId = (teamId: number): Observable<CreatedEmoji[]> => {
+    let res: CreatedEmoji[] = [];
+    Object.values(createdEmojis)
+      .filter(emoji => emoji.teamId == teamId)
+      .map(emoji => res.push(EmojiService.generateCreatedEmoji(emoji.id)));
+    return new Observable<CreatedEmoji[]>(obs => {
+      obs.next(res);
+      obs.complete();
+    });
+  }
+
+  /**
+   * This function allows you to add a emoji
+   * @param emoji a Created emoji that you want to add 
+   * @returns the id created 
+   */
+  addEmoji = (emoji: CreatedEmoji): Observable<number> => {
+    createdEmojis[nextId] = {
+      id: nextId,
+      teamId: emoji.teamId,
+      name: emoji.name,
+      picture: emoji.picture,
+      user: emoji.user
+    }
+    return new Observable<number>(obs => {
+      obs.next(nextId++);
+      obs.complete();
+    });
+  }
+
+  /**
+   * This function allws you to update the emoji
+   * @param emoji a Created Emoji that you want to update
+   */
+  updateCreatedEmoji = (emoji: CreatedEmoji) => {
+    createdEmojis[emoji.id].name = emoji.name;
+    createdEmojis[emoji.id].picture = emoji.picture;
+  }
+
+  /**
+   * This function allow you to check is the alias is already used
+   * @param name a string
+   * @returns true if the database contains an emoji with the alias, otherwise it returns false
+   */
+  isNameAlreadyUse = (id: number, name: string): Observable<boolean> => {
+    return new Observable<boolean>(obs => {
+      obs.next(Object.values(createdEmojis).filter(element => element.name == name && element.id != id).length != 0);
+      obs.complete();
+    });
+  }
+
+  /**
+   * This function allows you to delete a emoji from database by passing his id
+   * @param emojiId the id of the emoji you want to delete
+   */
+  deleteById = (emojiId: number) => {
+    delete createdEmojis[emojiId];
   }
 
   // ================================================================================================
@@ -92,11 +170,80 @@ export class EmojiService {
     }
     return new EmojiNamePict(emojisBase[emojiId].id, emojisBase[emojiId].name, emojisBase[emojiId].picture);
   }
+
+  /**
+  * this function give you an EmojiCreated object by the id 
+  * @param emojiId the id fo the emoji you re looking for
+  * @returns a CreatedEmoji object 
+  */
+  static generateCreatedEmoji = (emojiId: number): CreatedEmoji => {
+    if (!(emojiId in createdEmojis)) {
+      console.error("roleId doesn't exist:", emojiId);
+      return undefined;
+    }
+    return new CreatedEmoji(emojiId, createdEmojis[emojiId].teamId, createdEmojis[emojiId].name, createdEmojis[emojiId].picture, createdEmojis[emojiId].user);
+  }
+}
+
+let nextId = 10;
+// teamId = 0 when it is for every team
+let createdEmojis: { [id: number]: { id: number, teamId: number, name: string, picture: string, user: UserNamePict } } =
+{
+  1: {
+    id: 1,
+    name: "bmw",
+    teamId: 1,
+    picture: "0",
+    user: UserService.generateUserNamePicture(2)
+  },
+  2: {
+    id: 2,
+    teamId: 1,
+    name: "nike",
+    picture: "1",
+    user: UserService.generateUserNamePicture(2)
+  },
+  3: {
+    id: 3,
+    teamId: 2,
+    name: "insta",
+    picture: "2",
+    user: UserService.generateUserNamePicture(2)
+  },
+  4: {
+    id: 4,
+    teamId: 0,
+    name: "rocket",
+    picture: "3",
+    user: UserService.generateUserNamePicture(2)
+  },
+  5: {
+    id: 5,
+    teamId: 1,
+    name: "bob",
+    picture: "4",
+    user: UserService.generateUserNamePicture(2)
+  },
+  6: {
+    id: 6,
+    teamId: 1,
+    name: "boby",
+    picture: "4",
+    user: UserService.generateUserNamePicture(2)
+  },
+  7: {
+    id: 7,
+    teamId: 1,
+    name: "bobu",
+    picture: "4",
+    user: UserService.generateUserNamePicture(2)
+  }
 }
 
 // ================================================================================================
 // TODO [back]
 
+/** Emojis added in each team */
 let emojisTeam: { [id: number]: { [id: number]: { id: number, name: string, picture: string } } } = {
   "-1": {},// If no teamId given
   1: {
@@ -139,9 +286,9 @@ let emojisTeam: { [id: number]: { [id: number]: { id: number, name: string, pict
   }
 };
 
-
 // ================================================================================================
 
+/** Emojis added by the organization (available for all the teams) */
 let emojisOrga: { [id: number]: { id: number, name: string, picture: string } } = {
   1: {
     id: 1,
@@ -157,6 +304,7 @@ let emojisOrga: { [id: number]: { id: number, name: string, picture: string } } 
 
 // ================================================================================================
 
+/** Default emojis */
 let emojisBase: { [id: number]: { id: number, name: string, picture: string } } = {
   1: {
     id: 1,

@@ -19,6 +19,8 @@ import { TeamSelectComponent } from './pages/home/team-select/team-select.compon
 import { TeamChatComponent } from './pages/home/team/team-chat/team-chat.component';
 import { TemplateComponent } from './pages/home/home-template/template.component';
 import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-template/salon-template.component';
+import { AdminLogsComponent } from './pages/params/admin/admin-logs/admin-logs.component';
+import { AdminEmojisComponent } from './pages/params/admin/admin-emojis/admin-emojis.component';
 
 const routes: Routes = [
   {
@@ -45,6 +47,8 @@ const routes: Routes = [
           { path: "createUser", component: AddUserComponent },
           { path: "createTeam", component: AddTeamComponent },
           { path: "addUserToTeam", component: AddUserToTeamComponent },
+          { path: "adminLogs", component: AdminLogsComponent },
+          { path: "adminEmojis", component: AdminEmojisComponent },
           { path: "**", redirectTo: "createUser" }
         ]
       },

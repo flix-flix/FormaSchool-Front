@@ -21,7 +21,27 @@
     margin-left: 150px;
     margin-right: 150px;
 }
-img{
+/*-----------------profil Container-----------------------------------*/
+.profil{
     height: 50px;
     border-radius: 60px;
+}
+.profilContainer{
+    display: flex;
+}
+.profilContainer>p{
+    margin-left: 50px;
+    margin-top: 5%;
+}
+/*-----------------Logo log Container-----------------------------------*/
+.circleExample{
+    height: 10px;
+    width: 10px;
+    border-radius: 60%;
+    position: relative;
+    right: 25%;
+    margin-top: 60%;
+}
+#type{
+    display:flex;
 }

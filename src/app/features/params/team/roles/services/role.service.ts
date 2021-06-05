@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { createRole } from '../models/createRole';
 import { Role } from '../models/role';
 import { RoleWithoutRights } from '../models/roleWithoutRights';
@@ -23,7 +24,7 @@ export class RoleService {
    * @param roleId the id of the role you re looking for
    * @returns a Role object with the id you were looking for
    */
-  generateRole = (roleId: number): Role => {
+  static generateRole = (roleId: number): Role => {
     if (!(roleId in roles)) {
       console.error("roleId doesn't exist:", roleId);
       return undefined;
@@ -49,8 +50,11 @@ export class RoleService {
    * @param roleId the id you re looking for
    * @returns Return a roleWithoutRights object 
    */
-  static findWithoutRightsById = (roleId: number): RoleWithoutRights => {
-    return RoleService.generateRoleWithoutRights(roleId);
+  static findWithoutRightsById = (roleId: number): Observable<RoleWithoutRights> => {
+    return new Observable<RoleWithoutRights>(obs => {
+      obs.next(RoleService.generateRoleWithoutRights(roleId));
+      obs.complete();
+    });
   }
 
   /**
@@ -58,12 +62,15 @@ export class RoleService {
    * @param roleId the id of the role you re looking for
    * @returns a Role object
    */
-  findRoleById = (roleId: number): Role => {
+  findRoleById = (roleId: number): Observable<Role> => {
     if (!(roleId in roles)) {
       console.error("roleId doesn't exist:", roleId);
       return undefined;
     }
-    return this.generateRole(roleId);
+    return new Observable<Role>(obs => {
+      obs.next(RoleService.generateRole(roleId));
+      obs.complete();
+    });
   }
   /**
    * Return all the rigths that can be change 
@@ -88,7 +95,7 @@ export class RoleService {
    * @param teamId the id of the team which contain the role
    * @returns a number which is the id of the role created
    */
-  save = (role: createRole): number => {
+  save = (role: createRole): Observable<number> => {
     let data = {
       id: this.nextId++,
       name: role.name,
@@ -96,7 +103,10 @@ export class RoleService {
       rights: this.defaultList
     }
     roles[data.id] = data;
-    return data.id;
+    return new Observable<number>(obs => {
+      obs.next(data.id);
+      obs.complete();
+    });
   }
 
   static generateRoleName = (roleId: number): Role => {
@@ -113,7 +123,7 @@ export class RoleService {
   * @param teamId the id of the team which contain the role
   * @returns a number which is the id of the role created
   */
-  saveUpdateRole = (role: Role): number => {
+  saveUpdateRole = (role: Role): Observable<number> => {
     let data = {
       id: this.nextId++,
       name: role.name,
@@ -121,7 +131,10 @@ export class RoleService {
       rights: this.defaultList
     }
     roles[data.id] = data;
-    return data.id;
+    return new Observable<number>(obs => {
+      obs.next(data.id);
+      obs.complete();
+    });
   }
 }
 

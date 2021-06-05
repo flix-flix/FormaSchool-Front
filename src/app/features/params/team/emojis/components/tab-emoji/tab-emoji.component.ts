@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CreatedEmojiService } from 'src/app/features/createdEmoji/services/created-emoji.service';
+import { NumberValueAccessor } from '@angular/forms';
 import { CreatedEmoji } from 'src/app/models/createdEmoji';
+import { EmojiService } from 'src/app/services/emoji.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,6 +13,8 @@ export default class TabEmojiComponent implements OnInit {
 
   @Input() emojis: CreatedEmoji[];
 
+  @Input() teamId: number;
+
   emoji: CreatedEmoji;
 
   emojiDialog: boolean;
@@ -20,7 +23,7 @@ export default class TabEmojiComponent implements OnInit {
 
   submitted: boolean;
 
-  constructor(private service: CreatedEmojiService) {
+  constructor(private service: EmojiService) {
   }
 
   ngOnInit(): void {
@@ -30,15 +33,17 @@ export default class TabEmojiComponent implements OnInit {
    * This function refresh the list of emoji
    */
   refreshEmoji = () => {
-    this.emojis = this.service.findAllCreatedEmoji();
+    this.service.findCreatedEmojiByTeamId(this.teamId).subscribe(emojis => {
+      this.emojis = emojis;
+    });
   }
 
   /**
    * This function create a new CreatedEmoji empty and display the pop-up
    */
   openNew = () => {
-    //TODO replace the id 1 by the id of current user connected
-    this.emoji = new CreatedEmoji(null, null, null, UserService.generateUserNamePicture(1));
+    //TODO replace the id 1 by the id of current user connected 
+    this.emoji = new CreatedEmoji(null, this.teamId, null, null, UserService.generateUserNamePicture(1));
     this.submitted = false;
     this.emojiDialog = true;
   }
@@ -60,13 +65,22 @@ export default class TabEmojiComponent implements OnInit {
    */
   saveEmoji = () => {
     this.submitted = true;
-    if (!this.service.isNameAlreadyUse(this.emoji.name)) {
+    let isUsed: boolean;
+    this.service.isNameAlreadyUse(this.emoji.id, this.emoji.name).subscribe(used => {
+      isUsed = used;
+    })
+    if (!isUsed) {
       if (this.emoji.id == null) {
-        this.emoji.id = this.service.addEmoji(this.emoji);
+        this.service.addEmoji(this.emoji).subscribe(idRetour => {
+          this.emoji.id = idRetour;
+        });
         this.emojis.push(this.emoji);
       }
+      else {
+        this.service.updateCreatedEmoji(this.emoji);
+      }
       this.emojiDialog = false;
-      this.emoji = new CreatedEmoji(null, null, null, null);
+      this.emoji = new CreatedEmoji(null, this.teamId, null, null, null);
     }
     else {
       alert("Alias deja utiliser");
@@ -97,7 +111,7 @@ export default class TabEmojiComponent implements OnInit {
    */
   deleteEmoji = (emojiId: number) => {
     this.service.deleteById(emojiId);
-    this.emoji = new CreatedEmoji(null, null, null, null);
+    this.emoji = new CreatedEmoji(null, this.teamId, null, null, null);
     this.refreshEmoji();
   }
 }
