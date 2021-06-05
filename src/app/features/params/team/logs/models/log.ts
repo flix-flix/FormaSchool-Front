@@ -1,24 +1,28 @@
 export class Log {
 
-    private _picture: string;
-    private _firstname: string;
-    private _lastname: string;
+    private _userId: number;
+    private _type: number;
     private _date: Date;
     private _desc: string;
 
-    constructor(picture: string, firstname: string, lastname: string, date: Date, desc: string) {
-        this._picture = picture;
-        this._firstname = firstname;
-        this._lastname = lastname;
+    constructor(userId: number, type: number, date: Date, desc: string) {
+        this._userId = userId;
+        this._type = type;
         this._date = date;
         this._desc = desc;
     }
 
-    public get picture(): string {
-        return this._picture;
+    public get type(): number {
+        return this._type;
     }
-    public set picture(value: string) {
-        this._picture = value;
+    public set type(value: number) {
+        this._type = value;
+    }
+    public get userId(): number {
+        return this._userId;
+    }
+    public set userId(value: number) {
+        this._userId = value;
     }
     public get desc(): string {
         return this._desc;
@@ -31,17 +35,5 @@ export class Log {
     }
     public set date(value: Date) {
         this._date = value;
-    }
-    public get firstname(): string {
-        return this._firstname;
-    }
-    public set firstname(value: string) {
-        this._firstname = value;
-    }
-    public get lastname(): string {
-        return this._lastname;
-    }
-    public set lastname(value: string) {
-        this._lastname = value;
     }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Log } from '../models/log';
+import { Log } from '../features/params/team/logs/models/log';
 
 @Injectable({
   providedIn: 'root'
@@ -8,77 +8,70 @@ import { Log } from '../models/log';
 export class LogService {
 
   nextId = 10;
-
+  // 0 => create
+  // 1 => epinglé
+  // 2 => supprimer
   logs = [
     {
       id: 1,
-      picture: "0",
-      firstname: "Jason",
-      lastname: "Vennin",
+      userId: 2,
+      type: 0,
       date: new Date("2019-01-16"),
       desc: "a crée l'emoji Kama",
     },
     {
       id: 2,
-      picture: "1",
-      firstname: "Jacques",
-      lastname: "Chirac",
+      userId: 1,
+      type: 1,
       date: new Date("2021-05-04"),
       desc: "a épinglé un message de Bouchaib dans Géneral",
     },
     {
       id: 3,
-      picture: "1",
-      firstname: "Jacques",
-      lastname: "Chirac",
+      userId: 1,
+      type: 0,
       date: new Date("2021-05-04"),
       desc: "a crée un salon",
     },
     {
       id: 4,
-      picture: "0",
-      firstname: "Jason",
-      lastname: "Vennin",
+      userId: 1,
+      type: 2,
       date: new Date("2021-05-04"),
       desc: "a supprimé un salon",
     },
     {
       id: 5,
-      picture: "0",
-      firstname: "Jason",
-      lastname: "Vennin",
+      userId: 1,
+      type: 2,
       date: new Date("2021-05-04"),
       desc: "a supprimé un salon",
     },
     {
       id: 6,
-      picture: "0",
-      firstname: "Jason",
-      lastname: "Vennin",
+      userId: 10,
+      type: 2,
       date: new Date("2021-05-04"),
       desc: "a supprimé un salon",
     },
     {
       id: 7,
-      picture: "0",
-      firstname: "Jason",
-      lastname: "Vennin",
+      userId: 20,
+      type: 2,
       date: new Date("2021-05-04"),
       desc: "a supprimé un salon",
     },
     {
       id: 8,
-      picture: "0",
-      firstname: "Jason",
-      lastname: "Vennin",
+      userId: 2,
+      type: 2,
       date: new Date("2021-05-04"),
       desc: "a supprimé un salon",
     },
     {
       id: 9,
-      picture: "0",
-      firstname: "Jason",
-      lastname: "Vennin",
+      userId: 2,
+      type: 2,
       date: new Date("2021-05-04"),
       desc: "a supprimé un salon",
     }
@@ -93,7 +86,7 @@ export class LogService {
   findAll = (): Observable<Log[]> => {
     let res: Log[] = [];
     this.logs.map(log => {
-      res.push(new Log(log.picture, log.firstname, log.lastname, log.date, log.desc));
+      res.push(new Log(log.userId, log.type, log.date, log.desc));
     });
     return new Observable<Log[]>(obs => {
       obs.next(res);

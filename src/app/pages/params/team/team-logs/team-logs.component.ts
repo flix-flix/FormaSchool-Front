@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Log } from 'src/app/features/params/team/logs/models/log';
-import { LogService } from 'src/app/features/params/team/logs/services/log.service';
+import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'app-team-logs',
@@ -14,7 +14,7 @@ export class TeamLogsComponent implements OnInit {
   constructor(private service: LogService) { }
 
   ngOnInit(): void {
-    this.service.findAll().subscribe(logs =>{
+    this.service.findAll().subscribe(logs => {
       this.logs = logs;
     })
     this.trieDate();
