@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NumberValueAccessor } from '@angular/forms';
 import { CreatedEmoji } from 'src/app/models/createdEmoji';
 import { EmojiService } from 'src/app/services/emoji.service';
 import { UserService } from 'src/app/services/user.service';
@@ -11,6 +12,8 @@ import { UserService } from 'src/app/services/user.service';
 export default class TabEmojiComponent implements OnInit {
 
   @Input() emojis: CreatedEmoji[];
+
+  @Input() teamId: number;
 
   emoji: CreatedEmoji;
 
@@ -30,8 +33,7 @@ export default class TabEmojiComponent implements OnInit {
    * This function refresh the list of emoji
    */
   refreshEmoji = () => {
-    //TODO replace 1 by the current teamId
-    this.service.findCreatedEmojiByTeamId(1).subscribe(emojis => {
+    this.service.findCreatedEmojiByTeamId(this.teamId).subscribe(emojis => {
       this.emojis = emojis;
     });
   }
@@ -40,8 +42,8 @@ export default class TabEmojiComponent implements OnInit {
    * This function create a new CreatedEmoji empty and display the pop-up
    */
   openNew = () => {
-    //TODO replace the id 1 by the id of current user connected and replace the current teamId
-    this.emoji = new CreatedEmoji(null, 1, null, null, UserService.generateUserNamePicture(1));
+    //TODO replace the id 1 by the id of current user connected 
+    this.emoji = new CreatedEmoji(null, this.teamId, null, null, UserService.generateUserNamePicture(1));
     this.submitted = false;
     this.emojiDialog = true;
   }
@@ -78,8 +80,7 @@ export default class TabEmojiComponent implements OnInit {
         this.service.updateCreatedEmoji(this.emoji);
       }
       this.emojiDialog = false;
-      // TODO Replace 1 by the current teamId
-      this.emoji = new CreatedEmoji(null, 1, null, null, null);
+      this.emoji = new CreatedEmoji(null, this.teamId, null, null, null);
     }
     else {
       alert("Alias deja utiliser");
@@ -110,8 +111,7 @@ export default class TabEmojiComponent implements OnInit {
    */
   deleteEmoji = (emojiId: number) => {
     this.service.deleteById(emojiId);
-    // TODO Replace 1 by the current teamId
-    this.emoji = new CreatedEmoji(null, 1, null, null, null);
+    this.emoji = new CreatedEmoji(null, this.teamId, null, null, null);
     this.refreshEmoji();
   }
 }

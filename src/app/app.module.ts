@@ -60,6 +60,7 @@ import { LogSuppComponent } from './features/params/team/logs/components/log-sup
 import { LogCreateComponent } from './features/params/team/logs/components/log-create/log-create.component';
 import { LogPinComponent } from './features/params/team/logs/components/log-pin/log-pin.component';
 import { LogCreateUserComponent } from './features/params/team/logs/components/log-create-user/log-create-user.component';
+import { AdminEmojisComponent } from './pages/params/admin/admin-emojis/admin-emojis.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { LogCreateUserComponent } from './features/params/team/logs/components/l
     LogSuppComponent,
     LogCreateComponent,
     LogPinComponent,
-    LogCreateUserComponent
+    LogCreateUserComponent,
+    AdminEmojisComponent
   ],
   imports: [
     BrowserModule,
