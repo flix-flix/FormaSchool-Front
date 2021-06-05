@@ -187,7 +187,7 @@ export class EmojiService {
   }
 
   static generateAllReactionOfMsg = (msgId: number): Reaction[] => {
-    let x = Object.values(reactions).filter(react => react.msgId == msgId)// select react of msg
+    return Object.values(reactions).filter(react => react.msgId == msgId)// select react of msg
       .reduce((acc: Reaction[], _react) => {
         let user = UserService.generateUserName(_react.userId);
         let exist = acc.find(react => react.emojiId == _react.emojiId);
@@ -199,9 +199,6 @@ export class EmojiService {
 
         return acc;
       }, []);
-
-    console.log(msgId, x);
-    return x;
   }
 
   /**

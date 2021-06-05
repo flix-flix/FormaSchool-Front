@@ -18,9 +18,4 @@ export class SalonButtonComponent implements OnInit {
   ngOnInit(): void {
     this.salon.html = EmojiService.processEmoji(this.salon.name, 4, this.teamId);
   }
-
-  openSalonParams = (event) => {
-    alert(`TODO open salon params (id: ${this.salon.id})`);
-    event.stopPropagation();
-  }
 }

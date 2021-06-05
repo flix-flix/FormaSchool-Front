@@ -20,8 +20,4 @@ export class TeamMenuComponent implements OnInit {
   ngOnInit(): void {
     TeamService.findNamePictureById(this.teamId).subscribe(json => this.team = json);
   }
-
-  openTeamParams = () => {
-    alert("TODO team parameters");
-  }
 }

@@ -31,8 +31,4 @@ export class TeamChatComponent implements OnInit {
       });
     });
   }
-
-  switchToSalon = (event) => {
-    console.log("chat", event);
-  }
 }

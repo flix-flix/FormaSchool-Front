@@ -46,7 +46,7 @@ export class MsgThreadComponent implements OnInit {
     try {
       this.msgThread.nativeElement.scrollTop = this.msgThread.nativeElement.scrollHeight;
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 

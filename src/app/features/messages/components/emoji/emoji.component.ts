@@ -69,7 +69,6 @@ export class EmojiComponent implements OnInit {
   }
 
   getEmojiPath = () => {
-    console.log(this.emoji)
     return EmojiService.getEmoji(this.emoji.name).picture;
   }
 }
