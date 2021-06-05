@@ -10,27 +10,7 @@ import { TeamNamePict } from '../models/teamNamePict';
 })
 export class TeamService {
 
-  nextId: number = 10;
-
-  // TODO [Remove]
-  teams = [
-    {
-      id: 1,
-      name: "IBM",
-      desc: "ceci est la description de l equipe de IBM",
-      picture: "1",
-      salons: [1, 2, 3],
-      users: [1, 2, 3, 4]
-    },
-    {
-      id: 2,
-      name: "Semifir",
-      desc: "ceci est la description de l equipe de Semifir",
-      picture: "4",
-      salons: [1, 2, 3],
-      users: [1, 2, 3, 4]
-    }
-  ];
+  nextId: number = 11;
 
   constructor() { }
 
@@ -42,13 +22,13 @@ export class TeamService {
    */
   saveLink = (idTeam: number, idUser: number): Observable<number> => {
     let res = -1;
-    this.teams.forEach(team => {
+    Object.values(teams).forEach(team => {
       if (team.id == idTeam) {
         team.users.push(idUser);
         res = 0;
       }
     });
-    return new Observable<number>(obs =>{
+    return new Observable<number>(obs => {
       obs.next(res);
       obs.complete();
     });
@@ -60,11 +40,11 @@ export class TeamService {
    */
   findAllPresentation = (): Observable<TeamNamePict[]> => {
     let res: TeamNamePict[] = [];
-    this.teams.forEach(team => {
+    Object.values(teams).forEach(team => {
       let data = new TeamNamePict(team.id, team.name, team.picture);
       res.push(data);
     });
-    return new Observable<TeamNamePict[]>(obs =>{
+    return new Observable<TeamNamePict[]>(obs => {
       obs.next(res);
       obs.complete();
     });
@@ -82,35 +62,25 @@ export class TeamService {
       desc: team.desc,
       picture: team.picture,
       salons: [],
-      users: []
+      users: [],
+      roles: []
     };
-    this.teams.push(data);
-    return new Observable<number>(obs =>{
+    teams[data.id] = data;
+    return new Observable<number>(obs => {
       obs.next(data.id);
       obs.complete();
     });
   }
 
-  afficheEquipes = (id: number): TeamNamePict[] => {
+  afficheEquipes = (): Observable<TeamNamePict[]> => {
     let res = [];
-    res.push(new TeamNamePict(1, "IBM", "1.png"))
-    res.push(new TeamNamePict(2, "IDP", "2.jpg"))
-    res.push(new TeamNamePict(3, "M2i", "3.png"))
-    res.push(new TeamNamePict(10, "Semifir", "4.png"))
-    res.push(new TeamNamePict(5, "Semifir", "4.png"))
-    res.push(new TeamNamePict(6, "Semifir", "4.png"))
-    res.push(new TeamNamePict(7, "Semifir", "4.png"))
-    res.push(new TeamNamePict(8, "Semifir", "4.png"))
-    res.push(new TeamNamePict(8, "Semifir", "4.png"))
-    res.push(new TeamNamePict(9, "IBM", "1.png"))
-    res.push(new TeamNamePict(11, "IDP", "2.jpg"))
-    res.push(new TeamNamePict(12, "M2i", "3.png"))
-    res.push(new TeamNamePict(13, "IBM", "1.png"))
-    res.push(new TeamNamePict(14, "IDP", "2.jpg"))
-    res.push(new TeamNamePict(15, "M2i", "3.png"))
-    res.push(new TeamNamePict(16, "IBM", "1.png"))
-    res.push(new TeamNamePict(17, "IDP", "2.jpg"))
-    return res;
+    Object.values(teams).forEach(team => {
+      res.push(TeamService.generateTeamNamePicture(team.id));
+    });
+    return new Observable<TeamNamePict[]>(obs => {
+      obs.next(res);
+      obs.complete();
+    });
   }
 
   // ================================================================================================
@@ -144,23 +114,23 @@ export class TeamService {
   // TODO [back]
 
   static generateListSalonOfTeam = (teamId): Salon[] => {
-    if (!(teamId in _teams)) {
+    if (!(teamId in teams)) {
       console.error("teamId doesn't exist:", teamId);
       return undefined;
     }
 
     let salons = [];
-    for (let salonIndex in _teams[teamId].salons)
-      salons.push(SalonService.generateSalon(_teams[teamId].salons[salonIndex]));
+    for (let salonIndex in teams[teamId].salons)
+      salons.push(SalonService.generateSalon(teams[teamId].salons[salonIndex]));
     return salons;
   }
 
   static generateTeamNamePicture = (teamId: number): TeamNamePict => {
-    if (!(teamId in _teams)) {
+    if (!(teamId in teams)) {
       console.error("teamId doesn't exist:", teamId);
       return undefined;
     }
-    return new TeamNamePict(_teams[teamId].id, _teams[teamId].name, _teams[teamId].picture);
+    return new TeamNamePict(teams[teamId].id, teams[teamId].name, teams[teamId].picture);
   }
 
   /**
@@ -169,7 +139,7 @@ export class TeamService {
    * @param roleId id of the role
    */
   addRoleToTeam = (teamId: number, roleId: number) => {
-    _teams[teamId].roles.push(roleId);
+    teams[teamId].roles.push(roleId);
   }
 
   /**
@@ -178,12 +148,12 @@ export class TeamService {
    * @returns a list of number
    */
   findRolesByTeamId = (teamId: number): number[] => {
-    return _teams[teamId].roles;
+    return teams[teamId].roles;
   }
 }
 
 // TODO [back]
-let _teams: { [id: number]: { id: number, name: string, desc: string, picture: string, salons: number[], users: number[], roles: number[] } } =
+let teams: { [id: number]: { id: number, name: string, desc: string, picture: string, salons: number[], users: number[], roles: number[] } } =
 {
   1: {
     id: 1,
