@@ -7,7 +7,7 @@ import { Log } from '../features/params/team/logs/models/log';
 })
 export class LogService {
 
-  nextId = 10;
+  nextId = 11;
   // 0 => create
   // 1 => epinglé
   // 2 => supprimer
@@ -126,5 +126,26 @@ export class LogService {
       obs.next(res);
       obs.complete();
     });
+  }
+
+  /**
+   * This function allow you to push a log
+   * @param log the log you want to add
+   *  userId: the user who made the log
+   *  type: 0 => create, 1 => epinglé, 2 => supprimer, 3 => createUser
+   *  teamId: the teamId, case Admin(no team) put 0 
+   *  date: date of creation
+   *  desc: a quick description of what was made
+   */
+  addLog = (log: Log) => {
+    let data = {
+      id: this.nextId++,
+      userId: log.userId,
+      type: log.type,
+      teamId: log.teamId,
+      date: log.date,
+      desc: log.desc
+    }
+    this.logs.push(data);
   }
 }
