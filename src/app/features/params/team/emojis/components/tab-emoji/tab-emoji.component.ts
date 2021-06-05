@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CreatedEmojiService } from 'src/app/features/createdEmoji/services/created-emoji.service';
 import { CreatedEmoji } from 'src/app/models/createdEmoji';
+import { EmojiService } from 'src/app/services/emoji.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -20,7 +20,7 @@ export default class TabEmojiComponent implements OnInit {
 
   submitted: boolean;
 
-  constructor(private service: CreatedEmojiService) {
+  constructor(private service: EmojiService) {
   }
 
   ngOnInit(): void {

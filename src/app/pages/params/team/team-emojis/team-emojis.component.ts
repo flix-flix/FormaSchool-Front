@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CreatedEmoji } from 'src/app/models/createdEmoji';
-import { CreatedEmojiService } from 'src/app/features/createdEmoji/services/created-emoji.service';
-import { UserService } from 'src/app/services/user.service';
+import { EmojiService } from 'src/app/services/emoji.service';
 
 
 @Component({
@@ -13,7 +12,7 @@ export class TeamEmojisComponent implements OnInit {
 
   emojis: CreatedEmoji[];
 
-  constructor(private service: CreatedEmojiService) {
+  constructor(private service: EmojiService) {
   }
 
   ngOnInit(): void {
