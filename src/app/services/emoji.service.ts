@@ -572,10 +572,16 @@ let emojisBase: { [id: number]: { id: number, name: string, picture: string } } 
 
 /**  */
 let reactions: { userId: number, msgId: number, emojiId: number }[] = [
-  { userId: 1, msgId: 19, emojiId: 1 },
-  { userId: 1, msgId: 19, emojiId: 2 },
-  { userId: 1, msgId: 19, emojiId: 3 },
-  { userId: 2, msgId: 19, emojiId: 1 },
+  { userId: 1, msgId: 1, emojiId: 1 },
+  { userId: 1, msgId: 1, emojiId: 2 },
+  { userId: 1, msgId: 1, emojiId: 3 },
+  { userId: 2, msgId: 1, emojiId: 1 },
+
+  { userId: 1, msgId: 12, emojiId: 22 },
+  { userId: 10, msgId: 12, emojiId: 22 },
+  { userId: 20, msgId: 12, emojiId: 22 },
+
+  { userId: 10, msgId: 14, emojiId: 27 },
 
   { userId: 1, msgId: 15, emojiId: 37 },
   { userId: 2, msgId: 15, emojiId: 25 },
@@ -596,7 +602,7 @@ let reactions: { userId: number, msgId: number, emojiId: number }[] = [
   { userId: 1, msgId: 21, emojiId: 23 },
   { userId: 1, msgId: 22, emojiId: 23 },
 
-  { userId: 1, msgId: 23, emojiId: 23 },
+  { userId: 1, msgId: 23, emojiId: 2 },
 
   // Lorem
 

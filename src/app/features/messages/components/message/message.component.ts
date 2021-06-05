@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Message } from '../../models/message';
-import { MsgThreadComponent } from '../msg-thread/msg-thread.component';
 
 @Component({
   selector: 'app-message',
@@ -9,10 +8,11 @@ import { MsgThreadComponent } from '../msg-thread/msg-thread.component';
 })
 export class MessageComponent implements OnInit {
 
+  @Output() delete = new EventEmitter();
+
   @Input() msg: Message;
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit(): void { }
 
@@ -29,9 +29,9 @@ export class MessageComponent implements OnInit {
   }
 
   /** Delete the message */
-  delete = () => {
-    // TODO Delete the message
-    alert("TODO Delete")
+  deleteClick = () => {
+    if (confirm("Voulez vous supprimer ce message"))
+      this.delete.emit(this.msg.id);
   }
 
   /** Open the options selector */

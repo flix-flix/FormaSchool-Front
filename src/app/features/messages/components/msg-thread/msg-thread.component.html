@@ -2,7 +2,8 @@
     <div id="msg-thread" #scrollMe>
         <div *ngFor="let day of msgs" class="day">
             <app-line-date *ngIf="day.length != 0" [date]="day[0].date" class="center"></app-line-date>
-            <app-message *ngFor="let msg of day" [msg]="msg" class="center" #msgs></app-message>
+            <app-message *ngFor="let msg of day" [msg]="msg" class="center" (delete)="deleteMsg($event)" #msgs>
+            </app-message>
         </div>
     </div>
 

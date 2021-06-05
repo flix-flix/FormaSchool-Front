@@ -14,17 +14,16 @@ export class SalonSummaryComponent implements OnInit {
   salon: SalonNameDesc;
 
   constructor(
+    private salonService: SalonService,
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     this.route.parent.paramMap.subscribe(params => { console.log(params.get("salonId")) })
     this.route.parent.paramMap.subscribe(params => {
-      SalonService.findNameDescById(+ params.get("salonId")).subscribe(data => {
+      this.salonService.findNameDescById(+ params.get("salonId")).subscribe(data => {
         this.salon = data;
       })
     });
-
   }
-
 }

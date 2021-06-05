@@ -28,7 +28,7 @@
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/edit-3.svg" alt="edit"
             *ngIf="msg.sender.id == 1" (click)="edit()">
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/trash-2.svg" alt="delete"
-            *ngIf="msg.sender.id == 1" (click)="delete()">
+            *ngIf="msg.sender.id == 1" (click)="deleteClick()">
 
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/corner-up-left.svg" alt="reply"
             *ngIf="msg.sender.id != 1" (click)="reply()">
