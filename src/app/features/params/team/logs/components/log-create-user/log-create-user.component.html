@@ -1,0 +1,19 @@
+<p-panel class="createuser" [toggleable]="true" collapsed=false>
+    <ng-template pTemplate="header">
+        <div id="type">
+            <img src="../../../../../../../assets/images/feather-icons/user-plus.svg"
+                alt="logo d'ajout d'un utilisateur">
+            <div class="circleExample" style="background-color: #66665f;"> </div>
+        </div>
+        <div class="profilContainer">
+            <img class="profil" src="../../../../../assets/images/_remove/users/{{user.picture}}" alt="">
+            <p>{{user.firstname}} {{user.lastname}} </p>
+            <p>{{log.date.getDate()}}/{{log.date.getMonth()}}/{{log.date.getFullYear()}}</p>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="icons">
+        <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
+    </ng-template>
+    <p>{{log.desc}}</p>
+</p-panel>

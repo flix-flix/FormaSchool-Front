@@ -1,4 +1,8 @@
 <div class="logsContainer">
-    <app-log *ngFor="let log of logs" [log]="log"></app-log>
+    <div *ngFor="let log of logs">
+        <app-log-create *ngIf="log.type == 0" [log]="log"></app-log-create>
+        <app-log-pin *ngIf="log.type == 1" [log]="log"></app-log-pin>
+        <app-log-supp *ngIf="log.type == 2" [log]="log"></app-log-supp>
+        <app-log-create-user *ngIf="log.type == 3" [log]="log"></app-log-create-user>
+    </div>
 </div>
-

@@ -1,4 +1,4 @@
-div{
+.logsContainer{
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -21,3 +21,4 @@ div{
     
     border-radius: 200px;
 }
+/*---------------------------------------*/

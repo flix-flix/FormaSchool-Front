@@ -1,0 +1,22 @@
+<p-panel class="pin" [toggleable]="true" collapsed=false>
+    <ng-template pTemplate="header">
+        <div id="type">
+            <img src="../../../../../../../assets/images/feather-icons/corner-down-right.svg" alt="logo d'une fleche">
+            <div class="circleExample" style="background-color: #FAFC63;"> </div>
+        </div>
+        <div class="teamContainer">
+            <img src="../../../../../../../assets/images/_remove/teams/{{team.picture}}" alt="image de l'equipe">
+            <p>{{team.name}}</p>
+        </div>
+        <div class="profilContainer">
+            <img class="profil" src="../../../../../assets/images/_remove/users/{{user.picture}}" alt="">
+            <p>{{user.firstname}} {{user.lastname}} </p>
+            <p>{{log.date.getDate()}}/{{log.date.getMonth()}}/{{log.date.getFullYear()}}</p>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="icons">
+        <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
+    </ng-template>
+    <p>{{log.desc}}</p>
+</p-panel>
