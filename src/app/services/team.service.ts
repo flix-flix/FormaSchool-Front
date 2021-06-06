@@ -143,6 +143,21 @@ export class TeamService {
   }
 
   /**
+   * Delete one role from a team
+   * @param teamId id of the team you re looking for
+   * @param roleId id of the role you want to delete
+   */
+  deleteRoleToTeam = (teamId: number, roleId: number) => {
+    let arr = teams[teamId].roles;
+    for (var index = 0; index < arr.length; index++) {
+
+      if (arr[index] === roleId) {
+        arr.splice(index, 1);
+      }
+    }
+  }
+
+  /**
    * Return the list of id which are role's id
    * @param teamId 
    * @returns a list of number

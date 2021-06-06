@@ -81,7 +81,7 @@ export class RoleService {
   }
 
   /**
-   * This function allows you to update the data 
+   * This function allows you to update a role 
    * @param role the role with updated info you want to push
    */
   update = (role: Role) => {
@@ -107,6 +107,14 @@ export class RoleService {
       obs.next(data.id);
       obs.complete();
     });
+  }
+
+  /**
+   * Delete a role
+   * @param idRole The id of the role you want to delete 
+   */
+  delete = (idRole: number) => {
+    delete roles[idRole];
   }
 
   static generateRoleName = (roleId: number): Role => {

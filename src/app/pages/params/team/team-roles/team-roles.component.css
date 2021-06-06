@@ -25,6 +25,7 @@ section{
     margin: 15px;
     display: flex;
     padding: 15px;
+    justify-content: space-around;
 }
 .roles:hover{
     background-color: #003b55;
