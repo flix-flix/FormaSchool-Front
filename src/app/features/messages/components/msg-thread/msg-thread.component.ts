@@ -1,5 +1,4 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Salon } from 'src/app/models/salon';
 import { SalonService } from 'src/app/services/salon.service';
 import { UserService } from 'src/app/services/user.service';
@@ -14,6 +13,7 @@ import { MessageService } from '../../services/message.service';
 export class MsgThreadComponent implements OnInit {
   @ViewChild("scrollMe") private msgThread: ElementRef;
 
+  /** The displayed salon */
   @Input() salonId: number;
 
   salon: Salon;
@@ -24,26 +24,24 @@ export class MsgThreadComponent implements OnInit {
   /** true: the thread has been scrolled down on init */
   scrolledDownOnInit = false;
   /** true: currently displayed salon */
-  // isDisplayed: boolean;
+  isDisplayed: boolean;
 
-  constructor(private msgService: MessageService, private salonService: SalonService, private activatedRoute: ActivatedRoute) { }
+  // TODO [Optimise] prevent re-contruct RouteReuseStrategy
+  constructor(private msgService: MessageService, private salonService: SalonService) { }
 
   ngOnInit(): void {
-
     this.salonService.findById(this.salonId).subscribe(salon => {
       this.salon = salon;
       this.groupMsgByDay();
     });
 
-    // this.activatedRoute.paramMap.subscribe(params => {
-    //   this.isDisplayed = this.salon.id == +params.get("salonId");
-    // });
+    this.isDisplayed = this.salon.id == this.salonId;
   }
 
   ngAfterViewChecked() {
     // TODO [Improve] show un-read messages
     // On loading: scroll down to the last message
-    if (/*this.isDisplayed &&*/ !this.scrolledDownOnInit) {
+    if (this.isDisplayed && !this.scrolledDownOnInit) {
       this.scrollToBottom();
       this.scrolledDownOnInit = true;
     }

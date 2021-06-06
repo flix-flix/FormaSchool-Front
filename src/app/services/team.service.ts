@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Salon } from '../models/salon';
 import { teamNameDescPict } from '../models/teamNameDescPict';
 import { TeamNamePict } from '../models/teamNamePict';
-import { SalonService } from './salon.service';
 
 @Injectable({
   providedIn: 'root'
@@ -94,16 +92,8 @@ export class TeamService {
 
   // ================================================================================================
 
-  /** Returns the list of the salons for the given team */
-  static findAllSalonsOfTeam = (teamId: number): Observable<Salon[]> => {
-    return new Observable<Salon[]>(obs => {
-      obs.next(TeamService.generateListSalonOfTeam(teamId));
-      obs.complete();
-    });
-  }
-
   /** Returns the name and the picture for the given team */
-  static findNamePictureById = (teamId: number): Observable<TeamNamePict> => {
+  findNamePictureById = (teamId: number): Observable<TeamNamePict> => {
     return new Observable<TeamNamePict>(obs => {
       obs.next(TeamService.generateTeamNamePicture(teamId));
       obs.complete();
@@ -112,18 +102,6 @@ export class TeamService {
 
   // ================================================================================================
   // TODO [back]
-
-  static generateListSalonOfTeam = (teamId): Salon[] => {
-    if (!(teamId in teams)) {
-      console.error("teamId doesn't exist:", teamId);
-      return undefined;
-    }
-
-    let salons = [];
-    for (let salonIndex in teams[teamId].salons)
-      salons.push(SalonService.generateSalon(teams[teamId].salons[salonIndex]));
-    return salons;
-  }
 
   static generateTeamNamePicture = (teamId: number): TeamNamePict => {
     if (!(teamId in teams)) {
@@ -156,14 +134,13 @@ export class TeamService {
 }
 
 // TODO [back]
-let teams: { [id: number]: { id: number, name: string, desc: string, picture: string, salons: number[], users: number[], roles: number[] } } =
+let teams: { [id: number]: { id: number, name: string, desc: string, picture: string, users: number[], roles: number[] } } =
 {
   1: {
     id: 1,
     name: "IBM",
     desc: "International Business Machines Corporation",
     picture: "1.png",
-    salons: [1, 2, 3],
     users: [1, 2, 10, 20],
     roles: [1, 2, 3]
   },
@@ -172,7 +149,6 @@ let teams: { [id: number]: { id: number, name: string, desc: string, picture: st
     name: "IDP",
     desc: "Invest in Digital People",
     picture: "2.jpg",
-    salons: [10],
     users: [1, 2],
     roles: []
   },
@@ -181,7 +157,6 @@ let teams: { [id: number]: { id: number, name: string, desc: string, picture: st
     name: "M2i",
     desc: "M2i formations, Hauts-de-France",
     picture: "3.png",
-    salons: [20],
     users: [10, 20],
     roles: []
   },
@@ -190,7 +165,6 @@ let teams: { [id: number]: { id: number, name: string, desc: string, picture: st
     name: "Semifir",
     desc: "Ceci est la description de l'équipe Semifir",
     picture: "4.png",
-    salons: [30, 31, 32],
     users: [10, 20, 2, 1],
     roles: []
   }

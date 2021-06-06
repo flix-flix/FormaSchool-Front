@@ -8,12 +8,12 @@
         <div id="team_name">{{team.name}}</div>
         <div>
             <img id="team_param" class="feather" src="../../../../../assets/images/feather-icons/sliders.svg"
-                alt="teamParams" routerLink="/params/team/{{teamId}}">
+                alt="teamParams" routerLink="/params/team/{{team.id}}">
         </div>
     </div>
 
     <div id="salons">
-        <app-salon-button *ngFor="let salon of salons" [salon]="salon" [salonId]="salonId" [teamId]="teamId">
+        <app-salon-button *ngFor="let salon of salons" [salon]="salon" [salonId]="salonId">
         </app-salon-button>
     </div>
 </div>

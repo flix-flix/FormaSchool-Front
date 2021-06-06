@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { userCreation } from '../models/userCreation';
-import { UserNamePict } from '../models/userNamePict';
-import { UserHasRole } from '../models/userHasRole';
-import { RoleService } from '../features/params/team/roles/services/role.service';
 import { Observable } from 'rxjs';
+import { userCreation } from '../models/userCreation';
+import { UserHasRole } from '../models/userHasRole';
 import { UserName } from '../models/userName';
+import { UserNamePict } from '../models/userNamePict';
 
 @Injectable({
   providedIn: 'root'
@@ -64,7 +63,6 @@ export class UserService {
       obs.next(res);
       obs.complete();
     });
-
   }
 
   /**
