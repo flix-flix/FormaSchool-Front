@@ -1,10 +1,11 @@
 <p-panel class="create" [toggleable]="true" collapsed=false>
     <ng-template pTemplate="header">
         <div id="type">
-            <img class="feather" src="../../../../../../../assets/images/feather-icons/bookmark.svg"
-                alt="logo d'un pin">
-            <div class="circleExample" *ngIf="log.type == 6" style="background-color: green;"> </div>
-            <div class="circleExample" *ngIf="log.type == 7" style="background-color: red;"> </div>
+            <img class="feather" src="../../../../../../../assets/images/feather-icons/smile.svg"
+                alt="logo d'un smiley">
+            <div class="circleExample" *ngIf="log.type == 0" style="background-color: green;"> </div>
+            <div class="circleExample" *ngIf="log.type == 1" style="background-color: orange;"> </div>
+            <div class="circleExample" *ngIf="log.type == 2" style="background-color: red;"> </div>
         </div>
         <div class="teamContainer" *ngIf="teamId == 0 && team">
             <img src="../../../../../../../assets/images/_remove/teams/{{team.picture}}" alt="image de l'equipe">

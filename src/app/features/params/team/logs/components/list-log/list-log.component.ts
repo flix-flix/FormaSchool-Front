@@ -9,6 +9,7 @@ import { Log } from '../../models/log';
 export class ListLogComponent implements OnInit {
 
   @Input() logs: Log[];
+  @Input() teamId: number;
 
   constructor() { }
 
@@ -30,4 +31,13 @@ export class ListLogComponent implements OnInit {
       return 0;
     });
   }
+  ddmmyyyy = (date: Date): string => {
+    var mm = date.getMonth() + 1; // getMonth() is zero-based
+    var dd = date.getDate();
+
+    return [(dd > 9 ? '' : '0') + dd,
+    (mm > 9 ? '' : '0') + mm,
+    date.getFullYear()
+    ].join('/');
+  };
 }

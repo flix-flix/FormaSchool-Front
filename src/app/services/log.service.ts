@@ -7,11 +7,21 @@ import { Log } from '../features/params/team/logs/models/log';
 })
 export class LogService {
 
-  nextId = 11;
-  // 0 => create
-  // 1 => epinglé
-  // 2 => supprimer
-  // 3 => createUser
+  nextId = 12;
+  //0 => creer emojis
+  //1 => modifier emojis
+  // 2 => supprimer emojis
+  // 3 => creer salon
+  // 4 => modifier salon
+  // 5 => supprimer salon
+  // 6 => epingle msg
+  // 7 => supprimer msg epingle
+  // 8 => creer un utilisateur
+  // 9 => modifier un utilisateur
+  // 10 => supprimer utilisateur
+  // 11 => creer une equipe
+  // 12 => modifier une equipe
+  // 13 => supprimer une equipe
   logs = [
     {
       id: 1,
@@ -24,7 +34,7 @@ export class LogService {
     {
       id: 2,
       userId: 1,
-      type: 1,
+      type: 6,
       teamId: 1,
       date: new Date("2021-05-04"),
       desc: "a épinglé un message de Bouchaib dans Géneral",
@@ -32,7 +42,7 @@ export class LogService {
     {
       id: 3,
       userId: 1,
-      type: 0,
+      type: 3,
       teamId: 1,
       date: new Date("2021-05-04"),
       desc: "a crée un salon",
@@ -40,7 +50,7 @@ export class LogService {
     {
       id: 4,
       userId: 1,
-      type: 2,
+      type: 5,
       teamId: 1,
       date: new Date("2021-05-04"),
       desc: "a supprimé un salon",
@@ -48,7 +58,7 @@ export class LogService {
     {
       id: 5,
       userId: 1,
-      type: 2,
+      type: 5,
       teamId: 1,
       date: new Date("2021-05-04"),
       desc: "a supprimé un salon",
@@ -56,7 +66,7 @@ export class LogService {
     {
       id: 6,
       userId: 10,
-      type: 2,
+      type: 5,
       teamId: 1,
       date: new Date("2021-05-04"),
       desc: "a supprimé un salon",
@@ -64,7 +74,7 @@ export class LogService {
     {
       id: 7,
       userId: 20,
-      type: 2,
+      type: 5,
       teamId: 2,
       date: new Date("2021-05-04"),
       desc: "a supprimé un salon",
@@ -72,7 +82,7 @@ export class LogService {
     {
       id: 8,
       userId: 2,
-      type: 2,
+      type: 5,
       teamId: 1,
       date: new Date("2021-05-04"),
       desc: "a supprimé un salon",
@@ -80,18 +90,34 @@ export class LogService {
     {
       id: 9,
       userId: 2,
-      type: 2,
+      type: 4,
       teamId: 1,
       date: new Date("2021-05-04"),
-      desc: "a supprimé un salon",
+      desc: "a modifie un salon",
     },
     {
       id: 10,
       userId: 2,
-      type: 3,
-      teamId: null,
+      type: 8,
+      teamId: 0,
       date: new Date("2021-06-05"),
       desc: "a créer l'utilisateur Benoit Routier",
+    },
+    {
+      id: 11,
+      userId: 2,
+      type: 1,
+      teamId: 1,
+      date: new Date("2019-01-16"),
+      desc: "a Modifier l'emoji Kama",
+    },
+    {
+      id: 1,
+      userId: 2,
+      type: 11,
+      teamId: 0,
+      date: new Date("2019-01-16"),
+      desc: "a crée l'equipe Dofus",
     }
   ]
 

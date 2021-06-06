@@ -6,11 +6,11 @@ import { UserService } from 'src/app/services/user.service';
 import { Log } from '../../models/log';
 
 @Component({
-  selector: 'app-log-pin',
-  templateUrl: './log-pin.component.html',
-  styleUrls: ['./log-pin.component.css']
+  selector: 'app-log-salon',
+  templateUrl: './log-salon.component.html',
+  styleUrls: ['./log-salon.component.css']
 })
-export class LogPinComponent implements OnInit {
+export class LogSalonComponent implements OnInit {
 
   @Input() log: Log;
   @Input() teamId: number;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Log } from 'src/app/features/params/team/logs/models/log';
 import { LogService } from 'src/app/services/log.service';
 
@@ -10,12 +11,15 @@ import { LogService } from 'src/app/services/log.service';
 export class TeamLogsComponent implements OnInit {
 
   logs: Log[];
+  teamId: number;
 
-  constructor(private service: LogService) { }
+  constructor(private service: LogService, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
-    //TODO replace 1 by teamId in URL
-    this.service.findByTeam(1).subscribe(logs => {
+    this.router.parent.paramMap.subscribe(params => {
+      this.teamId = +params.get("teamId");
+    })
+    this.service.findByTeam(this.teamId).subscribe(logs => {
       this.logs = logs;
     })
   }

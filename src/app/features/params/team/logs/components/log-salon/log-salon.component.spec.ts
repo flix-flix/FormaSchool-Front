@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LogCreateComponent } from './log-create.component';
+import { LogSalonComponent } from './log-salon.component';
 
-describe('LogCreateComponent', () => {
-  let component: LogCreateComponent;
-  let fixture: ComponentFixture<LogCreateComponent>;
+describe('LogSalonComponent', () => {
+  let component: LogSalonComponent;
+  let fixture: ComponentFixture<LogSalonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LogCreateComponent ]
+      declarations: [ LogSalonComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LogCreateComponent);
+    fixture = TestBed.createComponent(LogSalonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

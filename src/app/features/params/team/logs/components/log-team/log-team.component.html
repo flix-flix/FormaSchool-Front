@@ -1,17 +1,19 @@
-<p-panel *ngIf="log.type == 2" class="supp" [toggleable]="true" collapsed=false>
+<p-panel class="create" [toggleable]="true" collapsed=false>
     <ng-template pTemplate="header">
         <div id="type">
-            <img src="../../../../../../../assets/images/feather-icons/x-square.svg" alt="logo de suppression">
-            <div class="circleExample" style="background-color: red;"> </div>
+            <img class="feather" src="../../../../../../../assets/images/feather-icons/box.svg" alt="logo d'un box">
+            <div class="circleExample" *ngIf="log.type == 11" style="background-color: green;"> </div>
+            <div class="circleExample" *ngIf="log.type == 12" style="background-color: orange;"> </div>
+            <div class="circleExample" *ngIf="log.type == 13" style="background-color: red;"> </div>
         </div>
-        <div class="teamContainer">
+        <div class="teamContainer" *ngIf="teamId == 0 && team">
             <img src="../../../../../../../assets/images/_remove/teams/{{team.picture}}" alt="image de l'equipe">
             <p>{{team.name}}</p>
         </div>
         <div class="profilContainer">
             <img class="profil" src="../../../../../assets/images/_remove/users/{{user.picture}}" alt="">
             <p>{{user.firstname}} {{user.lastname}} </p>
-            <p>{{log.date.getDate()}}/{{log.date.getMonth()}}/{{log.date.getFullYear()}}</p>
+            <p>{{ddmmyyyy(log.date)}}</p>
         </div>
     </ng-template>
 

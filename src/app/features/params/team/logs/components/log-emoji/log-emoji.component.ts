@@ -6,11 +6,11 @@ import { UserService } from 'src/app/services/user.service';
 import { Log } from '../../models/log';
 
 @Component({
-  selector: 'app-log-pin',
-  templateUrl: './log-pin.component.html',
-  styleUrls: ['./log-pin.component.css']
+  selector: 'app-log-emoji',
+  templateUrl: './log-emoji.component.html',
+  styleUrls: ['./log-emoji.component.css']
 })
-export class LogPinComponent implements OnInit {
+export class LogEmojiComponent implements OnInit {
 
   @Input() log: Log;
   @Input() teamId: number;
@@ -24,6 +24,7 @@ export class LogPinComponent implements OnInit {
       this.team = TeamService.generateTeamNamePicture(this.log.teamId);
     }
   }
+
   ddmmyyyy = (date: Date): string => {
     var mm = date.getMonth() + 1; // getMonth() is zero-based
     var dd = date.getDate();

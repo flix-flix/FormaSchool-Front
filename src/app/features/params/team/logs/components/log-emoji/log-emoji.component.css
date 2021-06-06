@@ -9,6 +9,7 @@
     margin-right: 150px;
     margin-top: 10px;
     margin-bottom: 10px;
+    display: flex;
 }
 ::ng-deep .p-panel .p-panel-content {
     padding: 1rem;
@@ -28,9 +29,10 @@
 }
 .profilContainer{
     display: flex;
+    width: 300px;
+    justify-content: space-around;
 }
 .profilContainer>p{
-    margin-left: 50px;
     margin-top: 5%;
 }
 /*-----------------Logo log Container-----------------------------------*/
@@ -44,4 +46,15 @@
 }
 #type{
     display:flex;
+}
+/*------------------------------ TeamContainer-----------------*/
+.teamContainer{
+    display: flex;
+}
+.teamContainer img{
+    height: 50px;
+}
+.teamContainer p{
+    margin-top: 15%;
+    margin-left: 15%;
 }

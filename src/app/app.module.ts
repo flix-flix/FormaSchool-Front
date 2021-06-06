@@ -56,11 +56,12 @@ import { ListLogComponent } from './features/params/team/logs/components/list-lo
 import TabEmojiComponent from './features/params/team/emojis/components/tab-emoji/tab-emoji.component';
 import { SharedFileComponent } from './features/messages/components/shared-file/shared-file.component';
 import { AdminLogsComponent } from './pages/params/admin/admin-logs/admin-logs.component';
-import { LogSuppComponent } from './features/params/team/logs/components/log-supp/log-supp.component';
-import { LogCreateComponent } from './features/params/team/logs/components/log-create/log-create.component';
-import { LogPinComponent } from './features/params/team/logs/components/log-pin/log-pin.component';
-import { LogCreateUserComponent } from './features/params/team/logs/components/log-create-user/log-create-user.component';
 import { AdminEmojisComponent } from './pages/params/admin/admin-emojis/admin-emojis.component';
+import { LogEmojiComponent } from './features/params/team/logs/components/log-emoji/log-emoji.component';
+import { LogSalonComponent } from './features/params/team/logs/components/log-salon/log-salon.component';
+import { LogPinComponent } from './features/params/team/logs/components/log-pin/log-pin.component';
+import { LogUserComponent } from './features/params/team/logs/components/log-user/log-user.component';
+import { LogTeamComponent } from './features/params/team/logs/components/log-team/log-team.component';
 
 @NgModule({
   declarations: [
@@ -104,11 +105,12 @@ import { AdminEmojisComponent } from './pages/params/admin/admin-emojis/admin-em
     TabEmojiComponent,
     SharedFileComponent,
     AdminLogsComponent,
-    LogSuppComponent,
-    LogCreateComponent,
+    AdminEmojisComponent,
+    LogEmojiComponent,
+    LogSalonComponent,
     LogPinComponent,
-    LogCreateUserComponent,
-    AdminEmojisComponent
+    LogUserComponent,
+    LogTeamComponent
   ],
   imports: [
     BrowserModule,

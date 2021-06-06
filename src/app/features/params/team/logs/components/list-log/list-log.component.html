@@ -1,8 +1,14 @@
 <div class="logsContainer">
     <div *ngFor="let log of logs">
-        <app-log-create *ngIf="log.type == 0" [log]="log"></app-log-create>
-        <app-log-pin *ngIf="log.type == 1" [log]="log"></app-log-pin>
-        <app-log-supp *ngIf="log.type == 2" [log]="log"></app-log-supp>
-        <app-log-create-user *ngIf="log.type == 3" [log]="log"></app-log-create-user>
+        <app-log-emoji *ngIf="log.type>=0 && log.type<=2" [log]="log" [teamId]="teamId">
+        </app-log-emoji>
+        <app-log-salon *ngIf="log.type>=3 && log.type<=5" [log]="log" [teamId]="teamId">
+        </app-log-salon>
+        <app-log-pin *ngIf="log.type==6 || log.type==7" [log]="log" [teamId]="teamId">
+        </app-log-pin>
+        <app-log-user *ngIf="log.type>=8 && log.type<=10" [log]="log" [teamId]="teamId">
+        </app-log-user>
+        <app-log-team *ngIf="log.type>=11 && log.type<=13" [log]="log" [teamId]="teamId">
+        </app-log-team>
     </div>
 </div>
