@@ -27,15 +27,16 @@ const routes: Routes = [
     path: "", component: TemplateComponent, children: [
       { path: "login", component: LoginComponent },
 
+      // TODO === guard login ===
       { path: "privateMessages", component: PrivateMsgComponent },
 
       { path: "teamSelect", component: TeamSelectComponent },
       { path: "teamMessages/:teamId/:salonId", component: TeamChatComponent },
-
+      { path: "teamMessages/:teamId", redirectTo: "teamMessages/:teamId/0" },
 
       { path: "404", component: NotFoundComponent },
 
-      // TODO redirectTo: lastVisitSedPage (+guard login)
+      // TODO redirectTo: lastVisitSedPage
       { path: "", redirectTo: "teamSelect", pathMatch: "full" },
     ]
   },

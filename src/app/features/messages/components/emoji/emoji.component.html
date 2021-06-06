@@ -1,6 +1,9 @@
-<div class="react" [class.on]="on" (click)="addRemoveReact()">
-    <img class="emoji" src="../../../../../assets/images/{{getEmojiPath()}}" alt="">
-    <span>{{emoji.users.length}}</span>
+<div class="all">
+    <div class="react" [class.on]="on" (click)="addRemoveReact()">
+        <img class="emoji" src="../../../../../assets/images/{{getEmojiPath()}}" alt="">
+        <span>{{emoji.users.length}}</span>
+
+    </div>
 
     <div class="react_tooltip">
         <img class="tooltip_emoji" src="../../../../../assets/images/{{getEmojiPath()}}" alt="">

@@ -2,6 +2,8 @@
     padding: 0;
     margin: 0;
 
+    font-family: sans-serif;
+
     /* ===== R, G, B =====*/
     --_header: 77, 114, 158;
     --_menu: 114, 149, 191; 

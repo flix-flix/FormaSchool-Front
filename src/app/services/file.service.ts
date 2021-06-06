@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { File } from '../models/file';
 
@@ -6,7 +7,19 @@ import { File } from '../models/file';
 })
 export class FileService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  /** Download the file */
+  download = (file: File): void => {
+    this.http.get("http://localhost:4200/assets/images/_remove/shared_files/" + file.path, { responseType: "blob" }).subscribe(blob => {
+      let a = document.createElement("a");
+      let url = window.URL.createObjectURL(blob);
+      a.href = url;
+      a.download = file.name;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
 
   // ================================================================================================
   // TODO [back]

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { File } from 'src/app/models/file';
+import { FileService } from 'src/app/services/file.service';
 
 @Component({
   selector: 'app-shared-file',
@@ -10,13 +11,11 @@ export class SharedFileComponent implements OnInit {
 
   @Input() file: File;
 
-  constructor() { }
+  constructor(private fileService: FileService) { }
 
   ngOnInit(): void { }
 
-
   download = () => {
-    // TODO Download file
-    alert("TODO download file");
+    this.fileService.download(this.file);
   }
 }
