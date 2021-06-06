@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Role } from 'src/app/features/params/team/roles/models/role';
-import { UserHasRole } from 'src/app/models/userHasRole';
+import { Members } from 'src/app/models/members';
+import { MembersService } from 'src/app/services/members.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,13 +12,13 @@ import { UserService } from 'src/app/services/user.service';
 export class TeamMembersComponent implements OnInit {
 
 
-  users: UserHasRole[];
+  users: Members[];
 
-  constructor(private userService: UserService) { }
+  constructor(private members: MembersService) { }
 
   ngOnInit(): void {
 
-    this.users = this.userService.findAllUserRoles();
+    this.users = this.members.findAllUserRoles();
   }
 
 

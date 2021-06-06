@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RoleWithoutRights } from 'src/app/features/params/team/roles/models/roleWithoutRights';
 import { RoleService } from 'src/app/features/params/team/roles/services/role.service';
-import { UserHasRole } from 'src/app/models/userHasRole';
+import { Members } from 'src/app/models/members';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { TeamService } from 'src/app/services/team.service';
 export class LineUserMembersComponent implements OnInit {
 
   //@Input() roles: RoleWithoutRights[];
-  @Input() user: UserHasRole;
+  @Input() user: Members;
   rolesMissing: RoleWithoutRights[];
   roleChoosen: RoleWithoutRights;
 

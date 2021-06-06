@@ -1,6 +1,5 @@
-import { Role } from "../features/params/team/roles/models/role";
 
-export class UserHasRole {
+export class Members {
 
     private _id: number;
     private _lastname: string;
