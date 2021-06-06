@@ -1,9 +1,52 @@
 <div id="col">
-    <app-header></app-header>
+    <app-header (colors)="openColors($event)"></app-header>
     <div id="row">
         <app-sidebar></app-sidebar>
         <div id="router_div">
             <router-outlet></router-outlet>
         </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal" [ngStyle]="styleColors">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" (click)="closeColors()">&times;</span>
+
+        <div class="color">
+            <label>
+                Principale:
+                <input type="color" [(ngModel)]="header">
+            </label>
+        </div>
+        <div class="color">
+            <label>
+                Menu:
+                <input type="color" [(ngModel)]="menu">
+            </label>
+        </div>
+        <div class="color">
+            <label>
+                Fond:
+                <input type="color" [(ngModel)]="background">
+            </label>
+        </div>
+        <div class="color">
+            <label>
+                Police 1:
+                <input type="color" [(ngModel)]="font_1">
+            </label>
+        </div>
+        <div class="color">
+            <label>
+                Police 2:
+                <input type="color" [(ngModel)]="font_2">
+            </label>
+        </div>
+
+        <button (click)="changeColor()">Appliquer</button>
+
     </div>
 </div>
