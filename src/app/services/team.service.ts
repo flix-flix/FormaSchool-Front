@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Salon } from '../features/team/services/models/salon';
 import { SalonService } from '../features/team/services/salon.service';
-import { teamNameDescPict } from '../models/teamNameDescPict';
+import { TeamNameDescPict } from '../models/teamNameDescPict';
 import { TeamNamePict } from '../models/teamNamePict';
 
 @Injectable({
@@ -48,11 +48,33 @@ export class TeamService {
         res = 0;
       }
     });
-    return new Observable<number>(obs =>{
+    return new Observable<number>(obs => {
       obs.next(res);
       obs.complete();
     });
   }
+  /**
+   * This function help for updating a team with a small presentation
+   * @returns a update team*/
+
+  updateTeam = (teamUpdate: TeamNameDescPict) => {
+    return new Observable<TeamNameDescPict>(obs => {
+      obs.next(new TeamNameDescPict(" ", " ", " ",));
+      obs.complete();
+    });
+
+  }
+
+  /** Returns the name and the picture for the given team */
+  findNamePictureById = (teamId: number): Observable<TeamNamePict> => {
+    return new Observable<TeamNamePict>(obs => {
+      obs.next(TeamService.generateTeamNamePicture(teamId));
+      obs.complete();
+    });
+  }
+
+
+
 
   /**
    * This function return a quick presentation of each team. It contain name, picture and the id
@@ -64,7 +86,7 @@ export class TeamService {
       let data = new TeamNamePict(team.id, team.name, team.picture);
       res.push(data);
     });
-    return new Observable<TeamNamePict[]>(obs =>{
+    return new Observable<TeamNamePict[]>(obs => {
       obs.next(res);
       obs.complete();
     });
@@ -75,7 +97,7 @@ export class TeamService {
    * @param team A creationTeam object (name, desc and picture)
    * @returns A number which is the id of the team created
    */
-  save = (team: teamNameDescPict): Observable<number> => {
+  save = (team: TeamNameDescPict): Observable<number> => {
     let data = {
       id: this.nextId++,
       name: team.name,
@@ -85,7 +107,7 @@ export class TeamService {
       users: []
     };
     this.teams.push(data);
-    return new Observable<number>(obs =>{
+    return new Observable<number>(obs => {
       obs.next(data.id);
       obs.complete();
     });
@@ -115,9 +137,9 @@ export class TeamService {
 
   // ================================================================================================
 
-  findNamePicDescById = (teamId: number): Observable<teamNameDescPict> => {
-    return new Observable<teamNameDescPict>(obs => {
-      obs.next(new teamNameDescPict("IBM", "Desc Ibm", "1.png"));
+  findNamePicDescById = (teamId: number): Observable<TeamNameDescPict> => {
+    return new Observable<TeamNameDescPict>(obs => {
+      obs.next(new TeamNameDescPict("IBM", "Desc Ibm", "1.png"));
       obs.complete();
     });
   }

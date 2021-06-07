@@ -1,4 +1,7 @@
-export class teamNameDescPict {
+export class TeamNameDescPict {
+    getById(id: number) {
+        throw new Error('Method not implemented.');
+    }
 
     private _name: string;
     private _desc: string;

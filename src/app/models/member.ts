@@ -1,5 +1,5 @@
 
-export class Members {
+export class Member {
 
     private _id: number;
     private _lastname: string;

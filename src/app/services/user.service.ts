@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Member } from '../models/member';
 import { userCreation } from '../models/userCreation';
 import { UserNamePict } from '../models/userNamePict';
-import { Members } from '../models/members';
-import { RoleService } from '../features/params/team/roles/services/role.service';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -110,12 +111,12 @@ export class UserService {
   // ================================================================================================
   // TODO [back]
 
-  static generateUserWithRole = (userId): Members => {
+  static generateUserWithRole = (userId): Member => {
     if (!(userId in _users)) {
       console.error("userId doesn't exist:", userId);
       return undefined;
     }
-    return new Members(_users[userId].id, _users[userId].lastname, _users[userId].firstname, _users[userId].roles);
+    return new Member(_users[userId].id, _users[userId].lastname, _users[userId].firstname, _users[userId].roles);
   }
 
   static generateUserNamePicture = (userId: number): UserNamePict => {

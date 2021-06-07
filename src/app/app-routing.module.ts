@@ -19,6 +19,7 @@ import { TeamSelectComponent } from './pages/home/team-select/team-select.compon
 import { TeamChatComponent } from './pages/home/team/team-chat/team-chat.component';
 import { TemplateComponent } from './pages/home/home-template/template.component';
 import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-template/salon-template.component';
+import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
 
 const routes: Routes = [
   {
@@ -50,11 +51,12 @@ const routes: Routes = [
       },
       {
         path: "team/:teamId", component: ParamsTeamTemplateComponent, children: [
-          { path: "summary", component: TeamSummaryComponent },
           { path: "roles", component: TeamRolesComponent },
           { path: "members", component: TeamMembersComponent },
           { path: "emojis", component: TeamEmojisComponent },
           { path: "logs", component: TeamLogsComponent },
+          { path: "summary", component: TeamSummaryComponent },
+          { path: "summaryUpdate", component: UpdateTeamFormComponent },
           { path: "**", redirectTo: "summary" }
         ]
       },
