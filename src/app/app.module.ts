@@ -50,6 +50,7 @@ import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-templat
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { EmojiComponent } from './features/messages/components/emoji/emoji.component';
 
@@ -110,7 +111,8 @@ import { EmojiComponent } from './features/messages/components/emoji/emoji.compo
     TableModule,
     ToolbarModule,
     DialogModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

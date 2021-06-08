@@ -3,6 +3,6 @@
     <label>{{ user.firstname }}</label>
 
     <app-line-role-members *ngFor="let role of user.roles" [roleId]="role"></app-line-role-members>
-    <p-listbox [options]="rolesMissing" [(ngModel)]="roleChoosen" optionLabel="name"></p-listbox>
-    <button type="button" (click)="ajouteRole()">+</button>
+    <p-dropdown [options]="rolesMissing" [(ngModel)]="roleChoosen" optionLabel="name">Search new role</p-dropdown>
+    <button type="button" (click)="ajouteRole()">Send Role</button>
 </div>
