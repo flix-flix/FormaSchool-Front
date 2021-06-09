@@ -1,22 +1,24 @@
 import { File } from "src/app/models/file";
-import { UserNamePict } from "src/app/models/userNamePict";
+import { MemberUsersPseudo } from "src/app/models/member/MemberUsersPseudo";
 import { EmojiService } from "src/app/services/emoji.service";
 import { Reaction } from "./reaction";
 
 export class Message {
     private _id: number;
-    private _sender: UserNamePict;
-    private _date: Date;
+    private _sender: MemberUsersPseudo;
+    private _send: Date;
+    private _edit: Date;
     private _content: string;
     private _file: File;
     private _reactions: Reaction[];
 
     private _html: string;
 
-    constructor(id: number, sender: UserNamePict, date: Date, content: string, file: File, reactions: Reaction[] = []) {
+    constructor(id: number, sender: MemberUsersPseudo, send: Date | string, edit: Date | string, content: string, file: File, reactions: Reaction[] = []) {
         this._id = id;
         this._sender = sender;
-        this._date = date;
+        this._send = send instanceof Date ? send : new Date(send);
+        this._edit = edit instanceof Date ? edit : new Date(edit);
         this._content = content;
         this._file = file;
         this._reactions = reactions;
@@ -26,9 +28,15 @@ export class Message {
 
     // ===============================================
 
+    static fromJSON = (json: Message): Message => {
+        return new Message(json.id, json.sender, json.send, json.edit, json.content, json.file, json.reactions);
+    }
+
+    // ===============================================
+
     /** Returns the time (hh:mm) */
     public getTimeStr = (): string => {
-        return nf.format(this.date.getHours()) + ":" + nf.format(this.date.getMinutes());
+        return nf.format(this.send.getHours()) + ":" + nf.format(this.send.getMinutes());
     }
 
     public processEmoji = (teamId: number) => {
@@ -45,20 +53,28 @@ export class Message {
         this._id = id;
     }
 
-    public get sender(): UserNamePict {
+    public get sender(): MemberUsersPseudo {
         return this._sender;
     }
 
-    public set sender(sender: UserNamePict) {
+    public set sender(sender: MemberUsersPseudo) {
         this._sender = sender;
     }
 
-    public get date(): Date {
-        return this._date;
+    public get send(): Date {
+        return this._send;
     }
 
-    public set date(date: Date) {
-        this._date = date;
+    public set send(send: Date) {
+        this._send = send;
+    }
+
+    public get edit(): Date {
+        return this._edit;
+    }
+
+    public set edit(edit: Date) {
+        this._edit = edit;
     }
 
     public get content(): string {

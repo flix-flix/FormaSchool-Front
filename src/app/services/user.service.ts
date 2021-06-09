@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { userCreation } from '../models/userCreation';
 import { UserHasRole } from '../models/userHasRole';
-import { UserName } from '../models/userName';
 import { UserNamePict } from '../models/userNamePict';
 
 @Injectable({
@@ -16,13 +15,15 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  findNamePictById = (id: string): Observable<UserNamePict> => {
-    return this.http.get<UserNamePict>(environment.apiUrl + "/users/namePict/" + id);
+  // ================================================================================================
+
+  findNamePictById = (userId: string): Observable<UserNamePict> => {
+    return this.http.get<UserNamePict>(environment.apiUrl + "/users/namePict/" + userId);
   }
 
   // TODO [Remove]
   findNamePictDefault = (): Observable<UserNamePict> => {
-    return this.http.get<UserNamePict>(environment.apiUrl + "/users/defaultUser");
+    return this.http.get<UserNamePict>(environment.apiUrl + "/users/default");
   }
 
   // ================================================================================================
@@ -34,7 +35,7 @@ export class UserService {
   findAllPresentation = (): Observable<UserNamePict[]> => {
     let res: UserNamePict[] = [];
     Object.values(users).forEach(user => {
-      let data = new UserNamePict(user.id, user.firstname, user.lastname, user.picture);
+      let data = new UserNamePict("" + user.id, user.firstname, user.lastname, user.picture);
       res.push(data);
     });
     return new Observable<UserNamePict[]>(obs => {
@@ -67,7 +68,7 @@ export class UserService {
     let res = Object.values(users)
       .filter(user => !user.teams.includes(id))
       .map(userDetail => new UserNamePict(
-        userDetail.id,
+        "" + userDetail.id,
         userDetail.firstname,
         userDetail.lastname,
         userDetail.picture)
@@ -138,15 +139,7 @@ export class UserService {
       console.error("userId doesn't exist:", userId);
       return undefined;
     }
-    return new UserNamePict(users[userId].id, users[userId].firstname, users[userId].lastname, users[userId].picture);
-  }
-
-  static generateUserName = (userId: number): UserName => {
-    if (!(userId in users)) {
-      console.error("userId doesn't exist:", userId);
-      return undefined;
-    }
-    return new UserName(users[userId].id, users[userId].firstname, users[userId].lastname);
+    return new UserNamePict("" + users[userId].id, users[userId].firstname, users[userId].lastname, users[userId].picture);
   }
 }
 

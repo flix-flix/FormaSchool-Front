@@ -1,8 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MessageService } from '../features/messages/services/message.service';
+import { environment } from 'src/environments/environment';
 import { SalonNameDesc } from '../features/params/salon/model/salonNameDesc';
-import { Salon } from '../models/salon';
 import { SalonName } from '../models/salonName';
 
 @Injectable({
@@ -10,17 +10,16 @@ import { SalonName } from '../models/salonName';
 })
 export class SalonService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   // ================================================================================================
 
-  /** Returns the salon with the given id */
-  findById = (msgId: number): Observable<Salon> => {
-    return new Observable<Salon>(observable => {
-      observable.next(SalonService.generateSalon(msgId));
-      observable.complete();
-    });
+  /** Returns the list of the salons for the given team */
+  findAllSalonsNameOfTeam = (teamId: string): Observable<SalonName[]> => {
+    return this.http.get<SalonName[]>(environment.apiUrl + "/salons/ofTeam/" + teamId);
   }
+
+  // ================================================================================================
 
   /** Returns the salon with the given id */
   findNameDescById = (salonId: number): Observable<SalonNameDesc> => {
@@ -30,51 +29,8 @@ export class SalonService {
     });
   }
 
-  /** Returns the list of the salons for the given team */
-  findAllSalonsNameOfTeam = (teamId: number): Observable<SalonName[]> => {
-    return new Observable<SalonName[]>(obs => {
-      obs.next(SalonService.generateListSalonNameOfTeam(teamId));
-      obs.complete();
-    });
-  }
-
-  /** Returns the list of the salons for the given team */
-  findAllSalonsOfTeam = (teamId: number): Observable<Salon[]> => {
-    return new Observable<Salon[]>(obs => {
-      obs.next(SalonService.generateListSalonOfTeam(teamId));
-      obs.complete();
-    });
-  }
-
-  getDefaultSalonOfTeam = (teamId: number): Observable<number> => {
-    return new Observable<number>(obs => {
-      obs.next(SalonService.generateDefaultSalonId(teamId));
-      obs.complete();
-    });
-  }
-
   // ================================================================================================
   // TODO [back]
-
-  static generateDefaultSalonId = (teamId: number): number => {
-    return Object.values(salons).find(salon => salon.teamId == teamId).id;
-  }
-
-  static generateSalon = (salonId: number): Salon => {
-    if (!(salonId in salons)) {
-      console.error("salonId doesn't exist:", salonId);
-      return undefined;
-    }
-    return new Salon(salons[salonId].id, salons[salonId].teamId, salons[salonId].name, MessageService.generateAllMessageOfSalon(salonId, salons[salonId].teamId));
-  }
-
-  static generateSalonName = (salonId: number): SalonName => {
-    if (!(salonId in salons)) {
-      console.error("salonId doesn't exist:", salonId);
-      return undefined;
-    }
-    return new SalonName(salons[salonId].id, salons[salonId].teamId, salons[salonId].name);
-  }
 
   static generateSalonNameDesc = (salonId: number): SalonNameDesc => {
     if (!(salonId in salons)) {
@@ -82,14 +38,6 @@ export class SalonService {
       return undefined;
     }
     return new SalonNameDesc(salons[salonId].id, salons[salonId].name, salons[salonId].desc);
-  }
-
-  static generateListSalonNameOfTeam = (teamId): SalonName[] => {
-    return Object.values(salons).filter(salon => salon.teamId == teamId).map(salon => SalonService.generateSalonName(salon.id));
-  }
-
-  static generateListSalonOfTeam = (teamId): Salon[] => {
-    return Object.values(salons).filter(salon => salon.teamId == teamId).map(salon => SalonService.generateSalon(salon.id));
   }
 }
 

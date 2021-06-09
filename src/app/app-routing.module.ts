@@ -32,7 +32,7 @@ const routes: Routes = [
 
       { path: "teamSelect", component: TeamSelectComponent },
       { path: "teamMessages/:teamId/:salonId", component: TeamChatComponent },
-      { path: "teamMessages/:teamId", redirectTo: "teamMessages/:teamId/0" },
+      { path: "teamMessages/:teamId", redirectTo: "teamMessages/:teamId/redirect" },
 
       { path: "404", component: NotFoundComponent },
 

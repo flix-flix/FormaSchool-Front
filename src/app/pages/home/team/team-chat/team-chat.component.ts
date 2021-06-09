@@ -11,9 +11,9 @@ import { SalonService } from 'src/app/services/salon.service';
 export class TeamChatComponent implements OnInit {
 
   /** From URL */
-  teamId: number;
+  teamId: string;
   /** From URL */
-  salonId: number;
+  salonId: string;
 
   salons: SalonName[];
 
@@ -21,16 +21,16 @@ export class TeamChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      this.teamId = +params.get("teamId");
-      this.salonId = +params.get("salonId");
+      this.teamId = params.get("teamId");
+      this.salonId = params.get("salonId");
 
       // Redirect to default salon
-      if (this.salonId == 0)
-        this.salonService.getDefaultSalonOfTeam(this.teamId).subscribe(id => {
-          this.router.navigate([`/teamMessages/${this.teamId}/${id}`]);
-        });
-      else
-        this.salonService.findAllSalonsNameOfTeam(this.teamId).subscribe(salons => this.salons = salons);
+      this.salonService.findAllSalonsNameOfTeam(this.teamId).subscribe(salons => {
+        if (this.salonId == "redirect")
+          this.router.navigate([`/teamMessages/${this.teamId}/${salons[0].id}`]);
+        else
+          this.salons = salons
+      });
     });
   }
 }

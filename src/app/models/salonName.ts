@@ -6,11 +6,18 @@ export class SalonName {
 
     private _html: string;
 
-    constructor(id: number, teamId: number, name: string) {
+    // TODO teamId ?
+    constructor(id: number, private _teamId: number, name: string) {
         this._id = id;
         this._name = name;
 
-        this._html = EmojiService.processEmoji(name, 4, teamId);
+        this._html = EmojiService.processEmoji(name, 4, 0);
+    }
+
+    // ===============================================
+
+    static fromJSON = (json: any): SalonName => {
+        return new SalonName(json.id, json.team.id, json.name);
     }
 
     // ===============================================
@@ -21,6 +28,14 @@ export class SalonName {
 
     public set id(id: number) {
         this._id = id;
+    }
+
+    public get teamId(): number {
+        return this._teamId;
+    }
+
+    public set teamId(teamId: number) {
+        this._teamId = teamId;
     }
 
     public get name(): string {

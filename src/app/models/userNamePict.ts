@@ -1,11 +1,11 @@
 export class UserNamePict {
 
-    private _id: number;
-    private _lastname: string;
+    private _id: string;
     private _firstname: string;
+    private _lastname: string;
     private _picture: string;
 
-    constructor(id: number, firstname: string, lastname: string, picture: string) {
+    constructor(id: string, firstname: string, lastname: string, picture: string) {
         this._id = id;
         this._firstname = firstname;
         this._lastname = lastname;
@@ -19,11 +19,11 @@ export class UserNamePict {
         return `${this._firstname} ${this._lastname}`
     }
 
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
-    public set id(value: number) {
+    public set id(value: string) {
         this._id = value;
     }
 

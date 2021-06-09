@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { teamNameDescPict } from '../models/teamNameDescPict';
 import { TeamNamePict } from '../models/teamNamePict';
 
@@ -10,7 +12,19 @@ export class TeamService {
 
   nextId: number = 11;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  // ================================================================================================
+
+  findAllTeamOfUser = (userId: string): Observable<TeamNamePict[]> => {
+    return this.http.get<TeamNamePict[]>(environment.apiUrl + "/teams/ofUser/" + userId);
+  }
+
+  /** Returns the name and the picture for the given team */
+  findNamePictureById = (teamId: string): Observable<TeamNamePict> => {
+    return this.http.get<TeamNamePict>(environment.apiUrl + "/teams/teamNamePict/" + teamId);
+  }
+  // ================================================================================================
 
   /**
    * This function allows us to link a user to a team.
@@ -70,32 +84,11 @@ export class TeamService {
     });
   }
 
-  afficheEquipes = (): Observable<TeamNamePict[]> => {
-    let res = [];
-    Object.values(teams).forEach(team => {
-      res.push(TeamService.generateTeamNamePicture(team.id));
-    });
-    return new Observable<TeamNamePict[]>(obs => {
-      obs.next(res);
-      obs.complete();
-    });
-  }
-
   // ================================================================================================
 
   findNamePicDescById = (teamId: number): Observable<teamNameDescPict> => {
     return new Observable<teamNameDescPict>(obs => {
       obs.next(new teamNameDescPict("IBM", "Desc Ibm", "1.png"));
-      obs.complete();
-    });
-  }
-
-  // ================================================================================================
-
-  /** Returns the name and the picture for the given team */
-  findNamePictureById = (teamId: number): Observable<TeamNamePict> => {
-    return new Observable<TeamNamePict>(obs => {
-      obs.next(TeamService.generateTeamNamePicture(teamId));
       obs.complete();
     });
   }

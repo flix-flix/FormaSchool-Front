@@ -1,23 +1,17 @@
-import { UserName } from "src/app/models/userName";
+import { MemberUsersPseudo } from "src/app/models/member/MemberUsersPseudo";
+import { EmojiNamePict } from "./emojiNamePict";
 
 export class Reaction {
-    private _emojiId: number;
-    private _name: string;
-    private _users: UserName[];
+
     // TODO [Improve] Add date
+    constructor(private _emoji: EmojiNamePict, private _name: string, private _users: MemberUsersPseudo[]) { }
 
-    constructor(emojiId: number, name: string, users: UserName[]) {
-        this._users = users;
-        this._name = name;
-        this._emojiId = emojiId;
+    public get emoji(): EmojiNamePict {
+        return this._emoji;
     }
 
-    public get emojiId(): number {
-        return this._emojiId;
-    }
-
-    public set emojiId(emojiId: number) {
-        this._emojiId = emojiId;
+    public set emoji(emoji: EmojiNamePict) {
+        this._emoji = emoji;
     }
 
     public get name(): string {
@@ -28,11 +22,11 @@ export class Reaction {
         this._name = name;
     }
 
-    public get users(): UserName[] {
+    public get members(): MemberUsersPseudo[] {
         return this._users;
     }
 
-    public set users(users: UserName[]) {
+    public set members(users: MemberUsersPseudo[]) {
         this._users = users;
     }
 }

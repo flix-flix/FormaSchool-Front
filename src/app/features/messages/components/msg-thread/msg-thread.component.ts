@@ -21,6 +21,10 @@ export class MsgThreadComponent implements OnInit {
   /** Messages grouped by date and sorted by time */
   msgs: Message[][];
 
+  // TODO [Remove]
+  /**  */
+  _msgs: Message[];
+
   /** true: the thread has been scrolled down on init */
   scrolledDownOnInit = false;
   /** true: currently displayed salon */
@@ -30,12 +34,13 @@ export class MsgThreadComponent implements OnInit {
   constructor(private msgService: MessageService, private salonService: SalonService) { }
 
   ngOnInit(): void {
-    this.salonService.findById(this.salonId).subscribe(salon => {
-      this.salon = salon;
+    this.msgService.findAllMessageOfSalon(this.salonId).subscribe(msgs => {
+      this._msgs = msgs.map(msg => Message.fromJSON(msg))
       this.groupMsgByDay();
     });
 
-    this.isDisplayed = this.salon.id == this.salonId;
+    // TODO
+    // this.isDisplayed = this.salon.id == this.salonId;
   }
 
   ngAfterViewChecked() {
@@ -58,17 +63,18 @@ export class MsgThreadComponent implements OnInit {
 
   // =========================================================================================
 
+  // TODO Call it only one time
   /** Group messages with same day */
   groupMsgByDay = () => {
     this.msgs = [];
     let date = new Date(0);
 
-    for (let i in this.salon.msgs) {
-      if (!isSameDay(this.salon.msgs[i].date, date)) {
+    for (let i in this._msgs) {
+      if (!isSameDay(this._msgs[i].send, date)) {
         this.msgs.push([]);
-        date = this.salon.msgs[i].date;
+        date = this._msgs[i].send;
       }
-      this.msgs[this.msgs.length - 1].push(this.salon.msgs[i]);
+      this.msgs[this.msgs.length - 1].push(this._msgs[i]);
     }
   }
 
@@ -76,7 +82,7 @@ export class MsgThreadComponent implements OnInit {
   /** Add the message to the day-grouped messages */
   addMsg = (msg: Message) => {
     msg.processEmoji(this.salon.teamId);
-    if (this.msgs.length == 0 || !isSameDay(msg.date, this.msgs[this.msgs.length - 1][0].date))
+    if (this.msgs.length == 0 || !isSameDay(msg.send, this.msgs[this.msgs.length - 1][0].send))
       this.msgs.push([]);
     this.msgs[this.msgs.length - 1].push(msg);
   }
@@ -95,10 +101,11 @@ export class MsgThreadComponent implements OnInit {
   /** Send the written message  */
   sendMsg = (text) => {
     // TODO [Improve] server get user from session
-    let msg = new Message(nextId++, UserService.generateUserNamePicture(1), new Date(), text, undefined);
-    this.msgService.post(msg, this.salon.id);
-    this.addMsg(msg);
-    this.salon.msgs.push(msg);
+
+    // let msg = new Message(nextId++, UserService.generateUserNamePicture(1), new Date(), new Date(), text, undefined);
+    // this.msgService.post(msg, this.salon.id);
+    // this.addMsg(msg);
+    // this.salon.msgs.push(msg);
   }
 
   deleteMsg = (msgId) => {
@@ -108,8 +115,6 @@ export class MsgThreadComponent implements OnInit {
     this.groupMsgByDay();
   }
 }
-// TODO [back]
-let nextId = 1_000;
 
 /** Returns true if the 2 datetime are on the same day */
 const isSameDay = (date1, date2) => {

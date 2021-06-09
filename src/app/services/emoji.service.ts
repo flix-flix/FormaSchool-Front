@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EmojiNamePict } from '../features/messages/models/emojiNamePict';
-import { Reaction } from '../features/messages/models/reaction';
 import { CreatedEmoji } from '../models/createdEmoji';
 import { UserNamePict } from '../models/userNamePict';
 import { UserService } from './user.service';
@@ -16,16 +15,7 @@ export class EmojiService {
 
   constructor() { }
 
-  // TODO [Unused]
-  private findAllNamePict = (): Observable<EmojiNamePict[]> => {
-    return new Observable<EmojiNamePict[]>(obs => {
-      obs.next(EmojiService.generateAllEmojiNamePicture());
-      obs.complete();
-    });
-  }
-
   //========================================= Emoji Created ======================================
-
 
   findCreatedEmojiByTeamId = (teamId: number): Observable<CreatedEmoji[]> => {
     let res: CreatedEmoji[] = [];
@@ -125,9 +115,9 @@ export class EmojiService {
       // TODO [Opti] -> search in dict
       let emojis = Object.values(_emojis[index]).filter(elem => elem.name == name);
       if (emojis.length != 0)
-        return new EmojiNamePict(emojis[0].id, emojis[0].name, EmojiService.path[index] + emojis[0].picture);
+        return new EmojiNamePict("" + emojis[0].id, emojis[0].name, EmojiService.path[index] + emojis[0].picture);
     }
-
+    console.log("emoji undefined", name);
     return undefined;
   }
 
@@ -158,36 +148,6 @@ export class EmojiService {
 
   // ================================================================================================
   // TODO [back]
-
-  static generateAllEmojiNamePicture = (): EmojiNamePict[] => {
-    let _emojis = [];
-    for (let emojiId in emojisBase)
-      _emojis.push(EmojiService.generateEmojiNamePicture(+emojiId));
-    return _emojis;
-  }
-
-  static generateEmojiNamePicture = (emojiId: number): EmojiNamePict => {
-    if (!(emojiId in emojisBase)) {
-      console.error("emojiId doesn't exist:", emojiId);
-      return undefined;
-    }
-    return new EmojiNamePict(emojisBase[emojiId].id, emojisBase[emojiId].name, emojisBase[emojiId].picture);
-  }
-
-  static generateAllReactionOfMsg = (msgId: number): Reaction[] => {
-    return Object.values(reactions).filter(react => react.msgId == msgId)// select react of msg
-      .reduce((acc: Reaction[], _react) => {
-        let user = UserService.generateUserName(_react.userId);
-        let exist = acc.find(react => react.emojiId == _react.emojiId);
-
-        if (exist == undefined)
-          acc.push(new Reaction(_react.emojiId, EmojiService.getEmojiName(_react.emojiId), [user]))
-        else
-          exist.users.push(user);
-
-        return acc;
-      }, []);
-  }
 
   /**
   * this function give you an EmojiCreated object by the id 
