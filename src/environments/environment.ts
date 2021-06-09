@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  urlSpring: "http://localhost:8086"
+  urlSpring: "http://localhost:8086",
+  apiUrl: "http://localhost:8080"
 };
 
 /*

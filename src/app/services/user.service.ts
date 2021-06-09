@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { userCreation } from '../models/userCreation';
 import { UserHasRole } from '../models/userHasRole';
 import { UserName } from '../models/userName';
@@ -12,7 +14,18 @@ export class UserService {
 
   nextId = 11;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  findNamePictById = (id: string): Observable<UserNamePict> => {
+    return this.http.get<UserNamePict>(environment.apiUrl + "/users/namePict/" + id);
+  }
+
+  // TODO [Remove]
+  findNamePictDefault = (): Observable<UserNamePict> => {
+    return this.http.get<UserNamePict>(environment.apiUrl + "/users/defaultUser");
+  }
+
+  // ================================================================================================
 
   /**
    * This function return a quick presentation of each user. It contain lastname, firstname, id and picture
