@@ -13,26 +13,8 @@ import { Log } from '../../models/log';
 export class LogEmojiComponent implements OnInit {
 
   @Input() log: Log;
-  @Input() teamId: number;
-  user: UserNamePict;
-  team: TeamNamePict;
   constructor() { }
 
   ngOnInit(): void {
-    this.user = UserService.generateUserNamePicture(this.log.userId);
-    if (this.log.teamId != 0) {
-      this.team = TeamService.generateTeamNamePicture(this.log.teamId);
-    }
   }
-
-  ddmmyyyy = (date: Date): string => {
-    var mm = date.getMonth() + 1; // getMonth() is zero-based
-    var dd = date.getDate();
-
-    return [(dd > 9 ? '' : '0') + dd,
-    (mm > 9 ? '' : '0') + mm,
-    date.getFullYear()
-    ].join('/');
-  };
-
 }

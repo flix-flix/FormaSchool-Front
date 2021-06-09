@@ -1,0 +1,20 @@
+<p-panel class="create" [toggleable]="true" collapsed=false>
+    <ng-template pTemplate="header">
+        <app-log-emoji *ngIf="log.type>=0 && log.type<=2" [log]="log"></app-log-emoji>
+        <app-log-pin *ngIf="log.type>=6 && log.type<=7" [log]="log"></app-log-pin>
+        <app-log-salon *ngIf="log.type>=3 && log.type<=5" [log]="log"></app-log-salon>
+        <app-log-team *ngIf="log.type>=11 && log.type<=13" [log]="log"></app-log-team>
+        <app-log-user *ngIf="log.type>=8 && log.type<=10" [log]="log"></app-log-user>
+
+        <div class="profilContainer">
+            <img class="profil" src="../../../../../assets/images/_remove/users/{{user.picture}}" alt="">
+            <p>{{user.firstname}} {{user.lastname}} </p>
+            <p>{{ddmmyyyy(log.date)}}</p>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="icons">
+        <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
+    </ng-template>
+    <p>{{log.desc}}</p>
+</p-panel>

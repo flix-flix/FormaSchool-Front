@@ -1,20 +1,5 @@
-<p-panel class="create" [toggleable]="true" collapsed=false>
-    <ng-template pTemplate="header">
-        <div id="type">
-            <img class="feather" src="../../../../../../../assets/images/feather-icons/bookmark.svg"
-                alt="logo d'un pin">
-            <div class="circleExample" *ngIf="log.type == 6" style="background-color: green;"> </div>
-            <div class="circleExample" *ngIf="log.type == 7" style="background-color: red;"> </div>
-        </div>
-        <div class="profilContainer">
-            <img class="profil" src="../../../../../assets/images/_remove/users/{{user.picture}}" alt="">
-            <p>{{user.firstname}} {{user.lastname}} </p>
-            <p>{{ddmmyyyy(log.date)}}</p>
-        </div>
-    </ng-template>
-
-    <ng-template pTemplate="icons">
-        <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
-    </ng-template>
-    <p>{{log.desc}}</p>
-</p-panel>
+<div id="type">
+    <img class="feather" src="../../../../../../../assets/images/feather-icons/bookmark.svg" alt="logo d'un pin">
+    <div class="circleExample" *ngIf="log.type == 6" style="background-color: green;"> </div>
+    <div class="circleExample" *ngIf="log.type == 7" style="background-color: red;"> </div>
+</div>
