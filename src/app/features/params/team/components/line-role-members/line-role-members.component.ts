@@ -17,7 +17,9 @@ export class LineRoleMembersComponent implements OnInit {
   ngOnInit(): void {
 
     console.log(this.roleId)
-    this.role = RoleService.findWithoutRightsById(this.roleId);
+    RoleService.findWithoutRightsById(this.roleId).subscribe(role => {
+      this.role = role;
+    });
   }
 
 }

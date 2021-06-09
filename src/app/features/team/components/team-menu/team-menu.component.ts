@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Salon } from 'src/app/models/salon';
 import { TeamNamePict } from 'src/app/models/teamNamePict';
+import { SalonService } from 'src/app/services/salon.service';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -9,19 +11,16 @@ import { TeamService } from 'src/app/services/team.service';
 })
 export class TeamMenuComponent implements OnInit {
 
-  @Input() salons: { id: number, name: string }[];
   @Input() teamId: number;
   @Input() salonId: number;
 
   team: TeamNamePict;
+  salons: Salon[];
 
-  constructor() { }
+  constructor(private teamService: TeamService, private salonService: SalonService) { }
 
   ngOnInit(): void {
-    TeamService.findNamePictureById(this.teamId).subscribe(json => this.team = json);
-  }
-
-  openTeamParams = () => {
-    alert("TODO team parameters");
+    this.teamService.findNamePictureById(this.teamId).subscribe(json => this.team = json);
+    this.salonService.findAllSalonsOfTeam(this.teamId).subscribe(json => this.salons = json);
   }
 }

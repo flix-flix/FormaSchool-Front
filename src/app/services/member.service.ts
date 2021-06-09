@@ -27,13 +27,13 @@ export class MemberService {
   }
 
   /**
-    * This function return a presentation of each user. It contain lastname, firstname, id and role
-    * @returns an array ofobject
-    */
+   * This function return a presentation of each user. It contain lastname, firstname, id and role
+   * @returns an array ofobject
+   */
   findAllMemberRoles = (): Member[] => {
     let result: Member[] = [];
     Object.values(_users).forEach(user => {
-      result.push(UserService.generateUserWithRole(user.id));
+      result.push(this.generateUserWithRole(user.id));
     });
     return result;
   }

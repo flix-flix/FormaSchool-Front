@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Salon } from 'src/app/models/salon';
 import { MessageService } from '../../messages/services/message.service';
 import { SalonNameDesc } from '../../params/salon/model/salonNameDesc';
-import { Salon } from './models/salon';
+
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,7 @@ export class SalonService {
     let msgs = [];
     for (let msgIndex in salons[salonId].msgs)
       msgs.push(MessageService.generateMessage(salons[salonId].msgs[msgIndex]))
-    return new Salon(salons[salonId].id, salons[salonId].name, msgs);
+    return new Salon(salons[salonId].id, salons[salonId].name, salons[salonId].desc, msgs);
   }
 
   static generateSalonNameDesc = (salonId: number): SalonNameDesc => {

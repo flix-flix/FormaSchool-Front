@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Log } from 'src/app/features/params/team/logs/models/log';
-import { LogService } from 'src/app/features/params/team/logs/services/log.service';
+import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'app-team-logs',
@@ -10,26 +11,16 @@ import { LogService } from 'src/app/features/params/team/logs/services/log.servi
 export class TeamLogsComponent implements OnInit {
 
   logs: Log[];
+  teamId: number;
 
-  constructor(private service: LogService) { }
+  constructor(private service: LogService, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.logs = this.service.findAll();
-    this.trieDate();
-  }
-
-  /**
-   * This function sort the list by the attribute date
-   */
-  trieDate = () => {
-    this.logs.sort((obj1: Log, obj2: Log) => {
-      if (obj1.date < obj2.date) {
-        return 1;
-      }
-      if (obj1.date > obj2.date) {
-        return -1;
-      }
-      return 0;
-    });
+    this.router.parent.paramMap.subscribe(params => {
+      this.teamId = +params.get("teamId");
+    })
+    this.service.findByTeam(this.teamId).subscribe(logs => {
+      this.logs = logs;
+    })
   }
 }

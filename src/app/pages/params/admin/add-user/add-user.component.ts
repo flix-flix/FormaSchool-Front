@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Log } from 'src/app/features/params/team/logs/models/log';
 import { userCreation } from 'src/app/models/userCreation';
+import { LogService } from 'src/app/services/log.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,7 +14,7 @@ export class AddUserComponent implements OnInit {
 
   userForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private logService: LogService) {
     this.userForm = this.fb.group({
       firstname: [''],
       lastname: [''],
@@ -31,8 +33,12 @@ export class AddUserComponent implements OnInit {
    */
   save = () => {
     let user: userCreation = this.userForm.value;
-    let idRetour = this.userService.save(user);
-    alert(`L'utilisateur a bien été créé avec l'id ${idRetour}`)
+    let retour: number;
+    this.userService.save(user).subscribe(idRetour => {
+      retour = idRetour;
+    });
+    this.logService.addLog(new Log(1, 8, 0, new Date(), `a creer l'utilisateur ${user.firstname} ${user.lastname}`));
+    alert(`L'utilisateur a bien été créé avec l'id ${retour}`)
   }
 
 }

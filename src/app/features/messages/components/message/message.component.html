@@ -3,7 +3,7 @@
         <img class="author_img" src="../../../../../assets/images/_remove/users/{{msg.sender.picture}}" alt="">
     </div>
 
-    <div>
+    <div id="left">
         <div class="top">
             <span class="sender">{{msg.sender.firstname}} {{msg.sender.lastname}}</span>
             <span class="time">{{msg.getTimeStr()}}</span>
@@ -12,39 +12,27 @@
         <div class="text" [innerHtml]="msg.html"></div>
 
         <!-- File -->
-        <ng-container *ngIf="msg.file != undefined">
-            <ng-container *ngIf="msg.file != undefined && msg.file.isImage(); then img; else file"></ng-container>
-
-            <ng-template #img>
-                <img src="../../../../../assets/images/_remove/sharedFiles/{{msg.file.path}}" alt="sharedFile"
-                    class="msg_shared_img">
-            </ng-template>
-
-            <ng-template #file>
-                <div>
-                    [file linked]
-                </div>
-            </ng-template>
-        </ng-container>
+        <app-shared-file [file]="msg.file"></app-shared-file>
 
         <!-- Reactions -->
         <div id="emojis">
-            <app-emoji *ngFor="let emoji of emojis" [emoji]="emoji"></app-emoji>
+            <app-emoji *ngFor="let react of msg.reactions" [emoji]="react"></app-emoji>
         </div>
     </div>
 
     <!-- Icons on hover -->
     <div id="icons">
-        <img class="msg_icon" src="../../../../../assets/images/icons/msg/emojiReact.png" alt="emoji" (click)="emoji()">
+        <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/smile.svg" alt="emoji"
+            (click)="emoji()">
 
-        <img class="msg_icon" src="../../../../../assets/images/icons/msg/edit.png" alt="edit"
+        <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/edit-3.svg" alt="edit"
             *ngIf="msg.sender.id == 1" (click)="edit()">
-        <img class="msg_icon" src="../../../../../assets/images/icons/msg/delete.png" alt="delete"
-            *ngIf="msg.sender.id == 1" (click)="delete()">
+        <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/trash-2.svg" alt="delete"
+            *ngIf="msg.sender.id == 1" (click)="deleteClick()">
 
-        <img class="msg_icon" src="../../../../../assets/images/icons/msg/reply.png" alt="reply"
+        <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/corner-up-left.svg" alt="reply"
             *ngIf="msg.sender.id != 1" (click)="reply()">
-        <img class="msg_icon" src="../../../../../assets/images/icons/msg/other.png" alt="other"
+        <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/more-horizontal.svg" alt="other"
             *ngIf="msg.sender.id != 1" (click)="other()">
     </div>
 </div>

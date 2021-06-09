@@ -1,0 +1,37 @@
+::ng-deep .p-panel .p-panel-header {
+    border: 1px solid #dee2e6;
+    padding: 1rem;
+    background: #6595B8;
+    color: #10516D;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+}
+::ng-deep .p-panel .p-panel-content {
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    background: #6595B8;
+    color: #10516D;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top: 0 none;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+/*-----------------profil Container-----------------------------------*/
+.profil{
+    height: 50px;
+    border-radius: 60px;
+}
+.profilContainer{
+    display: flex;
+    width: 300px;
+    justify-content: space-around;
+}
+.profilContainer>p{
+    margin-top: 5%;
+}

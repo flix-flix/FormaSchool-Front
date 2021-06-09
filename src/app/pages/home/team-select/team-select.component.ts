@@ -7,12 +7,15 @@ import { TeamService } from 'src/app/services/team.service';
   styleUrls: ['./team-select.component.css']
 })
 export class TeamSelectComponent implements OnInit {
-// c'est ici qu'il faut ajouter liste compléte des équipes
-teams = []
-  constructor(private service : TeamService) { }
+
+  teams = []
+
+  constructor(private service: TeamService) { }
 
   ngOnInit(): void {
-    this.teams = this.service.afficheEquipes(0);
+    this.service.afficheEquipes().subscribe(listTeam => {
+      this.teams = listTeam;
+    });
   }
 
 }
