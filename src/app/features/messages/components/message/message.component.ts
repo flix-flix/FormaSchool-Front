@@ -1,26 +1,20 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Message } from '../../models/message';
 
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
-  styleUrls: ['./message.component.css'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit {
 
-  @Input() msg: Message;
+  @Output() delete = new EventEmitter();
 
-  emojis: { name: string, users: string[], on: boolean }[] = [
-    { name: "red_apple", users: ["Félix", "Luca"], on: true },
-    { name: "shamrock", users: ["Luca", "Jason", "Bouchaib"], on: false },
-    { name: "bagel", users: ["Félix", "Luca", "Jason", "Bouchaib"], on: false },
-  ];
+  @Input() msg: Message;
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   /** Open the emoji selector */
   emoji = () => {
@@ -35,9 +29,9 @@ export class MessageComponent implements OnInit {
   }
 
   /** Delete the message */
-  delete = () => {
-    // TODO Delete the message
-    alert("TODO Delete")
+  deleteClick = () => {
+    if (confirm("Voulez vous supprimer ce message"))
+      this.delete.emit(this.msg.id);
   }
 
   /** Open the options selector */

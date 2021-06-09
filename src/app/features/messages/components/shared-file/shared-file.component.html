@@ -1,0 +1,20 @@
+<div *ngIf="file != undefined">
+    <ng-template [ngIf]="file.isImage()" [ngIfThen]="img" [ngIfElse]="other">
+    </ng-template>
+
+    <ng-template #img>
+        <img src="../../../../../assets/images/_remove/shared_files/{{file.path}}" alt="sharedImage" class="shared_img">
+    </ng-template>
+
+    <ng-template #other>
+        <div id="row">
+            <div id="other">
+                <img src="../../../../../assets/images/feather-icons/{{file.isText() ? 'file-text.svg' : 'file.svg'}}"
+                    alt="typeFile" class="icon">
+                {{file.name}}
+                <img src="../../../../../assets/images/feather-icons/download.svg" alt="download"
+                    class="icon download feather" (click)="download()">
+            </div>
+        </div>
+    </ng-template>
+</div>

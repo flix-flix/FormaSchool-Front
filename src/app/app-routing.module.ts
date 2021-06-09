@@ -19,22 +19,25 @@ import { TeamSelectComponent } from './pages/home/team-select/team-select.compon
 import { TeamChatComponent } from './pages/home/team/team-chat/team-chat.component';
 import { TemplateComponent } from './pages/home/home-template/template.component';
 import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-template/salon-template.component';
+import { AdminLogsComponent } from './pages/params/admin/admin-logs/admin-logs.component';
+import { AdminEmojisComponent } from './pages/params/admin/admin-emojis/admin-emojis.component';
 
 const routes: Routes = [
   {
     path: "", component: TemplateComponent, children: [
       { path: "login", component: LoginComponent },
 
+      // TODO === guard login ===
       { path: "privateMessages", component: PrivateMsgComponent },
 
       { path: "teamSelect", component: TeamSelectComponent },
       { path: "teamMessages/:teamId/:salonId", component: TeamChatComponent },
-
+      { path: "teamMessages/:teamId", redirectTo: "teamMessages/:teamId/0" },
 
       { path: "404", component: NotFoundComponent },
 
-      // TODO redirectTo: lastVisitedPage (+guard login)
-      { path: "", redirectTo: "teamMessages/1/1", pathMatch: "full" },
+      // TODO redirectTo: lastVisitSedPage
+      { path: "", redirectTo: "teamSelect", pathMatch: "full" },
     ]
   },
 
@@ -45,6 +48,8 @@ const routes: Routes = [
           { path: "createUser", component: AddUserComponent },
           { path: "createTeam", component: AddTeamComponent },
           { path: "addUserToTeam", component: AddUserToTeamComponent },
+          { path: "adminLogs", component: AdminLogsComponent },
+          { path: "adminEmojis", component: AdminEmojisComponent },
           { path: "**", redirectTo: "createUser" }
         ]
       },

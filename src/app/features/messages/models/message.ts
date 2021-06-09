@@ -1,6 +1,7 @@
 import { File } from "src/app/models/file";
 import { UserNamePict } from "src/app/models/userNamePict";
 import { EmojiService } from "src/app/services/emoji.service";
+import { Reaction } from "./reaction";
 
 export class Message {
     private _id: number;
@@ -8,18 +9,19 @@ export class Message {
     private _date: Date;
     private _content: string;
     private _file: File;
+    private _reactions: Reaction[];
 
     private _html: string;
 
-    constructor(id: number, sender: UserNamePict, date: Date, content: string, file: File) {
+    constructor(id: number, sender: UserNamePict, date: Date, content: string, file: File, reactions: Reaction[] = []) {
         this._id = id;
         this._sender = sender;
         this._date = date;
         this._content = content;
         this._file = file;
+        this._reactions = reactions;
 
         this._html = Message.processHtml(content);
-        this._html = EmojiService.processEmoji(this._html, 4);
     }
 
     // ===============================================
@@ -27,6 +29,10 @@ export class Message {
     /** Returns the time (hh:mm) */
     public getTimeStr = (): string => {
         return nf.format(this.date.getHours()) + ":" + nf.format(this.date.getMinutes());
+    }
+
+    public processEmoji = (teamId: number) => {
+        this._html = EmojiService.processEmoji(this._html, 5, teamId);
     }
 
     // ===============================================
@@ -71,6 +77,14 @@ export class Message {
         this._file = file;
     }
 
+    public get reactions(): Reaction[] {
+        return this._reactions;
+    }
+
+    public set reactions(reactions: Reaction[]) {
+        this._reactions = reactions;
+    }
+
     // =====
 
     public get html(): string {
@@ -86,6 +100,7 @@ export class Message {
        */
     static processHtml = (content: string, replace: boolean = true): string => {
         let html = content.replace(/\n/g, "<br>");
+        html = html.replace(/  /g, " &nbsp;");//TODO [Improve] space -> &nbsp;
 
         html = Message.processHtmlSpan(html, "**", "bold", replace);
         html = Message.processHtmlSpan(html, /((?<!\*)\*{1}(?!\*))|\*{3}/, "italic", replace); // *italic* | ***italic***

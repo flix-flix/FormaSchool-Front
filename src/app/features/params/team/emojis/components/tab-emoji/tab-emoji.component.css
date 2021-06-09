@@ -1,0 +1,83 @@
+.emoji img{
+    height: 4rem;
+    width: 4rem;
+}
+
+.user img {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 60px;
+}
+.user{
+    position: relative;
+}
+.user p{
+    position:absolute;
+    left: calc(10% + 50px) ;
+    bottom: 40%;
+}
+
+.tabButton button{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.card{
+    margin: 5%;
+}
+::ng-deep .p-toolbar {
+    background: #63b1ff;
+    border: 1px solid #ffffff;
+    padding: 1rem;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+::ng-deep .p-datatable-scrollable-header-box{
+    background-color: #63b1ff;
+}
+
+::ng-deep .p-datatable .p-datatable-header {
+    background: #63b1ff;
+    border: 1px solid #ffffff;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr {
+    background: #63b1ff;
+    color: #000000;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    background: #63b1ff;
+}
+
+::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
+    border-color: #2196F3;
+    background: #06844a;
+}
+
+::ng-deep .p-datatable .p-datatable-footer {
+    background: #63b1ff;
+    border: 1px solid #ffffff;
+}
+
+::ng-deep .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+    background: #06844a;
+}
+
+/* ========= Scrollbar ========= */
+::ng-deep ::-webkit-scrollbar {
+    width: 16px;
+}
+
+::ng-deep ::-webkit-scrollbar-track{
+    background: #63b1ff; 
+}
+
+::ng-deep ::-webkit-scrollbar-thumb {
+    background: var(--header); 
+
+    border: solid 4px var(--background);
+    
+    border-radius: 200px;
+}

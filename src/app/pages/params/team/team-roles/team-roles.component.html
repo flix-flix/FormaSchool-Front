@@ -8,10 +8,12 @@
             <div class="roleName">
                 {{role.name}}
             </div>
+            <img class="feather" src="../../../../../assets/images/feather-icons/x-circle.svg" alt="delete button"
+                (click)="deleteRole(role)">
         </div>
     </div>
 
-    <div id="content">
+    <div id="content" *ngIf="roles.length != 0">
         <span id="input" class="p-float-label">
             <input id="float-input" type="text" [(ngModel)]="role.name" pInputText>
             <label for="float-input">Nom du rôle</label>

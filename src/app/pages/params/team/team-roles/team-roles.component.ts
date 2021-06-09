@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { createRole } from 'src/app/features/params/team/roles/models/createRole';
 import { Role } from 'src/app/features/params/team/roles/models/role';
@@ -16,13 +15,19 @@ export class TeamRolesComponent implements OnInit {
 
   role: Role;
   roles: RoleWithoutRights[];
+  teamId: number;
 
   constructor(private roleService: RoleService, private teamService: TeamService, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.parent.paramMap.subscribe(params => {
+      this.teamId = +params.get("teamId");
+    })
     this.refreshRoles();
-    this.roleChoosen(this.roles[0].id);
+    if (this.roles.length != 0) {
+      this.roleChoosen(this.roles[0].id);
+    }
   }
 
   /**
@@ -30,9 +35,14 @@ export class TeamRolesComponent implements OnInit {
    */
   refreshRoles = () => {
     this.roles = [];
-    let rolesId: number[] = this.teamService.findRolesByTeamId(1);
-    rolesId.forEach(id => {
-      this.roles.push(RoleService.findWithoutRightsById(id));
+    let rolesId: number[];
+    this.teamService.findRolesByTeamId(this.teamId).subscribe(roles => {
+      rolesId = roles;
+      rolesId.forEach(id => {
+        RoleService.findWithoutRightsById(id).subscribe(role => {
+          this.roles.push(role);
+        })
+      });
     });
   }
 
@@ -41,18 +51,22 @@ export class TeamRolesComponent implements OnInit {
    * @param id the id of the role choosen
    */
   roleChoosen = (id: number) => {
-    let newRole: Role = this.roleService.findRoleById(id);
-    this.role = newRole;
+    this.roleService.findRoleById(id).subscribe(role => {
+      this.role = role;
+    });
   }
 
   /**
    * This function allows you to create a new role
    */
   addNewRole = () => {
-    let idRole: number = this.roleService.save(new createRole("nouveau role", "#A2D0EA"));
-    //TODO include the teamId instead of "1"
-    this.teamService.addRoleToTeam(1, idRole);
-    this.refreshRoles();
+    let idRole: number;
+    this.roleService.save(new createRole("nouveau role", "#A2D0EA")).subscribe(retour => {
+      idRole = retour;
+      this.teamService.addRoleToTeam(this.teamId, idRole);
+      this.refreshRoles();
+      this.roleChoosen(this.roles[0].id);
+    });
   }
 
   /**
@@ -63,7 +77,24 @@ export class TeamRolesComponent implements OnInit {
     this.refreshRoles();
   }
 
+  /**
+   * Change the color of the role
+   * @param color color you want to add
+   */
   updateColor = (color: string) => {
     this.role.color = color;
+  }
+
+  /**
+   * Delete a role 
+   * @param role id of the role
+   */
+  deleteRole = (role: RoleWithoutRights) => {
+    this.teamService.deleteRoleToTeam(this.teamId, role.id);
+    this.roleService.delete(role.id);
+    this.refreshRoles();
+    if (this.roles.length != 0) {
+      this.roleChoosen(this.roles[0].id);
+    }
   }
 }

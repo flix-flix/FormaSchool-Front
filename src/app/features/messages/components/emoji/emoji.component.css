@@ -1,3 +1,8 @@
+.all {
+    position: relative;
+    display: flex;
+}
+
 .react {
     position: relative;
     display: flex;
@@ -32,40 +37,42 @@
     margin-right: .1rem;
 }
 
-.react .bold {
-    font-weight: bold;
-}
-
 /* ========== tooltip ========== */
 
 .react_tooltip {
     position: absolute;
-    bottom: 2.7rem;
-    left: -3.5rem;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
 
     z-index: 10;
     
-    display: none;
+    opacity: 0;
+    display: flex;
+    align-items: center;
     
-    width: 10rem;
-    padding: .5rem;
+    width: 15rem;
+    padding: .2rem .5rem;
     
+    font-weight: normal;
     font-size: .8rem;
-
+    
     border-radius: .2rem;
     
     color: var(--font_1);
     background-color: var(--font_2);
 }
 
-.react:hover .react_tooltip {
-    display: block;
+.react:hover ~ .react_tooltip {
+    opacity: 1;
+    transition: opacity 0s .5s;
 }
 
+/* Triangle */
 .react_tooltip::after {
     position: absolute;
     bottom: -1rem;
-    left: 4rem;
+    left: calc(50% - 1rem);
 
     z-index: 11;
 
@@ -74,4 +81,14 @@
     border-right: 1rem solid transparent;
     border-left: 1rem solid transparent;
     border-top: 1rem solid var(--font_2);
+}
+
+.tooltip_emoji {
+    width: 3rem;
+    height: 3rem;
+    margin-right: .5rem;
+}
+
+.all .bold {
+    font-weight: bold;
 }

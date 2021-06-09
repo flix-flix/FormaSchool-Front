@@ -2,8 +2,8 @@
     <textarea id="input_msg" formControlName="msg" placeholder="Envoyer un message dans Général" [rows]="1"
         pInputTextarea autoResize="autoResize" (keydown.enter)="pressEnter($event)"></textarea>
 
-    <img id="plus" class="icon" src="../../../../../assets/images/icons/msg/plus.png" alt="joinFile"
+    <img id="plus" class="icon feather" src="../../../../../assets/images/feather-icons/plus-circle.svg" alt="joinFile"
         (click)="buttonJoinFile()">
-    <img id="emoji" class="icon" src="../../../../../assets/images/icons/msg/emoji.png" alt="addEmoji"
+    <img id="emoji" class="icon feather" src="../../../../../assets/images/feather-icons/smile.svg" alt="addEmoji"
         (click)="buttonAddEmoji()">
 </form>

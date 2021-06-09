@@ -1,4 +1,7 @@
 export class File {
+    private static imgExt: string[] = ["png", "jpg", "svg"];
+    private static textExt: string[] = ["txt", "html", "css", "js", "ts", "java", "json", "yaml", "py", "sql"];
+
     private _id: number;
     private _name: string;
     private _path: string;
@@ -9,7 +12,6 @@ export class File {
         this._path = path;
     }
 
-
     // ==========
 
     public getExt(): string {
@@ -17,8 +19,11 @@ export class File {
     }
 
     public isImage() {
-        let ext = this.getExt();
-        return ext == "png" || ext == "jpg";
+        return File.imgExt.includes(this.getExt());
+    }
+
+    public isText() {
+        return File.textExt.includes(this.getExt());
     }
 
     // ==========

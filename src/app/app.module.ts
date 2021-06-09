@@ -53,6 +53,17 @@ import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { EmojiComponent } from './features/messages/components/emoji/emoji.component';
+import { ListLogComponent } from './features/params/team/logs/components/list-log/list-log.component';
+import TabEmojiComponent from './features/params/team/emojis/components/tab-emoji/tab-emoji.component';
+import { SharedFileComponent } from './features/messages/components/shared-file/shared-file.component';
+import { AdminLogsComponent } from './pages/params/admin/admin-logs/admin-logs.component';
+import { AdminEmojisComponent } from './pages/params/admin/admin-emojis/admin-emojis.component';
+import { LogEmojiComponent } from './features/params/team/logs/components/log-emoji/log-emoji.component';
+import { LogSalonComponent } from './features/params/team/logs/components/log-salon/log-salon.component';
+import { LogPinComponent } from './features/params/team/logs/components/log-pin/log-pin.component';
+import { LogUserComponent } from './features/params/team/logs/components/log-user/log-user.component';
+import { LogTeamComponent } from './features/params/team/logs/components/log-team/log-team.component';
+import { LogComponent } from './features/params/team/logs/components/log/log.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +102,18 @@ import { EmojiComponent } from './features/messages/components/emoji/emoji.compo
     MsgWriterComponent,
     TeamRolesComponent,
     ParamsSalonTemplateComponent,
-    EmojiComponent
+    EmojiComponent,
+    ListLogComponent,
+    TabEmojiComponent,
+    SharedFileComponent,
+    AdminLogsComponent,
+    AdminEmojisComponent,
+    LogEmojiComponent,
+    LogSalonComponent,
+    LogPinComponent,
+    LogUserComponent,
+    LogTeamComponent,
+    LogComponent
   ],
   imports: [
     BrowserModule,

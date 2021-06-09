@@ -1,8 +1,14 @@
-<div class="react" [class.on]="on" (click)="addRemoveReact()">
-    <img class="emoji" src="../../../../../assets/images/_remove/emojis/{{emoji.name}}.png" alt="">
-    <span>{{emoji.users.length}}</span>
+<div class="all">
+    <div class="react" [class.on]="on" (click)="addRemoveReact()">
+        <img class="emoji" src="../../../../../assets/images/{{getEmojiPath()}}" alt="">
+        <span>{{emoji.users.length}}</span>
 
-    <div>
-        <div class="react_tooltip">{{getTextTooltip()}} <span class="bold">:{{emoji.name}}:</span></div>
+    </div>
+
+    <div class="react_tooltip">
+        <img class="tooltip_emoji" src="../../../../../assets/images/{{getEmojiPath()}}" alt="">
+        <div class="tooltip_text">
+            {{getTextTooltip()}} <span class="bold">:{{emoji.name}}:</span>
+        </div>
     </div>
 </div>
