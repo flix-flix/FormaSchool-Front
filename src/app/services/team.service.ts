@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TeamNamePict } from '../models/teamNamePict';
-import { SalonService } from '../features/team/services/salon.service';
 import { Member } from '../models/member';
 import { TeamNameDescPict } from '../models/teamNameDescPict';
 
@@ -52,9 +51,6 @@ export class TeamService {
       obs.complete();
     });
   }
-
-
-
 
   /**
    * This function return a quick presentation of each team. It contain name, picture and the id

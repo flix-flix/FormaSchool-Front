@@ -38,6 +38,14 @@ export class SalonService {
     });
   }
 
+  /** */
+  findTeamIdById = (salonId: number): Observable<number> => {
+    return new Observable<number>(obs => {
+      obs.next(salons[salonId].teamId);
+    })
+  }
+
+
   /** Returns the list of the salons for the given team */
   findAllSalonsOfTeam = (teamId: number): Observable<Salon[]> => {
     return new Observable<Salon[]>(obs => {
