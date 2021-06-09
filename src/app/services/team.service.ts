@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Salon } from '../features/team/services/models/salon';
 import { SalonService } from '../features/team/services/salon.service';
+import { Member } from '../models/member';
 import { TeamNameDescPict } from '../models/teamNameDescPict';
 import { TeamNamePict } from '../models/teamNamePict';
 
@@ -160,6 +161,18 @@ export class TeamService {
       obs.next(TeamService.generateTeamNamePicture(teamId));
       obs.complete();
     });
+  }
+
+  /**
+   * 
+   * @param teamm
+   * @returns 
+   */
+  findMembersByTeamId = (teamId: number): Observable<Member[]> => {
+    return new Observable<Member[]>(obs => {
+      obs.next([new Member(1, "Jason", "Vennin", [1]), new Member(2, "Luca", "Boulet", [2])]);
+      obs.complete();
+    })
   }
 
   // ================================================================================================

@@ -63,7 +63,7 @@ const routes: Routes = [
       {
         path: "salon/:salonId", component: ParamsSalonTemplateComponent, children: [
           { path: "summary", component: SalonSummaryComponent },
-          { path: "permissions:", component: SalonPermissionsComponent },
+          { path: "permissions", component: SalonPermissionsComponent },
           { path: "**", redirectTo: "summary" }
         ]
       },

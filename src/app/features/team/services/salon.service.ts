@@ -29,6 +29,13 @@ export class SalonService {
     });
   }
 
+  /** */
+  findTeamIdById = (salonId: number): Observable<number> => {
+    return new Observable<number>(obs => {
+      obs.next(salons[salonId].id);
+    })
+  }
+
   // ================================================================================================
   // TODO [back]
 
