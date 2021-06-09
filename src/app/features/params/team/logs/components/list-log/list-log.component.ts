@@ -14,7 +14,9 @@ export class ListLogComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.trieDate();
+    if (this.logs != null) {
+      this.trieDate();
+    }
   }
 
   /**

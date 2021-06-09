@@ -7,10 +7,6 @@
             <div class="circleExample" *ngIf="log.type == 1" style="background-color: orange;"> </div>
             <div class="circleExample" *ngIf="log.type == 2" style="background-color: red;"> </div>
         </div>
-        <div class="teamContainer" *ngIf="teamId == 0 && team">
-            <img src="../../../../../../../assets/images/_remove/teams/{{team.picture}}" alt="image de l'equipe">
-            <p>{{team.name}}</p>
-        </div>
         <div class="profilContainer">
             <img class="profil" src="../../../../../assets/images/_remove/users/{{user.picture}}" alt="">
             <p>{{user.firstname}} {{user.lastname}} </p>

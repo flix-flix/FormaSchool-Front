@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Log } from '../features/params/team/logs/models/log';
 
 @Injectable({
@@ -121,7 +123,7 @@ export class LogService {
     }
   ]
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   /**
    * This function return all log
@@ -144,6 +146,7 @@ export class LogService {
    * @returns return a list of log object (picture, firstname, lastname, date, desc)
    */
   findByTeam = (teamId: number): Observable<Log[]> => {
+    //return this.http.get<Log[]>(`${environment.urlSpring}/logs/withoutId/${teamId}`);
     let res: Log[] = [];
     this.logs.filter(log => log.teamId == teamId).map(log => {
       res.push(new Log(log.userId, log.type, log.teamId, log.date, log.desc));
