@@ -26,18 +26,6 @@ export class EmojiService {
 
   //========================================= Emoji Created ======================================
 
-  /**
-   * This function return you all element on type CreatedEmoji
-   * @returns a list of CreatedEmoji which contain all element
-   */
-  findAllCreatedEmoji = (): Observable<CreatedEmoji[]> => {
-    let res: CreatedEmoji[] = [];
-    Object.values(createdEmojis).map(element => res.push(EmojiService.generateCreatedEmoji(element.id)));
-    return new Observable<CreatedEmoji[]>(obs => {
-      obs.next(res);
-      obs.complete();
-    });
-  }
 
   findCreatedEmojiByTeamId = (teamId: number): Observable<CreatedEmoji[]> => {
     let res: CreatedEmoji[] = [];

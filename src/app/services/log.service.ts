@@ -158,7 +158,7 @@ export class LogService {
    * This function allow you to push a log
    * @param log the log you want to add
    *  userId: the user who made the log
-   *  type: 0 => create, 1 => epinglé, 2 => supprimer, 3 => createUser
+   * 
    *  teamId: the teamId, case Admin(no team) put 0 
    *  date: date of creation
    *  desc: a quick description of what was made
