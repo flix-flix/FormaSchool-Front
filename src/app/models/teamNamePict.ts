@@ -1,20 +1,20 @@
 export class TeamNamePict {
 
-    private _id: number;
+    private _id: string;
     private _name: string;
     private _picture: string;
 
-    constructor(id: number, name: string, picture: string) {
+    constructor(id: string, name: string, picture: string) {
         this.id = id
         this._name = name;
         this._picture = picture;
     }
 
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
-    public set id(value: number) {
+    public set id(value: string) {
         this._id = value;
     }
 

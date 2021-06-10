@@ -53,7 +53,7 @@ export class TeamService {
   findAllPresentation = (): Observable<TeamNamePict[]> => {
     let res: TeamNamePict[] = [];
     Object.values(teams).forEach(team => {
-      let data = new TeamNamePict(team.id, team.name, team.picture);
+      let data = new TeamNamePict("" + team.id, team.name, team.picture);
       res.push(data);
     });
     return new Observable<TeamNamePict[]>(obs => {
@@ -101,7 +101,7 @@ export class TeamService {
       console.error("teamId doesn't exist:", teamId);
       return undefined;
     }
-    return new TeamNamePict(teams[teamId].id, teams[teamId].name, teams[teamId].picture);
+    return new TeamNamePict("" + teams[teamId].id, teams[teamId].name, teams[teamId].picture);
   }
 
   /**

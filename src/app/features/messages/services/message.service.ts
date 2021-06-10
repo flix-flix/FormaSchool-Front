@@ -22,7 +22,7 @@ export class MessageService {
   delete = (msgId: number) => {
   }
 
-  findAllMessageOfSalon(salonId: number): Observable<Message[]> {
+  findAllMessageOfSalon(salonId: string): Observable<Message[]> {
     return this.http.get<Message[]>(environment.apiUrl + "/messages/salonWithReacts/" + salonId);
   }
 }

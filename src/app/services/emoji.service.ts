@@ -84,8 +84,7 @@ export class EmojiService {
    * @param content The string to process
    * @param deep The number of folder deeper than /assets
    */
-  static processEmoji = (content: string, deep: number, teamId: number): string => {
-    console.log(content, deep, teamId);
+  static processEmoji = (content: string, deep: number, teamId: string): string => {
     let html = ""; // return string
     let search = ":"; // TODO regex
     let first = 0, second = 0, prev = 0; // first ':', second ':', prev: current char index
@@ -109,12 +108,12 @@ export class EmojiService {
   }
 
   /** Returns the matching emoji if it exits, undefined otherwise */
-  static getEmoji = (name: string, teamId = -1): EmojiNamePict => {
-    let _emojis = [emojisBase, emojisOrga, emojisTeam[teamId]];
+  static getEmoji = (name: string, teamId = "orga"): EmojiNamePict => {
+    let _emojis = [emojisBase, emojisOrga/*, emojisTeam[teamId]*/];
 
     for (let index in _emojis) {
       // TODO [Opti] -> search in dict
-      let emojis = Object.values(_emojis[index]).filter(elem => elem.name == name);
+      let emojis = Object.values(_emojis[index]).filter(emoji => emoji.name == name);
       if (emojis.length != 0)
         return new EmojiNamePict("" + emojis[0].id, emojis[0].name, EmojiService.path[index] + emojis[0].picture);
     }
@@ -516,45 +515,3 @@ let emojisBase: { [id: number]: { id: number, name: string, picture: string } } 
     picture: "zipper-mouth_face.png"
   }
 };
-
-// ================================================================================================
-
-/**  */
-let reactions: { userId: number, msgId: number, emojiId: number }[] = [
-  { userId: 1, msgId: 1, emojiId: 1 },
-  { userId: 1, msgId: 1, emojiId: 2 },
-  { userId: 1, msgId: 1, emojiId: 3 },
-  { userId: 2, msgId: 1, emojiId: 1 },
-
-  { userId: 1, msgId: 12, emojiId: 22 },
-  { userId: 10, msgId: 12, emojiId: 22 },
-  { userId: 20, msgId: 12, emojiId: 22 },
-
-  { userId: 10, msgId: 14, emojiId: 27 },
-
-  { userId: 1, msgId: 15, emojiId: 37 },
-  { userId: 2, msgId: 15, emojiId: 25 },
-  { userId: 2, msgId: 15, emojiId: 37 },
-
-  { userId: 1, msgId: 16, emojiId: 15 },
-  { userId: 10, msgId: 16, emojiId: 15 },
-  { userId: 20, msgId: 16, emojiId: 15 },
-  { userId: 1, msgId: 16, emojiId: 16 },
-  { userId: 10, msgId: 16, emojiId: 16 },
-  { userId: 20, msgId: 16, emojiId: 16 },
-
-  // Nourriture
-  { userId: 10, msgId: 20, emojiId: 10 },
-  { userId: 2, msgId: 20, emojiId: 3 },
-  { userId: 20, msgId: 20, emojiId: 3 },
-
-  { userId: 1, msgId: 21, emojiId: 23 },
-  { userId: 1, msgId: 22, emojiId: 23 },
-
-  { userId: 1, msgId: 23, emojiId: 2 },
-
-  // Lorem
-
-  // ===== Semifir =====
-
-];

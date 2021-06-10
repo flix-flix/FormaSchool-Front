@@ -1,7 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Salon } from 'src/app/models/salon';
 import { SalonService } from 'src/app/services/salon.service';
-import { UserService } from 'src/app/services/user.service';
 import { Message } from '../../models/message';
 import { MessageService } from '../../services/message.service';
 
@@ -13,10 +12,9 @@ import { MessageService } from '../../services/message.service';
 export class MsgThreadComponent implements OnInit {
   @ViewChild("scrollMe") private msgThread: ElementRef;
 
+  @Input() teamId: string;
   /** The displayed salon */
-  @Input() salonId: number;
-
-  salon: Salon;
+  @Input() salonId: string;
 
   /** Messages grouped by date and sorted by time */
   msgs: Message[][];
@@ -36,6 +34,7 @@ export class MsgThreadComponent implements OnInit {
   ngOnInit(): void {
     this.msgService.findAllMessageOfSalon(this.salonId).subscribe(msgs => {
       this._msgs = msgs.map(msg => Message.fromJSON(msg))
+      this._msgs.forEach(msg => msg.processEmoji(this.teamId))
       this.groupMsgByDay();
     });
 
@@ -81,7 +80,7 @@ export class MsgThreadComponent implements OnInit {
   // TODO Allow the message to be added before
   /** Add the message to the day-grouped messages */
   addMsg = (msg: Message) => {
-    msg.processEmoji(this.salon.teamId);
+    msg.processEmoji(this.teamId);
     if (this.msgs.length == 0 || !isSameDay(msg.send, this.msgs[this.msgs.length - 1][0].send))
       this.msgs.push([]);
     this.msgs[this.msgs.length - 1].push(msg);
@@ -110,9 +109,9 @@ export class MsgThreadComponent implements OnInit {
 
   deleteMsg = (msgId) => {
     // TODO [back]
-    this.msgService.delete(msgId);
-    this.salon.msgs = this.salon.msgs.filter(msg => msg.id != msgId);
-    this.groupMsgByDay();
+    // this.msgService.delete(msgId);
+    // this.salon.msgs = this.salon.msgs.filter(msg => msg.id != msgId);
+    // this.groupMsgByDay();
   }
 }
 

@@ -39,7 +39,7 @@ export class Message {
         return nf.format(this.send.getHours()) + ":" + nf.format(this.send.getMinutes());
     }
 
-    public processEmoji = (teamId: number) => {
+    public processEmoji = (teamId: string) => {
         this._html = EmojiService.processEmoji(this._html, 5, teamId);
     }
 
