@@ -1,23 +1,17 @@
 import { EmojiService } from "../services/emoji.service";
+import { TeamNamePict } from "./teamNamePict";
 
-export class SalonName {
-    private _id: number;
-    private _name: string;
-
+export class SalonNameTeam {
     private _html: string;
 
-    // TODO teamId ?
-    constructor(id: number, private _teamId: number, name: string) {
-        this._id = id;
-        this._name = name;
-
-        this._html = EmojiService.processEmoji(name, 4, 0);
+    constructor(private _id: number, private _name: string, private _team: TeamNamePict) {
+        this._html = EmojiService.processEmoji(this.name, 4, this.team.id);
     }
 
     // ===============================================
 
-    static fromJSON = (json: any): SalonName => {
-        return new SalonName(json.id, json.team.id, json.name);
+    static fromJSON = (json: any): SalonNameTeam => {
+        return new SalonNameTeam(json.id, json.name, json.team);
     }
 
     // ===============================================
@@ -30,12 +24,12 @@ export class SalonName {
         this._id = id;
     }
 
-    public get teamId(): number {
-        return this._teamId;
+    public get team(): TeamNamePict {
+        return this._team;
     }
 
-    public set teamId(teamId: number) {
-        this._teamId = teamId;
+    public set team(team: TeamNamePict) {
+        this._team = team;
     }
 
     public get name(): string {

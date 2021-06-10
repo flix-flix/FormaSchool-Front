@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SalonName } from 'src/app/models/salonName';
+import { SalonNameTeam } from 'src/app/models/salonNameTeam';
 import { TeamNamePict } from 'src/app/models/teamNamePict';
 import { SalonService } from 'src/app/services/salon.service';
 import { TeamService } from 'src/app/services/team.service';
@@ -15,12 +15,12 @@ export class TeamMenuComponent implements OnInit {
   @Input() salonId: string;
 
   team: TeamNamePict;
-  salons: SalonName[];
+  salons: SalonNameTeam[];
 
   constructor(private teamService: TeamService, private salonService: SalonService) { }
 
   ngOnInit(): void {
     this.teamService.findNamePictureById(this.teamId).subscribe(json => this.team = json);
-    this.salonService.findAllSalonsNameOfTeam(this.teamId).subscribe(json => this.salons = json.map(salon => SalonName.fromJSON(salon)));
+    this.salonService.findAllSalonsNameOfTeam(this.teamId).subscribe(json => this.salons = json.map(salon => SalonNameTeam.fromJSON(salon)));
   }
 }

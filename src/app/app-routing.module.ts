@@ -36,7 +36,7 @@ const routes: Routes = [
 
       { path: "404", component: NotFoundComponent },
 
-      // TODO redirectTo: lastVisitSedPage
+      // TODO redirectTo: lastVisitedPage
       { path: "", redirectTo: "teamSelect", pathMatch: "full" },
     ]
   },

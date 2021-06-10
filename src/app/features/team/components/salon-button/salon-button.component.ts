@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SalonName } from 'src/app/models/salonName';
+import { SalonNameTeam } from 'src/app/models/salonNameTeam';
 
 @Component({
   selector: 'app-salon-button',
@@ -8,7 +8,7 @@ import { SalonName } from 'src/app/models/salonName';
 })
 export class SalonButtonComponent implements OnInit {
 
-  @Input() salon: SalonName;
+  @Input() salon: SalonNameTeam;
   // TODO [Improve] ? on/off state (linked to other buttons and the display)
   /** Displayed salon */
   @Input() salonId: number;

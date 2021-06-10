@@ -85,6 +85,7 @@ export class EmojiService {
    * @param deep The number of folder deeper than /assets
    */
   static processEmoji = (content: string, deep: number, teamId: number): string => {
+    console.log(content, deep, teamId);
     let html = ""; // return string
     let search = ":"; // TODO regex
     let first = 0, second = 0, prev = 0; // first ':', second ':', prev: current char index

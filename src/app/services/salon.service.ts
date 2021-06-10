@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SalonNameDesc } from '../features/params/salon/model/salonNameDesc';
-import { SalonName } from '../models/salonName';
+import { SalonNameTeam } from '../models/salonNameTeam';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,8 @@ export class SalonService {
   // ================================================================================================
 
   /** Returns the list of the salons for the given team */
-  findAllSalonsNameOfTeam = (teamId: string): Observable<SalonName[]> => {
-    return this.http.get<SalonName[]>(environment.apiUrl + "/salons/ofTeam/" + teamId);
+  findAllSalonsNameOfTeam = (teamId: string): Observable<SalonNameTeam[]> => {
+    return this.http.get<SalonNameTeam[]>(environment.apiUrl + "/salons/ofTeam/" + teamId);
   }
 
   // ================================================================================================

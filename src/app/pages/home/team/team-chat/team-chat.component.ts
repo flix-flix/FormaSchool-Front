@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SalonName } from 'src/app/models/salonName';
+import { SalonNameTeam } from 'src/app/models/salonNameTeam';
 import { SalonService } from 'src/app/services/salon.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class TeamChatComponent implements OnInit {
   /** From URL */
   salonId: string;
 
-  salons: SalonName[];
+  salons: SalonNameTeam[];
 
   constructor(private salonService: SalonService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
