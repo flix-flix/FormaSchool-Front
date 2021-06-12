@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { EmojiNamePict } from '../features/messages/models/emojiNamePict';
 import { CreatedEmoji } from '../models/createdEmoji';
 import { UserNamePict } from '../models/userNamePict';
@@ -13,47 +15,32 @@ export class EmojiService {
   /** path to the folder of the emojis [default, organization, team] */
   static path = ["emojis/", "_remove/emojis/", "_remove/emojis_teams/"];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   //========================================= Emoji Created ======================================
 
-  findCreatedEmojiByTeamId = (teamId: number): Observable<CreatedEmoji[]> => {
-    let res: CreatedEmoji[] = [];
-    Object.values(createdEmojis)
-      .filter(emoji => emoji.teamId == teamId)
-      .map(emoji => res.push(EmojiService.generateCreatedEmoji(emoji.id)));
-    return new Observable<CreatedEmoji[]>(obs => {
-      obs.next(res);
-      obs.complete();
-    });
+  findCreatedEmojiByTeamId = (teamId: string): Observable<CreatedEmoji[]> => {
+    return this.http.get<CreatedEmoji[]>(`${environment.apiUrl}/emojis/createdEmojis/${teamId}`);
+  }
+  findCreatedEmojiOrga = (): Observable<CreatedEmoji[]> => {
+    return this.http.get<CreatedEmoji[]>(`${environment.apiUrl}/emojis/createdEmojisOrga`);
   }
 
-  /**
-   * This function allows you to add a emoji
-   * @param emoji a Created emoji that you want to add 
-   * @returns the id created 
-   */
-  addEmoji = (emoji: CreatedEmoji): Observable<number> => {
-    createdEmojis[nextId] = {
-      id: nextId,
-      teamId: emoji.teamId,
-      name: emoji.name,
-      picture: emoji.picture,
-      user: emoji.user
-    }
-    return new Observable<number>(obs => {
-      obs.next(nextId++);
-      obs.complete();
-    });
+  // /**
+  //  * This function allows you to add a emoji
+  //  * @param emoji a Created emoji that you want to add 
+  //  * @returns the emoji created 
+  //  */
+  addEmoji = (emoji: CreatedEmoji): Observable<CreatedEmoji> => {
+    return this.http.post<CreatedEmoji>(`${environment.apiUrl}/emojis/createdEmojis`, emoji.toJSON());
   }
 
   /**
    * This function allws you to update the emoji
    * @param emoji a Created Emoji that you want to update
    */
-  updateCreatedEmoji = (emoji: CreatedEmoji) => {
-    createdEmojis[emoji.id].name = emoji.name;
-    createdEmojis[emoji.id].picture = emoji.picture;
+  updateCreatedEmoji = (emoji: CreatedEmoji): Observable<CreatedEmoji> => {
+    return this.http.patch<CreatedEmoji>(`${environment.apiUrl}/emojis/createdEmojis`, emoji);
   }
 
   /**
@@ -61,19 +48,16 @@ export class EmojiService {
    * @param name a string
    * @returns true if the database contains an emoji with the alias, otherwise it returns false
    */
-  isNameAlreadyUse = (id: number, name: string): Observable<boolean> => {
-    return new Observable<boolean>(obs => {
-      obs.next(Object.values(createdEmojis).filter(element => element.name == name && element.id != id).length != 0);
-      obs.complete();
-    });
+  isNameAlreadyUse = (id: string, name: string): Observable<Boolean> => {
+    return this.http.get<Boolean>(`${environment.apiUrl}/emojis/nameAlreadyUse/${id}/${name}`);
   }
 
   /**
    * This function allows you to delete a emoji from database by passing his id
    * @param emojiId the id of the emoji you want to delete
    */
-  deleteById = (emojiId: number) => {
-    delete createdEmojis[emojiId];
+  deleteById = (emojiId: string) => {
+    return this.http.delete<void>(`${environment.apiUrl}/emojis/${emojiId}`);
   }
 
   // ================================================================================================
@@ -149,18 +133,18 @@ export class EmojiService {
   // ================================================================================================
   // TODO [back]
 
-  /**
-  * this function give you an EmojiCreated object by the id 
-  * @param emojiId the id fo the emoji you re looking for
-  * @returns a CreatedEmoji object 
-  */
-  static generateCreatedEmoji = (emojiId: number): CreatedEmoji => {
-    if (!(emojiId in createdEmojis)) {
-      console.error("roleId doesn't exist:", emojiId);
-      return undefined;
-    }
-    return new CreatedEmoji(emojiId, createdEmojis[emojiId].teamId, createdEmojis[emojiId].name, createdEmojis[emojiId].picture, createdEmojis[emojiId].user);
-  }
+  // /**
+  // * this function give you an EmojiCreated object by the id 
+  // * @param emojiId the id fo the emoji you re looking for
+  // * @returns a CreatedEmoji object 
+  // */
+  // static generateCreatedEmoji = (emojiId: number): CreatedEmoji => {
+  //   if (!(emojiId in createdEmojis)) {
+  //     console.error("roleId doesn't exist:", emojiId);
+  //     return undefined;
+  //   }
+  //   return new CreatedEmoji(emojiId, createdEmojis[emojiId].teamId, createdEmojis[emojiId].name, createdEmojis[emojiId].picture, createdEmojis[emojiId].user);
+  // }
 }
 
 let nextId = 10;
