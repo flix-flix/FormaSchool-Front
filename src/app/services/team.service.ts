@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Role } from '../features/params/team/roles/models/role';
+import { Team } from '../models/team';
 import { teamNameDescPict } from '../models/teamNameDescPict';
 import { TeamNamePict } from '../models/teamNamePict';
 
@@ -109,24 +111,11 @@ export class TeamService {
    * @param teamId id of the team
    * @param roleId id of the role
    */
-  addRoleToTeam = (teamId: number, roleId: number) => {
-    teams[teamId].roles.push(roleId);
+  addRoleToTeam = (teamId: string, role: Role): Observable<Team> => {
+    console.log();
+    return this.http.patch<Team>(`${environment.apiUrl}/teams/addRole/${teamId}`, role);
   }
 
-  /**
-   * Delete one role from a team
-   * @param teamId id of the team you re looking for
-   * @param roleId id of the role you want to delete
-   */
-  deleteRoleToTeam = (teamId: number, roleId: number) => {
-    let arr = teams[teamId].roles;
-    for (var index = 0; index < arr.length; index++) {
-
-      if (arr[index] === roleId) {
-        arr.splice(index, 1);
-      }
-    }
-  }
 
   /**
    * Return the list of id which are role's id

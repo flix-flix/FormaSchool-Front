@@ -7,7 +7,12 @@ export class createRole {
     constructor(name: string, color: string) {
         this._name = name;
         this._color = color;
-
+    }
+    public toJSON() {
+        return {
+            name: this._name,
+            color: this._color,
+        };
     }
     public get color(): string {
         return this._color;
