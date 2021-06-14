@@ -14,7 +14,7 @@ export class AdminEmojisComponent implements OnInit {
   constructor(private service: EmojiService) { }
 
   ngOnInit(): void {
-    this.service.findCreatedEmojiByTeamId(0).subscribe(emojis => {
+    this.service.findCreatedEmojiOrga().subscribe(emojis => {
       this.emojis = emojis;
     });
   }

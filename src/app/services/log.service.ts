@@ -126,55 +126,19 @@ export class LogService {
   constructor(private http: HttpClient) { }
 
   /**
-   * This function return all log
+   * This function return admin log
    * @returns return a list of log object (picture, firstname, lastname, date, desc)
    */
-  findAll = (): Observable<Log[]> => {
-    let res: Log[] = [];
-    this.logs.map(log => {
-      res.push(new Log(log.userId, log.type, log.teamId, log.date, log.desc));
-    });
-    return new Observable<Log[]>(obs => {
-      obs.next(res);
-      obs.complete();
-    });
+  findAdminLogs = (): Observable<Log[]> => {
+    return this.http.get<Log[]>(`${environment.apiUrl}/logs/withoutId/adminLogs`);
   }
 
   /**
    * This function return all log which contain your teamId
    * @param teamId the id of the team you are looking for
-   * @returns return a list of log object (picture, firstname, lastname, date, desc)
+   * @returns return a list of log object (UserNamePict, type, date, desc)
    */
-  findByTeam = (teamId: number): Observable<Log[]> => {
-    //return this.http.get<Log[]>(`${environment.urlSpring}/logs/withoutId/${teamId}`);
-    let res: Log[] = [];
-    this.logs.filter(log => log.teamId == teamId).map(log => {
-      res.push(new Log(log.userId, log.type, log.teamId, log.date, log.desc));
-    })
-    return new Observable<Log[]>(obs => {
-      obs.next(res);
-      obs.complete();
-    });
-  }
-
-  /**
-   * This function allow you to push a log
-   * @param log the log you want to add
-   *  userId: the user who made the log
-   * 
-   *  teamId: the teamId, case Admin(no team) put 0 
-   *  date: date of creation
-   *  desc: a quick description of what was made
-   */
-  addLog = (log: Log) => {
-    let data = {
-      id: this.nextId++,
-      userId: log.userId,
-      type: log.type,
-      teamId: log.teamId,
-      date: log.date,
-      desc: log.desc
-    }
-    this.logs.push(data);
+  findByTeam = (teamId: String): Observable<Log[]> => {
+    return this.http.get<Log[]>(`${environment.apiUrl}/logs/withoutId/${teamId}`);
   }
 }

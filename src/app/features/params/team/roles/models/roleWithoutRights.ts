@@ -1,20 +1,22 @@
+import { StringifyOptions } from "querystring";
+
 export class RoleWithoutRights {
 
-    private _id: number;
+    private _id: string;
     private _name: string;
     private _color: string;
 
 
-    constructor(id: number, name: string, color: string) {
+    constructor(id: string, name: string, color: string) {
         this._id = id;
         this._name = name;
         this._color = color;
 
     }
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
-    public set id(value: number) {
+    public set id(value: string) {
         this._id = value;
     }
     public get color(): string {

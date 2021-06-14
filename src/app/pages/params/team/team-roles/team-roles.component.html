@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div id="content" *ngIf="roles.length != 0">
+    <div id="content" *ngIf="role">
         <span id="input" class="p-float-label">
             <input id="float-input" type="text" [(ngModel)]="role.name" pInputText>
             <label for="float-input">Nom du rôle</label>
@@ -61,10 +61,20 @@
         </div>
 
         <div class="rightsContainer">
-            <span class="rights" *ngFor="let right of role.rights">
-                <label>{{right.desc}}</label>
-                <p-inputSwitch [(ngModel)]="right.value"></p-inputSwitch>
-            </span>
+            <div>
+                <span class="rights" *ngFor="let right of role.rights">
+                    <label>{{right.desc}}</label>
+                    <p-inputSwitch [(ngModel)]="right.value"></p-inputSwitch>
+                </span>
+            </div>
+            <div id="blackBorder"></div>
+            <div>
+                <span class="rights" *ngFor="let right of role.commonRights">
+                    <label>{{right.desc}}</label>
+                    <p-inputSwitch [(ngModel)]="right.value"></p-inputSwitch>
+                </span>
+            </div>
+
         </div>
 
         <button pButton pRipple type="button" (click)="update()" label="Sauvegarder"
