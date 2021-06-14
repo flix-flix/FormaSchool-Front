@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MemberCreate } from 'src/app/models/member/memberCreate';
 import { TeamNamePict } from 'src/app/models/team/teamNamePict';
 import { UserNamePict } from 'src/app/models/user/userNamePict';
+import { MemberService } from 'src/app/services/member.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -18,7 +20,7 @@ export class AddUserToTeamComponent implements OnInit {
 
 
 
-  constructor(private userService: UserService, private teamService: TeamService) {
+  constructor(private userService: UserService, private teamService: TeamService, private memberService: MemberService) {
   }
 
   ngOnInit(): void {
@@ -32,7 +34,7 @@ export class AddUserToTeamComponent implements OnInit {
    */
   refreshUser = () => {
     if (this.selectedTeam != null) {
-      this.userService.listUserLinkTeam(+this.selectedTeam.id).subscribe(users => {
+      this.userService.userNotInTheTeam(this.selectedTeam.id).subscribe(users => {
         this.users = users;
       })
     }
@@ -42,18 +44,12 @@ export class AddUserToTeamComponent implements OnInit {
    * This function allows us to save the link between a team and a user/users 
    */
   save = () => {
-    let retour1;
-    let retour2;
     this.selectedUser.forEach(user => {
-      this.teamService.saveLink(+this.selectedTeam.id, +user.id).subscribe(idRetour => {
-        retour1 = idRetour;
-      });
-      this.userService.saveLink(+this.selectedTeam.id, +user.id).subscribe(idRetour => {
-        retour2 = idRetour
-      });
-      alert(`retour 1: ${retour1} retour 2: ${retour2}`);
+      this.memberService.save(new MemberCreate(this.selectedTeam, user)).subscribe(membre => {
+        alert(`Membre bien creer avec l'id: ${membre.id}`);
+        this.refreshUser();
+      })
     });
-    this.refreshUser();
   }
 
 }

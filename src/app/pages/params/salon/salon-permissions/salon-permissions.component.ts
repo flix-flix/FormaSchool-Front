@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RoleService } from 'src/app/services/role.service';
-import { Member } from 'src/app/models/member';
+
 import { TeamService } from 'src/app/services/team.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SalonService } from 'src/app/services/salon.service';
 import { RoleWithoutRights } from 'src/app/models/role/roleWithoutRights';
+import { Member } from 'src/app/models/member/member';
 
 
 @Component({

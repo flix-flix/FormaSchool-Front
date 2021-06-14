@@ -32,9 +32,8 @@ export class AddTeamComponent implements OnInit {
   save = () => {
     if (this.teamForm.get("name").value != "") {
       let team: TeamNameDescPict = this.teamForm.value;
-      this.teamService.save(team).subscribe(id => {
-        let idRetour = id;
-        alert(`team creer avec comme id ${idRetour}`);
+      this.teamService.save(team).subscribe(team => {
+        alert(`team creer avec comme id ${team.id}`);
       })
     }
     else {

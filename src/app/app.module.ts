@@ -63,15 +63,16 @@ import { LogPinComponent } from './features/params/team/logs/components/log-pin/
 import { LogUserComponent } from './features/params/team/logs/components/log-user/log-user.component';
 import { LogTeamComponent } from './features/params/team/logs/components/log-team/log-team.component';
 import { LogComponent } from './features/params/team/logs/components/log/log.component';
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
-=======
+
 import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
->>>>>>> Stashed changes
-=======
+
+
 import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
->>>>>>> Stashed changes
+
+import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
+
 
 @NgModule({
   declarations: [
@@ -121,6 +122,7 @@ import { UserIdentityComponent } from './pages/params/user/user-identity/user-id
     LogUserComponent,
     LogTeamComponent,
     LogComponent,
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
     UpdateTeamFormComponent
@@ -130,6 +132,9 @@ import { UserIdentityComponent } from './pages/params/user/user-identity/user-id
 =======
     UserIdentityComponent
 >>>>>>> Stashed changes
+=======
+    UpdateTeamFormComponent
+>>>>>>> d22cdc8e09912a4c20684e35a6335229ae6e575c
   ],
   imports: [
     BrowserModule,
