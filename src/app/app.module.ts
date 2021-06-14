@@ -64,7 +64,11 @@ import { LogUserComponent } from './features/params/team/logs/components/log-use
 import { LogTeamComponent } from './features/params/team/logs/components/log-team/log-team.component';
 import { LogComponent } from './features/params/team/logs/components/log/log.component';
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
+=======
+import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
+>>>>>>> Stashed changes
 =======
 import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
 >>>>>>> Stashed changes
@@ -118,7 +122,11 @@ import { UserIdentityComponent } from './pages/params/user/user-identity/user-id
     LogTeamComponent,
     LogComponent,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     UpdateTeamFormComponent
+=======
+    UserIdentityComponent
+>>>>>>> Stashed changes
 =======
     UserIdentityComponent
 >>>>>>> Stashed changes

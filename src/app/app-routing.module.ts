@@ -22,8 +22,11 @@ import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-templat
 import { AdminLogsComponent } from './pages/params/admin/admin-logs/admin-logs.component';
 import { AdminEmojisComponent } from './pages/params/admin/admin-emojis/admin-emojis.component';
 import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
+<<<<<<< Updated upstream
 import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
 
+=======
+>>>>>>> Stashed changes
 
 const routes: Routes = [
   {
