@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SalonNameTeam } from 'src/app/models/salonNameTeam';
+import { SalonNameTeam } from 'src/app/models/salon/salonNameTeam';
 import { SalonService } from 'src/app/services/salon.service';
 
 @Component({

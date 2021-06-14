@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Role } from '../features/params/team/roles/models/role';
-import { Team } from '../models/team';
-import { teamNameDescPict } from '../models/teamNameDescPict';
-import { TeamNamePict } from '../models/teamNamePict';
+import { Team } from '../models/team/team';
+import { teamNameDescPict } from '../models/team/teamNameDescPict';
+import { TeamNamePict } from '../models/team/teamNamePict';
 
 @Injectable({
   providedIn: 'root'
@@ -112,7 +112,6 @@ export class TeamService {
    * @param roleId id of the role
    */
   addRoleToTeam = (teamId: string, role: Role): Observable<Team> => {
-    console.log();
     return this.http.patch<Team>(`${environment.apiUrl}/teams/addRole/${teamId}`, role);
   }
 

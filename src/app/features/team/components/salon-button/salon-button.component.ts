@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SalonNameTeam } from 'src/app/models/salonNameTeam';
+import { SalonNameTeam } from 'src/app/models/salon/salonNameTeam';
 
 @Component({
   selector: 'app-salon-button',

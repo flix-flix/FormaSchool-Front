@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreatedEmoji } from 'src/app/models/createdEmoji';
+import { CreatedEmoji } from 'src/app/models/emoji/createdEmoji';
 import { EmojiService } from 'src/app/services/emoji.service';
 
 @Component({

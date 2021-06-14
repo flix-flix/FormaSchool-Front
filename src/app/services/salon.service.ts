@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SalonNameDesc } from '../features/params/salon/model/salonNameDesc';
-import { SalonNameTeam } from '../models/salonNameTeam';
+import { SalonNameTeam } from '../models/salon/salonNameTeam';
 
 @Injectable({
   providedIn: 'root'

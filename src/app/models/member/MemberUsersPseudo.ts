@@ -1,4 +1,4 @@
-import { UserNamePict } from "../userNamePict";
+import { UserNamePict } from "../user/userNamePict";
 
 export class MemberUsersPseudo {
 

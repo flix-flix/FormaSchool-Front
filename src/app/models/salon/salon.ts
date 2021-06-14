@@ -1,5 +1,5 @@
 import { Message } from "src/app/features/messages/models/message";
-import { EmojiService } from "../services/emoji.service";
+import { EmojiService } from "../../services/emoji.service";
 
 export class Salon {
     private _id: string;

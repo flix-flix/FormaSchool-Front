@@ -1,4 +1,4 @@
-import { UserNamePict } from "src/app/models/userNamePict";
+import { UserNamePict } from "src/app/models/user/userNamePict";
 
 export class CreatedEmoji {
     private _id: string;

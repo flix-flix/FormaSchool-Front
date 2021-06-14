@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Role } from 'src/app/features/params/team/roles/models/role';
 import { RoleService } from 'src/app/services/role.service';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/user/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
