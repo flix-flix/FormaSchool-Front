@@ -4,8 +4,10 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Role } from '../models/role/role';
 import { Team } from '../models/team/team';
-import { teamNameDescPict } from '../models/team/teamNameDescPict';
+import { TeamNameDescPict } from '../models/team/teamNameDescPict';
 import { TeamNamePict } from '../models/team/teamNamePict';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +49,18 @@ export class TeamService {
       obs.complete();
     });
   }
+  /**
+   * This function help for updating a team with a small presentation
+   * @returns a update team*/
+
+  updateTeam = (teamUpdate: TeamNameDescPict) => {
+    return new Observable<TeamNameDescPict>(obs => {
+      obs.next(new TeamNameDescPict(" ", " ", " ",));
+      obs.complete();
+    });
+
+  }
+
 
   /**
    * This function return a quick presentation of each team. It contain name, picture and the id
@@ -69,7 +83,7 @@ export class TeamService {
    * @param team A creationTeam object (name, desc and picture)
    * @returns A number which is the id of the team created
    */
-  save = (team: teamNameDescPict): Observable<number> => {
+  save = (team: TeamNameDescPict): Observable<number> => {
     let data = {
       id: this.nextId++,
       name: team.name,
@@ -88,12 +102,17 @@ export class TeamService {
 
   // ================================================================================================
 
-  findNamePicDescById = (teamId: number): Observable<teamNameDescPict> => {
-    return new Observable<teamNameDescPict>(obs => {
-      obs.next(new teamNameDescPict("IBM", "Desc Ibm", "1.png"));
+  findNamePicDescById = (teamId: number): Observable<TeamNameDescPict> => {
+    return new Observable<TeamNameDescPict>(obs => {
+      obs.next(new TeamNameDescPict("IBM", "Desc Ibm", "1.png"));
       obs.complete();
     });
   }
+
+  // ================================================================================================
+
+
+
 
   // ================================================================================================
   // TODO [back]
@@ -113,8 +132,8 @@ export class TeamService {
    * @param teamId 
    * @returns a list of number
    */
-  findRolesByTeamId = (teamId: number): Observable<number[]> => {
-    return new Observable<number[]>(obs => {
+  findRolesByTeamId = (teamId: string): Observable<string[]> => {
+    return new Observable<string[]>(obs => {
       obs.next(teams[teamId].roles);
       obs.complete();
     });

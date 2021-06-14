@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { teamNameDescPict } from 'src/app/models/team/teamNameDescPict';
+import { TeamNameDescPict } from 'src/app/models/team/teamNameDescPict';
+
+
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -29,7 +31,7 @@ export class AddTeamComponent implements OnInit {
    */
   save = () => {
     if (this.teamForm.get("name").value != "") {
-      let team: teamNameDescPict = this.teamForm.value;
+      let team: TeamNameDescPict = this.teamForm.value;
       this.teamService.save(team).subscribe(id => {
         let idRetour = id;
         alert(`team creer avec comme id ${idRetour}`);

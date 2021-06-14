@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { userCreation } from '../models/user/userCreation';
-import { UserHasRole } from '../models/user/userHasRole';
 import { UserNamePict } from '../models/user/userNamePict';
+
 
 @Injectable({
   providedIn: 'root'
@@ -44,20 +44,6 @@ export class UserService {
     });
   }
 
-  /**
-   * This function return a presentation of each user. It contain lastname, firstname, id and role
-   * @returns an array ofobject
-   */
-  findAllUserRoles = (): Observable<UserHasRole[]> => {
-    let result: UserHasRole[] = [];
-    Object.values(users).forEach(user => {
-      result.push(UserService.generateUserWithRole(user.id));
-    });
-    return new Observable<UserHasRole[]>(obs => {
-      obs.next(result);
-      obs.complete();
-    });
-  }
 
   /**
    * This function return a quick presentation of each user which arent in the team refered by the id.
@@ -126,13 +112,6 @@ export class UserService {
   // ================================================================================================
   // TODO [back]
 
-  static generateUserWithRole = (userId): UserHasRole => {
-    if (!(userId in users)) {
-      console.error("userId doesn't exist:", userId);
-      return undefined;
-    }
-    return new UserHasRole(users[userId].id, users[userId].lastname, users[userId].firstname, users[userId].roles);
-  }
 
   static generateUserNamePicture = (userId: number): UserNamePict => {
     if (!(userId in users)) {
