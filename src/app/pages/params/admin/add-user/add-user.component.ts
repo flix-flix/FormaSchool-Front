@@ -24,7 +24,6 @@ export class AddUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   /**

@@ -69,21 +69,8 @@ export class TeamService {
    * @param team A creationTeam object (name, desc and picture)
    * @returns A number which is the id of the team created
    */
-  save = (team: teamNameDescPict): Observable<number> => {
-    let data = {
-      id: this.nextId++,
-      name: team.name,
-      desc: team.desc,
-      picture: team.picture,
-      salons: [],
-      users: [],
-      roles: []
-    };
-    teams[data.id] = data;
-    return new Observable<number>(obs => {
-      obs.next(data.id);
-      obs.complete();
-    });
+  save = (team: teamNameDescPict): Observable<Team> => {
+    return this.http.post<Team>(`${environment.apiUrl}/teams`, team);
   }
 
   // ================================================================================================
