@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MemberUsersPseudo } from 'src/app/models/member/MemberUsersPseudo';
-import { UserNamePict } from 'src/app/models/userNamePict';
+import { UserNamePict } from 'src/app/models/user/userNamePict';
 import { EmojiService } from 'src/app/services/emoji.service';
-import { Reaction } from '../../models/reaction';
+import { Reaction } from '../../../../models/reaction';
 
 @Component({
   selector: 'app-emoji',

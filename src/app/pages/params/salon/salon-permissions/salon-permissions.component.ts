@@ -4,7 +4,8 @@ import { Member } from 'src/app/models/member';
 import { TeamService } from 'src/app/services/team.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SalonService } from 'src/app/services/salon.service';
-import { RoleWithoutRights } from 'src/app/features/params/team/roles/models/roleWithoutRights';
+import { RoleWithoutRights } from 'src/app/models/role/roleWithoutRights';
+
 
 @Component({
   selector: 'app-salon-permissions',

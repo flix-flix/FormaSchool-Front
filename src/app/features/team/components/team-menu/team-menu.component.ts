@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SalonNameTeam } from 'src/app/models/salonNameTeam';
-import { TeamNamePict } from 'src/app/models/teamNamePict';
+import { SalonNameTeam } from 'src/app/models/salon/salonNameTeam';
+import { TeamNamePict } from 'src/app/models/team/teamNamePict';
 import { SalonService } from 'src/app/services/salon.service';
 import { TeamService } from 'src/app/services/team.service';
 

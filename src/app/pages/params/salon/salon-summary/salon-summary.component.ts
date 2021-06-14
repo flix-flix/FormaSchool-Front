@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SalonNameDesc } from 'src/app/features/params/salon/model/salonNameDesc';
+import { SalonNameDesc } from 'src/app/models/salon/salonNameDesc';
 import { SalonService } from 'src/app/services/salon.service';
 
 

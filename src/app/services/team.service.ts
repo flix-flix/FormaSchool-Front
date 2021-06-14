@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TeamNamePict } from '../models/teamNamePict';
-import { Member } from '../models/member';
-import { TeamNameDescPict } from '../models/teamNameDescPict';
 import { environment } from 'src/environments/environment';
-import { Team } from '../models/team';
-import { Role } from '../features/params/team/roles/models/role';
+import { Member } from '../models/member';
+import { Role } from '../models/role/role';
+import { Team } from '../models/team/team';
+import { TeamNamePict } from '../models/team/teamNamePict';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -140,7 +141,6 @@ export class TeamService {
    * @param roleId id of the role
    */
   addRoleToTeam = (teamId: string, role: Role): Observable<Team> => {
-    console.log();
     return this.http.patch<Team>(`${environment.apiUrl}/teams/addRole/${teamId}`, role);
   }
 

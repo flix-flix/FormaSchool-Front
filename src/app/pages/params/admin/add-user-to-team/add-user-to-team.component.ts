@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TeamNamePict } from 'src/app/models/teamNamePict';
-import { UserNamePict } from 'src/app/models/userNamePict';
+import { TeamNamePict } from 'src/app/models/team/teamNamePict';
+import { UserNamePict } from 'src/app/models/user/userNamePict';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 

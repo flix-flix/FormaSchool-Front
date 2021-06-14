@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CreatedEmoji } from 'src/app/models/createdEmoji';
+import { CreatedEmoji } from 'src/app/models/emoji/createdEmoji';
 import { EmojiService } from 'src/app/services/emoji.service';
 
 

@@ -1,6 +1,6 @@
 <form [formGroup]="msgGroup">
-    <textarea id="input_msg" formControlName="msg" placeholder="Envoyer un message dans Général" [rows]="1"
-        pInputTextarea autoResize="autoResize" (keydown.enter)="pressEnter($event)"></textarea>
+    <div id="input_msg" formControlName="msg" placeholder="Envoyer un message dans Général"
+        (keydown.enter)="pressEnter($event)" contenteditable></div>
 
     <img id="plus" class="icon feather" src="../../../../../assets/images/feather-icons/plus-circle.svg" alt="joinFile"
         (click)="buttonJoinFile()">

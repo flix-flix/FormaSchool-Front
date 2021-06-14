@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Log } from 'src/app/features/params/team/logs/models/log';
-import { userCreation } from 'src/app/models/userCreation';
+import { userCreation } from 'src/app/models/user/userCreation';
 import { LogService } from 'src/app/services/log.service';
 import { UserService } from 'src/app/services/user.service';
 

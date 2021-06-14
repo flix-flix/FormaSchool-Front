@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+<<<<<<< HEAD
 import { TeamNameDescPict } from 'src/app/models/TeamNameDescPict';
+=======
+import { teamNameDescPict } from 'src/app/models/team/teamNameDescPict';
+>>>>>>> develop
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({

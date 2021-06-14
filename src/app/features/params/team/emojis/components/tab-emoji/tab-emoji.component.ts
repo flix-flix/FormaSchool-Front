@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NumberValueAccessor } from '@angular/forms';
-import { CreatedEmoji } from 'src/app/models/createdEmoji';
+import { CreatedEmoji } from 'src/app/models/emoji/createdEmoji';
 import { EmojiService } from 'src/app/services/emoji.service';
 import { UserService } from 'src/app/services/user.service';
 

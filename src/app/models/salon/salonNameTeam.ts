@@ -1,5 +1,5 @@
-import { EmojiService } from "../services/emoji.service";
-import { TeamNamePict } from "./teamNamePict";
+import { EmojiService } from "../../services/emoji.service";
+import { TeamNamePict } from "../team/teamNamePict";
 
 export class SalonNameTeam {
     private _html: string;

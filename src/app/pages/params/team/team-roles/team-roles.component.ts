@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { createRole } from 'src/app/features/params/team/roles/models/createRole';
-import { Role } from 'src/app/features/params/team/roles/models/role';
-import { RoleWithoutRights } from 'src/app/features/params/team/roles/models/roleWithoutRights';
+import { createRole } from 'src/app/models/role/createRole';
+import { Role } from 'src/app/models/role/role';
+import { RoleWithoutRights } from 'src/app/models/role/roleWithoutRights';
 import { RoleService } from 'src/app/services/role.service';
 import { TeamService } from 'src/app/services/team.service';
 
