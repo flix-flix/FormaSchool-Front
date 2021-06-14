@@ -32,11 +32,9 @@ export class AddUserComponent implements OnInit {
    */
   save = () => {
     let user: userCreation = this.userForm.value;
-    let retour: number;
-    this.userService.save(user).subscribe(idRetour => {
-      retour = idRetour;
+    this.userService.save(user).subscribe(user => {
+      alert(`L'utilisateur a bien été créé avec l'id ${user.id}`)
     });
-    alert(`L'utilisateur a bien été créé avec l'id ${retour}`)
   }
 
 }

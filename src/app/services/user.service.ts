@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user/user';
 import { userCreation } from '../models/user/userCreation';
 import { UserHasRole } from '../models/user/userHasRole';
 import { UserNamePict } from '../models/user/userNamePict';
@@ -102,25 +103,10 @@ export class UserService {
   /**
    * This function allows us to save a user
    * @param user A creationUser object (firstname, lastname, password, email and picture)
-   * @returns A number which is the id of the user created
+   * @returns A user 
    */
-  save = (user: userCreation): Observable<number> => {
-    let data = {
-      id: this.nextId++,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      password: user.password,
-      email: user.password,
-      picture: user.picture,
-      create: new Date(),
-      teams: [],
-      roles: []
-    }
-    users[data.id] = data;
-    return new Observable<number>(obs => {
-      obs.next(data.id);
-      obs.complete();
-    });
+  save = (user: userCreation): Observable<User> => {
+    return this.http.post<User>(`${environment.apiUrl}/users/add`, user);
   }
 
   // ================================================================================================

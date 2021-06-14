@@ -14,6 +14,16 @@ export class userCreation {
         this._picture = picture;
     }
 
+    public toJSON() {
+        return {
+            firstname: this._firstname,
+            lastname: this._lastname,
+            password: this._password,
+            email: this._email,
+            picture: this._picture
+        };
+    }
+
     public get firstname(): string {
         return this._firstname;
     }
