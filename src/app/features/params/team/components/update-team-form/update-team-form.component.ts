@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TeamNameDescPict } from 'src/app/models/teamNameDescPict';
+import { TeamNameDescPict } from 'src/app/models/team/teamNameDescPict';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({

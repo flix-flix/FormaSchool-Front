@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { observable, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Member } from '../models/member';
 import { UserService } from './user.service';
 
@@ -8,7 +10,7 @@ import { UserService } from './user.service';
 })
 export class MemberService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   /**
    * This function help for updating a team with a small presentation
@@ -16,7 +18,7 @@ export class MemberService {
    
   getById = (id: Number): Observable<Members> => {
     return this.http.get<Members>
-  }*/
+  }
 
   updateMember = () => {
     return new Observable<Member>(obs => {
@@ -29,7 +31,7 @@ export class MemberService {
   /**
    * This function return a presentation of each user. It contain lastname, firstname, id and role
    * @returns an array ofobject
-   */
+ 
   findAllMemberRoles = (): Member[] => {
     let result: Member[] = [];
     Object.values(_users).forEach(user => {
@@ -37,7 +39,15 @@ export class MemberService {
     });
     return result;
   }
-  // TODO [back]
+  /**
+ * 
+ * @param teamm
+ * @returns 
+ */
+  findMembersByTeamId = (teamId: string): Observable<Member[]> => {
+    return this.http.get<Member[]>(environment.apiUrl + "/members/findByTeamId/" + teamId);
+  }
+  /*// TODO [back]
   generateUserWithRole = (userId): Member => {
     if (!(userId in _users)) {
       console.error("userId doesn't exist:", userId);
@@ -72,7 +82,7 @@ let _users: {
     firstname: "Bouchaib",
     lastname: "Faham",
     roles: [2, 3]
-  },
+  },*/
 }
 
 

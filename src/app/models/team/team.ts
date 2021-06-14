@@ -6,12 +6,8 @@ export class Team {
     private _listOfMembers: number[];
     private _listOfSalons: number[];
 
-<<<<<<< HEAD:src/app/models/team.ts
 
     constructor(id: number, name: string, desc: string, picture: string, listOfMembers: number[], listOfSalons: number[]) {
-=======
-    constructor(id: number, name: string, desc: string, picture: string, listOfUsers: number[], listOfSalons: number[]) {
->>>>>>> develop:src/app/models/team/team.ts
         this._id = id;
         this._name = name;
         this._desc = desc;
@@ -51,22 +47,14 @@ export class Team {
     public set picture(value: string) {
         this._picture = value;
     }
-<<<<<<< HEAD:src/app/models/team.ts
+
     public get listOfMembers(): number[] {
         return this._listOfMembers;
     }
     public set listOfMembers(value: number[]) {
         this._listOfMembers = value;
-=======
-
-    public get listOfUsers(): number[] {
-        return this._listOfUsers;
     }
 
-    public set listOfUsers(value: number[]) {
-        this._listOfUsers = value;
->>>>>>> develop:src/app/models/team/team.ts
-    }
 
     public get listOfSalons(): number[] {
         return this._listOfSalons;

@@ -39,7 +39,6 @@ import { ParamsTeamTemplateComponent } from './pages/params/team/team-template/t
 import { TeamSidebarComponent } from './features/params/team/components/team-sidebar/team-sidebar.component';
 import { SalonSidebarComponent } from './features/params/salon/components/salon-sidebar/salon-sidebar.component';
 import { LineUserMembersComponent } from './features/params/team/components/line-user-members/line-user-members.component';
-import { LineRoleMembersComponent } from './features/params/team/components/line-role-members/line-role-members.component';
 import { ListboxModule } from 'primeng/listbox';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -99,7 +98,6 @@ import { UpdateTeamFormComponent } from './features/params/team/components/updat
     TeamSidebarComponent,
     SalonSidebarComponent,
     LineUserMembersComponent,
-    LineRoleMembersComponent,
     MsgWriterComponent,
     TeamRolesComponent,
     ParamsSalonTemplateComponent,

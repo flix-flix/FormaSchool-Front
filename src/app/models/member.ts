@@ -1,16 +1,19 @@
+import { Role } from "./role/role";
+import { Team } from "./team/team";
+import { User } from "./user/user";
 
 
 export class Member {
 
-    private _id: number;
-    private _lastname: string;
-    private _firstname: string;
-    private _roles: number[];
+    private _id: string;
+    private _user: User;
+    private _team: Team;
+    private _roles: Role[];
 
-    constructor(id: number, firstname: string, lastname: string, roles: number[]) {
+    constructor(id: string, user: User, team: Team, roles: Role[]) {
         this._id = id;
-        this._firstname = firstname;
-        this._lastname = lastname;
+        this._user = user;
+        this._team = team;
         this._roles = roles;
     }
 
@@ -18,37 +21,37 @@ export class Member {
      * This function is needed to filter on lastname AND firstname
      */
     public get search(): string {
-        return `${this._firstname} ${this._lastname}`
+        return `${this._user}`
     }
 
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
-    public set id(value: number) {
+    public set id(value: string) {
         this._id = value;
     }
 
-    public get lastname(): string {
-        return this._lastname;
+    public get user(): User {
+        return this._user;
     }
 
-    public set lastname(value: string) {
-        this._lastname = value;
+    public set user(value: User) {
+        this._user = value;
     }
 
-    public get firstname(): string {
-        return this._firstname;
+    public get team(): Team {
+        return this._team;
     }
 
-    public set firstname(value: string) {
-        this._firstname = value;
+    public set team(value: Team) {
+        this._team = value;
     }
 
-    public get roles(): number[] {
+    public get roles(): Role[] {
         return this._roles;
     }
-    public set roles(value: number[]) {
+    public set roles(value: Role[]) {
         this._roles = value;
     }
 

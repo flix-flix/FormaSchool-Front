@@ -1,17 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-<<<<<<< HEAD
-import { RoleWithoutRights } from 'src/app/features/params/team/roles/models/roleWithoutRights';
-<<<<<<< HEAD
-import { RoleService } from 'src/app/features/params/team/roles/services/role.service';
+import { ActivatedRoute } from '@angular/router';
 import { Member } from 'src/app/models/member';
-=======
-import { UserHasRole } from 'src/app/models/userHasRole';
-=======
 import { RoleWithoutRights } from 'src/app/models/role/roleWithoutRights';
-import { UserHasRole } from 'src/app/models/user/userHasRole';
->>>>>>> develop
 import { RoleService } from 'src/app/services/role.service';
->>>>>>> develop
 import { TeamService } from 'src/app/services/team.service';
 
 
@@ -22,35 +13,23 @@ import { TeamService } from 'src/app/services/team.service';
 })
 export class LineUserMembersComponent implements OnInit {
 
-  //@Input() roles: RoleWithoutRights[];
-  @Input() user: Member;
+
+  @Input() member: Member;
   rolesMissing: RoleWithoutRights[];
   roleChoosen: RoleWithoutRights;
 
-  constructor(private teamService: TeamService) {
+  constructor(private activatedRoute: ActivatedRoute, private roleService: RoleService) {
   }
 
   ngOnInit(): void {
-    console.log(this.user.roles);
+    console.log(this.member)
     this.findRoleMissing();
+
   }
 
 
   findRoleMissing = () => {
-    this.rolesMissing = [];
-    let rolesId: number[];
-    this.teamService.findRolesByTeamId(1).subscribe(roles => {
-      rolesId = roles;
-      rolesId.forEach(id => {
-        if (!this.user.roles.includes(id)) {
-          RoleService.findWithoutRightsById("" + id).subscribe(role => {
-            this.rolesMissing.push(role);
-          })
-        }
-      });
-    });
-    console.log(this.user.roles);
-    console.log(this.user.roles.includes(1));
+
   }
 
   /*findIdIsInside = (id: number) => {

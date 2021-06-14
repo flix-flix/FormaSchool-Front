@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Member } from '../models/member';
 import { Role } from '../models/role/role';
 import { Team } from '../models/team/team';
+import { TeamNameDescPict } from '../models/team/teamNameDescPict';
 import { TeamNamePict } from '../models/team/teamNamePict';
 
 
@@ -112,17 +113,7 @@ export class TeamService {
   // ================================================================================================
 
 
-  /**
-   * 
-   * @param teamm
-   * @returns 
-   */
-  findMembersByTeamId = (teamId: number): Observable<Member[]> => {
-    return new Observable<Member[]>(obs => {
-      obs.next([new Member(1, "Jason", "Vennin", [1]), new Member(2, "Luca", "Boulet", [2])]);
-      obs.complete();
-    })
-  }
+
 
   // ================================================================================================
   // TODO [back]
@@ -150,8 +141,8 @@ export class TeamService {
    * @param teamId 
    * @returns a list of number
    */
-  findRolesByTeamId = (teamId: number): Observable<number[]> => {
-    return new Observable<number[]>(obs => {
+  findRolesByTeamId = (teamId: string): Observable<string[]> => {
+    return new Observable<string[]>(obs => {
       obs.next(teams[teamId].roles);
       obs.complete();
     });

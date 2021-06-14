@@ -1,8 +1,10 @@
 <div id="global">
-    <label>{{ user.lastname }}</label>
-    <label>{{ user.firstname }}</label>
+    <label>{{ member.user.lastname }}</label>
+    <label>{{ member.user.firstname }}</label>
 
-    <app-line-role-members *ngFor="let role of user.roles" [roleId]="role"></app-line-role-members>
+    <div *ngFor="let role of member.roles">
+        {{ role.name }}
+    </div>
     <p-dropdown [options]="rolesMissing" [(ngModel)]="roleChoosen" optionLabel="name">Search new role</p-dropdown>
     <button type="button" (click)="ajouteRole()">Send Role</button>
 </div>
