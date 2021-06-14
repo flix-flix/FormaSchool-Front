@@ -21,6 +21,10 @@ export class UserService {
     return this.http.get<UserNamePict>(environment.apiUrl + "/users/namePict/" + userId);
   }
 
+  findSettingsById = (userId: string): Observable<UserNamePict> => {
+    return this.http.get<UserNamePict>(environment.apiUrl + "/users/userSettings/" + userId);
+  }
+
   // TODO [Remove]
   findNamePictDefault = (): Observable<UserNamePict> => {
     return this.http.get<UserNamePict>(environment.apiUrl + "/users/default");

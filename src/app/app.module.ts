@@ -63,7 +63,11 @@ import { LogPinComponent } from './features/params/team/logs/components/log-pin/
 import { LogUserComponent } from './features/params/team/logs/components/log-user/log-user.component';
 import { LogTeamComponent } from './features/params/team/logs/components/log-team/log-team.component';
 import { LogComponent } from './features/params/team/logs/components/log/log.component';
+<<<<<<< Updated upstream
 import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
+=======
+import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -113,7 +117,11 @@ import { UpdateTeamFormComponent } from './features/params/team/components/updat
     LogUserComponent,
     LogTeamComponent,
     LogComponent,
+<<<<<<< Updated upstream
     UpdateTeamFormComponent
+=======
+    UserIdentityComponent
+>>>>>>> Stashed changes
   ],
   imports: [
     BrowserModule,
