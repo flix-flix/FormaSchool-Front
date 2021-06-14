@@ -1,7 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { EmojiNamePict } from '../features/messages/models/emojiNamePict';
-import { Reaction } from '../features/messages/models/reaction';
 import { CreatedEmoji } from '../models/createdEmoji';
 import { UserNamePict } from '../models/userNamePict';
 import { UserService } from './user.service';
@@ -14,56 +15,32 @@ export class EmojiService {
   /** path to the folder of the emojis [default, organization, team] */
   static path = ["emojis/", "_remove/emojis/", "_remove/emojis_teams/"];
 
-  constructor() { }
-
-  // TODO [Unused]
-  private findAllNamePict = (): Observable<EmojiNamePict[]> => {
-    return new Observable<EmojiNamePict[]>(obs => {
-      obs.next(EmojiService.generateAllEmojiNamePicture());
-      obs.complete();
-    });
-  }
+  constructor(private http: HttpClient) { }
 
   //========================================= Emoji Created ======================================
 
-
-  findCreatedEmojiByTeamId = (teamId: number): Observable<CreatedEmoji[]> => {
-    let res: CreatedEmoji[] = [];
-    Object.values(createdEmojis)
-      .filter(emoji => emoji.teamId == teamId)
-      .map(emoji => res.push(EmojiService.generateCreatedEmoji(emoji.id)));
-    return new Observable<CreatedEmoji[]>(obs => {
-      obs.next(res);
-      obs.complete();
-    });
+  findCreatedEmojiByTeamId = (teamId: string): Observable<CreatedEmoji[]> => {
+    return this.http.get<CreatedEmoji[]>(`${environment.apiUrl}/emojis/createdEmojis/${teamId}`);
+  }
+  findCreatedEmojiOrga = (): Observable<CreatedEmoji[]> => {
+    return this.http.get<CreatedEmoji[]>(`${environment.apiUrl}/emojis/createdEmojisOrga`);
   }
 
-  /**
-   * This function allows you to add a emoji
-   * @param emoji a Created emoji that you want to add 
-   * @returns the id created 
-   */
-  addEmoji = (emoji: CreatedEmoji): Observable<number> => {
-    createdEmojis[nextId] = {
-      id: nextId,
-      teamId: emoji.teamId,
-      name: emoji.name,
-      picture: emoji.picture,
-      user: emoji.user
-    }
-    return new Observable<number>(obs => {
-      obs.next(nextId++);
-      obs.complete();
-    });
+  // /**
+  //  * This function allows you to add a emoji
+  //  * @param emoji a Created emoji that you want to add 
+  //  * @returns the emoji created 
+  //  */
+  addEmoji = (emoji: CreatedEmoji): Observable<CreatedEmoji> => {
+    return this.http.post<CreatedEmoji>(`${environment.apiUrl}/emojis/createdEmojis`, emoji.toJSON());
   }
 
   /**
    * This function allws you to update the emoji
    * @param emoji a Created Emoji that you want to update
    */
-  updateCreatedEmoji = (emoji: CreatedEmoji) => {
-    createdEmojis[emoji.id].name = emoji.name;
-    createdEmojis[emoji.id].picture = emoji.picture;
+  updateCreatedEmoji = (emoji: CreatedEmoji): Observable<CreatedEmoji> => {
+    return this.http.patch<CreatedEmoji>(`${environment.apiUrl}/emojis/createdEmojis`, emoji);
   }
 
   /**
@@ -71,19 +48,16 @@ export class EmojiService {
    * @param name a string
    * @returns true if the database contains an emoji with the alias, otherwise it returns false
    */
-  isNameAlreadyUse = (id: number, name: string): Observable<boolean> => {
-    return new Observable<boolean>(obs => {
-      obs.next(Object.values(createdEmojis).filter(element => element.name == name && element.id != id).length != 0);
-      obs.complete();
-    });
+  isNameAlreadyUse = (id: string, name: string): Observable<Boolean> => {
+    return this.http.get<Boolean>(`${environment.apiUrl}/emojis/nameAlreadyUse/${id}/${name}`);
   }
 
   /**
    * This function allows you to delete a emoji from database by passing his id
    * @param emojiId the id of the emoji you want to delete
    */
-  deleteById = (emojiId: number) => {
-    delete createdEmojis[emojiId];
+  deleteById = (emojiId: string) => {
+    return this.http.delete<void>(`${environment.apiUrl}/emojis/${emojiId}`);
   }
 
   // ================================================================================================
@@ -94,7 +68,7 @@ export class EmojiService {
    * @param content The string to process
    * @param deep The number of folder deeper than /assets
    */
-  static processEmoji = (content: string, deep: number, teamId: number): string => {
+  static processEmoji = (content: string, deep: number, teamId: string): string => {
     let html = ""; // return string
     let search = ":"; // TODO regex
     let first = 0, second = 0, prev = 0; // first ':', second ':', prev: current char index
@@ -118,16 +92,16 @@ export class EmojiService {
   }
 
   /** Returns the matching emoji if it exits, undefined otherwise */
-  static getEmoji = (name: string, teamId = -1): EmojiNamePict => {
-    let _emojis = [emojisBase, emojisOrga, emojisTeam[teamId]];
+  static getEmoji = (name: string, teamId = "orga"): EmojiNamePict => {
+    let _emojis = [emojisBase, emojisOrga/*, emojisTeam[teamId]*/];
 
     for (let index in _emojis) {
       // TODO [Opti] -> search in dict
-      let emojis = Object.values(_emojis[index]).filter(elem => elem.name == name);
+      let emojis = Object.values(_emojis[index]).filter(emoji => emoji.name == name);
       if (emojis.length != 0)
-        return new EmojiNamePict(emojis[0].id, emojis[0].name, EmojiService.path[index] + emojis[0].picture);
+        return new EmojiNamePict("" + emojis[0].id, emojis[0].name, EmojiService.path[index] + emojis[0].picture);
     }
-
+    console.log("emoji undefined", name);
     return undefined;
   }
 
@@ -159,48 +133,18 @@ export class EmojiService {
   // ================================================================================================
   // TODO [back]
 
-  static generateAllEmojiNamePicture = (): EmojiNamePict[] => {
-    let _emojis = [];
-    for (let emojiId in emojisBase)
-      _emojis.push(EmojiService.generateEmojiNamePicture(+emojiId));
-    return _emojis;
-  }
-
-  static generateEmojiNamePicture = (emojiId: number): EmojiNamePict => {
-    if (!(emojiId in emojisBase)) {
-      console.error("emojiId doesn't exist:", emojiId);
-      return undefined;
-    }
-    return new EmojiNamePict(emojisBase[emojiId].id, emojisBase[emojiId].name, emojisBase[emojiId].picture);
-  }
-
-  static generateAllReactionOfMsg = (msgId: number): Reaction[] => {
-    return Object.values(reactions).filter(react => react.msgId == msgId)// select react of msg
-      .reduce((acc: Reaction[], _react) => {
-        let user = UserService.generateUserName(_react.userId);
-        let exist = acc.find(react => react.emojiId == _react.emojiId);
-
-        if (exist == undefined)
-          acc.push(new Reaction(_react.emojiId, EmojiService.getEmojiName(_react.emojiId), [user]))
-        else
-          exist.users.push(user);
-
-        return acc;
-      }, []);
-  }
-
-  /**
-  * this function give you an EmojiCreated object by the id 
-  * @param emojiId the id fo the emoji you re looking for
-  * @returns a CreatedEmoji object 
-  */
-  static generateCreatedEmoji = (emojiId: number): CreatedEmoji => {
-    if (!(emojiId in createdEmojis)) {
-      console.error("roleId doesn't exist:", emojiId);
-      return undefined;
-    }
-    return new CreatedEmoji(emojiId, createdEmojis[emojiId].teamId, createdEmojis[emojiId].name, createdEmojis[emojiId].picture, createdEmojis[emojiId].user);
-  }
+  // /**
+  // * this function give you an EmojiCreated object by the id 
+  // * @param emojiId the id fo the emoji you re looking for
+  // * @returns a CreatedEmoji object 
+  // */
+  // static generateCreatedEmoji = (emojiId: number): CreatedEmoji => {
+  //   if (!(emojiId in createdEmojis)) {
+  //     console.error("roleId doesn't exist:", emojiId);
+  //     return undefined;
+  //   }
+  //   return new CreatedEmoji(emojiId, createdEmojis[emojiId].teamId, createdEmojis[emojiId].name, createdEmojis[emojiId].picture, createdEmojis[emojiId].user);
+  // }
 }
 
 let nextId = 10;
@@ -555,45 +499,3 @@ let emojisBase: { [id: number]: { id: number, name: string, picture: string } } 
     picture: "zipper-mouth_face.png"
   }
 };
-
-// ================================================================================================
-
-/**  */
-let reactions: { userId: number, msgId: number, emojiId: number }[] = [
-  { userId: 1, msgId: 1, emojiId: 1 },
-  { userId: 1, msgId: 1, emojiId: 2 },
-  { userId: 1, msgId: 1, emojiId: 3 },
-  { userId: 2, msgId: 1, emojiId: 1 },
-
-  { userId: 1, msgId: 12, emojiId: 22 },
-  { userId: 10, msgId: 12, emojiId: 22 },
-  { userId: 20, msgId: 12, emojiId: 22 },
-
-  { userId: 10, msgId: 14, emojiId: 27 },
-
-  { userId: 1, msgId: 15, emojiId: 37 },
-  { userId: 2, msgId: 15, emojiId: 25 },
-  { userId: 2, msgId: 15, emojiId: 37 },
-
-  { userId: 1, msgId: 16, emojiId: 15 },
-  { userId: 10, msgId: 16, emojiId: 15 },
-  { userId: 20, msgId: 16, emojiId: 15 },
-  { userId: 1, msgId: 16, emojiId: 16 },
-  { userId: 10, msgId: 16, emojiId: 16 },
-  { userId: 20, msgId: 16, emojiId: 16 },
-
-  // Nourriture
-  { userId: 10, msgId: 20, emojiId: 10 },
-  { userId: 2, msgId: 20, emojiId: 3 },
-  { userId: 20, msgId: 20, emojiId: 3 },
-
-  { userId: 1, msgId: 21, emojiId: 23 },
-  { userId: 1, msgId: 22, emojiId: 23 },
-
-  { userId: 1, msgId: 23, emojiId: 2 },
-
-  // Lorem
-
-  // ===== Semifir =====
-
-];

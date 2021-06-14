@@ -112,6 +112,10 @@ button{
     margin-left: 80%;
 }
 /*================================ Liste de droits ===================== */
+#blackBorder{
+    border:solid 2px rgba(0, 0, 255, .2);
+    width: 100%;
+}
 .rightsContainer{   
     display: flex;
     flex-direction: column;

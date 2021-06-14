@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProfilComponent implements OnInit {
 
-  user = new UserNamePict(0, "-", "-", "5.jpg");
+  user = new UserNamePict("TODO_No_Default_User", "-", "-", "5.jpg");
 
   constructor(private userService: UserService) { }
 

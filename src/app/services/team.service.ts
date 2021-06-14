@@ -1,8 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TeamNamePict } from '../models/teamNamePict';
 import { Member } from '../models/member';
 import { TeamNameDescPict } from '../models/teamNameDescPict';
+import { environment } from 'src/environments/environment';
+import { Team } from '../models/team';
+import { Role } from '../features/params/team/roles/models/role';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +15,19 @@ export class TeamService {
 
   nextId: number = 11;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  // ================================================================================================
+
+  findAllTeamOfUser = (userId: string): Observable<TeamNamePict[]> => {
+    return this.http.get<TeamNamePict[]>(environment.apiUrl + "/teams/ofUser/" + userId);
+  }
+
+  /** Returns the name and the picture for the given team */
+  findNamePictureById = (teamId: string): Observable<TeamNamePict> => {
+    return this.http.get<TeamNamePict>(environment.apiUrl + "/teams/teamNamePict/" + teamId);
+  }
+  // ================================================================================================
 
   /**
    * This function allows us to link a user to a team.
@@ -44,13 +60,6 @@ export class TeamService {
 
   }
 
-  /** Returns the name and the picture for the given team */
-  findNamePictureById = (teamId: number): Observable<TeamNamePict> => {
-    return new Observable<TeamNamePict>(obs => {
-      obs.next(TeamService.generateTeamNamePicture(teamId));
-      obs.complete();
-    });
-  }
 
   /**
    * This function return a quick presentation of each team. It contain name, picture and the id
@@ -59,7 +68,7 @@ export class TeamService {
   findAllPresentation = (): Observable<TeamNamePict[]> => {
     let res: TeamNamePict[] = [];
     Object.values(teams).forEach(team => {
-      let data = new TeamNamePict(team.id, team.name, team.picture);
+      let data = new TeamNamePict("" + team.id, team.name, team.picture);
       res.push(data);
     });
     return new Observable<TeamNamePict[]>(obs => {
@@ -86,17 +95,6 @@ export class TeamService {
     teams[data.id] = data;
     return new Observable<number>(obs => {
       obs.next(data.id);
-      obs.complete();
-    });
-  }
-
-  afficheEquipes = (): Observable<TeamNamePict[]> => {
-    let res = [];
-    Object.values(teams).forEach(team => {
-      res.push(TeamService.generateTeamNamePicture(team.id));
-    });
-    return new Observable<TeamNamePict[]>(obs => {
-      obs.next(res);
       obs.complete();
     });
   }
@@ -133,7 +131,7 @@ export class TeamService {
       console.error("teamId doesn't exist:", teamId);
       return undefined;
     }
-    return new TeamNamePict(teams[teamId].id, teams[teamId].name, teams[teamId].picture);
+    return new TeamNamePict("" + teams[teamId].id, teams[teamId].name, teams[teamId].picture);
   }
 
   /**
@@ -141,24 +139,11 @@ export class TeamService {
    * @param teamId id of the team
    * @param roleId id of the role
    */
-  addRoleToTeam = (teamId: number, roleId: number) => {
-    teams[teamId].roles.push(roleId);
+  addRoleToTeam = (teamId: string, role: Role): Observable<Team> => {
+    console.log();
+    return this.http.patch<Team>(`${environment.apiUrl}/teams/addRole/${teamId}`, role);
   }
 
-  /**
-   * Delete one role from a team
-   * @param teamId id of the team you re looking for
-   * @param roleId id of the role you want to delete
-   */
-  deleteRoleToTeam = (teamId: number, roleId: number) => {
-    let arr = teams[teamId].roles;
-    for (var index = 0; index < arr.length; index++) {
-
-      if (arr[index] === roleId) {
-        arr.splice(index, 1);
-      }
-    }
-  }
 
   /**
    * Return the list of id which are role's id

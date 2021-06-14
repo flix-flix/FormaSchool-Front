@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleService } from 'src/app/features/params/team/roles/services/role.service';
+import { RoleService } from 'src/app/services/role.service';
 import { Member } from 'src/app/models/member';
 import { TeamService } from 'src/app/services/team.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -47,9 +47,28 @@ export class SalonPermissionsComponent implements OnInit {
 
   swap = () => {
     this.booleanChoosen = !this.booleanChoosen;
+    /**
+     * This function allows us to save a role
+     *
+     
+    save = () => {
+      if (this.roleForm.get("name").value != "" && this.roleForm.get("name").value != null) {
+        //  let role: Role = new Role(this.nextId++, this.roleForm.get("name").value,
+        //    this.roleForm.get("color").value,
+        //    this.listOfRights);
+        // //TODO replace 1 by the id of the actual team
+        // let idRetour: number;
+        // this.roleService.saveUpdateRole(role).subscribe(retour => {
+        //   idRetour = retour;
+        //   alert(`Le role a bien été crée avec l'id ${idRetour}`);
+        // });
+      }
+      else {
+        alert("Le nom ne peut pas être vide");
+      }
+    }
+*/
   }
-
-
 
 
 }

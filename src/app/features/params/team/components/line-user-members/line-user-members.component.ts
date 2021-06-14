@@ -1,7 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RoleWithoutRights } from 'src/app/features/params/team/roles/models/roleWithoutRights';
+<<<<<<< HEAD
 import { RoleService } from 'src/app/features/params/team/roles/services/role.service';
 import { Member } from 'src/app/models/member';
+=======
+import { UserHasRole } from 'src/app/models/userHasRole';
+import { RoleService } from 'src/app/services/role.service';
+>>>>>>> develop
 import { TeamService } from 'src/app/services/team.service';
 
 
@@ -33,7 +38,7 @@ export class LineUserMembersComponent implements OnInit {
       rolesId = roles;
       rolesId.forEach(id => {
         if (!this.user.roles.includes(id)) {
-          RoleService.findWithoutRightsById(id).subscribe(role => {
+          RoleService.findWithoutRightsById("" + id).subscribe(role => {
             this.rolesMissing.push(role);
           })
         }

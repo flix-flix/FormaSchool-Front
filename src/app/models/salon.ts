@@ -2,14 +2,14 @@ import { Message } from "src/app/features/messages/models/message";
 import { EmojiService } from "../services/emoji.service";
 
 export class Salon {
-    private _id: number;
-    private _teamId: number;
+    private _id: string;
+    private _teamId: string;
     private _name: string;
     private _msgs: Message[];
 
     private _html: string;
 
-    constructor(id: number, teamId: number, name: string, msgs: Message[]) {
+    constructor(id: string, teamId: string, name: string, msgs: Message[]) {
         this._id = id;
         this._teamId = teamId;
         this._name = name;
@@ -20,19 +20,19 @@ export class Salon {
 
     // ===============================================
 
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
-    public set id(id: number) {
+    public set id(id: string) {
         this._id = id;
     }
 
-    public get teamId(): number {
+    public get teamId(): string {
         return this._teamId;
     }
 
-    public set teamId(teamId: number) {
+    public set teamId(teamId: string) {
         this._teamId = teamId;
     }
 

@@ -1,13 +1,13 @@
 import { UserNamePict } from "src/app/models/userNamePict";
 
 export class CreatedEmoji {
-    private _id: number;
-    private _teamId: number;
+    private _id: string;
+    private _teamId: string;
     private _name: string;
     private _picture: string;
     private _user: UserNamePict;
 
-    constructor(id: number, teamId: number, name: string, picture: string, user: UserNamePict) {
+    constructor(id: string, teamId: string, name: string, picture: string, user: UserNamePict) {
         this._id = id;
         this._teamId = teamId;
         this._name = name;
@@ -15,10 +15,19 @@ export class CreatedEmoji {
         this._user = user;
     }
 
-    public get teamId(): number {
+    public toJSON() {
+        return {
+            id: this._id,
+            teamId: this._teamId,
+            name: this._name,
+            picture: this._picture,
+            user: this._user
+        };
+    }
+    public get teamId(): string {
         return this._teamId;
     }
-    public set teamId(value: number) {
+    public set teamId(value: string) {
         this._teamId = value;
     }
     public get user(): UserNamePict {
@@ -28,11 +37,11 @@ export class CreatedEmoji {
         this._user = value;
     }
 
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
-    public set id(id: number) {
+    public set id(id: string) {
         this._id = id;
     }
 

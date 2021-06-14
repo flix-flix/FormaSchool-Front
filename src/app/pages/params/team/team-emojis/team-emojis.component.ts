@@ -12,14 +12,14 @@ import { EmojiService } from 'src/app/services/emoji.service';
 export class TeamEmojisComponent implements OnInit {
 
   emojis: CreatedEmoji[];
-  teamId: number;
+  teamId: string;
 
   constructor(private service: EmojiService, private router: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.router.parent.paramMap.subscribe(params => {
-      this.teamId = +params.get("teamId");
+      this.teamId = params.get("teamId");
     })
     this.service.findCreatedEmojiByTeamId(this.teamId).subscribe(emojis => {
       this.emojis = emojis;

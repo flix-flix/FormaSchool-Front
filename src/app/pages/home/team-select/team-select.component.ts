@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from 'src/app/services/team.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-team-select',
@@ -10,12 +11,12 @@ export class TeamSelectComponent implements OnInit {
 
   teams = []
 
-  constructor(private service: TeamService) { }
+  constructor(private service: TeamService, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.service.afficheEquipes().subscribe(listTeam => {
-      this.teams = listTeam;
-    });
+    // TODO User from local storage
+    this.userService.findNamePictDefault().subscribe(user =>
+      this.service.findAllTeamOfUser(user.id).subscribe(listTeam => this.teams = listTeam)
+    );
   }
-
 }

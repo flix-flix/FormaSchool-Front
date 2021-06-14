@@ -15,18 +15,15 @@ export class LogComponent implements OnInit {
   @Input() log: Log;
   @Input() teamId: number;
   user: UserNamePict;
-  team: TeamNamePict;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.user = UserService.generateUserNamePicture(this.log.userId);
-    if (this.log.teamId != 0) {
-      this.team = TeamService.generateTeamNamePicture(this.log.teamId);
-    }
+    this.user = this.log.user;
   }
 
   ddmmyyyy = (date: Date): string => {
+    date = new Date(date);
     var mm = date.getMonth() + 1; // getMonth() is zero-based
     var dd = date.getDate();
 

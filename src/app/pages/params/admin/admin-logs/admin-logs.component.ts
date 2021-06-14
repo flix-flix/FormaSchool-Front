@@ -14,7 +14,7 @@ export class AdminLogsComponent implements OnInit {
   constructor(private service: LogService) { }
 
   ngOnInit(): void {
-    this.service.findAll().subscribe(logs => {
+    this.service.findAdminLogs().subscribe(logs => {
       this.logs = logs;
     })
   }
