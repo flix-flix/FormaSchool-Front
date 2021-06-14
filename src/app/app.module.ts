@@ -62,6 +62,7 @@ import { LogSalonComponent } from './features/params/team/logs/components/log-sa
 import { LogPinComponent } from './features/params/team/logs/components/log-pin/log-pin.component';
 import { LogUserComponent } from './features/params/team/logs/components/log-user/log-user.component';
 import { LogTeamComponent } from './features/params/team/logs/components/log-team/log-team.component';
+import { LogComponent } from './features/params/team/logs/components/log/log.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { LogTeamComponent } from './features/params/team/logs/components/log-tea
     LogSalonComponent,
     LogPinComponent,
     LogUserComponent,
-    LogTeamComponent
+    LogTeamComponent,
+    LogComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Role } from "../features/params/team/roles/models/role";
+import { Role } from "../role/role";
 
 export class UserHasRole {
 

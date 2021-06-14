@@ -26,8 +26,8 @@ form {
     background-color: var(--header);
 
     border: solid .2rem var(--font_2);
+    outline: none;
 }
-
 
 #input_msg::placeholder {
     color: var(--font_1);

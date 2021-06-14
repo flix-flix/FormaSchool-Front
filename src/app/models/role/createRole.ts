@@ -1,21 +1,18 @@
-export class RoleWithoutRights {
+export class createRole {
 
-    private _id: number;
     private _name: string;
     private _color: string;
 
 
-    constructor(id: number, name: string, color: string) {
-        this._id = id;
+    constructor(name: string, color: string) {
         this._name = name;
         this._color = color;
-
     }
-    public get id(): number {
-        return this._id;
-    }
-    public set id(value: number) {
-        this._id = value;
+    public toJSON() {
+        return {
+            name: this._name,
+            color: this._color,
+        };
     }
     public get color(): string {
         return this._color;

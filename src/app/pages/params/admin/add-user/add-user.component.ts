@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Log } from 'src/app/features/params/team/logs/models/log';
-import { userCreation } from 'src/app/models/userCreation';
+import { userCreation } from 'src/app/models/user/userCreation';
 import { LogService } from 'src/app/services/log.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -37,7 +36,6 @@ export class AddUserComponent implements OnInit {
     this.userService.save(user).subscribe(idRetour => {
       retour = idRetour;
     });
-    this.logService.addLog(new Log(1, 8, 0, new Date(), `a creer l'utilisateur ${user.firstname} ${user.lastname}`));
     alert(`L'utilisateur a bien été créé avec l'id ${retour}`)
   }
 

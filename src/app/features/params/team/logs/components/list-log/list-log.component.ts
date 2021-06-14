@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Log } from '../../models/log';
+import { Log } from '../../../../../../models/log';
 
 @Component({
   selector: 'app-list-log',
@@ -14,7 +14,9 @@ export class ListLogComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.trieDate();
+    if (this.logs != null) {
+      this.trieDate();
+    }
   }
 
   /**

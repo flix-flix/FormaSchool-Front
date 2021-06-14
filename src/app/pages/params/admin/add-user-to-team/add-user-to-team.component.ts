@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TeamNamePict } from 'src/app/models/teamNamePict';
-import { UserNamePict } from 'src/app/models/userNamePict';
+import { TeamNamePict } from 'src/app/models/team/teamNamePict';
+import { UserNamePict } from 'src/app/models/user/userNamePict';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -32,7 +32,7 @@ export class AddUserToTeamComponent implements OnInit {
    */
   refreshUser = () => {
     if (this.selectedTeam != null) {
-      this.userService.listUserLinkTeam(this.selectedTeam.id).subscribe(users => {
+      this.userService.listUserLinkTeam(+this.selectedTeam.id).subscribe(users => {
         this.users = users;
       })
     }
@@ -45,10 +45,10 @@ export class AddUserToTeamComponent implements OnInit {
     let retour1;
     let retour2;
     this.selectedUser.forEach(user => {
-      this.teamService.saveLink(this.selectedTeam.id, user.id).subscribe(idRetour => {
+      this.teamService.saveLink(+this.selectedTeam.id, +user.id).subscribe(idRetour => {
         retour1 = idRetour;
       });
-      this.userService.saveLink(this.selectedTeam.id, user.id).subscribe(idRetour => {
+      this.userService.saveLink(+this.selectedTeam.id, +user.id).subscribe(idRetour => {
         retour2 = idRetour
       });
       alert(`retour 1: ${retour1} retour 2: ${retour2}`);

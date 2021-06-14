@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RoleService } from 'src/app/features/params/team/roles/services/role.service';
-import { RoleWithoutRights } from '../../roles/models/roleWithoutRights';
+import { RoleService } from 'src/app/services/role.service';
+import { RoleWithoutRights } from '../../../../../models/role/roleWithoutRights';
 
 @Component({
   selector: 'app-line-role-members',
@@ -17,7 +17,7 @@ export class LineRoleMembersComponent implements OnInit {
   ngOnInit(): void {
 
     console.log(this.roleId)
-    RoleService.findWithoutRightsById(this.roleId).subscribe(role => {
+    RoleService.findWithoutRightsById("" + this.roleId).subscribe(role => {
       this.role = role;
     });
   }

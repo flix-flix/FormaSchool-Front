@@ -1,13 +1,23 @@
-export class createRole {
+import { StringifyOptions } from "querystring";
 
+export class RoleWithoutRights {
+
+    private _id: string;
     private _name: string;
     private _color: string;
 
 
-    constructor(name: string, color: string) {
+    constructor(id: string, name: string, color: string) {
+        this._id = id;
         this._name = name;
         this._color = color;
 
+    }
+    public get id(): string {
+        return this._id;
+    }
+    public set id(value: string) {
+        this._id = value;
     }
     public get color(): string {
         return this._color;

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Salon } from 'src/app/models/salon';
-import { TeamNamePict } from 'src/app/models/teamNamePict';
+import { SalonNameTeam } from 'src/app/models/salon/salonNameTeam';
+import { TeamNamePict } from 'src/app/models/team/teamNamePict';
 import { SalonService } from 'src/app/services/salon.service';
 import { TeamService } from 'src/app/services/team.service';
 
@@ -11,16 +11,16 @@ import { TeamService } from 'src/app/services/team.service';
 })
 export class TeamMenuComponent implements OnInit {
 
-  @Input() teamId: number;
-  @Input() salonId: number;
+  @Input() teamId: string;
+  @Input() salonId: string;
 
   team: TeamNamePict;
-  salons: Salon[];
+  salons: SalonNameTeam[];
 
   constructor(private teamService: TeamService, private salonService: SalonService) { }
 
   ngOnInit(): void {
     this.teamService.findNamePictureById(this.teamId).subscribe(json => this.team = json);
-    this.salonService.findAllSalonsOfTeam(this.teamId).subscribe(json => this.salons = json);
+    this.salonService.findAllSalonsNameOfTeam(this.teamId).subscribe(json => this.salons = json.map(salon => SalonNameTeam.fromJSON(salon)));
   }
 }

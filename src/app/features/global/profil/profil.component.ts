@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserNamePict } from 'src/app/models/user/userNamePict';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-profil',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilComponent implements OnInit {
 
-  constructor() { }
+  user = new UserNamePict("TODO_No_Default_User", "-", "-", "5.jpg");
+
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.findNamePictDefault().subscribe(user => this.user = user);
   }
 
   openUserParams = () => {

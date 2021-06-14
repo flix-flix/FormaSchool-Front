@@ -1,19 +1,12 @@
 export class EmojiNamePict {
-    private _id: number;
-    private _name: string;
-    private _picture: string;
 
-    constructor(id: number, name: string, picture: string) {
-        this._id = id;
-        this._name = name;
-        this._picture = picture
-    }
+    constructor(private _id: string, private _name: string, private _picture: string) { }
 
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
-    public set id(id: number) {
+    public set id(id: string) {
         this._id = id;
     }
 

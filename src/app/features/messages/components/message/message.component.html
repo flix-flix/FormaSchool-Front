@@ -1,11 +1,11 @@
 <div class="msg">
     <div>
-        <img class="author_img" src="../../../../../assets/images/_remove/users/{{msg.sender.picture}}" alt="">
+        <img class="author_img" src="../../../../../assets/images/_remove/users/{{msg.sender.user.picture}}" alt="">
     </div>
 
     <div id="left">
         <div class="top">
-            <span class="sender">{{msg.sender.firstname}} {{msg.sender.lastname}}</span>
+            <span class="sender">{{msg.sender.user.firstname}} {{msg.sender.user.lastname}}</span>
             <span class="time">{{msg.getTimeStr()}}</span>
         </div>
 
@@ -16,7 +16,7 @@
 
         <!-- Reactions -->
         <div id="emojis">
-            <app-emoji *ngFor="let react of msg.reactions" [emoji]="react"></app-emoji>
+            <app-emoji *ngFor="let react of msg.reactions" [reaction]="react"></app-emoji>
         </div>
     </div>
 
@@ -26,13 +26,13 @@
             (click)="emoji()">
 
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/edit-3.svg" alt="edit"
-            *ngIf="msg.sender.id == 1" (click)="edit()">
+            *ngIf="msg.sender.user.firstname == 'Félix'" (click)="edit()">
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/trash-2.svg" alt="delete"
-            *ngIf="msg.sender.id == 1" (click)="deleteClick()">
+            *ngIf="msg.sender.user.firstname == 'Félix'" (click)="deleteClick()">
 
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/corner-up-left.svg" alt="reply"
-            *ngIf="msg.sender.id != 1" (click)="reply()">
+            *ngIf="msg.sender.user.firstname != 'Félix'" (click)="reply()">
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/more-horizontal.svg" alt="other"
-            *ngIf="msg.sender.id != 1" (click)="other()">
+            *ngIf="msg.sender.user.firstname != 'Félix'" (click)="other()">
     </div>
 </div>
