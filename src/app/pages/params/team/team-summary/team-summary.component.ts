@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { teamNameDescPict } from 'src/app/models/team/teamNameDescPict';
+import { ActivatedRoute } from '@angular/router';
+import { TeamNameDescPict } from 'src/app/models/team/teamNameDescPict';
+
+
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -10,7 +12,7 @@ import { TeamService } from 'src/app/services/team.service';
 })
 export class TeamSummaryComponent implements OnInit {
 
-  team: teamNameDescPict;
+  team: TeamNameDescPict;
 
   constructor(
     private service: TeamService,

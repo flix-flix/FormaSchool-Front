@@ -36,4 +36,8 @@ export class MsgWriterComponent implements OnInit {
     event.preventDefault();
     this.sendMsg();
   }
+
+  onInput = (event) => {
+    //event == str;
+  }
 }

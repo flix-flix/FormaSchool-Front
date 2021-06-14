@@ -1,6 +1,9 @@
+<<<<<<< HEAD:src/app/models/member.ts
+=======
 import { Role } from "../role/role";
+>>>>>>> develop:src/app/models/user/userHasRole.ts
 
-export class UserHasRole {
+export class Member {
 
     private _id: number;
     private _lastname: string;

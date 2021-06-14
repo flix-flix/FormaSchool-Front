@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Role } from 'src/app/models/role/role';
-import { UserHasRole } from 'src/app/models/user/userHasRole';
-import { UserService } from 'src/app/services/user.service';
+import { ActivatedRoute } from '@angular/router';
+import { Member } from 'src/app/models/member/member';
+import { MemberService } from 'src/app/services/member.service';
 
 @Component({
   selector: 'app-team-members',
@@ -10,15 +10,18 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class TeamMembersComponent implements OnInit {
 
+  teamId: string;
+  members: Member[];
 
-  users: UserHasRole[];
-
-  constructor(private userService: UserService) { }
+  constructor(private service: MemberService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.parent.paramMap.subscribe(params => {
+      this.teamId = params.get("teamId");
+    })
 
-    this.userService.findAllUserRoles().subscribe(users => {
-      this.users = users;
+    this.service.findMembersByTeamId(this.teamId).subscribe(members => {
+      this.members = members
     });
   }
 

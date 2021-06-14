@@ -4,8 +4,10 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Role } from '../models/role/role';
 import { Team } from '../models/team/team';
-import { teamNameDescPict } from '../models/team/teamNameDescPict';
+import { TeamNameDescPict } from '../models/team/teamNameDescPict';
 import { TeamNamePict } from '../models/team/teamNamePict';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,40 +30,13 @@ export class TeamService {
   }
   // ================================================================================================
 
-  /**
-   * This function allows us to link a user to a team.
-   * @param idTeam the id of the team you want to linked
-   * @param idUser the id of the user you want to linked
-   * @returns It return -1 if the team does not exist in the base, else it return 0 if its ok !
-   */
-  saveLink = (idTeam: number, idUser: number): Observable<number> => {
-    let res = -1;
-    Object.values(teams).forEach(team => {
-      if (team.id == idTeam) {
-        team.users.push(idUser);
-        res = 0;
-      }
-    });
-    return new Observable<number>(obs => {
-      obs.next(res);
-      obs.complete();
-    });
-  }
 
   /**
    * This function return a quick presentation of each team. It contain name, picture and the id
    * @returns an array of TeamLinkUser object
    */
   findAllPresentation = (): Observable<TeamNamePict[]> => {
-    let res: TeamNamePict[] = [];
-    Object.values(teams).forEach(team => {
-      let data = new TeamNamePict("" + team.id, team.name, team.picture);
-      res.push(data);
-    });
-    return new Observable<TeamNamePict[]>(obs => {
-      obs.next(res);
-      obs.complete();
-    });
+    return this.http.get<TeamNamePict[]>(`${environment.apiUrl}/teams/teamNamePict`);
   }
 
   /**
@@ -69,31 +44,23 @@ export class TeamService {
    * @param team A creationTeam object (name, desc and picture)
    * @returns A number which is the id of the team created
    */
-  save = (team: teamNameDescPict): Observable<number> => {
-    let data = {
-      id: this.nextId++,
-      name: team.name,
-      desc: team.desc,
-      picture: team.picture,
-      salons: [],
-      users: [],
-      roles: []
-    };
-    teams[data.id] = data;
-    return new Observable<number>(obs => {
-      obs.next(data.id);
+  save = (team: TeamNameDescPict): Observable<Team> => {
+    return this.http.post<Team>(`${environment.apiUrl}/teams`, team);
+  }
+
+  // ================================================================================================
+
+  findNamePicDescById = (teamId: number): Observable<TeamNameDescPict> => {
+    return new Observable<TeamNameDescPict>(obs => {
+      obs.next(new TeamNameDescPict("IBM", "Desc Ibm", "1.png"));
       obs.complete();
     });
   }
 
   // ================================================================================================
 
-  findNamePicDescById = (teamId: number): Observable<teamNameDescPict> => {
-    return new Observable<teamNameDescPict>(obs => {
-      obs.next(new teamNameDescPict("IBM", "Desc Ibm", "1.png"));
-      obs.complete();
-    });
-  }
+
+
 
   // ================================================================================================
   // TODO [back]
@@ -113,8 +80,8 @@ export class TeamService {
    * @param teamId 
    * @returns a list of number
    */
-  findRolesByTeamId = (teamId: number): Observable<number[]> => {
-    return new Observable<number[]>(obs => {
+  findRolesByTeamId = (teamId: string): Observable<string[]> => {
+    return new Observable<string[]>(obs => {
       obs.next(teams[teamId].roles);
       obs.complete();
     });
