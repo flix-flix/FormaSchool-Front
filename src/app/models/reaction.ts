@@ -1,5 +1,5 @@
 import { MemberUsersPseudo } from "src/app/models/member/MemberUsersPseudo";
-import { EmojiNamePict } from "./emojiNamePict";
+import { EmojiNamePict } from "./emoji/emojiNamePict";
 
 export class Reaction {
 

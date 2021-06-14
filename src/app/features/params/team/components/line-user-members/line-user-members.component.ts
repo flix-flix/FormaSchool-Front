@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RoleWithoutRights } from 'src/app/features/params/team/roles/models/roleWithoutRights';
+import { RoleWithoutRights } from 'src/app/models/role/roleWithoutRights';
 import { UserHasRole } from 'src/app/models/user/userHasRole';
 import { RoleService } from 'src/app/services/role.service';
 import { TeamService } from 'src/app/services/team.service';

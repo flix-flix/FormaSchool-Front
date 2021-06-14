@@ -1,8 +1,8 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Salon } from 'src/app/models/salon/salon';
 import { SalonService } from 'src/app/services/salon.service';
-import { Message } from '../../models/message';
-import { MessageService } from '../../services/message.service';
+import { Message } from '../../../../models/message';
+import { MessageService } from '../../../../services/message.service';
 
 @Component({
   selector: 'app-msg-thread',

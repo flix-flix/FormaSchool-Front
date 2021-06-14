@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Role } from '../features/params/team/roles/models/role';
+import { Role } from '../models/role/role';
 import { Team } from '../models/team/team';
 import { teamNameDescPict } from '../models/team/teamNameDescPict';
 import { TeamNamePict } from '../models/team/teamNamePict';

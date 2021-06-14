@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Role } from 'src/app/features/params/team/roles/models/role';
+import { Role } from 'src/app/models/role/role';
 import { UserHasRole } from 'src/app/models/user/userHasRole';
 import { UserService } from 'src/app/services/user.service';
 

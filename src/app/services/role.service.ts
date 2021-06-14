@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { createRole } from '../features/params/team/roles/models/createRole';
-import { Role } from '../features/params/team/roles/models/role';
-import { RoleWithoutRights } from '../features/params/team/roles/models/roleWithoutRights';
+import { createRole } from '../models/role/createRole';
+import { Role } from '../models/role/role';
+import { RoleWithoutRights } from '../models/role/roleWithoutRights';
 
 @Injectable({
   providedIn: 'root'
