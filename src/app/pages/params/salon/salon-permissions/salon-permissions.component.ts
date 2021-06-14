@@ -32,7 +32,7 @@ export class SalonPermissionsComponent implements OnInit {
     this.teamService.findRolesByTeamId(this.teamId).subscribe(roles => {
       let result = [];
       roles.forEach(roleId => {
-        result.push(RoleService.generateRoleWithoutRights(roleId));
+        // result.push(RoleService.generateRoleWithoutRights(roleId));
       });
       this.roles = result;
     })
