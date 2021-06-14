@@ -65,19 +65,8 @@ export class UserService {
    * @param id the id of the team
    * @returns a list of UserLinkTeam which dont have the team
    */
-  listUserLinkTeam = (id: number): Observable<UserNamePict[]> => {
-    let res = Object.values(users)
-      .filter(user => !user.teams.includes(id))
-      .map(userDetail => new UserNamePict(
-        "" + userDetail.id,
-        userDetail.firstname,
-        userDetail.lastname,
-        userDetail.picture)
-      );
-    return new Observable<UserNamePict[]>(obs => {
-      obs.next(res);
-      obs.complete();
-    });
+  userNotInTheTeam = (teamId: string): Observable<UserNamePict[]> => {
+    return this.http.get<UserNamePict[]>(`${environment.apiUrl}/users/userNotInTheTeam/${teamId}`);
   }
 
   /**
