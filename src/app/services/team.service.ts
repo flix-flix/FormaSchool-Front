@@ -125,14 +125,6 @@ export class TeamService {
     return new TeamNamePict("" + teams[teamId].id, teams[teamId].name, teams[teamId].picture);
   }
 
-  /**
-   * Add a role to the team
-   * @param teamId id of the team
-   * @param roleId id of the role
-   */
-  addRoleToTeam = (teamId: string, role: Role): Observable<Team> => {
-    return this.http.patch<Team>(`${environment.apiUrl}/teams/addRole/${teamId}`, role);
-  }
 
 
   /**
