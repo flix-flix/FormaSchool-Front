@@ -21,11 +21,8 @@ import { TemplateComponent } from './pages/home/home-template/template.component
 import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-template/salon-template.component';
 import { AdminLogsComponent } from './pages/params/admin/admin-logs/admin-logs.component';
 import { AdminEmojisComponent } from './pages/params/admin/admin-emojis/admin-emojis.component';
-<<<<<<< Updated upstream
+// import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
 import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
-=======
-import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
->>>>>>> Stashed changes
 
 const routes: Routes = [
   {
@@ -41,7 +38,7 @@ const routes: Routes = [
 
       { path: "404", component: NotFoundComponent },
 
-      { path: "user", component: UserIdentityComponent},
+      // { path: "user", component: UserIdentityComponent},
 
       // TODO redirectTo: lastVisitSedPage
       { path: "", redirectTo: "teamSelect", pathMatch: "full" },
