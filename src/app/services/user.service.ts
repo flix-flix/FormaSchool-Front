@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { User } from '../models/user/user';
 import { UserConnect } from '../models/user/userConnect';
 import { userCreation } from '../models/user/userCreation';
-import { USerLocalStorage } from '../models/user/userLocalStorage';
+import { UserLocalStorage } from '../models/user/userLocalStorage';
 import { UserNamePict } from '../models/user/userNamePict';
 
 
@@ -33,8 +33,8 @@ export class UserService {
     return this.http.get<UserNamePict>(environment.apiUrl + "/users/default");
   }
 
-  connect = (user: UserConnect): Observable<USerLocalStorage> => {
-    return this.http.post<USerLocalStorage>(environment.apiUrl + "/users/connect", user);
+  connect = (user: UserConnect): Observable<UserLocalStorage> => {
+    return this.http.post<UserLocalStorage>(environment.apiUrl + "/users/connect", user);
   }
 
   // ================================================================================================

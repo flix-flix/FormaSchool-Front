@@ -1,4 +1,4 @@
-export class USerLocalStorage {
+export class UserLocalStorage {
     private _id: string;
     private _firstname: string;
     private _lastname: string;
