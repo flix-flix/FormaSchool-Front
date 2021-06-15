@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user/user';
+import { UserConnect } from '../models/user/userConnect';
 import { userCreation } from '../models/user/userCreation';
+import { USerLocalStorage } from '../models/user/userLocalStorage';
 import { UserNamePict } from '../models/user/userNamePict';
 
 
@@ -29,6 +31,10 @@ export class UserService {
   // TODO [Remove]
   findNamePictDefault = (): Observable<UserNamePict> => {
     return this.http.get<UserNamePict>(environment.apiUrl + "/users/default");
+  }
+
+  connect = (user: UserConnect): Observable<USerLocalStorage> => {
+    return this.http.post<USerLocalStorage>(environment.apiUrl + "/users/connect", user);
   }
 
   // ================================================================================================
