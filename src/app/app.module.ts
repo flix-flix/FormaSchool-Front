@@ -63,15 +63,9 @@ import { LogPinComponent } from './features/params/team/logs/components/log-pin/
 import { LogUserComponent } from './features/params/team/logs/components/log-user/log-user.component';
 import { LogTeamComponent } from './features/params/team/logs/components/log-team/log-team.component';
 import { LogComponent } from './features/params/team/logs/components/log/log.component';
-
 import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
 
-import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
 
-
-import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
-
-import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
 
 
 @NgModule({
@@ -122,19 +116,7 @@ import { UpdateTeamFormComponent } from './features/params/team/components/updat
     LogUserComponent,
     LogTeamComponent,
     LogComponent,
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     UpdateTeamFormComponent
-=======
-    UserIdentityComponent
->>>>>>> Stashed changes
-=======
-    UserIdentityComponent
->>>>>>> Stashed changes
-=======
-    UpdateTeamFormComponent
->>>>>>> d22cdc8e09912a4c20684e35a6335229ae6e575c
   ],
   imports: [
     BrowserModule,
