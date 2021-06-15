@@ -1,25 +1,25 @@
+import { Role } from "../role/role";
+
 export class Team {
-    private _id: number;
+    private _id: string;
     private _name: string;
     private _desc: string;
     private _picture: string;
-    private _listOfUsers: number[];
-    private _listOfSalons: number[];
+    private _roles: Role[];
 
-    constructor(id: number, name: string, desc: string, picture: string, listOfUsers: number[], listOfSalons: number[]) {
+    constructor(id: string, name: string, desc: string, picture: string, roles: Role[]) {
         this._id = id;
         this._name = name;
         this._desc = desc;
         this._picture = picture;
-        this._listOfUsers = listOfUsers;
-        this._listOfSalons = listOfSalons;
+        this._roles = roles;
     }
 
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
-    public set id(value: number) {
+    public set id(value: string) {
         this._id = value;
     }
 
@@ -46,20 +46,10 @@ export class Team {
     public set picture(value: string) {
         this._picture = value;
     }
-
-    public get listOfUsers(): number[] {
-        return this._listOfUsers;
+    public get roles(): Role[] {
+        return this._roles;
     }
-
-    public set listOfUsers(value: number[]) {
-        this._listOfUsers = value;
-    }
-
-    public get listOfSalons(): number[] {
-        return this._listOfSalons;
-    }
-
-    public set listOfSalons(value: number[]) {
-        this._listOfSalons = value;
+    public set roles(value: Role[]) {
+        this._roles = value;
     }
 }

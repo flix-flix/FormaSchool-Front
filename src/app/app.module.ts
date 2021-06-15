@@ -39,7 +39,6 @@ import { ParamsTeamTemplateComponent } from './pages/params/team/team-template/t
 import { TeamSidebarComponent } from './features/params/team/components/team-sidebar/team-sidebar.component';
 import { SalonSidebarComponent } from './features/params/salon/components/salon-sidebar/salon-sidebar.component';
 import { LineUserMembersComponent } from './features/params/team/components/line-user-members/line-user-members.component';
-import { LineRoleMembersComponent } from './features/params/team/components/line-role-members/line-role-members.component';
 import { ListboxModule } from 'primeng/listbox';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -50,6 +49,7 @@ import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-templat
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { EmojiComponent } from './features/messages/components/emoji/emoji.component';
 import { ListLogComponent } from './features/params/team/logs/components/list-log/list-log.component';
@@ -63,6 +63,7 @@ import { LogPinComponent } from './features/params/team/logs/components/log-pin/
 import { LogUserComponent } from './features/params/team/logs/components/log-user/log-user.component';
 import { LogTeamComponent } from './features/params/team/logs/components/log-team/log-team.component';
 import { LogComponent } from './features/params/team/logs/components/log/log.component';
+import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,6 @@ import { LogComponent } from './features/params/team/logs/components/log/log.com
     TeamSidebarComponent,
     SalonSidebarComponent,
     LineUserMembersComponent,
-    LineRoleMembersComponent,
     MsgWriterComponent,
     TeamRolesComponent,
     ParamsSalonTemplateComponent,
@@ -112,7 +112,8 @@ import { LogComponent } from './features/params/team/logs/components/log/log.com
     LogPinComponent,
     LogUserComponent,
     LogTeamComponent,
-    LogComponent
+    LogComponent,
+    UpdateTeamFormComponent
   ],
   imports: [
     BrowserModule,
@@ -132,7 +133,8 @@ import { LogComponent } from './features/params/team/logs/components/log/log.com
     TableModule,
     ToolbarModule,
     DialogModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]
