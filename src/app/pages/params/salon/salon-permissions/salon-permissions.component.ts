@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleService } from 'src/app/services/role.service';
 
 import { TeamService } from 'src/app/services/team.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SalonService } from 'src/app/services/salon.service';
-import { RoleWithoutRights } from 'src/app/models/role/roleWithoutRights';
-import { Member } from 'src/app/models/member/member';
+import { PermissionService } from 'src/app/services/permission.service';
+import { PermissionMemberRoleWithoutRights } from 'src/app/models/permission/permissionMemberRoleWithoutRights';
+import { PermissionRights } from 'src/app/models/permission/permissionRights';
 
 
 @Component({
@@ -15,18 +14,32 @@ import { Member } from 'src/app/models/member/member';
 })
 export class SalonPermissionsComponent implements OnInit {
 
-  teamId: number;
+  teamId: string;
+  salonId: string;
+  permissionsMembers: PermissionMemberRoleWithoutRights[];
+  permissionsRoles: PermissionMemberRoleWithoutRights[];
+  permissionChoosen: PermissionRights;
 
-  constructor(private salonService: SalonService, private router: ActivatedRoute) {
+  constructor(private teamService: TeamService, private permissionService: PermissionService, private router: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.router.parent.paramMap.subscribe(params => {
-      let salonId = +params.get("salonId");
-      this.salonService.findTeamIdById(salonId).subscribe(teamId => {
-        this.teamId = teamId;
+      this.salonId = params.get("salonId");
+      this.teamService.findTeamIdBySalonId(this.salonId).subscribe(team => {
+        this.teamId = team.id;
       });
+      this.permissionService.findPermissionBySalonId(this.salonId).subscribe(permissions => {
+        this.permissionsMembers = permissions.filter(permission => permission.member != null);
+        this.permissionsRoles = permissions.filter(permission => permission.role != null);
+      })
     });
+  }
+
+  choosePermission = (permissionId: string) => {
+    this.permissionService.findPermissionRightsByPermissionId(permissionId).subscribe(permission => {
+      this.permissionChoosen = permission;
+    })
   }
 
 }
