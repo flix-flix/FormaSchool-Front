@@ -9,12 +9,12 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProfilComponent implements OnInit {
 
-  user = new UserNamePict("TODO_No_Default_User", "-", "-", "5.jpg");
+  user: UserNamePict;
 
-  constructor(private userService: UserService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.userService.findNamePictDefault().subscribe(user => this.user = user);
+    this.user = JSON.parse(localStorage.getItem("user"));
   }
 
   openUserParams = () => {

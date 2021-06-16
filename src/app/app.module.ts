@@ -65,6 +65,9 @@ import { LogTeamComponent } from './features/params/team/logs/components/log-tea
 import { LogComponent } from './features/params/team/logs/components/log/log.component';
 import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,

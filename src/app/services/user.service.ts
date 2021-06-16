@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user/user';
+import { UserConnect } from '../models/user/userConnect';
 import { userCreation } from '../models/user/userCreation';
+import { UserLocalStorage } from '../models/user/userLocalStorage';
 import { UserNamePict } from '../models/user/userNamePict';
 
 
@@ -21,9 +24,17 @@ export class UserService {
     return this.http.get<UserNamePict>(environment.apiUrl + "/users/namePict/" + userId);
   }
 
+  findSettingsById = (userId: string): Observable<UserNamePict> => {
+    return this.http.get<UserNamePict>(environment.apiUrl + "/users/userSettings/" + userId);
+  }
+
   // TODO [Remove]
   findNamePictDefault = (): Observable<UserNamePict> => {
     return this.http.get<UserNamePict>(environment.apiUrl + "/users/default");
+  }
+
+  connect = (user: UserConnect): Observable<UserLocalStorage> => {
+    return this.http.post<UserLocalStorage>(environment.apiUrl + "/users/connect", user);
   }
 
   // ================================================================================================
@@ -50,19 +61,8 @@ export class UserService {
    * @param id the id of the team
    * @returns a list of UserLinkTeam which dont have the team
    */
-  listUserLinkTeam = (id: number): Observable<UserNamePict[]> => {
-    let res = Object.values(users)
-      .filter(user => !user.teams.includes(id))
-      .map(userDetail => new UserNamePict(
-        "" + userDetail.id,
-        userDetail.firstname,
-        userDetail.lastname,
-        userDetail.picture)
-      );
-    return new Observable<UserNamePict[]>(obs => {
-      obs.next(res);
-      obs.complete();
-    });
+  userNotInTheTeam = (teamId: string): Observable<UserNamePict[]> => {
+    return this.http.get<UserNamePict[]>(`${environment.apiUrl}/users/userNotInTheTeam/${teamId}`);
   }
 
   /**
@@ -88,25 +88,10 @@ export class UserService {
   /**
    * This function allows us to save a user
    * @param user A creationUser object (firstname, lastname, password, email and picture)
-   * @returns A number which is the id of the user created
+   * @returns A user 
    */
-  save = (user: userCreation): Observable<number> => {
-    let data = {
-      id: this.nextId++,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      password: user.password,
-      email: user.password,
-      picture: user.picture,
-      create: new Date(),
-      teams: [],
-      roles: []
-    }
-    users[data.id] = data;
-    return new Observable<number>(obs => {
-      obs.next(data.id);
-      obs.complete();
-    });
+  save = (user: userCreation): Observable<User> => {
+    return this.http.post<User>(`${environment.apiUrl}/users/add`, user);
   }
 
   // ================================================================================================

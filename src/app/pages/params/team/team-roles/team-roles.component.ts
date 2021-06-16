@@ -56,10 +56,8 @@ export class TeamRolesComponent implements OnInit {
    */
   addNewRole = () => {
     this.roleService.save(this.teamId, new createRole("nouveau role", "#A2D0EA")).subscribe(role => {
-      this.teamService.addRoleToTeam(this.teamId, role).subscribe(() => {
-        this.refreshRoles();
-      });
-    })
+      this.refreshRoles();
+    });
   }
 
   /**

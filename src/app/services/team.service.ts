@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Member } from '../models/member';
 import { Role } from '../models/role/role';
 import { Team } from '../models/team/team';
 import { TeamNameDescPict } from '../models/team/teamNameDescPict';
@@ -70,15 +69,7 @@ export class TeamService {
    * @returns an array of TeamLinkUser object
    */
   findAllPresentation = (): Observable<TeamNamePict[]> => {
-    let res: TeamNamePict[] = [];
-    Object.values(teams).forEach(team => {
-      let data = new TeamNamePict("" + team.id, team.name, team.picture);
-      res.push(data);
-    });
-    return new Observable<TeamNamePict[]>(obs => {
-      obs.next(res);
-      obs.complete();
-    });
+    return this.http.get<TeamNamePict[]>(`${environment.apiUrl}/teams/teamNamePict`);
   }
 
   /**
@@ -86,21 +77,8 @@ export class TeamService {
    * @param team A creationTeam object (name, desc and picture)
    * @returns A number which is the id of the team created
    */
-  save = (team: TeamNameDescPict): Observable<number> => {
-    let data = {
-      id: this.nextId++,
-      name: team.name,
-      desc: team.desc,
-      picture: team.picture,
-      salons: [],
-      users: [],
-      roles: []
-    };
-    teams[data.id] = data;
-    return new Observable<number>(obs => {
-      obs.next(data.id);
-      obs.complete();
-    });
+  save = (team: TeamNameDescPict): Observable<Team> => {
+    return this.http.post<Team>(`${environment.apiUrl}/teams`, team);
   }
 
   // ================================================================================================
@@ -128,14 +106,6 @@ export class TeamService {
     return new TeamNamePict("" + teams[teamId].id, teams[teamId].name, teams[teamId].picture);
   }
 
-  /**
-   * Add a role to the team
-   * @param teamId id of the team
-   * @param roleId id of the role
-   */
-  addRoleToTeam = (teamId: string, role: Role): Observable<Team> => {
-    return this.http.patch<Team>(`${environment.apiUrl}/teams/addRole/${teamId}`, role);
-  }
 
 
   /**

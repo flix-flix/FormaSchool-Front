@@ -15,15 +15,18 @@
         <div class="info">
             <label for="float-input">TEAM NAME</label>
             <span class="p-float-label">
-                <input id="float-input" type="text" value="{{ team == undefined?'':team.name }}" pInputText>
+                <input type="text" [ngModel]="team.name"  (ngModelChange)="team.name = $event">
+                <!-- <input id="float-input" type="text" value="{{ team == undefined?'':team.name }}" pInputText>-->
             </span>
         </div>
 
         <div class="info">
             <label for="float-input">TEAM DESCRIPTION</label>
             <span class="p-float-label">
-                <textarea [rows]="5" [cols]="30" value="{{team == undefined?'': team.desc }}" pInputTextarea
-                    autoResize="autoResize"></textarea>
+                <textarea [rows]="5" [cols]="30"  type="text" [ngModel]="team.desc"
+                     (ngModelChange)="team.desc = $event" pInputTextarea>
+                <!--<textarea [rows]="5" [cols]="30" value="{{team == undefined?'': team.desc }}" pInputTextarea>-->
+                autoResize="autoResize"></textarea>
             </span>
         </div>
     </div>

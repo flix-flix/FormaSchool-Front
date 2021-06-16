@@ -23,6 +23,7 @@ import { AdminEmojisComponent } from './pages/params/admin/admin-emojis/admin-em
 import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
 import { RouterModule, Routes } from '@angular/router';
 
+
 const routes: Routes = [
   {
     path: "", component: TemplateComponent, children: [
@@ -37,7 +38,9 @@ const routes: Routes = [
 
       { path: "404", component: NotFoundComponent },
 
-      // TODO redirectTo: lastVisitedPage
+      { path: "user", component: UpdateTeamFormComponent },
+
+      // TODO redirectTo: lastVisitSedPage
       { path: "", redirectTo: "teamSelect", pathMatch: "full" },
     ]
   },

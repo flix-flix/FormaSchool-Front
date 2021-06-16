@@ -1,38 +1,32 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
-//import { from } from 'rxjs';
-// ajout 14 mai 
-import {FormBuilder} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserConnect } from 'src/app/models/user/userConnect';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-//------------ avant 14 mai début------------------------
-//export class LoginComponent implements OnInit {
 
-//  constructor() { }
-
-//  ngOnInit(): void {
-//  }
-//}
-//-------------- avant 14 mai fin -------------------------
-//         ajout 14 mai 
 export class LoginComponent implements OnInit {
+
   userProfile: FormGroup;
-  constructor(private fb: FormBuilder){
+  value: string = '';
+
+
+  constructor(private fb: FormBuilder, private userService: UserService) {
     this.userProfile = this.fb.group({
-      login : ['', Validators.required],
-      password : ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
-  ngOnInit(): void{
-      }
-  public value: string = '';    
-  onSubmit= ()=>{
-    alert("Bonjour " + this.userProfile.get("login").value + " et bienvenue !!");
+  ngOnInit(): void {
+  }
+
+  onSubmit = () => {
+    this.userService.connect(this.userProfile.value)
+      .subscribe(user => localStorage.setItem("user", JSON.stringify(user)));
   }
 }
