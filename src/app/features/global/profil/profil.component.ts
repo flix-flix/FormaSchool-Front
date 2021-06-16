@@ -11,6 +11,8 @@ export class ProfilComponent implements OnInit {
 
   user: UserNamePict;
 
+  displayMenu = false;
+
   constructor(private storageService: StorageService) { }
 
   ngOnInit(): void {
@@ -19,6 +21,12 @@ export class ProfilComponent implements OnInit {
   }
 
   openUserParams = () => {
-    alert("TODO userParams");
+    // alert("TODO userParams");
+    this.displayMenu = !this.displayMenu;
+  }
+
+  logout = () => {
+    this.displayMenu = false;
+    this.storageService.clear("user");
   }
 }
