@@ -9,29 +9,31 @@
 </ng-template>
 
 <ng-template #namePict>
-    <div id="row">
-        <div>
-            <img id="profil_img" src="../../../../assets/images/_remove/users/{{user.picture}}" alt="profil">
-        </div>
-        <div id="profil_name">{{user.firstname}} {{user.lastname}}</div>
-        <div>
-            <img id="profil_params" class="feather" src="../../../../assets/images/feather-icons/settings.svg"
-                alt="params" (click)="openUserParams()">
-        </div>
-    </div>
-
-    <div id="profil_menu" *ngIf="displayMenu">
-        <a class="menu_item" routerLink="/user">
-            <img src="../../../../assets/images/feather-icons/settings.svg" alt="params" class="menu_item_img">
-            <div class="item_name">
-                Paramètres
+    <div id="profil">
+        <div id="row">
+            <div>
+                <img id="profil_img" src="../../../../assets/images/_remove/users/{{user.picture}}" alt="profil">
             </div>
-        </a>
+            <div id="profil_name">{{user.firstname}} {{user.lastname}}</div>
+            <div>
+                <img id="profil_params" class="feather" src="../../../../assets/images/feather-icons/settings.svg"
+                    alt="params" (click)="openUserParams()">
+            </div>
+        </div>
 
-        <div class="menu_item" (click)="logout()">
-            <img src="../../../../assets/images/feather-icons/log-out.svg" alt="logout" class="menu_item_img">
-            <div class="item_name">
-                Déconnexion
+        <div id="profil_menu" *ngIf="displayMenu">
+            <a class="menu_item" routerLink="/user">
+                <img src="../../../../assets/images/feather-icons/settings.svg" alt="params" class="menu_item_img">
+                <div class="item_name">
+                    Paramètres
+                </div>
+            </a>
+
+            <div class="menu_item" (click)="logout()">
+                <img src="../../../../assets/images/feather-icons/log-out.svg" alt="logout" class="menu_item_img">
+                <div class="item_name">
+                    Déconnexion
+                </div>
             </div>
         </div>
     </div>

@@ -1,40 +1,4 @@
-#row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    height: 100%;
-}
-
-#profil_img {
-    height: 4rem;
-    width: 4rem;
-    margin-right: 1rem;
-    
-    border-radius: 50%;
-}
-
-#profil_name {
-    display: flex;
-    flex-direction: row;
-    
-    white-space: nowrap;
-
-    margin-right: 1rem;
-    
-    font-family: sans-serif;
-    font-weight: bold;
-    
-    color: var(--font_1);
-}
-
-#profil_params {
-    height: 2rem;
-    width: 2rem;
-    margin-right: 1rem;
-}
-
-/* ===== login ===== */
+/* ===== Login ===== */
 
 #login_all {
     display: flex;
@@ -68,8 +32,50 @@
     filter: drop-shadow(1px 1px 2px var(--black));
 }
 
-/* ===== Menu ===== */
+/* ===== Profil ===== */
+#profil {
+    display: flex;
+    flex-direction: column;
+}
 
+#row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 100%;
+    margin-top: .5rem;
+}
+
+#profil_img {
+    height: 4rem;
+    width: 4rem;
+    margin-right: 1rem;
+    
+    border-radius: 50%;
+}
+
+#profil_name {
+    display: flex;
+    flex-direction: row;
+    
+    white-space: nowrap;
+
+    margin-right: 1rem;
+    
+    font-family: sans-serif;
+    font-weight: bold;
+    
+    color: var(--font_1);
+}
+
+#profil_params {
+    height: 2rem;
+    width: 2rem;
+    margin-right: 1rem;
+}
+
+/* ===== Menu ===== */
 #profil_menu {
     position: relative;
     top: 1rem;
@@ -77,8 +83,11 @@
 
     z-index: 10;
 
+    align-self: flex-end;
+
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     
     padding: .5rem;
 
