@@ -25,6 +25,11 @@ export class TeamService {
     return this.http.get<TeamNamePict[]>(environment.apiUrl + "/teams/ofUser/" + userId);
   }
 
+  // ===============================================================================================
+  findNamePicDescById = (teamId: string): Observable<TeamNameDescPict> => {
+    return this.http.get<TeamNameDescPict>(environment.apiUrl + "/teams/teamNameDescPict/" + teamId)
+  }
+
   /** Returns the name and the picture for the given team */
   findNamePictureById = (teamId: string): Observable<TeamNamePict> => {
     return this.http.get<TeamNamePict>(environment.apiUrl + "/teams/teamNamePict/" + teamId);
@@ -54,13 +59,10 @@ export class TeamService {
    * This function help for updating a team with a small presentation
    * @returns a update team*/
 
-  updateTeam = (teamUpdate: TeamNameDescPict) => {
-    return new Observable<TeamNameDescPict>(obs => {
-      obs.next(new TeamNameDescPict(" ", " ", " ",));
-      obs.complete();
-    });
-
+  updateTeamNameDescPic = (team: TeamNameDescPict): Observable<TeamNameDescPict> => {
+    return this.http.patch<TeamNameDescPict>(`${environment.apiUrl}/teams`, team);
   }
+
 
 
   /**
@@ -103,7 +105,7 @@ export class TeamService {
 
   // ================================================================================================
 
-  findNamePicDescById = (teamId: number): Observable<TeamNameDescPict> => {
+  /*findNamePicDescById = (teamId: number): Observable<TeamNameDescPict> => {
     return new Observable<TeamNameDescPict>(obs => {
       obs.next(new TeamNameDescPict("IBM", "Desc Ibm", "1.png"));
       obs.complete();

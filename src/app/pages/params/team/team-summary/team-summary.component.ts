@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TeamNameDescPict } from 'src/app/models/team/teamNameDescPict';
 
 
 import { TeamService } from 'src/app/services/team.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-team-summary',
@@ -13,18 +14,27 @@ import { TeamService } from 'src/app/services/team.service';
 export class TeamSummaryComponent implements OnInit {
 
   team: TeamNameDescPict;
+  teamId: string;
 
   constructor(
     private service: TeamService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.service.findNamePicDescById(+params.get("id")).subscribe(data => {
-        this.team = data;
-      })
-    });
+    this.activatedRoute.parent.paramMap.subscribe(params => {
+      this.teamId = params.get("teamId");
+    })
+
+
+    this.service.findNamePicDescById(this.teamId).subscribe(team => {
+      this.team = team;
+    })
+  }
+
+  teamUpdate = (teamId: string) => {
+    this.router.navigate([`${environment.apiUrl}/team/${teamId}/summaryUpdate`])
   }
 
   /*delete = () => {

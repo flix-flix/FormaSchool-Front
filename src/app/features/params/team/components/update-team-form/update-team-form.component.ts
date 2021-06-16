@@ -12,12 +12,12 @@ import { TeamService } from 'src/app/services/team.service';
 export class UpdateTeamFormComponent implements OnInit {
 
   teamUpdateForm: FormGroup = new FormGroup({
-    nom: new FormControl(''),
+    name: new FormControl(''),
     desc: new FormControl(''),
     picture: new FormControl('')
   });
 
-  teamUpdate: TeamNameDescPict = new TeamNameDescPict(" ", " ", " ");
+  teamUpdate: TeamNameDescPict = new TeamNameDescPict(" ", " ", " ", " ");
 
   constructor(
     private service: TeamService,
@@ -25,9 +25,9 @@ export class UpdateTeamFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    let id: number;
+    let id: string;
     this.route.paramMap.subscribe(params => {
-      id = Number(params.get("id"));
+      id = params.get("id");
       this.service.findNamePicDescById(id).subscribe(teamUpdate => {
         this.teamUpdate = teamUpdate;
         this.teamUpdateForm = this.fb.group({
@@ -40,6 +40,16 @@ export class UpdateTeamFormComponent implements OnInit {
   }
   ngOnInit(): void {
 
+  }
+
+  updateTeam = () => {
+    this.teamUpdate.name = this.teamUpdateForm.value.name;
+    this.teamUpdate.desc = this.teamUpdateForm.value.desc;
+    this.teamUpdate.picture = this.teamUpdateForm.value.picture;
+    this.service.updateTeamNameDescPic(this.teamUpdate).subscribe(teamUpdate => {
+      this.teamUpdate = teamUpdate;
+      this.router.navigate(["localhost:8080/params/team"]);
+    })
   }
 
   /*updateTeam = (teamUpdate: TeamNameDescPict) => {

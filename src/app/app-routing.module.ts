@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/home/login/login.component';
 import { NotFoundComponent } from './pages/home/not-found/not-found.component';
 import { ParamsAdminTemplateComponent } from './pages/params/admin/admin-template/parametres.component';
@@ -22,6 +21,7 @@ import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-templat
 import { AdminLogsComponent } from './pages/params/admin/admin-logs/admin-logs.component';
 import { AdminEmojisComponent } from './pages/params/admin/admin-emojis/admin-emojis.component';
 import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {

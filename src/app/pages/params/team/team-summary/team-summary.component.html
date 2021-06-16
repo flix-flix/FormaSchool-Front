@@ -15,17 +15,19 @@
         <div class="info">
             <label for="float-input">TEAM NAME</label>
             <span class="p-float-label">
-                <input id="float-input" type="text" value="{{ team.name }}" pInputText>
+                <input id="float-input" type="text" value="{{ team == undefined?'':team.name }}" pInputText>
             </span>
         </div>
 
         <div class="info">
             <label for="float-input">TEAM DESCRIPTION</label>
             <span class="p-float-label">
-                <textarea [rows]="5" [cols]="30" value="{{ team.desc }}" pInputTextarea
+                <textarea [rows]="5" [cols]="30" value="{{team == undefined?'': team.desc }}" pInputTextarea
                     autoResize="autoResize"></textarea>
             </span>
         </div>
     </div>
-
+    <div>
+        <a routerLink="summaryUpdate">Do you want change that informations?</a>
+    </div>
 </div>
