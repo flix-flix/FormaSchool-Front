@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserNamePict } from 'src/app/models/user/userNamePict';
-import { UserService } from 'src/app/services/user.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-profil',
@@ -11,10 +11,11 @@ export class ProfilComponent implements OnInit {
 
   user: UserNamePict;
 
-  constructor() { }
+  constructor(private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem("user"));
+    this.storageService.changes.subscribe(() => this.user = JSON.parse(localStorage.getItem("user")));
   }
 
   openUserParams = () => {
