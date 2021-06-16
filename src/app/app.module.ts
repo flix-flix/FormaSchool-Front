@@ -64,6 +64,7 @@ import { LogUserComponent } from './features/params/team/logs/components/log-use
 import { LogTeamComponent } from './features/params/team/logs/components/log-team/log-team.component';
 import { LogComponent } from './features/params/team/logs/components/log/log.component';
 import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
+import { RightsComponent } from './features/params/team/components/rights/rights.component';
 
 
 
@@ -116,7 +117,8 @@ import { UpdateTeamFormComponent } from './features/params/team/components/updat
     LogUserComponent,
     LogTeamComponent,
     LogComponent,
-    UpdateTeamFormComponent
+    UpdateTeamFormComponent,
+    RightsComponent
   ],
   imports: [
     BrowserModule,

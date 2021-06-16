@@ -61,19 +61,14 @@
         </div>
 
         <div class="rightsContainer">
-            <div>
-                <span class="rights" *ngFor="let right of role.rights">
-                    <label>{{right.desc}}</label>
-                    <p-inputSwitch [(ngModel)]="right.value"></p-inputSwitch>
-                </span>
-            </div>
+
+            <app-rights *ngFor="let right of role.rights" [right]="right">
+            </app-rights>
+
             <div id="blackBorder"></div>
-            <div>
-                <span class="rights" *ngFor="let right of role.commonRights">
-                    <label>{{right.desc}}</label>
-                    <p-inputSwitch [(ngModel)]="right.value"></p-inputSwitch>
-                </span>
-            </div>
+
+            <app-rights *ngFor="let right of role.commonRights" [right]="right">
+            </app-rights>
 
         </div>
 
