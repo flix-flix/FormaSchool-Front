@@ -20,6 +20,10 @@ export class TeamService {
 
   // ================================================================================================
 
+  findTeamIdBySalonId = (salonId: string): Observable<Team> => {
+    return this.http.get<Team>(`${environment.apiUrl}/teams/bySalon/${salonId}`);
+  }
+
   findAllTeamOfUser = (userId: string): Observable<TeamNamePict[]> => {
     return this.http.get<TeamNamePict[]>(environment.apiUrl + "/teams/ofUser/" + userId);
   }
