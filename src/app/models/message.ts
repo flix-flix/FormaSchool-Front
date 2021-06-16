@@ -29,7 +29,7 @@ export class Message {
     // ===============================================
 
     static fromJSON = (json: Message): Message => {
-        return new Message(json.id, json.sender, json.send, json.edit, json.content, json.file, json.reactions);
+        return new Message(json.id, json.sender, json.send, json.edit, json.content, File.fromJSON(json.file), json.reactions);
     }
 
     // ===============================================
