@@ -16,14 +16,14 @@
             </div>
             <div id="profil_name">{{user.firstname}} {{user.lastname}}</div>
             <div>
-                <img id="profil_params" class="feather" src="../../../../assets/images/feather-icons/settings.svg"
-                    alt="params" (click)="openUserParams()">
+                <img id="button_menu" class="feather" src="../../../../assets/images/feather-icons/menu.svg" alt="menu"
+                    (mousedown)="openCloseMenu()">
             </div>
         </div>
 
         <div id="profil_menu" *ngIf="displayMenu">
             <a class="menu_item" routerLink="/user">
-                <img src="../../../../assets/images/feather-icons/settings.svg" alt="params" class="menu_item_img">
+                <img src="../../../../assets/images/feather-icons/settings.svg" alt="settings" class="menu_item_img">
                 <div class="item_name">
                     Paramètres
                 </div>
