@@ -1,9 +1,50 @@
+/* ===== Login ===== */
+
+#login_all {
+    display: flex;
+    flex-direction: row;
+    
+    height: 100%;
+    padding: 0 2rem;
+    
+    text-decoration: none;
+}
+
+#login_all:visited {
+    color: var(--font_2);
+}
+
+#login {
+    display: flex;
+    align-items: center;
+
+    font-size: 1.3rem;
+    font-weight: bold;
+
+    color: var(--font_2);
+}
+
+#login_img {
+    margin-right: .5rem;
+}
+
+#login_all:hover #login_img {
+    filter: drop-shadow(1px 1px 2px var(--black));
+}
+
+/* ===== Profil ===== */
+#profil {
+    display: flex;
+    flex-direction: column;
+}
+
 #row {
     display: flex;
     flex-direction: row;
     align-items: center;
 
     height: 100%;
+    margin-top: .5rem;
 }
 
 #profil_img {
@@ -34,38 +75,55 @@
     margin-right: 1rem;
 }
 
-/* ===== login ===== */
+/* ===== Menu ===== */
+#profil_menu {
+    position: relative;
+    top: 1rem;
+    right: 1rem;
 
-#login_all {
+    z-index: 10;
+
+    align-self: flex-end;
+
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: flex-start;
     
-    height: 100%;
-    padding: 0 2rem;
-    
-    text-decoration: none;
+    padding: .5rem;
+
+    color: var(--font_2);
+    background-color: var(--background);
+    border: 2px solid var(--font_2);
+
+    border-radius: 1rem;
+
+    box-shadow: 0 0 50px 20px var(--font_2);
 }
 
-#login_all:visited {
+.menu_item {
+    display: flex;
+    flex-direction: row;
+
+    padding: .25rem .5rem;
+
+    text-decoration: none;
+    
     color: var(--font_2);
 }
 
-#login {
+.menu_item:hover .menu_item_img {
+    filter: drop-shadow(1px 1px 2px var(--black));
+}
+
+.menu_item:visited {
+    color: var(--font_2);
+}
+
+.item_name {
     display: flex;
     align-items: center;
 
-    font-size: 1.5rem;
+    margin-left: .5rem;
+
     font-weight: bold;
-
-    text-decoration: none;
-
-    color: var(--font_2);
-}
-
-#login_img {
-    margin-right: .5rem;
-}
-
-#login_all:hover #login_img {
-    filter: drop-shadow(1px 1px 2px var(--black));
 }

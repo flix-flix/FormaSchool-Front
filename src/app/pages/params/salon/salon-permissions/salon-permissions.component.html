@@ -1,9 +1,22 @@
-<div *ngFor="let member of members">
-    <p (click)="refreshBoolean(member)"> {{ member.firstname }}</p>
-</div>
-<div *ngFor="let role of roles">
-    <p> {{ role.name }} </p>
-</div>
-
-<div> {{ booleanChoosen }}</div>
-<button type="button" (click)="swap()">Bouchaib</button>
+<section>
+    <div class="permissionMenu">
+        <div *ngFor="let permission of permissionsRoles">
+            <div class="permissionRoleName" (click)="choosePermission(permission.id)">
+                {{permission.role.name}}
+            </div>
+        </div>
+        <div class="barre"></div>
+        <div *ngFor="let permission of permissionsMembers">
+            <div class="permissionUser" (click)="choosePermission(permission.id)">
+                <img src=" ../../../../../assets/images/_remove/users/{{permission.member.user.picture}}" alt="">
+                <p>
+                    {{permission.member.user.firstname}} {{permission.member.user.lastname}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="permission" *ngIf="permissionChoosen">
+        <app-rights *ngFor="let right of permissionChoosen.commonRights" [right]="right">
+        </app-rights>
+    </div>
+</section>

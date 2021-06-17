@@ -19,7 +19,7 @@ export class EmojiComponent implements OnInit {
   on: boolean;
 
   // TODO [Improve] Get user from local storage
-  member = new MemberUsersPseudo(new UserNamePict("123456", "Félix", "Burie", "123.png"), "pseudododod")
+  member = new MemberUsersPseudo(JSON.parse(localStorage.getItem("user")), "fake_pseudo")
 
   constructor() { }
 

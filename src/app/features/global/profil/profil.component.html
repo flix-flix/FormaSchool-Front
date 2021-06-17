@@ -1,22 +1,40 @@
-<div id="row">
-    <ng-template [ngIf]="user == undefined" [ngIfThen]="login" [ngIfElse]="namePict">
-    </ng-template>
+<ng-template [ngIf]="user == undefined" [ngIfThen]="login" [ngIfElse]="namePict">
+</ng-template>
 
-    <ng-template #login>
-        <a id="login_all" routerLink="/login">
-            <img src="../../../../assets/images/feather-icons/log-in.svg" alt="login" class="feather" id="login_img">
-            <div id="login">Login</div>
-        </a>
-    </ng-template>
+<ng-template #login>
+    <a id="login_all" routerLink="/login">
+        <img src="../../../../assets/images/feather-icons/log-in.svg" alt="login" id="login_img">
+        <div id="login">Connexion</div>
+    </a>
+</ng-template>
 
-    <ng-template #namePict>
-        <div>
-            <img id="profil_img" src="../../../../assets/images/_remove/users/{{user.picture}}" alt="profil">
+<ng-template #namePict>
+    <div id="profil">
+        <div id="row">
+            <div>
+                <img id="profil_img" src="../../../../assets/images/_remove/users/{{user.picture}}" alt="profil">
+            </div>
+            <div id="profil_name">{{user.firstname}} {{user.lastname}}</div>
+            <div>
+                <img id="profil_params" class="feather" src="../../../../assets/images/feather-icons/settings.svg"
+                    alt="params" (click)="openUserParams()">
+            </div>
         </div>
-        <div id="profil_name">{{user.firstname}} {{user.lastname}}</div>
-        <div>
-            <img id="profil_params" class="feather" src="../../../../assets/images/feather-icons/settings.svg"
-                alt="params" (click)="openUserParams()">
+
+        <div id="profil_menu" *ngIf="displayMenu">
+            <a class="menu_item" routerLink="/user">
+                <img src="../../../../assets/images/feather-icons/settings.svg" alt="params" class="menu_item_img">
+                <div class="item_name">
+                    Paramètres
+                </div>
+            </a>
+
+            <div class="menu_item" (click)="logout()">
+                <img src="../../../../assets/images/feather-icons/log-out.svg" alt="logout" class="menu_item_img">
+                <div class="item_name">
+                    Déconnexion
+                </div>
+            </div>
         </div>
-    </ng-template>
-</div>
+    </div>
+</ng-template>

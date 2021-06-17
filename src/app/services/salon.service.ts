@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SalonNameDesc } from '../models/salon/salonNameDesc';
 import { SalonNameTeam } from '../models/salon/salonNameTeam';
+import { Team } from '../models/team/team';
 
 @Injectable({
   providedIn: 'root'
@@ -27,15 +28,6 @@ export class SalonService {
       observable.next(SalonService.generateSalonNameDesc(salonId));
       observable.complete();
     });
-  }
-
-
-
-  /** */
-  findTeamIdById = (salonId: number): Observable<number> => {
-    return new Observable<number>(obs => {
-      obs.next(salons[salonId].teamId);
-    })
   }
 
 

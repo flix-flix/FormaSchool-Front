@@ -14,6 +14,20 @@ export class File {
 
     // ==========
 
+    static fromJSON = (json): File => {
+        if (json == null)
+            return null;
+
+        let split = json.name.split(".");
+        let ext = "";
+        if (split.length != 1)
+            ext = "." + split.pop();
+
+        return new File(json.id, json.name, json.id + ext);
+    }
+
+    // ==========
+
     public getExt(): string {
         return this.path.split(".").pop();
     }
