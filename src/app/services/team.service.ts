@@ -17,11 +17,20 @@ export class TeamService {
   nextId: number = 11;
 
   constructor(private http: HttpClient) { }
+  // ==============================================================================================
+  getTeamById = (teamId: String): Observable<TeamNameDescPict> => {
+    return this.http.get<TeamNameDescPict>(`${environment.apiUrl}/teams/${teamId}`);
+  }
 
-  // ================================================================================================
+  // ==============================================================================================
 
   findAllTeamOfUser = (userId: string): Observable<TeamNamePict[]> => {
     return this.http.get<TeamNamePict[]>(environment.apiUrl + "/teams/ofUser/" + userId);
+  }
+
+  // ==============================================================================================
+  updateTeamNameDescPic = (team: TeamNameDescPict): Observable<TeamNameDescPict> => {
+    return this.http.patch<TeamNameDescPict>(environment.apiUrl, "/teams/teamNameDescPic" + team);
   }
 
   // ===============================================================================================
@@ -54,15 +63,6 @@ export class TeamService {
       obs.complete();
     });
   }
-  /**
-   * This function help for updating a team with a small presentation
-   * @returns a update team*/
-
-  updateTeamNameDescPic = (team: TeamNameDescPict): Observable<TeamNameDescPict> => {
-    return this.http.patch<TeamNameDescPict>(`${environment.apiUrl}/teams`, team);
-  }
-
-
 
   /**
    * This function return a quick presentation of each team. It contain name, picture and the id

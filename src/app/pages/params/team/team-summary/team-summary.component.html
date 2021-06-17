@@ -1,36 +1,55 @@
 <div id="global">
     <h1 id="title"> INFORMATIONS</h1>
-
-    <!--
-         
-        <span class="p-float-label">
-            <input id="float-input" type="text" value="{{ team.picture }}" pInputText>
-        </span>
-    -->
-    <div id="inputs">
+    <form [formGroup]="teamForm" (ngSubmit)="updateTeam()">
         <div>
-            <img src="../../../../../assets/images/_remove/teams/2.jpg" alt="">
+            <img src="../../../../../assets/images/_remove/teams/{{team.picture}}" alt="" formControlName="picture">
         </div>
 
         <div class="info">
             <label for="float-input">TEAM NAME</label>
             <span class="p-float-label">
-                <input type="text" [ngModel]="team.name"  (ngModelChange)="team.name = $event">
-                <!-- <input id="float-input" type="text" value="{{ team == undefined?'':team.name }}" pInputText>-->
+                <input id="float-input" type="text" value="{{ team == undefined?'':team.name }}" pInputText
+                    formControlName="name">
             </span>
         </div>
 
         <div class="info">
             <label for="float-input">TEAM DESCRIPTION</label>
             <span class="p-float-label">
-                <textarea [rows]="5" [cols]="30"  type="text" [ngModel]="team.desc"
-                     (ngModelChange)="team.desc = $event" pInputTextarea>
-                <!--<textarea [rows]="5" [cols]="30" value="{{team == undefined?'': team.desc }}" pInputTextarea>-->
-                autoResize="autoResize"></textarea>
+
+                <textarea [rows]="5" [cols]="30" value="{{team == undefined?'': team.desc }}" pInputTextarea
+                    formControlName="desc" autoResize="autoResize">
+                   </textarea>
+            </span>
+        </div>
+
+        <div>
+            <button type="submit">Do you want change that informations?</button>
+        </div>
+    </form>
+    <!--<div id="inputs">
+        <div>
+            <img src="../../../../../assets/images/_remove/teams/{{team.picture}}" alt="">
+        </div>
+
+        <div class="info">
+            <label for="float-input">TEAM NAME</label>
+            <span class="p-float-label">
+                <input id="float-input" type="text" value="{{ team == undefined?'':team.name }}" pInputText>
+            </span>
+        </div>
+
+        <div class="info">
+            <label for="float-input">TEAM DESCRIPTION</label>
+            <span class="p-float-label">
+
+                <textarea [rows]="5" [cols]="30" value="{{team == undefined?'': team.desc }}" pInputTextarea
+                    formControlName="desc" autoResize="autoResize">
+               </textarea>
             </span>
         </div>
     </div>
     <div>
-        <a routerLink="summaryUpdate">Do you want change that informations?</a>
-    </div>
+        <button type="submit">Do you want change that informations?</button>
+    </div>-->
 </div>
