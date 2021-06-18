@@ -7,24 +7,25 @@
             <input id="float-input" type="text" value="{{ team.picture }}" pInputText>
         </span>
     -->
-    <form [formGroup]="teamUpdateForm" (ngSubmit)="updateTeam()">
+    <form [formGroup]="teamUpdateForm" (ngSubmit)="updateTeam(team.id)">
         <div id="inputs">
             <div>
-                <img src="../../../../../assets/images/_remove/teams/2.jpg" alt="" formControlName="picture">
+                <img *ngIf="team!=undefined" src="../../../../../assets/images/_remove/teams/{{team.picture}}" alt="">
             </div>
 
             <div class="info">
                 <label for="float-input">TEAM NAME</label>
                 <span class="p-float-label">
-                    <input id="float-input" type="text" formControlName="name" pInputText>
+                    <input id="float-input" type="text" value="{{team == undefined?'': team.name }}"
+                        formControlName="name" pInputText>
                 </span>
             </div>
 
             <div class="info">
                 <label for="float-input">TEAM DESCRIPTION</label>
                 <span class="p-float-label">
-                    <textarea [rows]="5" [cols]="30" formControlName="desc" pInputTextarea>
-                        autoResize="autoResize"></textarea>
+                    <textarea [rows]="5" [cols]="30" type="text" value="{{team == undefined?'': team.desc }}"
+                        formControlName="desc" pInputTextarea autoResize="autoResize"> </textarea>
                 </span>
             </div>
         </div>

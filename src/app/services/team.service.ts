@@ -28,13 +28,15 @@ export class TeamService {
     return this.http.get<Team>(`${environment.apiUrl}/teams/bySalon/${salonId}`);
   }
 
+  // ==============================================================================================
+
   findAllTeamOfUser = (userId: string): Observable<TeamNamePict[]> => {
     return this.http.get<TeamNamePict[]>(environment.apiUrl + "/teams/ofUser/" + userId);
   }
 
   // ==============================================================================================
   updateTeamNameDescPic = (team: TeamNameDescPict): Observable<TeamNameDescPict> => {
-    return this.http.patch<TeamNameDescPict>(environment.apiUrl, "/teams/teamNameDescPic" + team);
+    return this.http.patch<TeamNameDescPict>(environment.apiUrl + "/teams/teamNameDescPict", team);
   }
 
   // ===============================================================================================
