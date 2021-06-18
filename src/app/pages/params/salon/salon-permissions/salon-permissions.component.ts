@@ -43,7 +43,6 @@ export class SalonPermissionsComponent implements OnInit {
   }
 
   update = () => {
-    alert(this.permissionChoosen.id);
+    this.permissionService.updatePermission(this.permissionChoosen).subscribe();
   }
-
 }

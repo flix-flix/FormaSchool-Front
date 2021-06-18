@@ -19,4 +19,8 @@ export class PermissionService {
   findPermissionRightsByPermissionId = (permissionId: string): Observable<PermissionRights> => {
     return this.http.get<PermissionRights>(`${environment.apiUrl}/permissions/permissionRights/${permissionId}`);
   }
+
+  updatePermission = (permission: PermissionRights): Observable<PermissionRights> => {
+    return this.http.patch<PermissionRights>(`${environment.apiUrl}/permissions/update`, permission);
+  }
 }
