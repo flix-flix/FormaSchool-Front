@@ -42,4 +42,8 @@ export class SalonPermissionsComponent implements OnInit {
     })
   }
 
+  update = () => {
+    alert(this.permissionChoosen.id);
+  }
+
 }
