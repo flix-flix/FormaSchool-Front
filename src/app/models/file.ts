@@ -1,4 +1,4 @@
-export class File {
+export class FileModel {
     private static imgExt: string[] = ["png", "jpg", "svg"];
     private static textExt: string[] = ["txt", "html", "css", "js", "ts", "java", "json", "yaml", "py", "sql"];
 
@@ -14,7 +14,7 @@ export class File {
 
     // ==========
 
-    static fromJSON = (json): File => {
+    static fromJSON = (json): FileModel => {
         if (json == null)
             return null;
 
@@ -23,7 +23,7 @@ export class File {
         if (split.length != 1)
             ext = "." + split.pop();
 
-        return new File(json.id, json.name, json.id + ext);
+        return new FileModel(json.id, json.name, json.id + ext);
     }
 
     // ==========
@@ -33,11 +33,11 @@ export class File {
     }
 
     public isImage() {
-        return File.imgExt.includes(this.getExt());
+        return FileModel.imgExt.includes(this.getExt());
     }
 
     public isText() {
-        return File.textExt.includes(this.getExt());
+        return FileModel.textExt.includes(this.getExt());
     }
 
     // ==========

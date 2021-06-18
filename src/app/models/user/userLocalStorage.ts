@@ -1,13 +1,14 @@
+import { Member } from "../member/member";
+
 export class UserLocalStorage {
     private _id: string;
     private _firstname: string;
     private _lastname: string;
     private _picture: string;
 
-    // TODO [Improve] add team and role to localStorage
-    // private _members: Member[];
+    private _members: Member[];
 
-    constructor(id: string, firstname: string, lastname: string, picture: string) {
+    constructor(id: string, firstname: string, lastname: string, picture: string, members: Member[]) {
         this._id = id;
         this._firstname = firstname;
         this._lastname = lastname;
@@ -44,5 +45,13 @@ export class UserLocalStorage {
 
     public set picture(picture: string) {
         this._picture = picture;
+    }
+
+    public get members(): Member[] {
+        return this._members;
+    }
+
+    public set members(members: Member[]) {
+        this._members = members;
     }
 }

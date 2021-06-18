@@ -1,9 +1,11 @@
 <div id="all">
-    <span id="input_msg" (input)="onInput($event.target.innerHTML)" data-placeholder="Envoyer un message dans Général"
-        (keydown.enter)="pressEnter($event)" contenteditable></span>
+    <span id="input_msg" (input)="content=$event.target.innerText" data-placeholder="Envoyer un message"
+        (keydown.enter)="pressEnter($event)" contenteditable #writer></span>
 
     <img id="plus" class="icon feather" src="../../../../../assets/images/feather-icons/plus-circle.svg" alt="joinFile"
-        (click)="buttonJoinFile()">
+        (mousedown)="fileInput.click()">
     <img id="emoji" class="icon feather" src="../../../../../assets/images/feather-icons/smile.svg" alt="addEmoji"
-        (click)="buttonAddEmoji()">
+        (mousedown)="openCloseEmojiSelector()">
 </div>
+
+<input type="file" id="input_file" (change)="file=$event.target.files[0]" #fileInput>

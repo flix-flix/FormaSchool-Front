@@ -1,4 +1,4 @@
-import { File } from "src/app/models/file";
+import { FileModel } from "src/app/models/file";
 import { MemberUsersPseudo } from "src/app/models/member/MemberUsersPseudo";
 import { EmojiService } from "src/app/services/emoji.service";
 import { Reaction } from "./reaction";
@@ -9,12 +9,12 @@ export class Message {
     private _send: Date;
     private _edit: Date;
     private _content: string;
-    private _file: File;
+    private _file: FileModel;
     private _reactions: Reaction[];
 
     private _html: string;
 
-    constructor(id: number, sender: MemberUsersPseudo, send: Date | string, edit: Date | string, content: string, file: File, reactions: Reaction[] = []) {
+    constructor(id: number, sender: MemberUsersPseudo, send: Date | string, edit: Date | string, content: string, file: FileModel, reactions: Reaction[] = []) {
         this._id = id;
         this._sender = sender;
         this._send = send instanceof Date ? send : new Date(send);
@@ -29,7 +29,7 @@ export class Message {
     // ===============================================
 
     static fromJSON = (json: Message): Message => {
-        return new Message(json.id, json.sender, json.send, json.edit, json.content, File.fromJSON(json.file), json.reactions);
+        return new Message(json.id, json.sender, json.send, json.edit, json.content, FileModel.fromJSON(json.file), json.reactions);
     }
 
     // ===============================================
@@ -85,11 +85,11 @@ export class Message {
         this._content = content;
     }
 
-    public get file(): File {
+    public get file(): FileModel {
         return this._file;
     }
 
-    public set file(file: File) {
+    public set file(file: FileModel) {
         this._file = file;
     }
 
