@@ -2,10 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { EmojiNamePict } from '../models/emoji/emojiNamePict';
 import { CreatedEmoji } from '../models/emoji/createdEmoji';
-import { UserNamePict } from '../models/user/userNamePict';
-import { UserService } from './user.service';
+import { EmojiNamePict } from '../models/emoji/emojiNamePict';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +24,11 @@ export class EmojiService {
     return this.http.get<CreatedEmoji[]>(`${environment.apiUrl}/emojis/createdEmojisOrga`);
   }
 
-  // /**
-  //  * This function allows you to add a emoji
-  //  * @param emoji a Created emoji that you want to add 
-  //  * @returns the emoji created 
-  //  */
+  /**
+   * This function allows you to add a emoji
+   * @param emoji the CreatedEmoji you want to add 
+   * @returns the emoji created 
+   */
   addEmoji = (emoji: CreatedEmoji): Observable<CreatedEmoji> => {
     return this.http.post<CreatedEmoji>(`${environment.apiUrl}/emojis/createdEmojis`, emoji.toJSON());
   }
@@ -101,7 +99,6 @@ export class EmojiService {
       if (emojis.length != 0)
         return new EmojiNamePict("" + emojis[0].id, emojis[0].name, EmojiService.path[index] + emojis[0].picture);
     }
-    console.log("emoji undefined", name);
     return undefined;
   }
 
@@ -115,7 +112,6 @@ export class EmojiService {
       if (emoji != undefined)
         return emoji.name;
     }
-
     return undefined;
   }
 
@@ -128,77 +124,6 @@ export class EmojiService {
       return text.indexOf(<string>search, start); // string
     let index = text.slice(start).search(search); // regex
     return index < 0 ? index : index + start; // return -1
-  }
-
-  // ================================================================================================
-  // TODO [back]
-
-  // /**
-  // * this function give you an EmojiCreated object by the id 
-  // * @param emojiId the id fo the emoji you re looking for
-  // * @returns a CreatedEmoji object 
-  // */
-  // static generateCreatedEmoji = (emojiId: number): CreatedEmoji => {
-  //   if (!(emojiId in createdEmojis)) {
-  //     console.error("roleId doesn't exist:", emojiId);
-  //     return undefined;
-  //   }
-  //   return new CreatedEmoji(emojiId, createdEmojis[emojiId].teamId, createdEmojis[emojiId].name, createdEmojis[emojiId].picture, createdEmojis[emojiId].user);
-  // }
-}
-
-let nextId = 10;
-// teamId = 0 when it is for every team
-let createdEmojis: { [id: number]: { id: number, teamId: number, name: string, picture: string, user: UserNamePict } } =
-{
-  1: {
-    id: 1,
-    name: "bmw",
-    teamId: 1,
-    picture: "0",
-    user: UserService.generateUserNamePicture(2)
-  },
-  2: {
-    id: 2,
-    teamId: 1,
-    name: "nike",
-    picture: "1",
-    user: UserService.generateUserNamePicture(2)
-  },
-  3: {
-    id: 3,
-    teamId: 2,
-    name: "insta",
-    picture: "2",
-    user: UserService.generateUserNamePicture(2)
-  },
-  4: {
-    id: 4,
-    teamId: 0,
-    name: "rocket",
-    picture: "3",
-    user: UserService.generateUserNamePicture(2)
-  },
-  5: {
-    id: 5,
-    teamId: 1,
-    name: "bob",
-    picture: "4",
-    user: UserService.generateUserNamePicture(2)
-  },
-  6: {
-    id: 6,
-    teamId: 1,
-    name: "boby",
-    picture: "4",
-    user: UserService.generateUserNamePicture(2)
-  },
-  7: {
-    id: 7,
-    teamId: 1,
-    name: "bobu",
-    picture: "4",
-    user: UserService.generateUserNamePicture(2)
   }
 }
 

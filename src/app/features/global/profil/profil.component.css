@@ -69,10 +69,12 @@
     color: var(--font_1);
 }
 
-#profil_params {
+#button_menu {
     height: 2rem;
     width: 2rem;
     margin-right: 1rem;
+
+    cursor: pointer;
 }
 
 /* ===== Menu ===== */

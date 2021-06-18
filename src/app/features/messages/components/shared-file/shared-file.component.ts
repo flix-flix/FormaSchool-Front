@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { File } from 'src/app/models/file';
+import { FileModel } from 'src/app/models/file';
 import { FileService } from 'src/app/services/file.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { FileService } from 'src/app/services/file.service';
 })
 export class SharedFileComponent implements OnInit {
 
-  @Input() file: File;
+  @Input() file: FileModel;
 
   constructor(private fileService: FileService) { }
 

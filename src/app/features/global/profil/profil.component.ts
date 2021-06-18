@@ -21,8 +21,7 @@ export class ProfilComponent implements OnInit {
     this.storageService.changes.subscribe(() => this.user = JSON.parse(localStorage.getItem("user")));
   }
 
-  openUserParams = () => {
-    // alert("TODO userParams");
+  openCloseMenu = () => {
     this.displayMenu = !this.displayMenu;
   }
 
