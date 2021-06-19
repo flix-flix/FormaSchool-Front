@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserLocalStorage } from 'src/app/models/user/userLocalStorage';
 import { TeamService } from 'src/app/services/team.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-team-select',
@@ -9,6 +10,7 @@ import { TeamService } from 'src/app/services/team.service';
   styleUrls: ['./team-select.component.css']
 })
 export class TeamSelectComponent implements OnInit {
+  env = environment;
 
   user: UserLocalStorage;
   teams = []

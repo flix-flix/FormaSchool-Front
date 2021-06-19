@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamNameDescPict } from 'src/app/models/team/teamNameDescPict';
-
-
 import { TeamService } from 'src/app/services/team.service';
 import { environment } from 'src/environments/environment';
 
@@ -12,9 +10,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./team-summary.component.css']
 })
 export class TeamSummaryComponent implements OnInit {
+  env = environment;
 
   team: TeamNameDescPict;
-  teamId: string;
 
   constructor(
     private service: TeamService,
@@ -24,11 +22,8 @@ export class TeamSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.parent.paramMap.subscribe(params => {
-      this.teamId = params.get("teamId");
-    })
-    this.service.findNamePicDescById(this.teamId).subscribe(team => {
-      this.team = team;
-    })
+      this.service.findNamePicDescById(params.get("teamId")).subscribe(team => this.team = team);
+    });
   }
 
   teamUpdate = (teamId: string) => {
@@ -38,6 +33,4 @@ export class TeamSummaryComponent implements OnInit {
     console.log(URL);
 
   }
-
-
 }

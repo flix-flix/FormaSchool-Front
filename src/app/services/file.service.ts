@@ -12,7 +12,7 @@ export class FileService {
 
   /** Download the file */
   download = (file: FileModel): void => {
-    this.http.get(environment.apiUrl + "/files/download/" + file.id, { responseType: "blob" }).subscribe(blob => {
+    this.http.get(environment.apiUrl + "/files/sharedFiles/" + file.id, { responseType: "blob" }).subscribe(blob => {
       let a = document.createElement("a");
       let url = window.URL.createObjectURL(blob);
       a.href = url;

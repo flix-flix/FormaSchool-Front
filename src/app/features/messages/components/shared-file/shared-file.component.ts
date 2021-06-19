@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FileModel } from 'src/app/models/file';
 import { FileService } from 'src/app/services/file.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-shared-file',
@@ -8,6 +9,7 @@ import { FileService } from 'src/app/services/file.service';
   styleUrls: ['./shared-file.component.css']
 })
 export class SharedFileComponent implements OnInit {
+  env = environment;
 
   @Input() file: FileModel;
 

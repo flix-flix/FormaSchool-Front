@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamNameDescPict } from 'src/app/models/team/teamNameDescPict';
 import { TeamService } from 'src/app/services/team.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-update-team-form',
@@ -10,6 +11,7 @@ import { TeamService } from 'src/app/services/team.service';
   styleUrls: ['./update-team-form.component.css']
 })
 export class UpdateTeamFormComponent implements OnInit {
+  env = environment;
 
   teamUpdate: TeamNameDescPict = new TeamNameDescPict(" ", " ", " ", " ");
   teamUpdateForm: FormGroup = new FormGroup({

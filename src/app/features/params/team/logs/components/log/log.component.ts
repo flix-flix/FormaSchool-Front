@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserNamePict } from 'src/app/models/user/userNamePict';
+import { environment } from 'src/environments/environment';
 import { Log } from '../../../../../../models/log';
 
 @Component({
@@ -8,6 +9,7 @@ import { Log } from '../../../../../../models/log';
   styleUrls: ['./log.component.css']
 })
 export class LogComponent implements OnInit {
+  env = environment;
 
   @Input() log: Log;
   @Input() teamId: number;

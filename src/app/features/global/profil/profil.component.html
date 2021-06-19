@@ -12,7 +12,7 @@
     <div id="profil">
         <div id="row">
             <div>
-                <img id="profil_img" src="../../../../assets/images/_remove/users/{{user.picture}}" alt="profil">
+                <img id="profil_img" src="{{env.apiUrl}}/files/users/{{user.picture}}" alt="profil">
             </div>
             <div id="profil_name">{{user.firstname}} {{user.lastname}}</div>
             <div>

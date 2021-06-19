@@ -8,7 +8,7 @@
         <div class="barre"></div>
         <div *ngFor="let permission of permissionsMembers">
             <div class="permissionUser" (click)="choosePermission(permission.id)">
-                <img src=" ../../../../../assets/images/_remove/users/{{permission.member.user.picture}}" alt="">
+                <img src="{{env.apiUrl}}/files/users/{{permission.member.user.picture}}" alt="">
                 <p>
                     {{permission.member.user.firstname}} {{permission.member.user.lastname}}
                 </p>

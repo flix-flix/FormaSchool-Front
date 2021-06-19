@@ -42,8 +42,7 @@
                         alt="picture of an emoji"></td>
                 <td>:{{emoji.name}}:</td>
                 <td class="user">
-                    <img src="../../../../../assets/images/_remove/users/{{emoji.user.picture}}"
-                        alt="avatar de l utilisateur">
+                    <img src="{{env.apiUrl}}/files/users/{{emoji.user.picture}}" alt="avatar de l utilisateur">
                     <p>{{emoji.user.firstname}} {{emoji.user.lastname}} </p>
                 </td>
                 <td class="tabButton">

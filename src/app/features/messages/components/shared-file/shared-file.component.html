@@ -3,7 +3,7 @@
     </ng-template>
 
     <ng-template #img>
-        <img src="http://localhost:8080/files/download/{{file.path}}" alt="sharedImage" class="shared_img">
+        <img src="{{env.apiUrl}}/files/sharedFiles/{{file.path}}" alt="sharedImage" class="shared_img">
     </ng-template>
 
     <ng-template #other>

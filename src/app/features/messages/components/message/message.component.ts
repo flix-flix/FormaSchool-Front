@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Message } from '../../../../models/message';
 
 @Component({
@@ -7,6 +8,7 @@ import { Message } from '../../../../models/message';
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit {
+  env = environment;
 
   @Output() delete = new EventEmitter();
 

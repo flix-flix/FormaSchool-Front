@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserNamePict } from 'src/app/models/user/userNamePict';
 import { StorageService } from 'src/app/services/storage.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profil',
@@ -9,6 +10,7 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./profil.component.css']
 })
 export class ProfilComponent implements OnInit {
+  env = environment;
 
   user: UserNamePict;
 

@@ -10,7 +10,7 @@
     <form [formGroup]="teamUpdateForm" (ngSubmit)="updateTeam(team.id)">
         <div id="inputs">
             <div>
-                <img *ngIf="team!=undefined" src="../../../../../assets/images/_remove/teams/{{team.picture}}" alt="">
+                <img *ngIf="team!=undefined" src="{{env.apiUrl}}/files/teams/{{team.picture}}" alt="">
             </div>
 
             <div class="info">

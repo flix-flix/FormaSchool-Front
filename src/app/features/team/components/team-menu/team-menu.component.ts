@@ -3,6 +3,7 @@ import { SalonNameTeam } from 'src/app/models/salon/salonNameTeam';
 import { TeamNamePict } from 'src/app/models/team/teamNamePict';
 import { SalonService } from 'src/app/services/salon.service';
 import { TeamService } from 'src/app/services/team.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-team-menu',
@@ -10,6 +11,7 @@ import { TeamService } from 'src/app/services/team.service';
   styleUrls: ['./team-menu.component.css']
 })
 export class TeamMenuComponent implements OnInit {
+  env = environment;
 
   @Input() teamId: string;
   @Input() salonId: string;

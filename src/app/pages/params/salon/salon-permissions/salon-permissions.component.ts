@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PermissionService } from 'src/app/services/permission.service';
 import { PermissionMemberRoleWithoutRights } from 'src/app/models/permission/permissionMemberRoleWithoutRights';
 import { PermissionRights } from 'src/app/models/permission/permissionRights';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { PermissionRights } from 'src/app/models/permission/permissionRights';
   styleUrls: ['./salon-permissions.component.css']
 })
 export class SalonPermissionsComponent implements OnInit {
+  env = environment;
 
   teamId: string;
   salonId: string;
@@ -41,5 +43,4 @@ export class SalonPermissionsComponent implements OnInit {
       this.permissionChoosen = permission;
     })
   }
-
 }
