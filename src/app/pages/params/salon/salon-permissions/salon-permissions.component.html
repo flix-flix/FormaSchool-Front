@@ -1,15 +1,7 @@
 <section>
     <div class="permissionMenu">
-        <p-dialog header="Title" [(visible)]="display">
-            <h5>Membres</h5>
-            <p-dropdown [options]="members" [(ngModel)]="selectedMembre" placeholder="Selectionne un membre"
-                optionLabel="user.firstname" [showClear]="true"></p-dropdown>
-            <h5>Roles</h5>
-            <p-dropdown [options]="roles" [(ngModel)]="selectedRole" placeholder="Selecttionne un role"
-                optionLabel="name" [showClear]="true"></p-dropdown>
-        </p-dialog>
+        <app-dialog-permission [salonId]="salonId" (createEvent)="getEvent($event)"> </app-dialog-permission>
 
-        <button type="button" (click)="showDialog()" label="Show"> CLIQUE ICI</button>
         <div *ngFor="let permission of permissionsRoles">
             <div class="permissionRoleName" (click)="choosePermission(permission.id)">
                 {{permission.role.name}}

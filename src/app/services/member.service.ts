@@ -5,6 +5,7 @@ import { Member } from '../models/member/member';
 import { Observable } from 'rxjs';
 import { MemberCreate } from '../models/member/memberCreate';
 import { MemberUsersPseudo } from '../models/member/MemberUsersPseudo';
+import { MemberUserNamePict } from '../models/member/MemberUserNamePict';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class MemberService {
     return this.http.get<Member[]>(environment.apiUrl + "/members/findByTeamId/" + teamId);
   }
 
-  findMembersInTeamWithoutPermissionForSalon = (teamId: string, salonId: string): Observable<MemberUsersPseudo> => {
-    return this.http.get<MemberUsersPseudo>(`${environment.apiUrl}/withoutPermission/${teamId}/${salonId}`);
+  findMembersInTeamWithoutPermissionForSalon = (salonId: string): Observable<MemberUserNamePict[]> => {
+    return this.http.get<MemberUserNamePict[]>(`${environment.apiUrl}/members/withoutPermission/${salonId}`);
   }
 }

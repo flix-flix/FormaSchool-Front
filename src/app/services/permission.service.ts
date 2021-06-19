@@ -23,4 +23,11 @@ export class PermissionService {
   updatePermission = (permission: PermissionRights): Observable<PermissionRights> => {
     return this.http.patch<PermissionRights>(`${environment.apiUrl}/permissions/update`, permission);
   }
+
+  saveFromRole = (salonId: string, roleId: string): Observable<PermissionMemberRoleWithoutRights> => {
+    return this.http.post<PermissionMemberRoleWithoutRights>(`${environment.apiUrl}/permissions/addFromRole/${salonId}/${roleId}`, null);
+  }
+  saveFromMember = (salonId: string, memberId: string): Observable<PermissionMemberRoleWithoutRights> => {
+    return this.http.post<PermissionMemberRoleWithoutRights>(`${environment.apiUrl}/permissions/addFromMember/${salonId}/${memberId}`, null);
+  }
 }
