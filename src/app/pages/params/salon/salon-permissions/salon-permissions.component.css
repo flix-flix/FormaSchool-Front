@@ -11,7 +11,11 @@ section{
     height: 100%;
     width: 100%;
 }
+
 /*========================= Menu permission========================= */
+#addPermission  {
+    border-radius: 0; 
+}
 .permissionMenu{
     display: flex;
     flex-direction: column;
@@ -21,7 +25,8 @@ section{
     overflow-y: auto;
 }
 .permissionRoleName{
-    margin:10px;
+    margin: 20px;
+    margin-right: 15%;
 }
 .permissionUser{
     margin: 10px;
@@ -36,6 +41,10 @@ section{
     margin: 5%;
     width: 100%;
     overflow-y: auto;
+}
+/* ====================Dialogue==============*/
+:host ::ng-deep .p-dialog-content {
+    overflow-y: unset;
 }
 
 /* ========= Scrollbar ========= */
