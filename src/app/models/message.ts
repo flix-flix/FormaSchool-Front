@@ -40,7 +40,7 @@ export class Message {
     }
 
     public processEmoji = (teamId: string) => {
-        this._html = EmojiService.processEmoji(this._html, 5, teamId);
+        this._html = EmojiService.processEmoji(this._html, teamId);
     }
 
     // ===============================================

@@ -11,7 +11,7 @@ import { EmojiNamePict } from '../models/emoji/emojiNamePict';
 export class EmojiService {
 
   /** path to the folder of the emojis [default, organization, team] */
-  static path = ["emojis/", "_remove/emojis/", "_remove/emojis_teams/"];
+  static path = ["emojis/", "emojisOrga/", "emojisTeams/"];
 
   constructor(private http: HttpClient) { }
 
@@ -66,7 +66,7 @@ export class EmojiService {
    * @param content The string to process
    * @param deep The number of folder deeper than /assets
    */
-  static processEmoji = (content: string, deep: number, teamId: string): string => {
+  static processEmoji = (content: string, teamId: string): string => {
     let html = ""; // return string
     let search = ":"; // TODO regex
     let first = 0, second = 0, prev = 0; // first ':', second ':', prev: current char index
@@ -80,7 +80,8 @@ export class EmojiService {
         html += ":";
         prev = first + 1;
       } else {
-        html += `<img class="inline_emoji" src="${"../".repeat(deep)}assets/images/${emoji.picture}" alt=":${emoji.name}:">`;
+        // html += `<img class="inline_emoji" src="${"../".repeat(deep)}assets/images/${emoji.picture}" alt=":${emoji.name}:">`;
+        html += `<img class="inline_emoji" src="${environment.apiUrl}/files/${emoji.picture}" alt=":${emoji.name}:">`;
         prev = second + 1;
       }
     }
@@ -98,19 +99,6 @@ export class EmojiService {
       let emojis = Object.values(_emojis[index]).filter(emoji => emoji.name == name);
       if (emojis.length != 0)
         return new EmojiNamePict("" + emojis[0].id, emojis[0].name, EmojiService.path[index] + emojis[0].picture);
-    }
-    return undefined;
-  }
-
-  /** Returns the name if it exits, undefined otherwise */
-  static getEmojiName = (emojiId: number): string => {
-    let _emojis = [emojisBase, emojisOrga, ...Object.values(emojisTeam)];
-
-    for (let index in _emojis) {
-      // TODO [Opti] -> search in dict
-      let emoji = Object.values(_emojis[index]).find(elem => elem.id == emojiId);
-      if (emoji != undefined)
-        return emoji.name;
     }
     return undefined;
   }
@@ -137,17 +125,17 @@ let emojisTeam: { [id: number]: { [id: number]: { id: number, name: string, pict
     100_001: {
       id: 100_001,
       name: "bob",
-      picture: "1/aa.png"
+      picture: "team_1_1.png"
     },
     100_002: {
       id: 100_002,
       name: "rl",
-      picture: "1/ab.png"
+      picture: "team_1_2.png"
     },
     100_003: {
       id: 100_003,
       name: "ibm",
-      picture: "1/ac.png"
+      picture: "team_1_3.png"
     },
   },
   2: {
@@ -180,12 +168,12 @@ let emojisOrga: { [id: number]: { id: number, name: string, picture: string } } 
   10_001: {
     id: 10_001,
     name: "m2i",
-    picture: "1.png"
+    picture: "orga_1.png"
   },
   10_002: {
     id: 10_002,
     name: "semifir",
-    picture: "2.png"
+    picture: "orga_2.png"
   },
 };
 

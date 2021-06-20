@@ -15,7 +15,7 @@ export class Salon {
         this._name = name;
         this._msgs = msgs;
 
-        this._html = EmojiService.processEmoji(name, 4, teamId);
+        this._html = EmojiService.processEmoji(name, teamId);
     }
 
     // ===============================================

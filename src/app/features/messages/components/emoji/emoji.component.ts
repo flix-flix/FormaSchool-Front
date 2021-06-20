@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MemberUsersPseudo } from 'src/app/models/member/MemberUsersPseudo';
-import { UserNamePict } from 'src/app/models/user/userNamePict';
 import { EmojiService } from 'src/app/services/emoji.service';
+import { environment } from 'src/environments/environment';
 import { Reaction } from '../../../../models/reaction';
 
 @Component({
@@ -10,6 +10,7 @@ import { Reaction } from '../../../../models/reaction';
   styleUrls: ['./emoji.component.css']
 })
 export class EmojiComponent implements OnInit {
+  env = environment;
 
   @Output() eventEitter = new EventEmitter();
 

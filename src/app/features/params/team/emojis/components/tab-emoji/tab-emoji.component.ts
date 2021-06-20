@@ -41,6 +41,7 @@ export default class TabEmojiComponent implements OnInit {
     if (this.teamId) {
       this.service.findCreatedEmojiByTeamId(this.teamId).subscribe(emojis => {
         this.emojis = emojis;
+        console.log(this.emojis);
       });
     }
     else {
