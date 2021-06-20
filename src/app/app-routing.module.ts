@@ -22,6 +22,7 @@ import { AdminLogsComponent } from './pages/params/admin/admin-logs/admin-logs.c
 import { AdminEmojisComponent } from './pages/params/admin/admin-emojis/admin-emojis.component';
 import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
 import { RouterModule, Routes } from '@angular/router';
+import { UpdateSalonFormComponent } from './features/params/salon/update-salon-form/update-salon-form.component';
 
 
 const routes: Routes = [
@@ -71,6 +72,7 @@ const routes: Routes = [
       {
         path: "salon/:salonId", component: ParamsSalonTemplateComponent, children: [
           { path: "summary", component: SalonSummaryComponent },
+          { path: "summaryUpdate", component: UpdateSalonFormComponent },
           { path: "permissions", component: SalonPermissionsComponent },
           { path: "**", redirectTo: "summary" }
         ]

@@ -2,21 +2,21 @@
 
 export class SalonNameDesc {
 
-    private _id: number;
+    private _id: string;
     private _name: string;
     private _desc: string;
 
-    constructor(id: number, name: string, desc: string) {
+    constructor(id: string, name: string, desc: string) {
         this._id = id;
         this._name = name;
         this._desc = desc;
     }
 
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
-    public set id(id: number) {
+    public set id(id: string) {
         this._id = id;
     }
 
