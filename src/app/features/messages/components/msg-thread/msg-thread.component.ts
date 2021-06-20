@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { first } from 'rxjs/operators';
 import { MessageSend } from 'src/app/models/messages/messageSend';
 import { UserLocalStorage } from 'src/app/models/user/userLocalStorage';
 import { StorageService } from 'src/app/services/storage.service';
@@ -30,6 +31,8 @@ export class MsgThreadComponent implements OnInit {
   constructor(private msgService: MessageService, private storageService: StorageService) { }
 
   ngOnInit(): void {
+    this.msgService.registerThread(this.salonId, this);
+
     this.msgService.findAllMessageOfSalon(this.salonId).subscribe(msgs => {
       this._msgs = msgs.map(msg => Message.fromJSON(msg))
       this._msgs.forEach(msg => msg.processEmoji(this.teamId))
@@ -75,11 +78,19 @@ export class MsgThreadComponent implements OnInit {
 
   // TODO Allow the message to be added before
   /** Add the message to the day-grouped messages */
-  addMsg = (msg: Message) => {
+  addMsg = (msg: Message, scroll = false) => {
     msg.processEmoji(this.teamId);
     if (this.msgs.length == 0 || !isSameDay(msg.send, this.msgs[this.msgs.length - 1][0].send))
       this.msgs.push([]);
     this.msgs[this.msgs.length - 1].push(msg);
+
+    if (scroll)
+      setTimeout(() => this.scrollToBottom(), 250);
+  }
+
+  removeMsg(msgId: string) {
+    this._msgs = this._msgs.filter(msg => msg.id !== msgId);
+    this.groupMsgByDay();
   }
 
   // =========================================================================================
@@ -89,17 +100,11 @@ export class MsgThreadComponent implements OnInit {
     msg.memberId = this.memberId;
     msg.salonId = this.salonId;
 
-    this.msgService.sendMessage(msg).subscribe(msg => {
-      this.addMsg(msg)
-      setTimeout(() => this.scrollToBottom(), 250);
-    });
+    this.msgService.sendWs(msg);
   }
 
   deleteMsg = (msgId: string) => {
-    this.msgService.delete(msgId).subscribe(() => {
-      this._msgs = this._msgs.filter(msg => msg.id != msgId);
-      this.groupMsgByDay();
-    });
+    this.msgService.deleteWs(msgId);
   }
 }
 

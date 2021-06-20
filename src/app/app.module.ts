@@ -67,8 +67,8 @@ import { UpdateTeamFormComponent } from './features/params/team/components/updat
 import { RightsComponent } from './features/params/team/components/rights/rights.component';
 import { UpdateSalonFormComponent } from './features/params/salon/update-salon-form/update-salon-form.component';
 import { DialogPermissionComponent } from './features/params/salon/components/dialog-permission/dialog-permission.component';
-
-
+// import { StompRService } from 'ng2-stomp-service';
+import { RxStompService } from '@stomp/ng2-stompjs';
 
 @NgModule({
   declarations: [
@@ -144,7 +144,7 @@ import { DialogPermissionComponent } from './features/params/salon/components/di
     ConfirmDialogModule,
     DropdownModule
   ],
-  providers: [],
+  providers: [RxStompService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

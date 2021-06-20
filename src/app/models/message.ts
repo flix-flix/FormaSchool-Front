@@ -6,22 +6,28 @@ import { Reaction } from "./reaction";
 export class Message {
     private _id: string;
     private _sender: MemberUsersPseudo;
-    private _send: Date;
-    private _edit: Date;
+    private _salonId: string;
+
     private _content: string;
     private _file: FileModel;
     private _reactions: Reaction[];
 
+    private _send: Date;
+    private _edit: Date;
+
     private _html: string;
 
-    constructor(id: string, sender: MemberUsersPseudo, send: Date | string, edit: Date | string, content: string, file: FileModel, reactions: Reaction[] = []) {
+    constructor(id: string, sender: MemberUsersPseudo, salonId: string, content: string, file: FileModel, reactions: Reaction[], send: Date | string, edit: Date | string) {
         this._id = id;
         this._sender = sender;
-        this._send = send instanceof Date ? send : new Date(send);
-        this._edit = edit instanceof Date ? edit : new Date(edit);
+        this._salonId = salonId;
+
         this._content = content;
         this._file = file;
         this._reactions = reactions;
+
+        this._send = send instanceof Date ? send : new Date(send);
+        this._edit = edit instanceof Date ? edit : new Date(edit);
 
         this._html = Message.processHtml(content);
     }
@@ -29,7 +35,7 @@ export class Message {
     // ===============================================
 
     static fromJSON = (json: Message): Message => {
-        return new Message(json.id, json.sender, json.send, json.edit, json.content, FileModel.fromJSON(json.file), json.reactions);
+        return new Message(json.id, json.sender, json.salonId, json.content, FileModel.fromJSON(json.file), json.reactions, json.send, json.edit);
     }
 
     // ===============================================
@@ -59,6 +65,14 @@ export class Message {
 
     public set sender(sender: MemberUsersPseudo) {
         this._sender = sender;
+    }
+
+    public get salonId(): string {
+        return this._salonId;
+    }
+
+    public set salonId(salonId: string) {
+        this._salonId = salonId;
     }
 
     public get send(): Date {
