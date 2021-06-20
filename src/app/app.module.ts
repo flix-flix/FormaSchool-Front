@@ -65,6 +65,7 @@ import { LogTeamComponent } from './features/params/team/logs/components/log-tea
 import { LogComponent } from './features/params/team/logs/components/log/log.component';
 import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
 import { RightsComponent } from './features/params/team/components/rights/rights.component';
+import { UpdateSalonFormComponent } from './features/params/salon/update-salon-form/update-salon-form.component';
 
 
 
@@ -118,7 +119,8 @@ import { RightsComponent } from './features/params/team/components/rights/rights
     LogTeamComponent,
     LogComponent,
     UpdateTeamFormComponent,
-    RightsComponent
+    RightsComponent,
+    UpdateSalonFormComponent
   ],
   imports: [
     BrowserModule,

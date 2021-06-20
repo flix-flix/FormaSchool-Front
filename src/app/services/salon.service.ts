@@ -20,9 +20,21 @@ export class SalonService {
     return this.http.get<SalonNameTeam[]>(environment.apiUrl + "/salons/ofTeam/" + teamId);
   }
 
+  findNameDescById = (teamId: string): Observable<SalonNameDesc> => {
+    return this.http.get<SalonNameDesc>(environment.apiUrl + "/salons/salonDesc/" + teamId)
+  }
+
+  getSalonById = (salonId: String): Observable<SalonNameDesc> => {
+    return this.http.get<SalonNameDesc>(`${environment.apiUrl}/salons/${salonId}`);
+  }
+
   // ================================================================================================
 
-  /** Returns the salon with the given id */
+  updateSalonNameDesc = (salon: SalonNameDesc): Observable<SalonNameDesc> => {
+    return this.http.patch<SalonNameDesc>(environment.apiUrl + "/salons/salonDesc", salon);
+  }
+
+  /** Returns the salon with the given id 
   findNameDescById = (salonId: number): Observable<SalonNameDesc> => {
     return new Observable<SalonNameDesc>(observable => {
       observable.next(SalonService.generateSalonNameDesc(salonId));
@@ -49,13 +61,13 @@ export class SalonService {
   // ================================================================================================
   // TODO [back]
 
-  static generateSalonNameDesc = (salonId: number): SalonNameDesc => {
+  /**static generateSalonNameDesc = (salonId: number): SalonNameDesc => {
     if (!(salonId in salons)) {
       console.error("salonId doesn't exist:", salonId);
       return undefined;
     }
     return new SalonNameDesc(salons[salonId].id, salons[salonId].name, salons[salonId].desc);
-  }
+  }*/
 }
 
 let salons: { [id: number]: { id: number, teamId: number, name: string, desc: string } } = {
