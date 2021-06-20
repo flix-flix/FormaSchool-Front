@@ -4,19 +4,21 @@
     <div class="info">
         <label for="float-input">SALON NAME</label>
         <span class="p-float-label">
-            <input id="float-input" type="text" value="{{ salon == undefined?'':salon.name }}" pInputText>
+            <input id="float-input" type="text" value="{{ salon == undefined?'':salon.name }}" disabled="disabled"
+                pInputText>
         </span>
     </div>
 
     <div class="info">
         <label for="float-input">SALON DESCRIPTION</label>
         <span class="p-float-label">
-            <textarea [rows]="5" [cols]="30" value="{{ salon == undefined?'':salon.desc }}" pInputTextarea
-                autoResize="autoResize"></textarea>
+            <textarea [rows]="5" [cols]="30" value="{{ salon == undefined?'':salon.desc }}" disabled="disabled"
+                pInputTextarea autoResize="autoResize"></textarea>
         </span>
     </div>
 
     <div>
-        <button (click)="salonUpdate( salon.id )">Do you want change that informations?</button>
+        <button pButton pRipple type="button" (click)="salonUpdate( salon.id )"
+            label="Do you want change that informations?" class="p-button-rounded p-button-info"></button>
     </div>
 </div>
