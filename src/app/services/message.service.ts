@@ -26,13 +26,15 @@ export class MessageService {
     return this.http.post<Message>(environment.apiUrl + "/messages/sendMsgWithFile", data).pipe(map(json => Message.fromJSON(json)));
   }
 
+  // TODO [Back]
+  delete = (msgId: string) => {
+    return this.http.delete(environment.apiUrl + "/messages/deleteMsg/" + msgId)
+  }
+
   // TODO [Websocket]
   post = (msg: Message, salonId: number) => {
   }
 
-  // TODO [Back]
-  delete = (msgId: number) => {
-  }
 
   findAllMessageOfSalon(salonId: string): Observable<Message[]> {
     return this.http.get<Message[]>(environment.apiUrl + "/messages/salonWithReacts/" + salonId);

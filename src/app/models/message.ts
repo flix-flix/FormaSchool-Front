@@ -4,7 +4,7 @@ import { EmojiService } from "src/app/services/emoji.service";
 import { Reaction } from "./reaction";
 
 export class Message {
-    private _id: number;
+    private _id: string;
     private _sender: MemberUsersPseudo;
     private _send: Date;
     private _edit: Date;
@@ -14,7 +14,7 @@ export class Message {
 
     private _html: string;
 
-    constructor(id: number, sender: MemberUsersPseudo, send: Date | string, edit: Date | string, content: string, file: FileModel, reactions: Reaction[] = []) {
+    constructor(id: string, sender: MemberUsersPseudo, send: Date | string, edit: Date | string, content: string, file: FileModel, reactions: Reaction[] = []) {
         this._id = id;
         this._sender = sender;
         this._send = send instanceof Date ? send : new Date(send);
@@ -45,11 +45,11 @@ export class Message {
 
     // ===============================================
 
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
-    public set id(id: number) {
+    public set id(id: string) {
         this._id = id;
     }
 

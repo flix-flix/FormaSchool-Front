@@ -95,11 +95,11 @@ export class MsgThreadComponent implements OnInit {
     });
   }
 
-  deleteMsg = (msgId) => {
-    // TODO [back]
-    // this.msgService.delete(msgId);
-    // this.salon.msgs = this.salon.msgs.filter(msg => msg.id != msgId);
-    // this.groupMsgByDay();
+  deleteMsg = (msgId: string) => {
+    this.msgService.delete(msgId).subscribe(() => {
+      this._msgs = this._msgs.filter(msg => msg.id != msgId);
+      this.groupMsgByDay();
+    });
   }
 }
 
