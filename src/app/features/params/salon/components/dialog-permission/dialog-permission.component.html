@@ -1,0 +1,10 @@
+<p-dialog header="Ajoute une permission" [(visible)]="display">
+    <h5>Membres</h5>
+    <p-dropdown [options]="members" (onChange)="createFromMember()" [(ngModel)]="selectedMembre"
+        placeholder="Selectionne un membre" optionLabel="user.firstname" [showClear]="true"></p-dropdown>
+    <h5>Roles</h5>
+    <p-dropdown [options]="roles" (onChange)="createFromRole()" [(ngModel)]="selectedRole"
+        placeholder="Selecttionne un role" optionLabel="name" [showClear]="true"></p-dropdown>
+</p-dialog>
+<button id="addPermission" pButton pRipple type="button" (click)="showDialog()" label="Ajoute une permission"
+    class="p-button-rounded p-button-info addPermission"></button>
