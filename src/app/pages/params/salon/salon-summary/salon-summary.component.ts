@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SalonNameDesc } from 'src/app/models/salon/salonNameDesc';
 import { SalonService } from 'src/app/services/salon.service';
 
@@ -12,18 +12,28 @@ import { SalonService } from 'src/app/services/salon.service';
 export class SalonSummaryComponent implements OnInit {
 
   salon: SalonNameDesc;
+  salonId: string;
 
   constructor(
     private salonService: SalonService,
     private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.route.parent.paramMap.subscribe(params => { console.log(params.get("salonId")) })
     this.route.parent.paramMap.subscribe(params => {
-      this.salonService.findNameDescById(+ params.get("salonId")).subscribe(data => {
-        this.salon = data;
-      })
-    });
+      this.salonId = params.get("salonId");
+    })
+    this.salonService.findNameDescById(this.salonId).subscribe(salon => {
+      this.salon = salon;
+    })
+  }
+
+  salonUpdate = (salonId: string) => {
+    console.log(salonId);
+    const URL = `/params/salon/${salonId}/summaryUpdate`
+    this.router.navigate([URL]);
+    console.log(URL);
+
   }
 }

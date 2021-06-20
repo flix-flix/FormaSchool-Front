@@ -1,0 +1,30 @@
+.right{
+    background-color: #A2D0EA;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.right label{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.right:hover{
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2)
+}
+
+::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+    background:  #227014;
+}
+::ng-deep .p-inputswitch .p-inputswitch-slider {
+    background: #8a1a1a;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 30px;
+}
+::ng-deep .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider{
+    background: #1cb301;
+}
+::ng-deep .p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider{
+    background: #d60b0b;
+}

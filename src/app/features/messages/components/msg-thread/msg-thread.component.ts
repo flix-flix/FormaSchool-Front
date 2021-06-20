@@ -1,6 +1,8 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Salon } from 'src/app/models/salon/salon';
-import { SalonService } from 'src/app/services/salon.service';
+import { first } from 'rxjs/operators';
+import { MessageSend } from 'src/app/models/messages/messageSend';
+import { UserLocalStorage } from 'src/app/models/user/userLocalStorage';
+import { StorageService } from 'src/app/services/storage.service';
 import { Message } from '../../../../models/message';
 import { MessageService } from '../../../../services/message.service';
 
@@ -13,42 +15,39 @@ export class MsgThreadComponent implements OnInit {
   @ViewChild("scrollMe") private msgThread: ElementRef;
 
   @Input() teamId: string;
-  /** The displayed salon */
   @Input() salonId: string;
+
+  user: UserLocalStorage;
+  memberId: string;
 
   /** Messages grouped by date and sorted by time */
   msgs: Message[][];
 
   // TODO [Remove]
-  /**  */
+  /** List of all the messages */
   _msgs: Message[];
 
-  /** true: the thread has been scrolled down on init */
-  scrolledDownOnInit = false;
-  /** true: currently displayed salon */
-  isDisplayed: boolean;
-
   // TODO [Optimise] prevent re-contruct RouteReuseStrategy
-  constructor(private msgService: MessageService, private salonService: SalonService) { }
+  constructor(private msgService: MessageService, private storageService: StorageService) { }
 
   ngOnInit(): void {
+    this.msgService.registerThread(this.salonId, this);
+
     this.msgService.findAllMessageOfSalon(this.salonId).subscribe(msgs => {
       this._msgs = msgs.map(msg => Message.fromJSON(msg))
       this._msgs.forEach(msg => msg.processEmoji(this.teamId))
       this.groupMsgByDay();
+
+      setTimeout(() => this.scrollToBottom(), 250);
     });
 
-    // TODO
-    // this.isDisplayed = this.salon.id == this.salonId;
+    this.initUserMember();
+    this.storageService.changes.subscribe(() => this.initUserMember());
   }
 
-  ngAfterViewChecked() {
-    // TODO [Improve] show un-read messages
-    // On loading: scroll down to the last message
-    if (this.isDisplayed && !this.scrolledDownOnInit) {
-      this.scrollToBottom();
-      this.scrolledDownOnInit = true;
-    }
+  initUserMember() {
+    this.user = JSON.parse(localStorage.getItem("user"));
+    this.memberId = this.user.members.find(member => member.team.id == this.teamId).id;
   }
 
   /** Scroll the view to the last message */
@@ -79,39 +78,33 @@ export class MsgThreadComponent implements OnInit {
 
   // TODO Allow the message to be added before
   /** Add the message to the day-grouped messages */
-  addMsg = (msg: Message) => {
+  addMsg = (msg: Message, scroll = false) => {
     msg.processEmoji(this.teamId);
     if (this.msgs.length == 0 || !isSameDay(msg.send, this.msgs[this.msgs.length - 1][0].send))
       this.msgs.push([]);
     this.msgs[this.msgs.length - 1].push(msg);
+
+    if (scroll)
+      setTimeout(() => this.scrollToBottom(), 250);
+  }
+
+  removeMsg(msgId: string) {
+    this._msgs = this._msgs.filter(msg => msg.id !== msgId);
+    this.groupMsgByDay();
   }
 
   // =========================================================================================
-
-  /** Called on msgwriter (keyup) */
-  keyUp = (event) => {
-    if (event.keyCode == 13)// Enter
-      this.scrollToBottom();
-  }
-
-  // =========================================================================================
-  // TODO [service]
 
   /** Send the written message  */
-  sendMsg = (text) => {
-    // TODO [Improve] server get user from session
+  sendMsg = (msg: MessageSend) => {
+    msg.memberId = this.memberId;
+    msg.salonId = this.salonId;
 
-    // let msg = new Message(nextId++, UserService.generateUserNamePicture(1), new Date(), new Date(), text, undefined);
-    // this.msgService.post(msg, this.salon.id);
-    // this.addMsg(msg);
-    // this.salon.msgs.push(msg);
+    this.msgService.sendWs(msg);
   }
 
-  deleteMsg = (msgId) => {
-    // TODO [back]
-    // this.msgService.delete(msgId);
-    // this.salon.msgs = this.salon.msgs.filter(msg => msg.id != msgId);
-    // this.groupMsgByDay();
+  deleteMsg = (msgId: string) => {
+    this.msgService.deleteWs(msgId);
   }
 }
 

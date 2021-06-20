@@ -1,0 +1,35 @@
+<div id="global">
+    <h1 id="title"> UPDATE INFORMATIONS</h1>
+
+    <!--
+         
+        <span class="p-float-label">
+            <input id="float-input" type="text" value="{{ team.picture }}" pInputText>
+        </span>
+    -->
+    <form [formGroup]="teamUpdateForm" (ngSubmit)="updateTeam(team.id)">
+        <div id="inputs">
+            <div>
+                <img *ngIf="team!=undefined" src="{{env.apiUrl}}/files/teams/{{team.picture}}" alt="">
+            </div>
+
+            <div class="info">
+                <label for="float-input">TEAM NAME</label>
+                <span class="p-float-label">
+                    <input id="float-input" type="text" value="{{team == undefined?'': team.name }}"
+                        formControlName="name" pInputText>
+                </span>
+            </div>
+
+            <div class="info">
+                <label for="float-input">TEAM DESCRIPTION</label>
+                <span class="p-float-label">
+                    <textarea [rows]="5" [cols]="30" type="text" value="{{team == undefined?'': team.desc }}"
+                        formControlName="desc" pInputTextarea autoResize="autoResize"> </textarea>
+                </span>
+            </div>
+        </div>
+        <button pButton pRipple type="submit" label="Update" class="p-button-rounded p-button-info"></button>
+    </form>
+
+</div>

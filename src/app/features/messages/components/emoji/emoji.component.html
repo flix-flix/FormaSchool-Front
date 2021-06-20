@@ -1,12 +1,12 @@
 <div class="all">
     <div class="react" [class.on]="on" (click)="addRemoveReact()">
-        <img class="emoji" src="../../../../../assets/images/{{getEmojiPath()}}" alt="">
+        <img class="emoji" src="{{env.apiUrl + '/files/' + reaction.emoji.picture}}" alt="">
         <span>{{reaction.members.length}}</span>
 
     </div>
 
     <div class="react_tooltip">
-        <img class="tooltip_emoji" src="../../../../../assets/images/{{getEmojiPath()}}" alt="">
+        <img class="tooltip_emoji" src="{{env.apiUrl + '/files/' + reaction.emoji.picture}}" alt="">
         <div class="tooltip_text">
             {{getTextTooltip()}} <span class="bold">:{{reaction.emoji.name}}:</span>
         </div>

@@ -4,22 +4,21 @@
         <img src="../../../assets/images/logo.png" alt="">
         <div>
             <span id="login" class="p-float-label">
-                <input id="float-input" type="text" formControlName="login" required pInputText>
+                <input id="float-input" type="text" formControlName="email" required pInputText>
                 <label for="float-input"> Login </label>
             </span>
-        
+
             <span id="pwd" class="p-float-label">
                 <input id="float-input" type="password" formControlName="password" required pInputText>
                 <label for="float-input">Mot de passe</label>
             </span>
-    
+
             <button pButton pRipple type="submit" label="Envoyer" class="p-button-rounded p-button-info"></button>
         </div>
-        
     </form>
-    
-    </div>
-    <!-- <div>
+
+</div>
+<!-- <div>
         <form [formGroup]="userProfile" (ngSubmit)="onSubmit()">
 
             <label id="label">

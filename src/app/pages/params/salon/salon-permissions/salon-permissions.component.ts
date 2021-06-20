@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleService } from 'src/app/services/role.service';
-
 import { TeamService } from 'src/app/services/team.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SalonService } from 'src/app/services/salon.service';
-import { RoleWithoutRights } from 'src/app/models/role/roleWithoutRights';
-import { Member } from 'src/app/models/member/member';
-
+import { PermissionService } from 'src/app/services/permission.service';
+import { PermissionMemberRoleWithoutRights } from 'src/app/models/permission/permissionMemberRoleWithoutRights';
+import { PermissionRights } from 'src/app/models/permission/permissionRights';
+import { environment } from 'src/environments/environment';
+import { MemberService } from 'src/app/services/member.service';
+import { RoleService } from 'src/app/services/role.service';
 
 @Component({
   selector: 'app-salon-permissions',
@@ -14,63 +14,56 @@ import { Member } from 'src/app/models/member/member';
   styleUrls: ['./salon-permissions.component.css']
 })
 export class SalonPermissionsComponent implements OnInit {
-  members: Member[];
-  teamId: number;
-  booleanChoosen: boolean;
-  roles: RoleWithoutRights[];
+  env = environment;
 
-  constructor(private teamService: TeamService, private roleService: RoleService,
-    private salonService: SalonService, private router: ActivatedRoute) {
+  teamId: string;
+  salonId: string;
+  permissionsMembers: PermissionMemberRoleWithoutRights[];
+  permissionsRoles: PermissionMemberRoleWithoutRights[];
+  permissionChoosen: PermissionRights;
+
+  constructor(private teamService: TeamService, private permissionService: PermissionService,
+    private memberService: MemberService, private roleService: RoleService, private router: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.booleanChoosen = true;
     this.router.parent.paramMap.subscribe(params => {
-      let salonId = +params.get("salonId");
-      this.salonService.findTeamIdById(salonId).subscribe(teamId => {
-        this.teamId = teamId;
-      })
-    })
-    this.teamService.findRolesByTeamId("" + this.teamId).subscribe(roles => {
-      let result = [];
-      roles.forEach(roleId => {
-        // result.push(RoleService.generateRoleWithoutRights(roleId));
+      this.salonId = params.get("salonId");
+      this.teamService.findTeamIdBySalonId(this.salonId).subscribe(team => {
+        this.teamId = team.id;
       });
-      this.roles = result;
+      this.refreshMenu();
+    });
+  }
+
+  /**
+   * This function refresh the list of permission for the salon
+   */
+  refreshMenu = () => {
+    this.permissionService.findPermissionBySalonId(this.salonId).subscribe(permissions => {
+      this.permissionsMembers = permissions.filter(permission => permission.member != null);
+      this.permissionsRoles = permissions.filter(permission => permission.role != null);
+    });
+  }
+
+  /**
+   * Load rights of the permission choosen
+   * @param permissionId the id of the permission choosen
+   */
+  choosePermission = (permissionId: string) => {
+    this.permissionService.findPermissionRightsByPermissionId(permissionId).subscribe(permission => {
+      this.permissionChoosen = permission;
     })
-    //this.teamService.findMembersByTeamId(this.teamId).subscribe(members => {
-    // this.members = members;
-    //  });
   }
 
-  refreshBoolean = (member: Member) => {
-    this.booleanChoosen = !this.booleanChoosen;
+  /**
+   * This function update a permission
+   */
+  update = () => {
+    this.permissionService.updatePermission(this.permissionChoosen).subscribe();
   }
 
-  swap = () => {
-    this.booleanChoosen = !this.booleanChoosen;
-    /**
-     * This function allows us to save a role
-     *
-     
-    save = () => {
-      if (this.roleForm.get("name").value != "" && this.roleForm.get("name").value != null) {
-        //  let role: Role = new Role(this.nextId++, this.roleForm.get("name").value,
-        //    this.roleForm.get("color").value,
-        //    this.listOfRights);
-        // //TODO replace 1 by the id of the actual team
-        // let idRetour: number;
-        // this.roleService.saveUpdateRole(role).subscribe(retour => {
-        //   idRetour = retour;
-        //   alert(`Le role a bien été crée avec l'id ${idRetour}`);
-        // });
-      }
-      else {
-        alert("Le nom ne peut pas être vide");
-      }
-    }
-*/
+  getEvent = (element) => {
+    this.refreshMenu();
   }
-
-
 }

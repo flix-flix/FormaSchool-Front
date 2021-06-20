@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UserLocalStorage } from 'src/app/models/user/userLocalStorage';
+import { environment } from 'src/environments/environment';
 import { Message } from '../../../../models/message';
 
 @Component({
@@ -7,6 +9,8 @@ import { Message } from '../../../../models/message';
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit {
+  env = environment;
+  user: UserLocalStorage = JSON.parse(localStorage.getItem("user"))
 
   @Output() delete = new EventEmitter();
 

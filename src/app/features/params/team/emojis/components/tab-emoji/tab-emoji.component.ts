@@ -3,6 +3,7 @@ import { NumberValueAccessor } from '@angular/forms';
 import { CreatedEmoji } from 'src/app/models/emoji/createdEmoji';
 import { EmojiService } from 'src/app/services/emoji.service';
 import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-tab-emoji',
@@ -10,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./tab-emoji.component.css']
 })
 export default class TabEmojiComponent implements OnInit {
+  env = environment;
 
   @Input() emojis: CreatedEmoji[];
 
@@ -39,6 +41,7 @@ export default class TabEmojiComponent implements OnInit {
     if (this.teamId) {
       this.service.findCreatedEmojiByTeamId(this.teamId).subscribe(emojis => {
         this.emojis = emojis;
+        console.log(this.emojis);
       });
     }
     else {
@@ -68,7 +71,6 @@ export default class TabEmojiComponent implements OnInit {
     this.submitted = false;
     this.refreshEmoji();
   }
-
 
   /**
    * This function allow you to:

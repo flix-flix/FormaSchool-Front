@@ -5,7 +5,7 @@ export class SalonNameTeam {
     private _html: string;
 
     constructor(private _id: number, private _name: string, private _team: TeamNamePict) {
-        this._html = EmojiService.processEmoji(this.name, 4, this.team.id);
+        this._html = EmojiService.processEmoji(this.name, this.team.id);
     }
 
     // ===============================================

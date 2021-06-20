@@ -75,3 +75,7 @@
 #emoji {
     right: .5rem;
 }
+
+#input_file { 
+    display: none;
+}

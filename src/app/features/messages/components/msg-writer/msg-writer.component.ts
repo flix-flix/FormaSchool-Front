@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MessageSend } from 'src/app/models/messages/messageSend';
 
 @Component({
   selector: 'app-msg-writer',
@@ -7,37 +7,32 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./msg-writer.component.css']
 })
 export class MsgWriterComponent implements OnInit {
+  @ViewChild("writer") private msgWriter: ElementRef;
 
-  @Output() msgEmit = new EventEmitter<string>();
+  @Output() msgEmit = new EventEmitter<MessageSend>();
 
-  msgGroup: FormGroup;
+  file: File;
+  content = "";
 
-  constructor(private fb: FormBuilder) {
-    this.msgGroup = fb.group({ msg: [""] });
-  }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  buttonJoinFile = () => {
-    alert("TODO join file");
-  }
-
-  buttonAddEmoji = () => {
-    alert("TODO add emoji");
+  pressEnter = (event) => {
+    event.preventDefault();
+    if (this.content.length != 0 || this.file)
+      this.sendMsg();
   }
 
   sendMsg = () => {
-    this.msgEmit.emit(this.msgGroup.value.msg);
-    this.msgGroup.controls["msg"].setValue("");
+    this.msgEmit.emit(new MessageSend(undefined, undefined, this.content, this.file));
+    this.content = "";
+    this.file = undefined;
+    this.msgWriter.nativeElement.innerText = "";
   }
 
-  pressEnter = (event) => {
-    event.preventDefault();
-    this.sendMsg();
-  }
-
-  onInput = (event) => {
-    //event == str;
+  openCloseEmojiSelector = () => {
+    alert("TODO add emoji");
   }
 }

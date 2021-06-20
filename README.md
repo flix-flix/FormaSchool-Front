@@ -15,7 +15,7 @@ Collaborative platform for training courses
 
 **npm:** 7.12 (update `npm i -g npm@latest`)
 
-**Angular:** 11.2
+**Angular:** 12.0
 
 **Node:** 14.16
 

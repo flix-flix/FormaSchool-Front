@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserLocalStorage } from 'src/app/models/user/userLocalStorage';
 import { TeamService } from 'src/app/services/team.service';
-import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-team-select',
@@ -8,15 +10,21 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./team-select.component.css']
 })
 export class TeamSelectComponent implements OnInit {
+  env = environment;
 
+  user: UserLocalStorage;
   teams = []
 
-  constructor(private service: TeamService, private userService: UserService) { }
+  constructor(private service: TeamService, private router: Router) { }
 
   ngOnInit(): void {
-    // TODO User from local storage
-    this.userService.findNamePictDefault().subscribe(user =>
-      this.service.findAllTeamOfUser(user.id).subscribe(listTeam => this.teams = listTeam)
-    );
+    this.user = JSON.parse(localStorage.getItem("user"));
+
+    // TODO [Guard]
+    if (this.user == null)
+      this.router.navigate(["/login"]);
+
+    // TODO Store teams in user
+    this.service.findAllTeamOfUser(this.user.id).subscribe(listTeam => this.teams = listTeam)
   }
 }

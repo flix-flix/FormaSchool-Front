@@ -1,7 +1,6 @@
 <div class="all">
-    <div *ngFor="let equipe of teams" class="image">
-        <img src="../../../assets/images/_remove/teams/{{equipe.picture}}" alt=""
-            routerLink="/teamMessages/{{equipe.id}}/redirect">
-        <p>{{equipe.name}}</p>
-    </div>
+    <a *ngFor="let team of teams" class="team" routerLink="/teamMessages/{{team.id}}/redirect">
+        <img src="{{env.apiUrl}}/files/teams/{{team.picture}}" alt="">
+        <p>{{team.name}}</p>
+    </a>
 </div>

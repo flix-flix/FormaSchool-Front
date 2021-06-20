@@ -1,61 +1,65 @@
+img{
+    border-radius: 40%;
+    height: 40px;
+}
+.barre{
+    border:solid 2px rgba(0, 0, 255, .2);
+    width: 100%;
+}
 section{
-    background-color: #6595B8;
+    display: flex;
     height: 100%;
-    padding: 50px;
-}
-input{
-    background-color: #A2D0EA;
+    width: 100%;
 }
 
-label{
-    color: #10516D;
+/*========================= Menu permission========================= */
+#addPermission  {
+    border-radius: 0; 
 }
-
-.p-float-label{
-   margin-left: 120px;
-   margin-bottom: 20px;
-}
-.colorSpan{
-    background-color: #A2D0EA;
-    padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-right: 120px;
-    margin-left: 120px; 
-}
-button{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-right: 120px;
-    margin-left: 120px; 
-}
-
-.rightsContainer{   
+.permissionMenu{
     display: flex;
     flex-direction: column;
+    background-color: var(--background);
+    height: 100%;
+    width: 20rem;
+    overflow-y: auto;
 }
-.rights{
-    background-color: #A2D0EA;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-right: 120px;
-    margin-left: 120px;  
+.permissionRoleName{
+    margin: 20px;
+    margin-right: 15%;
+}
+.permissionUser{
+    margin: 10px;
     display: flex;
-    justify-content: space-between;
-    padding: 10px;
+}
+.permissionUser p{
+    margin-top: 5%;
+    margin-left: 5%;
+}
+/*=======================================Permission==========================*/
+.permission{
+    margin: 5%;
+    width: 100%;
+    overflow-y: auto;
+}
+/* ====================Dialogue==============*/
+:host ::ng-deep .p-dialog-content {
+    overflow-y: unset;
 }
 
-::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
-    background: #1cb301;
+/* ========= Scrollbar ========= */
+.permission::-webkit-scrollbar {
+    width: 16px;
 }
-::ng-deep .p-inputswitch .p-inputswitch-slider {
-    background: #d60b0b;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
-    border-radius: 30px;
+
+.permission::-webkit-scrollbar-track{
+    background: #6595b8; 
 }
-::ng-deep .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider{
-    background: #1cb301;
-}
-::ng-deep .p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider{
-    background: #d60b0b;
+
+.permission::-webkit-scrollbar-thumb {
+    background: var(--background); 
+
+    border: solid 4px var(--header);
+    
+    border-radius: 200px;
 }

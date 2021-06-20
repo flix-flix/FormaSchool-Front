@@ -1,6 +1,6 @@
 <div class="msg">
     <div>
-        <img class="author_img" src="../../../../../assets/images/_remove/users/{{msg.sender.user.picture}}" alt="">
+        <img class="author_img" src="{{env.apiUrl}}/files/users/{{msg.sender.user.picture}}" alt="">
     </div>
 
     <div id="left">
@@ -26,13 +26,13 @@
             (click)="emoji()">
 
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/edit-3.svg" alt="edit"
-            *ngIf="msg.sender.user.firstname == 'Félix'" (click)="edit()">
+            *ngIf="msg.sender.user.id == user.id" (click)="edit()">
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/trash-2.svg" alt="delete"
-            *ngIf="msg.sender.user.firstname == 'Félix'" (click)="deleteClick()">
+            *ngIf="msg.sender.user.id == user.id" (click)="deleteClick()">
 
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/corner-up-left.svg" alt="reply"
-            *ngIf="msg.sender.user.firstname != 'Félix'" (click)="reply()">
+            *ngIf="msg.sender.user.id != user.id" (click)="reply()">
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/more-horizontal.svg" alt="other"
-            *ngIf="msg.sender.user.firstname != 'Félix'" (click)="other()">
+            *ngIf="msg.sender.user.id != user.id" (click)="other()">
     </div>
 </div>

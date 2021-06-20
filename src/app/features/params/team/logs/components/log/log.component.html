@@ -7,7 +7,7 @@
         <app-log-user *ngIf="log.type>=8 && log.type<=10" [log]="log"></app-log-user>
 
         <div class="profilContainer">
-            <img class="profil" src="../../../../../assets/images/_remove/users/{{user.picture}}" alt="">
+            <img class="profil" src="{{env.apiUrl}}/files/users/{{user.picture}}" alt="">
             <p>{{user.firstname}} {{user.lastname}} </p>
             <p>{{ddmmyyyy(log.date)}}</p>
         </div>

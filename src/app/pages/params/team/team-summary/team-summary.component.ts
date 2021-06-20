@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TeamNameDescPict } from 'src/app/models/team/teamNameDescPict';
-
-
 import { TeamService } from 'src/app/services/team.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-team-summary',
@@ -11,25 +10,27 @@ import { TeamService } from 'src/app/services/team.service';
   styleUrls: ['./team-summary.component.css']
 })
 export class TeamSummaryComponent implements OnInit {
+  env = environment;
 
   team: TeamNameDescPict;
 
   constructor(
     private service: TeamService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.service.findNamePicDescById(+params.get("id")).subscribe(data => {
-        this.team = data;
-      })
+    this.activatedRoute.parent.paramMap.subscribe(params => {
+      this.service.findNamePicDescById(params.get("teamId")).subscribe(team => this.team = team);
     });
   }
 
-  /*delete = () => {
-    this.service.delete(this.team.id).subscribe( () => {
-      this.router.navigate(['/teams']);
-    });
-  }*/
+  teamUpdate = (teamId: string) => {
+    console.log(teamId);
+    const URL = `/params/team/${teamId}/summaryUpdate`
+    this.router.navigate([URL]);
+    console.log(URL);
+
+  }
 }

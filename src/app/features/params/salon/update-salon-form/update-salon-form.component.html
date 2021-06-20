@@ -1,0 +1,32 @@
+<div id="global">
+    <h1 id="title"> UPDATE INFORMATIONS</h1>
+
+    <!--
+         
+        <span class="p-float-label">
+            <input id="float-input" type="text" value="{{ team.picture }}" pInputText>
+        </span>
+    -->
+    <form [formGroup]="salonUpdateForm" (ngSubmit)="updateSalon(salon.id)">
+
+        <div class="info">
+            <label for="float-input">SALON NAME</label>
+            <span class="p-float-label">
+                <input id="float-input" type="text" value="{{salon == undefined?'': salon.name }}"
+                    formControlName="name" pInputText>
+            </span>
+        </div>
+
+        <div class="info">
+            <label for="float-input">SALON DESCRIPTION</label>
+            <span class="p-float-label">
+                <textarea [rows]="5" [cols]="30" type="text" value="{{salon == undefined?'': salon.desc }}"
+                    formControlName="desc" pInputTextarea autoResize="autoResize"> </textarea>
+            </span>
+        </div>
+
+
+        <button pButton pRipple type="submit" label="Update" class="p-button-rounded p-button-info"></button>
+    </form>
+
+</div>

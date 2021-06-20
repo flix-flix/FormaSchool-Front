@@ -1,31 +1,32 @@
 <div id="global">
     <h1 id="title"> INFORMATIONS</h1>
 
-    <!--
-         
+    <div>
+        <img *ngIf="team!=undefined" src="{{env.apiUrl}}/files/teams/{{team.picture}}" alt="">
+    </div>
+
+    <div class="info">
+        <label for="float-input">TEAM NAME</label>
         <span class="p-float-label">
-            <input id="float-input" type="text" value="{{ team.picture }}" pInputText>
+            <input id="float-input" type="text" disabled="disabled" value="{{ team == undefined?'':team.name }}"
+                pInputText>
         </span>
-    -->
-    <div id="inputs">
-        <div>
-            <img src="../../../../../assets/images/_remove/teams/2.jpg" alt="">
-        </div>
+    </div>
 
-        <div class="info">
-            <label for="float-input">TEAM NAME</label>
-            <span class="p-float-label">
-                <input id="float-input" type="text" value="{{ team.name }}" pInputText>
-            </span>
-        </div>
+    <div class="info">
+        <label for="float-input">TEAM DESCRIPTION</label>
+        <span class="p-float-label">
 
-        <div class="info">
-            <label for="float-input">TEAM DESCRIPTION</label>
-            <span class="p-float-label">
-                <textarea [rows]="5" [cols]="30" value="{{ team.desc }}" pInputTextarea
-                    autoResize="autoResize"></textarea>
-            </span>
-        </div>
+            <textarea [rows]="5" [cols]="30" type="text" disabled="disabled"
+                value="{{team == undefined?'': team.desc }}" pInputTextarea autoResize="autoResize">
+                   </textarea>
+        </span>
+    </div>
+
+
+    <div>
+        <button pButton pRipple type="button" (click)="teamUpdate( team.id )"
+            label="Do you want change that informations?" class="p-button-rounded p-button-info"></button>
     </div>
 
 </div>

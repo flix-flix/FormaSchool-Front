@@ -58,3 +58,7 @@ app-msg-writer {
     
     border: solid 4px var(--background);
 }
+
+::-webkit-scrollbar-corner {
+    background-color: var(--background);
+}

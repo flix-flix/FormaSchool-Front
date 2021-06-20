@@ -44,3 +44,7 @@ app-root {
 .feather:hover {
     filter: drop-shadow(1px 1px 2px var(--black));
 }
+
+img {
+    -webkit-user-drag: none;
+}

@@ -1,27 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UpdateSalonFormComponent } from './features/params/salon/update-salon-form/update-salon-form.component';
+import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
+import { TemplateComponent } from './pages/home/home-template/template.component';
 import { LoginComponent } from './pages/home/login/login.component';
 import { NotFoundComponent } from './pages/home/not-found/not-found.component';
-import { ParamsAdminTemplateComponent } from './pages/params/admin/admin-template/parametres.component';
-import { AddTeamComponent } from './pages/params/admin/add-team/add-team.component';
-import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
-import { AddUserComponent } from './pages/params/admin/add-user/add-user.component';
-import { SalonPermissionsComponent } from './pages/params/salon/salon-permissions/salon-permissions.component';
-import { SalonSummaryComponent } from './pages/params/salon/salon-summary/salon-summary.component';
-import { TeamEmojisComponent } from './pages/params/team/team-emojis/team-emojis.component';
-import { TeamLogsComponent } from './pages/params/team/team-logs/team-logs.component';
-import { TeamMembersComponent } from './pages/params/team/team-members/team-members.component';
-import { ParamsTeamTemplateComponent } from './pages/params/team/team-template/team-page.component';
-import { TeamRolesComponent } from './pages/params/team/team-roles/team-roles.component';
-import { TeamSummaryComponent } from './pages/params/team/team-summary/team-summary.component';
 import { PrivateMsgComponent } from './pages/home/private-msg/private-msg.component';
 import { TeamSelectComponent } from './pages/home/team-select/team-select.component';
 import { TeamChatComponent } from './pages/home/team/team-chat/team-chat.component';
-import { TemplateComponent } from './pages/home/home-template/template.component';
-import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-template/salon-template.component';
-import { AdminLogsComponent } from './pages/params/admin/admin-logs/admin-logs.component';
+import { AddTeamComponent } from './pages/params/admin/add-team/add-team.component';
+import { AddUserToTeamComponent } from './pages/params/admin/add-user-to-team/add-user-to-team.component';
+import { AddUserComponent } from './pages/params/admin/add-user/add-user.component';
 import { AdminEmojisComponent } from './pages/params/admin/admin-emojis/admin-emojis.component';
-import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
+import { AdminLogsComponent } from './pages/params/admin/admin-logs/admin-logs.component';
+import { ParamsAdminTemplateComponent } from './pages/params/admin/admin-template/parametres.component';
+import { SalonPermissionsComponent } from './pages/params/salon/salon-permissions/salon-permissions.component';
+import { SalonSummaryComponent } from './pages/params/salon/salon-summary/salon-summary.component';
+import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-template/salon-template.component';
+import { TeamEmojisComponent } from './pages/params/team/team-emojis/team-emojis.component';
+import { TeamLogsComponent } from './pages/params/team/team-logs/team-logs.component';
+import { TeamMembersComponent } from './pages/params/team/team-members/team-members.component';
+import { TeamRolesComponent } from './pages/params/team/team-roles/team-roles.component';
+import { TeamSummaryComponent } from './pages/params/team/team-summary/team-summary.component';
+import { ParamsTeamTemplateComponent } from './pages/params/team/team-template/team-page.component';
 import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
 
 const routes: Routes = [
@@ -38,7 +39,7 @@ const routes: Routes = [
 
       { path: "404", component: NotFoundComponent },
 
-      { path: "user", component: UserIdentityComponent},
+      { path: "user", component: UserIdentityComponent },
 
       // TODO redirectTo: lastVisitSedPage
       { path: "", redirectTo: "teamSelect", pathMatch: "full" },
@@ -71,6 +72,7 @@ const routes: Routes = [
       {
         path: "salon/:salonId", component: ParamsSalonTemplateComponent, children: [
           { path: "summary", component: SalonSummaryComponent },
+          { path: "summaryUpdate", component: UpdateSalonFormComponent },
           { path: "permissions", component: SalonPermissionsComponent },
           { path: "**", redirectTo: "summary" }
         ]

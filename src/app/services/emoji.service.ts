@@ -2,10 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { EmojiNamePict } from '../models/emoji/emojiNamePict';
 import { CreatedEmoji } from '../models/emoji/createdEmoji';
-import { UserNamePict } from '../models/user/userNamePict';
-import { UserService } from './user.service';
+import { EmojiNamePict } from '../models/emoji/emojiNamePict';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +11,7 @@ import { UserService } from './user.service';
 export class EmojiService {
 
   /** path to the folder of the emojis [default, organization, team] */
-  static path = ["emojis/", "_remove/emojis/", "_remove/emojis_teams/"];
+  static path = ["emojis/", "emojisOrga/", "emojisTeams/"];
 
   constructor(private http: HttpClient) { }
 
@@ -26,11 +24,11 @@ export class EmojiService {
     return this.http.get<CreatedEmoji[]>(`${environment.apiUrl}/emojis/createdEmojisOrga`);
   }
 
-  // /**
-  //  * This function allows you to add a emoji
-  //  * @param emoji a Created emoji that you want to add 
-  //  * @returns the emoji created 
-  //  */
+  /**
+   * This function allows you to add a emoji
+   * @param emoji the CreatedEmoji you want to add 
+   * @returns the emoji created 
+   */
   addEmoji = (emoji: CreatedEmoji): Observable<CreatedEmoji> => {
     return this.http.post<CreatedEmoji>(`${environment.apiUrl}/emojis/createdEmojis`, emoji.toJSON());
   }
@@ -68,7 +66,7 @@ export class EmojiService {
    * @param content The string to process
    * @param deep The number of folder deeper than /assets
    */
-  static processEmoji = (content: string, deep: number, teamId: string): string => {
+  static processEmoji = (content: string, teamId: string): string => {
     let html = ""; // return string
     let search = ":"; // TODO regex
     let first = 0, second = 0, prev = 0; // first ':', second ':', prev: current char index
@@ -82,7 +80,8 @@ export class EmojiService {
         html += ":";
         prev = first + 1;
       } else {
-        html += `<img class="inline_emoji" src="${"../".repeat(deep)}assets/images/${emoji.picture}" alt=":${emoji.name}:">`;
+        // html += `<img class="inline_emoji" src="${"../".repeat(deep)}assets/images/${emoji.picture}" alt=":${emoji.name}:">`;
+        html += `<img class="inline_emoji" src="${environment.apiUrl}/files/${emoji.picture}" alt=":${emoji.name}:">`;
         prev = second + 1;
       }
     }
@@ -101,21 +100,6 @@ export class EmojiService {
       if (emojis.length != 0)
         return new EmojiNamePict("" + emojis[0].id, emojis[0].name, EmojiService.path[index] + emojis[0].picture);
     }
-    console.log("emoji undefined", name);
-    return undefined;
-  }
-
-  /** Returns the name if it exits, undefined otherwise */
-  static getEmojiName = (emojiId: number): string => {
-    let _emojis = [emojisBase, emojisOrga, ...Object.values(emojisTeam)];
-
-    for (let index in _emojis) {
-      // TODO [Opti] -> search in dict
-      let emoji = Object.values(_emojis[index]).find(elem => elem.id == emojiId);
-      if (emoji != undefined)
-        return emoji.name;
-    }
-
     return undefined;
   }
 
@@ -129,77 +113,6 @@ export class EmojiService {
     let index = text.slice(start).search(search); // regex
     return index < 0 ? index : index + start; // return -1
   }
-
-  // ================================================================================================
-  // TODO [back]
-
-  // /**
-  // * this function give you an EmojiCreated object by the id 
-  // * @param emojiId the id fo the emoji you re looking for
-  // * @returns a CreatedEmoji object 
-  // */
-  // static generateCreatedEmoji = (emojiId: number): CreatedEmoji => {
-  //   if (!(emojiId in createdEmojis)) {
-  //     console.error("roleId doesn't exist:", emojiId);
-  //     return undefined;
-  //   }
-  //   return new CreatedEmoji(emojiId, createdEmojis[emojiId].teamId, createdEmojis[emojiId].name, createdEmojis[emojiId].picture, createdEmojis[emojiId].user);
-  // }
-}
-
-let nextId = 10;
-// teamId = 0 when it is for every team
-let createdEmojis: { [id: number]: { id: number, teamId: number, name: string, picture: string, user: UserNamePict } } =
-{
-  1: {
-    id: 1,
-    name: "bmw",
-    teamId: 1,
-    picture: "0",
-    user: UserService.generateUserNamePicture(2)
-  },
-  2: {
-    id: 2,
-    teamId: 1,
-    name: "nike",
-    picture: "1",
-    user: UserService.generateUserNamePicture(2)
-  },
-  3: {
-    id: 3,
-    teamId: 2,
-    name: "insta",
-    picture: "2",
-    user: UserService.generateUserNamePicture(2)
-  },
-  4: {
-    id: 4,
-    teamId: 0,
-    name: "rocket",
-    picture: "3",
-    user: UserService.generateUserNamePicture(2)
-  },
-  5: {
-    id: 5,
-    teamId: 1,
-    name: "bob",
-    picture: "4",
-    user: UserService.generateUserNamePicture(2)
-  },
-  6: {
-    id: 6,
-    teamId: 1,
-    name: "boby",
-    picture: "4",
-    user: UserService.generateUserNamePicture(2)
-  },
-  7: {
-    id: 7,
-    teamId: 1,
-    name: "bobu",
-    picture: "4",
-    user: UserService.generateUserNamePicture(2)
-  }
 }
 
 // ================================================================================================
@@ -212,17 +125,17 @@ let emojisTeam: { [id: number]: { [id: number]: { id: number, name: string, pict
     100_001: {
       id: 100_001,
       name: "bob",
-      picture: "1/aa.png"
+      picture: "team_1_1.png"
     },
     100_002: {
       id: 100_002,
       name: "rl",
-      picture: "1/ab.png"
+      picture: "team_1_2.png"
     },
     100_003: {
       id: 100_003,
       name: "ibm",
-      picture: "1/ac.png"
+      picture: "team_1_3.png"
     },
   },
   2: {
@@ -255,12 +168,12 @@ let emojisOrga: { [id: number]: { id: number, name: string, picture: string } } 
   10_001: {
     id: 10_001,
     name: "m2i",
-    picture: "1.png"
+    picture: "orga_1.png"
   },
   10_002: {
     id: 10_002,
     name: "semifir",
-    picture: "2.png"
+    picture: "orga_2.png"
   },
 };
 

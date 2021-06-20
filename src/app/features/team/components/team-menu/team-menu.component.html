@@ -1,7 +1,6 @@
 <div id="col">
     <div id="team_logo_center">
-        <img *ngIf="team != undefined" id="team_logo" src="../../../../assets/images/_remove/teams/{{team.picture}}"
-            alt="">
+        <img *ngIf="team != undefined" id="team_logo" src="{{env.apiUrl}}/files/teams/{{team.picture}}" alt="">
     </div>
 
     <div id="team_name_line">

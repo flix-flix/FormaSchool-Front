@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MemberUsersPseudo } from 'src/app/models/member/MemberUsersPseudo';
-import { UserNamePict } from 'src/app/models/user/userNamePict';
 import { EmojiService } from 'src/app/services/emoji.service';
+import { environment } from 'src/environments/environment';
 import { Reaction } from '../../../../models/reaction';
 
 @Component({
@@ -10,6 +10,7 @@ import { Reaction } from '../../../../models/reaction';
   styleUrls: ['./emoji.component.css']
 })
 export class EmojiComponent implements OnInit {
+  env = environment;
 
   @Output() eventEitter = new EventEmitter();
 
@@ -19,7 +20,7 @@ export class EmojiComponent implements OnInit {
   on: boolean;
 
   // TODO [Improve] Get user from local storage
-  member = new MemberUsersPseudo(new UserNamePict("123456", "Félix", "Burie", "123.png"), "pseudododod")
+  member = new MemberUsersPseudo(JSON.parse(localStorage.getItem("user")), "fake_pseudo")
 
   constructor() { }
 
