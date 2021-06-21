@@ -26,7 +26,7 @@ export class MsgWriterComponent implements OnInit {
   }
 
   sendMsg = () => {
-    this.msgEmit.emit(new MessageSend(undefined, undefined, this.content, this.file));
+    this.msgEmit.emit({ content: this.content, file: this.file, fileName: this.file?.name });
     this.content = "";
     this.file = undefined;
     this.msgWriter.nativeElement.innerText = "";

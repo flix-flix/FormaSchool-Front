@@ -1,60 +1,45 @@
+import { MsgThreadComponent } from "src/app/components/messages/msg-thread/msg-thread.component";
 import { Message } from "src/app/models/message";
 import { EmojiService } from "../../services/emoji.service";
 
 export class Salon {
-    private _id: string;
-    private _teamId: string;
-    private _name: string;
-    private _msgs: Message[];
+    html: string;
 
-    private _html: string;
+    constructor(public id: string, public teamId: string, public name: string, public msgs: Message[], public thread: MsgThreadComponent) {
+        this.html = EmojiService.processEmoji(name, teamId);
+        msgs.forEach(msg => msg.processEmoji(teamId));
 
-    constructor(id: string, teamId: string, name: string, msgs: Message[]) {
-        this._id = id;
-        this._teamId = teamId;
-        this._name = name;
-        this._msgs = msgs;
-
-        this._html = EmojiService.processEmoji(name, teamId);
+        this.initThread();
     }
 
-    // ===============================================
+    // =========================================================================================
 
-    public get id(): string {
-        return this._id;
+    setThread(thread) {
+        this.thread = thread;
+        this.initThread();
     }
 
-    public set id(id: string) {
-        this._id = id;
+    initThread() {
+        this.thread.setMessages(this.msgs);
+        setTimeout(() => this.thread.scrollToBottom(), 10);
     }
 
-    public get teamId(): string {
-        return this._teamId;
+    // =========================================================================================
+
+    addMsg(msg: Message) {
+        msg.processEmoji(this.teamId);
+        this.msgs.push(msg);
+
+        this.thread.setMessages(this.msgs);
+
+        // TODO
+        // if (msg.sender. == this.memberId)
+        if (scroll)
+            setTimeout(() => this.thread.scrollToBottom(), 250);
     }
 
-    public set teamId(teamId: string) {
-        this._teamId = teamId;
-    }
-
-    public get name(): string {
-        return this._name;
-    }
-
-    public set name(name: string) {
-        this._name = name;
-    }
-
-    public get msgs(): Message[] {
-        return this._msgs;
-    }
-
-    public set msgs(msgs: Message[]) {
-        this._msgs = msgs;
-    }
-
-    // =====
-
-    public get html(): string {
-        return this._html;
+    deleteMsg(msgDelete) {
+        this.msgs = this.msgs.filter(msg => msg.id !== msgDelete.messageId);
+        this.thread.setMessages(this.msgs);
     }
 }

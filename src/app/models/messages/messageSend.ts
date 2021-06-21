@@ -1,3 +1,3 @@
-export class MessageSend {
-    constructor(public memberId: string, public salonId: string, public content: string, public file: File) { }
+export interface MessageSend {
+    memberId?: string, salonId?: string, content: string, file: File, fileName: string
 }
