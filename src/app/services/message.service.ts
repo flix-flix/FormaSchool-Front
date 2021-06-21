@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import * as SockJS from 'sockjs-client';
 import { environment } from 'src/environments/environment';
 import * as Stomp from 'stompjs';
-import { MsgThreadComponent } from '../features/messages/components/msg-thread/msg-thread.component';
+import { MsgThreadComponent } from '../components/messages/msg-thread/msg-thread.component';
 import { Message } from '../models/message';
 import { MessageSend } from '../models/messages/messageSend';
 
@@ -18,40 +17,26 @@ export class MessageService {
     this.connect();
   }
 
-  sendMessage = (msg: MessageSend) => {
-    let data = new FormData();
-    data.append("memberId", msg.memberId);
-    data.append("salonId", msg.salonId);
-    data.append("content", msg.content);
-
-    if (msg.file == undefined)
-      return this.http.post<Message>(environment.apiUrl + "/messages/sendMsg", data).pipe(map(json => Message.fromJSON(json)));
-
-    data.append("file", msg.file);
-    return this.http.post<Message>(environment.apiUrl + "/messages/sendMsgWithFile", data).pipe(map(json => Message.fromJSON(json)));
-  }
-
-  delete = (msgId: string) => {
-    return this.http.delete(environment.apiUrl + "/messages/deleteMsg/" + msgId)
-  }
-
   // =========================================================================================
+  // REST
 
   findAllMessageOfSalon(salonId: string): Observable<Message[]> {
     return this.http.get<Message[]>(environment.apiUrl + "/messages/salonWithReacts/" + salonId);
   }
 
   // =========================================================================================
+  // WebSocket (settings)
 
   stompClient;
   salons: { [salonId: string]: MsgThreadComponent } = {};
 
   connect() {
     this.stompClient = Stomp.over(new SockJS(environment.apiUrl + "/wsMessages"));
+    this.stompClient.debug = null;
     this.stompClient.connect({}, this.onConnect);
   }
 
-  onConnect = () => {
+  private onConnect = () => {
     this.stompClient.subscribe('/topic/public', this.onMessageReceived);
   }
 
@@ -60,6 +45,7 @@ export class MessageService {
   }
 
   // =========================================================================================
+  // WebSocket (request)
 
   sendWs(msg: MessageSend) {
     if (msg.file != undefined) {
@@ -81,7 +67,7 @@ export class MessageService {
 
   // =========================================================================================
 
-  onMessageReceived = (obj) => {
+  private onMessageReceived = (obj) => {
     let msg = JSON.parse(obj.body);
 
     if ("content" in msg) // New
