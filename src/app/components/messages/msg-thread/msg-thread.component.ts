@@ -23,12 +23,8 @@ export class MsgThreadComponent implements OnInit {
 
   ngOnInit(): void {
     this.msgService.registerThread(this);
-
-    this.initUserMember();
-    this.storageService.changes.subscribe(() => this.initUserMember());
+    this.storageService.subscribe(() => this.memberId = JSON.parse(localStorage.getItem("user")).members.find(member => member.team.id == this.teamId).id);
   }
-
-  initUserMember = () => this.memberId = JSON.parse(localStorage.getItem("user")).members.find(member => member.team.id == this.teamId).id;
 
   /** Scroll the view to the last message */
   scrollToBottom(): void {
