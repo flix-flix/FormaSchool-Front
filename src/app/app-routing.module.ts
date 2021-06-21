@@ -20,9 +20,9 @@ import { TemplateComponent } from './pages/home/home-template/template.component
 import { ParamsSalonTemplateComponent } from './pages/params/salon/salon-template/salon-template.component';
 import { AdminLogsComponent } from './pages/params/admin/admin-logs/admin-logs.component';
 import { AdminEmojisComponent } from './pages/params/admin/admin-emojis/admin-emojis.component';
-import { UpdateTeamFormComponent } from './features/params/team/components/update-team-form/update-team-form.component';
+import { UpdateTeamFormComponent } from './components/params/team/update-team-form/update-team-form.component';
 import { RouterModule, Routes } from '@angular/router';
-import { UpdateSalonFormComponent } from './features/params/salon/update-salon-form/update-salon-form.component';
+import { UpdateSalonFormComponent } from './components/params/salon/update-salon-form/update-salon-form.component';
 
 
 const routes: Routes = [

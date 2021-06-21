@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import * as SockJS from 'sockjs-client';
 import { environment } from 'src/environments/environment';
 import * as Stomp from 'stompjs';
-import { MsgThreadComponent } from '../features/messages/components/msg-thread/msg-thread.component';
+import { MsgThreadComponent } from '../components/messages/msg-thread/msg-thread.component';
 import { Message } from '../models/message';
 import { MessageSend } from '../models/messages/messageSend';
 
