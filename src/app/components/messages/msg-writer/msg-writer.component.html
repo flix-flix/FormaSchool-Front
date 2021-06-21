@@ -6,6 +6,12 @@
         (mousedown)="fileInput.click()">
     <img id="emoji" class="icon feather" src="../../../../../assets/images/feather-icons/smile.svg" alt="addEmoji"
         (mousedown)="openCloseEmojiSelector()">
+
+    <span *ngIf="file != undefined" id="file_name">{{file.name}}
+        <div id="remove_file" (click)="file=undefined; fileInput.value=''">
+            <img src="../../../../assets/images/feather-icons/x-circle.svg" alt="remove_file" class="feather">
+        </div>
+    </span>
 </div>
 
 <input type="file" id="input_file" (change)="file=$event.target.files[0]" #fileInput>
