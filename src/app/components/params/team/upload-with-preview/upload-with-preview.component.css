@@ -1,0 +1,28 @@
+#filechoosen{
+    height: 15vh;
+}
+section {
+    display: flex;
+    background-color: #A2D0EA;
+    margin: 2% 50% 0% 2.3%;
+    border-radius: 1.2%;
+    padding: 1%;
+    border: solid rgba(255,255,255,0.3) 1px;
+}
+section:hover{
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+    border: solid rgba(0, 225, 255, 0.5) 1px;
+}
+section p{
+    margin: 2%;
+}
+span{
+    margin-top: 8%;
+}
+
+#input_file {
+    display: none;
+}
+span{
+    display: flex;
+}

@@ -68,6 +68,7 @@ import { TeamRolesComponent } from './pages/params/team/team-roles/team-roles.co
 import { TeamSummaryComponent } from './pages/params/team/team-summary/team-summary.component';
 import { ParamsTeamTemplateComponent } from './pages/params/team/team-template/team-page.component';
 import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
+import { UploadWithPreviewComponent } from './components/params/team/upload-with-preview/upload-with-preview.component';
 
 
 @NgModule({
@@ -122,7 +123,8 @@ import { UserIdentityComponent } from './pages/params/user/user-identity/user-id
     UserIdentityComponent,
     RightsComponent,
     UpdateSalonFormComponent,
-    DialogPermissionComponent
+    DialogPermissionComponent,
+    UploadWithPreviewComponent
   ],
   imports: [
     BrowserModule,
