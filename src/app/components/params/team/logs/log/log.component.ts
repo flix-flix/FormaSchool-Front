@@ -22,13 +22,12 @@ export class LogComponent implements OnInit {
   }
 
   ddmmyyyy = (date: Date): string => {
-    date = new Date(date);
-    var mm = date.getMonth() + 1; // getMonth() is zero-based
-    var dd = date.getDate();
+    var mm = date[1]; // getMonth() is zero-based
+    var dd = date[2];
 
     return [(dd > 9 ? '' : '0') + dd,
     (mm > 9 ? '' : '0') + mm,
-    date.getFullYear()
+    date[0]
     ].join('/');
   };
 
