@@ -22,6 +22,7 @@ export class MsgWriterComponent implements OnInit {
 
   changeFile(event) {
     this.file = event.target.files[0];
+    this.fileUrl = undefined;
 
     if (this.file.type.startsWith("image/")) {
       var reader = new FileReader();
