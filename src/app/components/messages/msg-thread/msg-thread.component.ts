@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Member } from 'src/app/models/member/member';
 import { MessageSend } from 'src/app/models/messages/messageSend';
 import { StorageService } from 'src/app/services/storage.service';
 import { Message } from '../../../models/message';
@@ -14,7 +15,7 @@ export class MsgThreadComponent implements OnInit {
 
   @Input() teamId: string;
   @Input() salonId: string;
-  memberId: string;
+  member: Member;
 
   /** Messages grouped by date and sorted by time */
   msgs: Message[][];
@@ -23,7 +24,7 @@ export class MsgThreadComponent implements OnInit {
 
   ngOnInit(): void {
     this.msgService.registerThread(this);
-    this.storageService.subscribe(() => this.memberId = JSON.parse(localStorage.getItem("user")).members.find(member => member.team.id == this.teamId).id);
+    this.storageService.subscribe("user", user => this.member = user?.members.find(member => member.team.id == this.teamId));
   }
 
   /** Scroll the view to the last message */
@@ -54,7 +55,7 @@ export class MsgThreadComponent implements OnInit {
 
   // =========================================================================================
 
-  sendMsg = (msg: MessageSend) => this.msgService.send({ memberId: this.memberId, salonId: this.salonId, ...msg });
+  sendMsg = (msg: MessageSend) => this.msgService.send({ memberId: this.member.id, salonId: this.salonId, ...msg });
 
   deleteMsg = (msgId: string) => this.msgService.deleteMsg(msgId);
 }

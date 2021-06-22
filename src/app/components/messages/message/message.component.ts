@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Member } from 'src/app/models/member/member';
 import { UserLocalStorage } from 'src/app/models/user/userLocalStorage';
 import { environment } from 'src/environments/environment';
 import { Message } from '../../../models/message';
@@ -10,15 +11,19 @@ import { Message } from '../../../models/message';
 })
 export class MessageComponent implements OnInit {
   env = environment;
-  user: UserLocalStorage = JSON.parse(localStorage.getItem("user"))
 
   @Output() delete = new EventEmitter();
 
   @Input() msg: Message;
+  @Input() member: Member;
+
+  user: UserLocalStorage = JSON.parse(localStorage.getItem("user"));
 
   constructor() { }
 
   ngOnInit(): void { }
+
+  // =========================================================================================
 
   /** Open the emoji selector */
   emoji = () => {

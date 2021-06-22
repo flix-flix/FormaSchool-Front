@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MemberUsersPseudo } from 'src/app/models/member/MemberUsersPseudo';
-import { EmojiService } from 'src/app/services/emoji.service';
 import { environment } from 'src/environments/environment';
 import { Reaction } from '../../../models/reaction';
 
@@ -12,25 +11,20 @@ import { Reaction } from '../../../models/reaction';
 export class EmojiComponent implements OnInit {
   env = environment;
 
-  @Output() eventEitter = new EventEmitter();
-
   @Input() reaction: Reaction;
+  _member: MemberUsersPseudo;
 
   /** true: used by the user */
   on: boolean;
 
-  // TODO [Improve] Get user from local storage
-  member = new MemberUsersPseudo(JSON.parse(localStorage.getItem("user")), "fake_pseudo")
-
   constructor() { }
 
-  ngOnInit(): void {
-    this.on = this.reaction.members.find(member => member.user.id == this.member.user.id) != undefined;
-  }
+  ngOnInit(): void { }
+
+  // =========================================================================================
 
   /** Handle click on reaction emoji, either add/remove the reaction for the user */
   addRemoveReact = () => {
-    this.eventEitter.emit(this.reaction);
     // TODO [Back] fake emoji counter
     if (this.on)
       this.reaction.members = this.reaction.members.filter(member => member.user.id != this.member.user.id);
@@ -70,7 +64,14 @@ export class EmojiComponent implements OnInit {
     return `${namesStr} ${userIn ? "avez" : this.reaction.members.length == 1 ? "a" : "ont"} réagi avec`;
   }
 
-  getEmojiPath = () => {
-    return EmojiService.getEmoji(this.reaction.emoji.name).picture;
+  // =========================================================================================
+
+  @Input() set member(member: MemberUsersPseudo) {
+    this._member = member;
+    this.on = this.reaction.members.find(member => member.user.id == this.member.user.id) != undefined;
+  }
+
+  get member(): MemberUsersPseudo {
+    return this._member;
   }
 }

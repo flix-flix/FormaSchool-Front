@@ -19,8 +19,10 @@ export class StorageService {
     this.onSubject.next({ key: key, value: null });
   }
 
-  subscribe(func) {
-    func();
-    this.changes.subscribe(func);
+  subscribe(key: string, setter: Function) {
+    setter(this.get(key));
+    this.changes.subscribe(() => setter(this.get(key)));
   }
+
+  private get = (key) => JSON.parse(localStorage.getItem(key));
 }
