@@ -2,16 +2,20 @@
     <span id="input_msg" (input)="content=$event.target.innerText" data-placeholder="Envoyer un message"
         (keydown.enter)="pressEnter($event)" contenteditable #writer></span>
 
-    <img id="plus" class="icon feather" src="../../../../../assets/images/feather-icons/plus-circle.svg" alt="joinFile"
+    <img id="plus" class="icon feather" src="../../../../../assets/images/feather-icons/plus-circle.svg" alt="join file"
         (mousedown)="fileInput.click()">
-    <img id="emoji" class="icon feather" src="../../../../../assets/images/feather-icons/smile.svg" alt="addEmoji"
+    <img id="emoji" class="icon feather" src="../../../../../assets/images/feather-icons/smile.svg" alt="add emoji"
         (mousedown)="openCloseEmojiSelector()">
 
-    <span *ngIf="file != undefined" id="file_name">{{file.name}}
+    <span *ngIf="file != undefined" id="file_name">
+        <div *ngIf="fileUrl" id="display_img">
+            <img src="{{fileUrl}}" alt="selected image">
+        </div>
+        {{file.name}}
         <div id="remove_file" (click)="file=undefined; fileInput.value=''">
-            <img src="../../../../assets/images/feather-icons/x-circle.svg" alt="remove_file" class="feather">
+            <img src="../../../../assets/images/feather-icons/x-circle.svg" alt="unselect file" class="feather">
         </div>
     </span>
 </div>
 
-<input type="file" id="input_file" (change)="file=$event.target.files[0]" #fileInput>
+<input type="file" id="input_file" (change)="changeFile($event)" #fileInput>
