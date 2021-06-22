@@ -5,6 +5,7 @@ export class UserNamePict {
     private _lastname: string;
     private _picture: string;
 
+
     constructor(id: string, firstname: string, lastname: string, picture: string) {
         this._id = id;
         this._firstname = firstname;
