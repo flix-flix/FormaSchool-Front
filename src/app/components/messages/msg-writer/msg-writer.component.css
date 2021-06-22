@@ -95,6 +95,18 @@
     border-top-right-radius: 1rem;
 }
 
+#display_img {
+    max-width: 2rem;
+    max-height: 2rem;
+
+    margin-right: .5rem;
+}
+
+#display_img img {
+    max-width: 2rem;
+    max-height: 2rem;
+}
+
 #remove_file {
     display: inline;
     

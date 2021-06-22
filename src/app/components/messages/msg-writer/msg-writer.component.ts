@@ -13,10 +13,21 @@ export class MsgWriterComponent implements OnInit {
 
   file: File;
   content = "";
+  fileUrl = "";
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  changeFile(event) {
+    this.file = event.target.files[0];
+
+    if (this.file.type.startsWith("image/")) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => this.fileUrl = event.target.result
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
 
   pressEnter = (event) => {
