@@ -15,9 +15,6 @@ export class TeamService {
 
   constructor(private http: HttpClient) { }
   // ==============================================================================================
-  getTeamById = (teamId: String): Observable<TeamNameDescPict> => {
-    return this.http.get<TeamNameDescPict>(`${environment.apiUrl}/teams/${teamId}`);
-  }
 
   findTeamIdBySalonId = (salonId: string): Observable<Team> => {
     return this.http.get<Team>(`${environment.apiUrl}/teams/bySalon/${salonId}`);
