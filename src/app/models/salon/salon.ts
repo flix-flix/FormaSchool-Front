@@ -1,5 +1,5 @@
 import { MsgThreadComponent } from "src/app/components/messages/msg-thread/msg-thread.component";
-import { Message } from "src/app/models/message";
+import { Message } from "src/app/models/messages/message";
 import { EmojiService } from "../../services/emoji.service";
 
 export class Salon {

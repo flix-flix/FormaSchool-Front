@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Member } from 'src/app/models/member/member';
 import { UserLocalStorage } from 'src/app/models/user/userLocalStorage';
 import { environment } from 'src/environments/environment';
-import { Message } from '../../../models/message';
+import { Message } from '../../../models/messages/message';
 
 @Component({
   selector: 'app-message',

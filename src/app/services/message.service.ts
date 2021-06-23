@@ -5,7 +5,7 @@ import * as SockJS from 'sockjs-client';
 import { environment } from 'src/environments/environment';
 import * as Stomp from 'stompjs';
 import { MsgThreadComponent } from '../components/messages/msg-thread/msg-thread.component';
-import { Message } from '../models/message';
+import { Message } from '../models/messages/message';
 import { MessageSend } from '../models/messages/messageSend';
 import { Salon } from '../models/salon/salon';
 

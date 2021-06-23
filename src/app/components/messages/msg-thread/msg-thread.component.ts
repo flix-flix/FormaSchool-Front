@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/models/member/member';
 import { MessageSend } from 'src/app/models/messages/messageSend';
 import { StorageService } from 'src/app/services/storage.service';
-import { Message } from '../../../models/message';
+import { Message } from '../../../models/messages/message';
 import { MessageService } from '../../../services/message.service';
 
 @Component({
