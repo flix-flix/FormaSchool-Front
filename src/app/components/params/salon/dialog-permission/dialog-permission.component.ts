@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { MemberUserNamePict } from 'src/app/models/member/MemberUserNamePict';
+import { MemberUserNamePict } from 'src/app/models/member/memberUserNamePict';
 import { RoleWithoutRights } from 'src/app/models/role/roleWithoutRights';
 import { MemberService } from 'src/app/services/member.service';
 import { PermissionService } from 'src/app/services/permission.service';
