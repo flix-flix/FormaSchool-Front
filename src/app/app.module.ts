@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -69,6 +69,7 @@ import { TeamSummaryComponent } from './pages/params/team/team-summary/team-summ
 import { ParamsTeamTemplateComponent } from './pages/params/team/team-template/team-page.component';
 import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
 import { UploadWithPreviewComponent } from './components/params/team/upload-with-preview/upload-with-preview.component';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 
 @NgModule({
@@ -147,7 +148,12 @@ import { UploadWithPreviewComponent } from './components/params/team/upload-with
     ConfirmDialogModule,
     DropdownModule
   ],
-  providers: [RxStompService],
+  providers: [RxStompService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
