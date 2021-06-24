@@ -62,6 +62,16 @@
     color: var(--black);
 }
 
+/* ================ editable =================== */
+
+.edit {
+    padding: 1rem;
+
+    background-color: var(--menu);
+    border-radius: 1rem;
+    outline: none;
+}
+
 /* ================ emojis =================== */
 
 #emojis {

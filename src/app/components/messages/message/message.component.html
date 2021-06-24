@@ -9,7 +9,8 @@
             <span class="time">{{msg.getTimeStr()}}</span>
         </div>
 
-        <div class="text" [innerHtml]="msg.html"></div>
+        <div class="text" [contentEditable]="editable" (keydown.enter)="pressEnter($event)"
+            (keydown.escape)="pressEscape($event)" [class.edit]="editable" #text></div>
 
         <!-- File -->
         <app-shared-file [file]="msg.file"></app-shared-file>

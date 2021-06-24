@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import * as Stomp from 'stompjs';
 import { MsgThreadComponent } from '../components/messages/msg-thread/msg-thread.component';
 import { Message } from '../models/messages/message';
+import { MessageEdit } from '../models/messages/MessageEdit';
 import { MessageSend } from '../models/messages/messageSend';
 import { Salon } from '../models/salon/salon';
 
@@ -60,7 +61,9 @@ export class MessageService {
   private _send = (msg: MessageSend, fileContent = null) =>
     this.stompClient.send("/app/chat.send", {}, JSON.stringify(fileContent ? { ...msg, file: fileContent } : msg));
 
-  deleteMsg = (msgId: string) => this.stompClient.send("/app/chat.delete", {}, msgId);
+  edit = (msg: MessageEdit) => this.stompClient.send("/app/chat.edit", {}, JSON.stringify(msg));
+
+  delete = (msgId: string) => this.stompClient.send("/app/chat.delete", {}, msgId);
 
   // =========================================================================================
   // Messages management

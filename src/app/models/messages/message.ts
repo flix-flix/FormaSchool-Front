@@ -121,6 +121,10 @@ export class Message {
         return this._html;
     }
 
+    public set html(html: string) {
+        this._html = html;
+    }
+
     // ================================================================================================
     // Smart
 

@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/models/member/member';
+import { MessageEdit } from 'src/app/models/messages/MessageEdit';
 import { MessageSend } from 'src/app/models/messages/messageSend';
 import { StorageService } from 'src/app/services/storage.service';
 import { Message } from '../../../models/messages/message';
@@ -57,7 +58,9 @@ export class MsgThreadComponent implements OnInit {
 
   sendMsg = (msg: MessageSend) => this.msgService.send({ memberId: this.member.id, salonId: this.salonId, ...msg });
 
-  deleteMsg = (msgId: string) => this.msgService.deleteMsg(msgId);
+  editMsg = (msg: MessageEdit) => this.msgService.edit(msg);
+
+  deleteMsg = (msgId: string) => this.msgService.delete(msgId);
 }
 
 /** Returns true if the 2 datetime are on the same day */

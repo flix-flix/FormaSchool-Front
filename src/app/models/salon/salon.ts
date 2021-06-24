@@ -28,13 +28,22 @@ export class Salon {
 
     addMsg(msg: Message) {
         msg.processEmoji(this.teamId);
-        this.msgs.push(msg);
+
+        let edited = false;
+        for (let i = 0; i < this.msgs.length; i++)
+            if (this.msgs[i].id == msg.id) {
+                this.msgs[i] = msg;
+                edited = true;
+                break;
+            }
+        if (!edited)
+            this.msgs.push(msg);
 
         this.thread.setMessages(this.msgs);
 
         // TODO
         // if (msg.sender. == this.memberId)
-        if (scroll)
+        if (!edited)
             setTimeout(() => this.thread.scrollToBottom(), 250);
     }
 
