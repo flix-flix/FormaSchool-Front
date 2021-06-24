@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Member } from '../models/member/member';
 import { MemberCreate } from '../models/member/memberCreate';
-import { MemberUserNamePict } from '../models/member/MemberUserNamePict';
+import { MemberUserNamePict } from '../models/member/memberUserNamePict';
 
 @Injectable({
   providedIn: 'root'
