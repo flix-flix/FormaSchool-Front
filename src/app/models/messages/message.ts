@@ -28,7 +28,7 @@ export class Message {
 
         this._send = send instanceof Date ? send : new Date(send[0], send[1] - 1, send[2], send[3], send[4], send[5]);
         this._edit = edit instanceof Date ? edit : new Date(send[0], send[1] - 1, send[2], send[3], send[4], send[5]);
-        console.log(this._send)
+
         this._html = Message.processHtml(content);
     }
 
