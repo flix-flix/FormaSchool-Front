@@ -46,16 +46,6 @@ export class TeamService {
     return this.http.patch<TeamNameDescPict>(environment.apiUrl + "/teams/teamNameDescPict", team);
   }
 
-  /**
- * This function allows us to save a team
- * @param team A creationTeam object (name, desc and picture)
- * @returns A number which is the id of the team created
- */
-  save = (team: TeamNameDescFile): Observable<Team> => {
-    return this.http.post<Team>(`${environment.apiUrl}/teams`, { name: team.name, desc: team.desc });
-  }
-
-
   send = (team: TeamNameDescFile) => {
     if (team.file != undefined) {
       let reader = new FileReader();
@@ -63,6 +53,9 @@ export class TeamService {
       reader.onloadend = () => {
         this.http.post<Team>(`${environment.apiUrl}/teams/saveWithFile`, { ...team, file: reader.result, filename: team.file.name }).subscribe();
       }
+    }
+    else {
+      this.http.post<Team>(`${environment.apiUrl}/teams/saveWithFile`, { ...team, file: null, filename: null }).subscribe();
     }
   }
 }

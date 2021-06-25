@@ -42,7 +42,8 @@ export class AddTeamComponent implements OnInit {
         this.teamService.send(team);
       }
       else {
-        this.teamService.save(team).subscribe();
+        team.file = null;
+        this.teamService.send(team);
       }
     }
     else {
