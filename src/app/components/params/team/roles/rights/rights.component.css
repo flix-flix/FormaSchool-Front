@@ -1,5 +1,5 @@
 .right{
-    background-color: #A2D0EA;
+    background-color: var(--background);
     margin-top: 20px;
     margin-bottom: 20px;
     display: flex;
@@ -11,7 +11,7 @@
     margin-bottom: 5px;
 }
 .right:hover{
-    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2)
+    box-shadow: 12px 12px 2px 1px var(--font_2)
 }
 
 ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
