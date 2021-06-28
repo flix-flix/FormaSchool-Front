@@ -1,0 +1,10 @@
+#col {
+    display: flex;
+    flex-direction: column;
+
+    width: 15rem;
+    height: 100%;
+    padding: .5rem;
+
+    background-color: var(--menu);
+}

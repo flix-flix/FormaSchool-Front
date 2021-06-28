@@ -1,1 +1,6 @@
-<p>private-msg works!</p>
+<div id="row">
+    <app-private-menu [privates]="privates" [salonId]="salonId"></app-private-menu>
+    <app-msg-thread *ngFor="let private of privates" [salonId]="private.salon.id"
+        [class.display]="private.salon.id == salonId">
+    </app-msg-thread>
+</div>

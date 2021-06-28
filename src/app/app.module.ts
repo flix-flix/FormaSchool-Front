@@ -70,6 +70,8 @@ import { ParamsTeamTemplateComponent } from './pages/params/team/team-template/t
 import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
 import { UploadWithPreviewComponent } from './components/params/team/upload-with-preview/upload-with-preview.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { PrivateMenuComponent } from './components/private-msg/private-menu/private-menu.component';
+import { UserButtonComponent } from './components/private-msg/user-button/user-button.component';
 
 
 @NgModule({
@@ -125,7 +127,9 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     RightsComponent,
     UpdateSalonFormComponent,
     DialogPermissionComponent,
-    UploadWithPreviewComponent
+    UploadWithPreviewComponent,
+    PrivateMenuComponent,
+    UserButtonComponent
   ],
   imports: [
     BrowserModule,

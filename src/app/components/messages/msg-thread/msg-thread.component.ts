@@ -2,7 +2,6 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/models/member/member';
 import { MessageEdit } from 'src/app/models/messages/MessageEdit';
 import { MessageSend } from 'src/app/models/messages/messageSend';
-import { StorageService } from 'src/app/services/storage.service';
 import { Message } from '../../../models/messages/message';
 import { MessageService } from '../../../services/message.service';
 
@@ -14,18 +13,16 @@ import { MessageService } from '../../../services/message.service';
 export class MsgThreadComponent implements OnInit {
   @ViewChild("scrollMe") private msgThread: ElementRef;
 
-  @Input() teamId: string;
   @Input() salonId: string;
-  member: Member;
 
   /** Messages grouped by date and sorted by time */
   msgs: Message[][];
+  member: Member;
 
-  constructor(private msgService: MessageService, private storageService: StorageService) { }
+  constructor(private msgService: MessageService) { }
 
   ngOnInit(): void {
     this.msgService.registerThread(this);
-    this.storageService.subscribe("user", user => this.member = user?.members.find(member => member.team.id == this.teamId));
   }
 
   /** Scroll the view to the last message */
@@ -56,7 +53,7 @@ export class MsgThreadComponent implements OnInit {
 
   // =========================================================================================
 
-  sendMsg = (msg: MessageSend) => this.msgService.send({ memberId: this.member.id, salonId: this.salonId, ...msg });
+  sendMsg = (msg: MessageSend) => this.msgService.send({ salonId: this.salonId, ...msg });
 
   editMsg = (msg: MessageEdit) => this.msgService.edit(msg);
 

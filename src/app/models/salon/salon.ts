@@ -1,11 +1,12 @@
 import { MsgThreadComponent } from "src/app/components/messages/msg-thread/msg-thread.component";
 import { Message } from "src/app/models/messages/message";
 import { EmojiService } from "../../services/emoji.service";
+import { Member } from "../member/member";
 
 export class Salon {
     html: string;
 
-    constructor(public id: string, public teamId: string, public name: string, public msgs: Message[], public thread: MsgThreadComponent) {
+    constructor(public id: string, public teamId: string, public name: string, public msgs: Message[], public thread: MsgThreadComponent, public member: Member) {
         this.html = EmojiService.processEmoji(name, teamId);
         msgs.forEach(msg => msg.processEmoji(teamId));
 
@@ -21,6 +22,7 @@ export class Salon {
 
     initThread() {
         this.thread.setMessages(this.msgs);
+        this.thread.member = this.member;
         setTimeout(() => this.thread.scrollToBottom(), 10);
     }
 

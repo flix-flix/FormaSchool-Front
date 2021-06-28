@@ -32,7 +32,7 @@ const routes: Routes = [
       { path: "login", component: LoginComponent },
 
       // TODO === guard login ===
-      { path: "privateMessages", component: PrivateMsgComponent },
+      { path: "privateMessages/:salonId", component: PrivateMsgComponent },
 
       { path: "teamSelect", component: TeamSelectComponent },
       { path: "teamMessages/:teamId/:salonId", component: TeamChatComponent },

@@ -97,7 +97,7 @@ export class MessageComponent implements OnInit, AfterViewInit {
   // =========================================================================================
 
   privateMsg() {
-    console.log("private");
-    this.router.navigate(["/privateMessages"]);
+    // TODO right salon OR new private
+    this.router.navigate(["/privateMessages/redirect"]);
   }
 }
