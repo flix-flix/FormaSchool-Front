@@ -21,7 +21,7 @@ export class CreatedEmoji {
             teamId: this._teamId,
             name: this._name,
             picture: this._picture,
-            user: this._user
+            user: this._user.toJSON()
         };
     }
     public get teamId(): string {

@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NumberValueAccessor } from '@angular/forms';
 import { CreatedEmoji } from 'src/app/models/emoji/createdEmoji';
+import { UserLocalStorage } from 'src/app/models/user/userLocalStorage';
+import { UserNamePict } from 'src/app/models/user/userNamePict';
 import { EmojiService } from 'src/app/services/emoji.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
 
@@ -25,7 +28,7 @@ export default class TabEmojiComponent implements OnInit {
 
   submitted: boolean;
 
-  constructor(private service: EmojiService, private userService: UserService) {
+  constructor(private service: EmojiService, private userService: UserService, private storageService: StorageService) {
   }
 
   ngOnInit(): void {
@@ -55,10 +58,11 @@ export default class TabEmojiComponent implements OnInit {
    * This function create a new CreatedEmoji empty and display the pop-up
    */
   openNew = () => {
-    //TODO replace the id 1 by the id of current user connected 
-    this.userService.findNamePictDefault().subscribe(user => {
-      this.emoji = new CreatedEmoji(null, this.teamId, null, null, user);
-    })
+    let user: UserLocalStorage;
+    this.storageService.subscribe("user", userStorage => {
+      user = userStorage
+      this.emoji = new CreatedEmoji(null, this.teamId, null, null, new UserNamePict(user.id, user.firstname, user.lastname, user.picture));
+    });
     this.submitted = false;
     this.emojiDialog = true;
   }
@@ -79,14 +83,10 @@ export default class TabEmojiComponent implements OnInit {
    */
   saveEmoji = () => {
     this.submitted = true;
-
     this.service.isNameAlreadyUse(this.emoji.id, this.emoji.name).subscribe(used => {
       if (!used) {
         if (this.emoji.id == null) {
           this.service.addEmoji(this.emoji).subscribe();
-          // this.service.addEmoji(this.emoji).subscribe(emoji => {
-          //   this.emoji.id = emoji.id;
-          // });
           this.emojis.push(this.emoji);
         }
         else {

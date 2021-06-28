@@ -5,12 +5,12 @@
 #divFile{
     height: 15vh;
     width: 10vw;
-    border: solid black 5px;
+    border: solid var(--black) 5px;
     text-align: center;
 }
 section {
     display: flex;
-    background-color: #A2D0EA;
+    background-color: var(--background);
     margin: 2% 0% 0% 2.3%;
     width: 20%;
     min-width: 25%;

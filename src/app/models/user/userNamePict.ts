@@ -12,7 +12,14 @@ export class UserNamePict {
         this._lastname = lastname;
         this._picture = picture;
     }
-
+    public toJSON() {
+        return {
+            id: this._id,
+            firstname: this._firstname,
+            lastname: this._lastname,
+            picture: this._picture,
+        };
+    }
     /**
      * This function is needed to filter on lastname AND firstname
      */
