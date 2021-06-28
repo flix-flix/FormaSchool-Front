@@ -1,6 +1,19 @@
 <div class="msg">
-    <div>
-        <img class="author_img" src="{{env.apiUrl}}/files/users/{{msg.sender.user.picture}}" alt="">
+    <!-- Profile -->
+    <div id="profile">
+        <img id="sender_img" src="{{env.apiUrl}}/files/users/{{msg.sender.user.picture}}" alt="">
+        <div id="profile_hover" *ngIf="msg.sender.user.id != user.id">
+            <div id="profile_top">
+                <img id="sender_img2" src="{{env.apiUrl}}/files/users/{{msg.sender.user.picture}}" alt="">
+                {{msg.sender.user.firstname}} {{msg.sender.user.lastname}}
+            </div>
+            <div id="profile_bottom" (click)="privateMsg()">
+                <div>
+                    <img src="../../../../assets/images/feather-icons/mail.svg" alt="mail" id="mail">
+                </div>
+                Message privé
+            </div>
+        </div>
     </div>
 
     <div id="left">
@@ -20,6 +33,8 @@
             <app-emoji *ngFor="let react of msg.reactions" [reaction]="react" [member]="member"></app-emoji>
         </div>
     </div>
+
+
 
     <!-- Icons on hover -->
     <div id="icons">
