@@ -1,0 +1,27 @@
+#col {
+    display: flex;
+    flex-direction: column;
+
+    width: 16rem;
+    height: 100%;
+    padding: .5rem;
+
+    overflow-y: auto;
+
+    background-color: var(--menu);
+}
+
+/* ========= Scrollbar ========= */
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track{
+    background-color: var(--menu);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--header);
+    border: 2px solid var(--menu);
+    border-radius: 20px;
+}

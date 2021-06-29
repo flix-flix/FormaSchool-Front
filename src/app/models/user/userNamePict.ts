@@ -5,13 +5,21 @@ export class UserNamePict {
     private _lastname: string;
     private _picture: string;
 
+
     constructor(id: string, firstname: string, lastname: string, picture: string) {
         this._id = id;
         this._firstname = firstname;
         this._lastname = lastname;
         this._picture = picture;
     }
-
+    public toJSON() {
+        return {
+            id: this._id,
+            firstname: this._firstname,
+            lastname: this._lastname,
+            picture: this._picture,
+        };
+    }
     /**
      * This function is needed to filter on lastname AND firstname
      */

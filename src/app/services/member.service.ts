@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Member } from '../models/member/member';
 import { MemberCreate } from '../models/member/memberCreate';
 import { MemberRoles } from '../models/member/memberRoles';
-import { MemberUserNamePict } from '../models/member/MemberUserNamePict';
+import { MemberUserNamePict } from '../models/member/memberUserNamePict';
 
 @Injectable({
   providedIn: 'root'

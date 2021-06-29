@@ -1,7 +1,7 @@
 import { FileModel } from "src/app/models/file";
 import { MemberUsersPseudo } from "src/app/models/member/MemberUsersPseudo";
 import { EmojiService } from "src/app/services/emoji.service";
-import { Reaction } from "./reaction";
+import { Reaction } from "../reaction";
 
 export class Message {
     private _id: string;
@@ -17,7 +17,7 @@ export class Message {
 
     private _html: string;
 
-    constructor(id: string, sender: MemberUsersPseudo, salonId: string, content: string, file: FileModel, reactions: Reaction[], send: Date | string, edit: Date | string) {
+    constructor(id: string, sender: MemberUsersPseudo, salonId: string, content: string, file: FileModel, reactions: Reaction[], send, edit) {
         this._id = id;
         this._sender = sender;
         this._salonId = salonId;
@@ -26,8 +26,8 @@ export class Message {
         this._file = file;
         this._reactions = reactions;
 
-        this._send = send instanceof Date ? send : new Date(send);
-        this._edit = edit instanceof Date ? edit : new Date(edit);
+        this._send = send instanceof Date ? send : new Date(send[0], send[1] - 1, send[2], send[3], send[4], send[5]);
+        this._edit = edit instanceof Date ? edit : new Date(send[0], send[1] - 1, send[2], send[3], send[4], send[5]);
 
         this._html = Message.processHtml(content);
     }
@@ -119,6 +119,10 @@ export class Message {
 
     public get html(): string {
         return this._html;
+    }
+
+    public set html(html: string) {
+        this._html = html;
     }
 
     // ================================================================================================

@@ -17,12 +17,12 @@
             <div id="profil_name">{{user.firstname}} {{user.lastname}}</div>
             <div>
                 <img id="button_menu" class="feather" src="../../../../assets/images/feather-icons/menu.svg" alt="menu"
-                    (mousedown)="openCloseMenu()">
+                    (mousedown)="displayMenu = !displayMenu">
             </div>
         </div>
 
         <div id="profil_menu" *ngIf="displayMenu">
-            <a class="menu_item" routerLink="/user">
+            <a class="menu_item" (click)="userSettings()">
                 <img src="../../../../assets/images/feather-icons/settings.svg" alt="settings" class="menu_item_img">
                 <div class="item_name">
                     Paramètres

@@ -1,0 +1,59 @@
+#all {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 100%;
+    padding: .5rem .5rem;
+    margin-bottom: .5rem;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    color: var(--font_2);
+}
+
+#private_img {
+    width: 2rem;
+    height: 2rem;
+
+    margin-right: .5rem;
+
+    border-radius: 2rem;
+}
+
+#all:hover  {
+    background-color: var(--background);
+}
+
+#all.selected {
+    background-color: var(--header);
+}
+
+/* ===== group ===== */
+
+#len {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2rem;
+    min-width: 2rem;
+    height: 2rem;
+    margin-right: .5rem;
+
+    border-radius: 2rem;
+
+    color: var(--font_2);
+    background-color: var(--header);
+}
+
+#names {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.selected #len {
+    background-color: var(--background);
+}

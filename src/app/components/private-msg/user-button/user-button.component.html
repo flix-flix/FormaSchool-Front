@@ -1,0 +1,14 @@
+<a id="all" routerLink="/privateMessages/{{salonId}}" [class.selected]="salonId == displayed">
+    <ng-template [ngIf]="member == undefined" [ngIfThen]="group" [ngIfElse]="single">
+    </ng-template>
+
+    <ng-template #single>
+        <img id="private_img" src="{{env.apiUrl}}/files/users/{{member.user.picture}}" alt="userPicture">
+        {{member.user.firstname}} {{member.user.lastname}}
+    </ng-template>
+
+    <ng-template #group>
+        <div id="len">{{members.length}}</div>
+        <div id="names">{{names}}</div>
+    </ng-template>
+</a>

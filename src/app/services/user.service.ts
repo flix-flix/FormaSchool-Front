@@ -2,9 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Team } from '../models/team/team';
 import { User } from '../models/user/user';
 import { UserConnect } from '../models/user/userConnect';
 import { userCreation } from '../models/user/userCreation';
+import { UserCreationWithFile } from '../models/user/userCreationWithFile';
 import { UserLocalStorage } from '../models/user/userLocalStorage';
 import { UserNamePict } from '../models/user/userNamePict';
 
@@ -65,25 +67,6 @@ export class UserService {
     return this.http.get<UserNamePict[]>(`${environment.apiUrl}/users/userNotInTheTeam/${teamId}`);
   }
 
-  /**
-   * This function allows us to link a team to a user
-   * @param idTeam the id of the team you want to linked
-   * @param idUser the id of the user you want to linked
-   * @returns It return -1 if the user does not exist in the base, else it return 0 if its ok !
-   */
-  saveLink = (idTeam: number, idUser: number): Observable<number> => {
-    let res = -1;
-    Object.values(users).forEach(user => {
-      if (user.id == idUser) {
-        user.teams.push(idTeam);
-        res = 0;
-      }
-    });
-    return new Observable<number>(obs => {
-      obs.next(res);
-      obs.complete();
-    });
-  }
 
   /**
    * This function allows us to save a user
@@ -92,6 +75,16 @@ export class UserService {
    */
   save = (user: userCreation): Observable<User> => {
     return this.http.post<User>(`${environment.apiUrl}/users/add`, user);
+  }
+
+  saveWithFile = (user: UserCreationWithFile) => {
+    if (user.file != undefined) {
+      let reader = new FileReader();
+      reader.readAsDataURL(user.file);
+      reader.onloadend = () => {
+        this.http.post<Team>(`${environment.apiUrl}/users/saveWithFile`, { ...user, file: reader.result, filename: user.file.name }).subscribe();
+      }
+    }
   }
 
   // ================================================================================================

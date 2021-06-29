@@ -13,10 +13,22 @@ export class MsgWriterComponent implements OnInit {
 
   file: File;
   content = "";
+  fileUrl = "";
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  changeFile(event) {
+    this.file = event.target.files[0];
+    this.fileUrl = undefined;
+
+    if (this.file.type.startsWith("image/")) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => this.fileUrl = event.target.result
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
 
   pressEnter = (event) => {
@@ -26,7 +38,7 @@ export class MsgWriterComponent implements OnInit {
   }
 
   sendMsg = () => {
-    this.msgEmit.emit(new MessageSend(undefined, undefined, this.content, this.file));
+    this.msgEmit.emit({ content: this.content, file: this.file, fileName: this.file?.name });
     this.content = "";
     this.file = undefined;
     this.msgWriter.nativeElement.innerText = "";

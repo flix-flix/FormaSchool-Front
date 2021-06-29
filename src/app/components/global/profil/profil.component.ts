@@ -19,17 +19,17 @@ export class ProfilComponent implements OnInit {
   constructor(private storageService: StorageService, private router: Router) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem("user"));
-    this.storageService.changes.subscribe(() => this.user = JSON.parse(localStorage.getItem("user")));
-  }
-
-  openCloseMenu = () => {
-    this.displayMenu = !this.displayMenu;
+    this.storageService.subscribe("user", user => this.user = user);
   }
 
   logout = () => {
     this.displayMenu = false;
     this.storageService.clear("user");
     this.router.navigate(["/login"]);
+  }
+
+  userSettings() {
+    this.displayMenu = false;
+    this.router.navigate(["/user"]);
   }
 }

@@ -1,8 +1,8 @@
 ::ng-deep .p-panel .p-panel-header {
-    border: 1px solid #dee2e6;
+    border: 1px solid var(--white);
     padding: 1rem;
-    background: #6595B8;
-    color: #10516D;
+    background: var(--menu);
+    color: var(--font_2);
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
     margin-left: 150px;
@@ -13,9 +13,9 @@
 }
 ::ng-deep .p-panel .p-panel-content {
     padding: 1rem;
-    border: 1px solid #dee2e6;
-    background: #6595B8;
-    color: #10516D;
+    border: 1px solid var(--white);
+    background: var(--menu);
+    color: var(--font_2);
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
     border-top: 0 none;

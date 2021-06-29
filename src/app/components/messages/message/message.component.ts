@@ -1,24 +1,39 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { Member } from 'src/app/models/member/member';
+import { MessageEdit } from 'src/app/models/messages/MessageEdit';
 import { UserLocalStorage } from 'src/app/models/user/userLocalStorage';
 import { environment } from 'src/environments/environment';
-import { Message } from '../../../models/message';
+import { Message } from '../../../models/messages/message';
 
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css']
 })
-export class MessageComponent implements OnInit {
+export class MessageComponent implements OnInit, AfterViewInit {
   env = environment;
-  user: UserLocalStorage = JSON.parse(localStorage.getItem("user"))
+  @ViewChild("text") private text: ElementRef;
 
+  @Output() msgEdit = new EventEmitter<MessageEdit>();
   @Output() delete = new EventEmitter();
 
   @Input() msg: Message;
+  @Input() member: Member;
 
-  constructor() { }
+  user: UserLocalStorage = JSON.parse(localStorage.getItem("user"));
+
+  editable = false;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void { }
+
+  ngAfterViewInit() {
+    this.text.nativeElement.innerHTML = this.msg.html;
+  }
+
+  // =========================================================================================
 
   /** Open the emoji selector */
   emoji = () => {
@@ -28,8 +43,11 @@ export class MessageComponent implements OnInit {
 
   /** Edit the message */
   edit = () => {
-    // TODO Edit the msg
-    alert("TODO Edit")
+    this.text.nativeElement.innerText = this.msg.content;
+    this.editable = true;
+    setTimeout(() => {
+      this.text.nativeElement.focus()
+    }, 50);
   }
 
   /** Delete the message */
@@ -48,5 +66,38 @@ export class MessageComponent implements OnInit {
   reply = () => {
     // TODO Reply to the message
     alert("TODO Reply")
+  }
+
+  // =========================================================================================
+  // Edit
+
+  pressEscape = (event) => {
+    this.text.nativeElement.innerHTML = this.msg.html;
+    this.editable = false;
+  }
+
+  pressEnter = (event) => {
+    event.preventDefault();
+
+    if (this.text.nativeElement.innerText.length != 0)
+      this.sendMsg();
+  }
+
+  sendMsg = () => {
+    this.msg.content = this.text.nativeElement.innerText;
+    this.msg.html = Message.processHtml(this.msg.content);
+    this.msg.processEmoji("");
+
+    this.text.nativeElement.innerHTML = this.msg.html;
+
+    this.msgEdit.emit({ id: this.msg.id, content: this.msg.content });
+    this.editable = false;
+  }
+
+  // =========================================================================================
+
+  privateMsg() {
+    // TODO right salon OR new private
+    this.router.navigate(["/privateMessages/redirect"]);
   }
 }

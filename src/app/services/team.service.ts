@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Team } from '../models/team/team';
+import { TeamNameDescFile } from '../models/team/teamNameDescFile';
 import { TeamNameDescPict } from '../models/team/teamNameDescPict';
 import { TeamNamePict } from '../models/team/teamNamePict';
+import { TeamLogsComponent } from '../pages/params/team/team-logs/team-logs.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +15,6 @@ export class TeamService {
 
   constructor(private http: HttpClient) { }
   // ==============================================================================================
-  getTeamById = (teamId: String): Observable<TeamNameDescPict> => {
-    return this.http.get<TeamNameDescPict>(`${environment.apiUrl}/teams/${teamId}`);
-  }
 
   findTeamIdBySalonId = (salonId: string): Observable<Team> => {
     return this.http.get<Team>(`${environment.apiUrl}/teams/bySalon/${salonId}`);
@@ -47,12 +46,16 @@ export class TeamService {
     return this.http.patch<TeamNameDescPict>(environment.apiUrl + "/teams/teamNameDescPict", team);
   }
 
-  /**
- * This function allows us to save a team
- * @param team A creationTeam object (name, desc and picture)
- * @returns A number which is the id of the team created
- */
-  save = (team: TeamNameDescPict): Observable<Team> => {
-    return this.http.post<Team>(`${environment.apiUrl}/teams`, team);
+  send = (team: TeamNameDescFile) => {
+    if (team.file != undefined) {
+      let reader = new FileReader();
+      reader.readAsDataURL(team.file);
+      reader.onloadend = () => {
+        this.http.post<Team>(`${environment.apiUrl}/teams/saveWithFile`, { ...team, file: reader.result, filename: team.file.name }).subscribe();
+      }
+    }
+    else {
+      this.http.post<Team>(`${environment.apiUrl}/teams/saveWithFile`, { ...team, file: null, filename: null }).subscribe();
+    }
   }
 }

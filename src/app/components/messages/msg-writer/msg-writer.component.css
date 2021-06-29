@@ -7,28 +7,26 @@
     margin: 0 auto;
 }
 
-#input_msg:enabled {
-    box-shadow: 5px 3px 5px var(--font_2);
-}
-
 #input_msg {
     display: block;
-
+    
     width: 100%;
     min-height: 3rem;
     max-height: 20rem;
     padding: .5rem 3rem;
     
     overflow-y: auto !important;
-
+    
     font-weight: bold;
     font-size: 1.2rem;
-
+    
     color: var(--font_1);
     background-color: var(--header);
-
+    
     border: solid .2rem var(--font_2);
     outline: none;
+
+    box-shadow: 5px 3px 5px var(--font_2);
 }
 
 
@@ -63,7 +61,7 @@
     position: absolute;
     
     top: .5rem;
-
+    
     width: 2rem;
     height: 2rem;
 }
@@ -74,6 +72,49 @@
 
 #emoji {
     right: .5rem;
+}
+
+/* ========= File ========= */
+#file_name {
+    position: absolute;
+    bottom: 2.5rem;
+
+    display: flex;
+    align-items: center;
+
+    z-index: -1;
+    
+    padding: .5rem 1rem;
+    
+    font-weight: bold;
+    
+    color: var(--font_1);
+    background-color: var(--font_2);
+    
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+#display_img {
+    max-width: 2rem;
+    max-height: 2rem;
+
+    margin-right: .5rem;
+}
+
+#display_img img {
+    max-width: 2rem;
+    max-height: 2rem;
+}
+
+#remove_file {
+    display: inline;
+    
+    margin-left: .5rem;
+}
+
+#remove_file:hover {
+    filter: drop-shadow(1px 1px 2px var(--font_1));
 }
 
 #input_file { 

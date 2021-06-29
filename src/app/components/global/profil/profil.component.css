@@ -111,6 +111,8 @@
     text-decoration: none;
     
     color: var(--font_2);
+
+    cursor: pointer;
 }
 
 .menu_item:hover .menu_item_img {

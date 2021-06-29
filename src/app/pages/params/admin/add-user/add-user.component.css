@@ -6,7 +6,7 @@ div{
     flex-wrap: wrap;
 }
 input{
-    background-color: #A2D0EA;
+    background-color: var(--background);
 }
 
 input:hover{
@@ -14,7 +14,7 @@ input:hover{
 }
 
 label{
-    color: #10516D;
+    color: var(--font_2);
 }
 button{
     margin: 35px;

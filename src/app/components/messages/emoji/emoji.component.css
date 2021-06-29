@@ -48,6 +48,8 @@
     z-index: 10;
     
     opacity: 0;
+    visibility: hidden;
+
     display: flex;
     align-items: center;
     
@@ -65,7 +67,8 @@
 
 .react:hover ~ .react_tooltip {
     opacity: 1;
-    transition: opacity 0s .5s;
+    visibility: visible;
+    transition: visibility 0s, opacity 0s .5s;
 }
 
 /* Triangle */

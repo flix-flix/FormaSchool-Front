@@ -1,0 +1,5 @@
+<div id="col">
+    <app-user-button *ngFor="let private of privates" [members]="getMembers(private.users)" [salonId]="private.salon.id"
+        [displayed]="salonId">
+    </app-user-button>
+</div>
