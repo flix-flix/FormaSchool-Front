@@ -16,10 +16,14 @@ export class UserButtonComponent implements OnInit {
 
   member: MemberUserNamePict;
 
+  names: string;
+
   constructor() { }
 
   ngOnInit(): void {
     if (this.members.length == 1)
       this.member = this.members[0];
+    else
+      this.names = this.members.map(member => `${member.user.firstname} ${member.user.lastname[0]}`).join(", ");
   }
 }

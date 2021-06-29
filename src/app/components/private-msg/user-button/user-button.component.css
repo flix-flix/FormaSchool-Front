@@ -29,3 +29,31 @@
 #all.selected {
     background-color: var(--header);
 }
+
+/* ===== group ===== */
+
+#len {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2rem;
+    min-width: 2rem;
+    height: 2rem;
+    margin-right: .5rem;
+
+    border-radius: 2rem;
+
+    color: var(--font_2);
+    background-color: var(--header);
+}
+
+#names {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.selected #len {
+    background-color: var(--background);
+}
