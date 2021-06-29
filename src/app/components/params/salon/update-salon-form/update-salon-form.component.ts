@@ -10,6 +10,7 @@ import { SalonService } from 'src/app/services/salon.service';
   styleUrls: ['./update-salon-form.component.css']
 })
 export class UpdateSalonFormComponent implements OnInit {
+
   salonUpdate: SalonNameDesc = new SalonNameDesc(" ", " ", " ");
   salonUpdateForm: FormGroup = new FormGroup({
     name: new FormControl(''),
@@ -54,8 +55,6 @@ export class UpdateSalonFormComponent implements OnInit {
       this.salonUpdate = salonUpdate;
       const URL = `/params/salon/${salonId}/summary`;
       this.router.navigate([URL]);
-      console.log(salonId);
-      console.log(URL);
     })
   }
 
