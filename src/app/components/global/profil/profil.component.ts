@@ -27,4 +27,9 @@ export class ProfilComponent implements OnInit {
     this.storageService.clear("user");
     this.router.navigate(["/login"]);
   }
+
+  userSettings() {
+    this.displayMenu = false;
+    this.router.navigate(["/user"]);
+  }
 }
