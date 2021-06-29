@@ -72,6 +72,7 @@ import { UploadWithPreviewComponent } from './components/params/team/upload-with
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { PrivateMenuComponent } from './components/private-msg/private-menu/private-menu.component';
 import { UserButtonComponent } from './components/private-msg/user-button/user-button.component';
+import { SenderProfileComponent } from './components/messages/sender-profile/sender-profile.component';
 
 
 @NgModule({
@@ -129,7 +130,8 @@ import { UserButtonComponent } from './components/private-msg/user-button/user-b
     DialogPermissionComponent,
     UploadWithPreviewComponent,
     PrivateMenuComponent,
-    UserButtonComponent
+    UserButtonComponent,
+    SenderProfileComponent
   ],
   imports: [
     BrowserModule,

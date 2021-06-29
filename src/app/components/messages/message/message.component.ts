@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { Member } from 'src/app/models/member/member';
 import { MessageEdit } from 'src/app/models/messages/MessageEdit';
 import { UserLocalStorage } from 'src/app/models/user/userLocalStorage';
@@ -25,7 +24,7 @@ export class MessageComponent implements OnInit, AfterViewInit {
 
   editable = false;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void { }
 
@@ -92,12 +91,5 @@ export class MessageComponent implements OnInit, AfterViewInit {
 
     this.msgEdit.emit({ id: this.msg.id, content: this.msg.content });
     this.editable = false;
-  }
-
-  // =========================================================================================
-
-  privateMsg() {
-    // TODO right salon OR new private
-    this.router.navigate(["/privateMessages/redirect"]);
   }
 }

@@ -17,14 +17,6 @@
     background-color: rgba(var(--_header), .9);
 }
 
-#sender_img, #sender_img2 {
-    height: 4rem;
-    width: 4rem;
-    margin-right: 2rem;
-
-    border-radius: 50%;
-}
-
 /* ================ msg =================== */
 
 .top {
@@ -164,62 +156,4 @@
     
     vertical-align: middle;
     filter: drop-shadow(3px 3px 3px var(--font_2));
-}
-
-/* ================ Profile =================== */
-
-#profile_hover {
-    position: absolute;
-    left: -0.5rem;
-    top: -0.5rem;
-    
-    display: none;
-    flex-direction: column;
-    align-items: flex-start;
-   
-    z-index: 3;
-
-    width: 20rem;
-    height:8rem;
-    
-    font-weight: bold;
-
-    color: var(--background);
-    background-color: rgb(56 88 128);
-    
-    /* border: 4px solid var(--font_2); */
-    
-    border-radius: 1rem;
-}
-
-#sender_img2 {
-    margin-top: 1rem;
-    margin-left: 1.5rem;
-}
-
-#profile:hover #profile_hover{
-    display: flex;
-}
-
-#profile_top {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    padding-bottom: 1rem;
-}
-
-#profile_bottom {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-
-    font-weight: normal;
-}
-
-#mail{
-    margin-left: 1rem;
-    margin-right: 1rem;
 }
