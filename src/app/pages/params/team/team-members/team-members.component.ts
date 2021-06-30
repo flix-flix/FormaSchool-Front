@@ -28,25 +28,6 @@ export class TeamMembersComponent implements OnInit {
       this.members = members
     });
   }
-  /**
-    * This function refresh the list of roles
-    */
-  refreshRoles = () => {
-    this.roleService.findAllWithoutRightsByTeamId(this.teamId).subscribe(roles => {
-      this.roles = roles;
-    });
-  }
-
-  /**
-   * This function refresh the page with the role choosen
-   * @param id the id of the role choosen
-   */
-  roleChoosen = (id: string) => {
-    this.roleService.findRoleById(id).subscribe(role => {
-      this.role = role;
-    });
-  }
-
 
 
 }

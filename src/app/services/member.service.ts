@@ -6,6 +6,7 @@ import { Member } from '../models/member/member';
 import { MemberCreate } from '../models/member/memberCreate';
 import { MemberRoles } from '../models/member/memberRoles';
 import { MemberUserNamePict } from '../models/member/memberUserNamePict';
+import { RoleWithoutRights } from '../models/role/roleWithoutRights';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,11 @@ export class MemberService {
     return this.http.get<MemberUserNamePict[]>(`${environment.apiUrl}/members/withoutPermission/${salonId}`);
   }
 
-  addRoleToMember = (member: MemberRoles): Observable<MemberRoles> => {
-    return this.http.patch<MemberRoles>(environment.apiUrl + "/members/updateRolesMember", member);
+  addRoleToMember = (idMember: string, idRole: string): Observable<MemberRoles> => {
+    return this.http.patch<MemberRoles>(`${environment.apiUrl}/members/addRolesMember/${idMember}/${idRole}`, "");
+  }
+
+  findRolesByMember = (idMember: string): Observable<RoleWithoutRights[]> => {
+    return this.http.get<RoleWithoutRights[]>(`${environment.apiUrl}/members/rolesWhitoutRights/${idMember}`);
   }
 }

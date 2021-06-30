@@ -6,7 +6,9 @@ import { createRole } from 'src/app/models/role/createRole';
 import { Role } from 'src/app/models/role/role';
 
 import { RoleWithoutRights } from 'src/app/models/role/roleWithoutRights';
+import { MemberService } from 'src/app/services/member.service';
 import { RoleService } from 'src/app/services/role.service';
+import { TeamService } from 'src/app/services/team.service';
 
 
 
@@ -19,31 +21,24 @@ export class LineUserMembersComponent implements OnInit {
 
   teamId: string;
   @Input() member: MemberRoles;
-  role: RoleWithoutRights;
+  selectedRole: RoleWithoutRights;
   roles: RoleWithoutRights[];
-  missingRoles: RoleWithoutRights[];
 
-  constructor(private activatedRoute: ActivatedRoute, private roleService: RoleService) { }
+
+  constructor(private activatedRoute: ActivatedRoute, private roleService: RoleService, private memberService: MemberService) { }
+
   ngOnInit(): void {
-    console.log(this.member)
+    this.activatedRoute.parent.paramMap.subscribe(params => {
+      this.teamId = params.get("teamId");
+    })
     this.findRoleMissing();
   }
 
-  /**
-   * This function refresh the list of roles
-   */
-  refreshRoles = () => {
-    this.roleService.findAllWithoutRightsByTeamId(this.teamId).subscribe(roles => {
-      this.roles = roles;
+  refresh = () => {
+    this.memberService.findRolesByMember(this.member.id).subscribe(roles => {
+      this.member.roles = roles;
+      this.findRoleMissing();
     });
-  }
-  /**
-   * This function refresh the page with the role choosen
-   * @param id the id of the role choosen
-   */
-  roleChoosen = (id: string) => {
-    console.log(id);
-    // this.roles.filter(this.member.roles.include())
   }
   /*
     Aller chercher tous les roles
@@ -51,33 +46,16 @@ export class LineUserMembersComponent implements OnInit {
     Stocker les roles manquant pour afficher ça dans le dropdown
   */
   findRoleMissing = () => {
-    this.roleService.findAllWithoutRightsByTeamId(this.member.id).subscribe(roles => {
-      this.roles = roles.filter(role => !this.member.roles.includes(role))
+    this.roleService.findAllWithoutRightsByTeamId(this.teamId).subscribe(roles => {
+      console.log(roles);
+      this.roles = roles.filter(role => !this.member.roles.find(r => r.id == role.id));
     });
   }
 
-  /*findIdIsInside = (id: number) => {
-    this.user.roles.forEach(element => {
-      if (element.)
-      
+  addRole = () => {
+    this.memberService.addRoleToMember(this.member.id, this.selectedRole.id).subscribe(member => {
+      this.refresh();
     });
-  }*/
 
-  /**
-   * This function refresh the page with the role choosen 
-   * @param id the id of the role choosen*/
-
-  /* roleChoosenn = (id: string) => {
-     let newRole: Role = this.roleService.findRoleById(id);
-     console.log("roleChoosen ", newRole);
-     //TODO Call service Add Role
-   }*/
-
-
-
-  addRole = () => { }
-  // TODO find role missing in the dropdown
-  /*  this.possibleRoles.push(this.roles[indexRole])
-  this.roles.filter(this.user.roles.include())
-}*/
+  }
 }
