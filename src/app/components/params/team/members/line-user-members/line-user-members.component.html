@@ -5,6 +5,7 @@
     <div *ngFor="let role of member.roles">
         {{ role.name }}
     </div>
-    <p-dropdown [options]="rolesMissing" [(ngModel)]="roleChoosen" optionLabel="name">Search new role</p-dropdown>
-    <button type="button" (click)="ajouteRole()">Send Role</button>
+    <p-dropdown [options]="roles" [(ngModel)]="missingRoles" optionLabel="name">Search new role</p-dropdown>
+    <button type="button" (click)="addRole()">Send Role</button>
+
 </div>

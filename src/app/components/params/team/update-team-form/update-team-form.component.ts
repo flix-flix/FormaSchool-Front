@@ -60,8 +60,6 @@ export class UpdateTeamFormComponent implements OnInit {
       this.teamUpdate = teamUpdate;
       const URL = `/params/team/${teamId}/summary`;
       this.router.navigate([URL]);
-      console.log(teamId);
-      console.log(URL);
     })
   }
 }
