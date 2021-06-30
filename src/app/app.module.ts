@@ -74,6 +74,7 @@ import { PrivateMenuComponent } from './components/private-msg/private-menu/priv
 import { UserButtonComponent } from './components/private-msg/user-button/user-button.component';
 import { SenderProfileComponent } from './components/messages/sender-profile/sender-profile.component';
 import { EmojisSelectorComponent } from './components/messages/emojis-selector/emojis-selector.component';
+import { FullCalendarModule } from 'primeng/fullcalendar';
 
 
 @NgModule({
@@ -154,7 +155,8 @@ import { EmojisSelectorComponent } from './components/messages/emojis-selector/e
     ToolbarModule,
     DialogModule,
     ConfirmDialogModule,
-    DropdownModule
+    DropdownModule,
+    FullCalendarModule
   ],
   providers: [RxStompService,
     {

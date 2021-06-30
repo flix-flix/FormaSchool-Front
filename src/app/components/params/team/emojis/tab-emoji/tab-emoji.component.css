@@ -26,29 +26,29 @@
     margin: 5%;
 }
 ::ng-deep .p-toolbar {
-    background: #63b1ff;
-    border: 1px solid #ffffff;
+    background: var(--font_1);
+    border: 1px solid var(--white);
     padding: 1rem;
     border-radius: 3px;
     margin-bottom: 10px;
 }
 
 ::ng-deep .p-datatable-scrollable-header-box{
-    background-color: #63b1ff;
+    background-color: var(--font_1);
 }
 
 ::ng-deep .p-datatable .p-datatable-header {
-    background: #63b1ff;
-    border: 1px solid #ffffff;
+    background: var(--font_1);
+    border: 1px solid var(--white);
 }
 
 ::ng-deep .p-datatable .p-datatable-tbody > tr {
-    background: #63b1ff;
+    background: var(--font_1);
     color: #000000;
 }
 
 ::ng-deep .p-datatable .p-datatable-thead > tr > th {
-    background: #63b1ff;
+    background: var(--font_1);
 }
 
 ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
@@ -57,8 +57,8 @@
 }
 
 ::ng-deep .p-datatable .p-datatable-footer {
-    background: #63b1ff;
-    border: 1px solid #ffffff;
+    background: var(--font_1);
+    border: 1px solid var(--white);
 }
 
 ::ng-deep .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
@@ -71,7 +71,7 @@
 }
 
 ::ng-deep ::-webkit-scrollbar-track{
-    background: #63b1ff; 
+    background: var(--font_1); 
 }
 
 ::ng-deep ::-webkit-scrollbar-thumb {

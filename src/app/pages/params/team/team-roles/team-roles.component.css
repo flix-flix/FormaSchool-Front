@@ -16,7 +16,7 @@ section{
 #menu{
     height: 100%;
     width: 20rem;
-    background-color: #275575;
+    background-color: var(--background);
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -28,7 +28,7 @@ section{
     justify-content: space-around;
 }
 .roles:hover{
-    background-color: #003b55;
+    background-color: var(--menu);
 }
 
 .roleName{
@@ -43,14 +43,14 @@ section{
 /*================================ Input/ Label ========================== */
 
 input{
-    background-color: #A2D0EA;
+    background-color: var(--background);
 }
 input:hover{
-    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2)
+    box-shadow: 12px 12px 2px 1px var(--font_2)
 }
 
 label{
-    color: #10516D;
+    color: var(--font_2);
 }
 .p-float-label{
     margin-top: 3%;
@@ -69,12 +69,12 @@ label{
 }
 .colorPicker{
     display:flex;
-    background-color: #A2D0EA;
+    background-color: var(--background);
     justify-content: space-around;
     padding: 10px;
 }
 .colorPicker:hover{
-    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2)
+    box-shadow: 12px 12px 2px 1px var(--font_2)
 }
 
 .colorExample{
@@ -93,7 +93,7 @@ label{
     padding: 0.5rem 0;
 }
 .addRole ::ng-deep .p-button {
-    color: #ffffff;
+    color: var(--white);
     background: #2b8a55;
     border: 1px solid #2196F3;
     padding: 0.5rem 1rem;
@@ -113,7 +113,7 @@ button{
 }
 /*================================ Liste de droits ===================== */
 #blackBorder{
-    border:solid 2px rgba(0, 0, 255, .2);
+    border:solid 2px var(--font_2);
     width: 100%;
 }
 .rightsContainer{   
@@ -126,7 +126,7 @@ button{
 }
 
 #content::-webkit-scrollbar-track{
-    background: #6595b8; 
+    background: var(--hearder); 
 }
 
 #content::-webkit-scrollbar-thumb {

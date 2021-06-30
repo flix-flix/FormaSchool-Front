@@ -56,7 +56,7 @@ export class EmojiService {
    * @param emojiId the id of the emoji you want to delete
    */
   deleteById = (emojiId: string) => {
-    return this.http.delete<void>(`${environment.apiUrl}/emojis/${emojiId}`);
+    return this.http.delete<void>(`${environment.apiUrl}/emojis/createdEmoji/${emojiId}`);
   }
 
   // ================================================================================================
