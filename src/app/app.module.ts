@@ -22,7 +22,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/global/header/header.component';
 import { ProfilComponent } from './components/global/profil/profil.component';
 import { SidebarComponent } from './components/global/sidebar/sidebar.component';
-import { EmojiComponent } from './components/messages/emoji/emoji.component';
+import { EmojiComponent } from './components/messages/reaction/reaction.component';
 import { LineDateComponent } from './components/messages/line-date/line-date.component';
 import { MessageComponent } from './components/messages/message/message.component';
 import { MsgThreadComponent } from './components/messages/msg-thread/msg-thread.component';

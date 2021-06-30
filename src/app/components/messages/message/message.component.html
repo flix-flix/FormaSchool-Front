@@ -14,12 +14,10 @@
         <app-shared-file [file]="msg.file"></app-shared-file>
 
         <!-- Reactions -->
-        <div id="emojis">
-            <app-emoji *ngFor="let react of msg.reactions" [reaction]="react" [member]="member"></app-emoji>
+        <div id="reactions">
+            <app-reaction *ngFor="let react of msg.reactions" [reaction]="react" [member]="member"></app-reaction>
         </div>
     </div>
-
-
 
     <!-- Icons on hover -->
     <div id="icons">

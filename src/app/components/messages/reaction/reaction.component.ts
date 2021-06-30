@@ -4,9 +4,9 @@ import { environment } from 'src/environments/environment';
 import { Reaction } from '../../../models/reaction';
 
 @Component({
-  selector: 'app-emoji',
-  templateUrl: './emoji.component.html',
-  styleUrls: ['./emoji.component.css']
+  selector: 'app-reaction',
+  templateUrl: './reaction.component.html',
+  styleUrls: ['./reaction.component.css']
 })
 export class EmojiComponent implements OnInit {
   env = environment;
