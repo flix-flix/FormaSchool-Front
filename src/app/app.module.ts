@@ -75,7 +75,7 @@ import { UserButtonComponent } from './components/private-msg/user-button/user-b
 import { SenderProfileComponent } from './components/messages/sender-profile/sender-profile.component';
 import { EmojisSelectorComponent } from './components/messages/emojis-selector/emojis-selector.component';
 import { FullCalendarModule } from 'primeng/fullcalendar';
-
+import { ModaleAddSalonComponent } from './components/team/modale-add-salon/modale-add-salon.component';
 
 @NgModule({
   declarations: [
@@ -134,7 +134,8 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
     PrivateMenuComponent,
     UserButtonComponent,
     SenderProfileComponent,
-    EmojisSelectorComponent
+    EmojisSelectorComponent,
+    ModaleAddSalonComponent
   ],
   imports: [
     BrowserModule,
