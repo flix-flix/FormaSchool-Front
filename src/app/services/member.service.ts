@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Member } from '../models/member/member';
 import { MemberCreate } from '../models/member/memberCreate';
+import { MemberRoles } from '../models/member/memberRoles';
 import { MemberUserNamePict } from '../models/member/memberUserNamePict';
 
 @Injectable({
@@ -34,5 +35,9 @@ export class MemberService {
 
   findMembersInTeamWithoutPermissionForSalon = (salonId: string): Observable<MemberUserNamePict[]> => {
     return this.http.get<MemberUserNamePict[]>(`${environment.apiUrl}/members/withoutPermission/${salonId}`);
+  }
+
+  addRoleToMember = (member: MemberRoles): Observable<MemberRoles> => {
+    return this.http.patch<MemberRoles>(environment.apiUrl + "/members/updateRolesMember", member);
   }
 }
