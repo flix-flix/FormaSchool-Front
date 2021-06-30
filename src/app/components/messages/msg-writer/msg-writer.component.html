@@ -1,13 +1,14 @@
 <div id="all">
-    <span id="input_msg" (input)="content=$event.target.innerText" data-placeholder="Envoyer un message"
-        (keydown.enter)="pressEnter($event)" contentEditable #writer></span>
+    <span class="input_msg" (input)="content=$event.target.innerText" data-placeholder="Envoyer un message"
+        (keydown.enter)="pressEnter($event)" (keyup)="updateCaret($event.target)" (mouseup)="updateCaret($event.target)"
+        contentEditable #writer></span>
 
     <img id="plus" class="icon feather" src="../../../../../assets/images/feather-icons/plus-circle.svg" alt="join file"
         (mousedown)="fileInput.click()">
     <img id="emoji" class="icon feather" src="../../../../../assets/images/feather-icons/smile.svg" alt="add emoji"
         (mousedown)="openCloseEmojiSelector()">
 
-    <app-emojis-selector [hidden]="hideSelector"></app-emojis-selector>
+    <app-emojis-selector [hidden]="hideSelector" (emojiEmit)="addEmoji($event)"></app-emojis-selector>
 
     <span *ngIf="file != undefined" id="file_name">
         <div *ngIf="fileUrl" id="display_img">

@@ -15,23 +15,16 @@ export class MsgWriterComponent implements OnInit {
   content = "";
   fileUrl = "";
 
-  hideSelector = false;
+  hideSelector = true;
+  caretStart = 5;
+  caretEnd = 5;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  changeFile(event) {
-    this.file = event.target.files[0];
-    this.fileUrl = undefined;
-
-    if (this.file.type.startsWith("image/")) {
-      var reader = new FileReader();
-      reader.onload = (event: any) => this.fileUrl = event.target.result
-      reader.readAsDataURL(event.target.files[0]);
-    }
-  }
+  // ====================================================================================================
 
   pressEnter = (event) => {
     event.preventDefault();
@@ -46,7 +39,37 @@ export class MsgWriterComponent implements OnInit {
     this.msgWriter.nativeElement.innerText = "";
   }
 
-  openCloseEmojiSelector = () => {
-    this.hideSelector = !this.hideSelector;
+  changeFile(event) {
+    this.file = event.target.files[0];
+    this.fileUrl = undefined;
+
+    if (this.file.type.startsWith("image/")) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => this.fileUrl = event.target.result
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+  // ====================================================================================================
+  // Emoji
+
+  openCloseEmojiSelector = () => this.hideSelector = !this.hideSelector;
+
+  addEmoji(emoji: string) {
+    const elem = this.msgWriter.nativeElement;
+    const text = `${elem.innerText.substring(0, this.caretStart)}:${emoji}:${elem.innerText.substring(this.caretEnd, elem.innerText.length)}`;
+    this.msgWriter.nativeElement.innerText = text;
+    this.content = text;
+  }
+
+  updateCaret(elem) {
+    const win = elem.ownerDocument.defaultView;
+
+    if (win.getSelection().rangeCount > 0) {
+      const range = win.getSelection().getRangeAt(0);
+
+      this.caretStart = range.startOffset;
+      this.caretEnd = range.endOffset;
+    }
   }
 }

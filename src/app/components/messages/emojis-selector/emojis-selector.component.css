@@ -1,13 +1,13 @@
 #all {
     position: absolute;
-    top: -12.5rem;
+    top: -16rem;
     right:-1rem;
 
     display: flex;
     flex-direction: column;
 
-    max-width: 13.25rem;
-    height: 12rem;
+    width: 13.25rem;
+    height: 15.5rem;
     padding: .5rem 0 0 .5rem;
     
     color: var(--font_1);
@@ -16,12 +16,21 @@
     border-radius: 1rem .5rem .5rem 1rem;
 }
 
-#search {
+.search {
     margin-right: .5rem;
     margin-bottom: .5rem;
+
+    padding: .2rem;
+
+    font-weight: bold;
+
+    color: var(--font_2);
+    background-color: var(--background);
+    
+    border: none;
 }
 
-#search:focus {
+.search:focus {
     outline: none;
 }
 
@@ -30,10 +39,10 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-content: flex-start;
+
+    height: 12rem;
     
     overflow-y: auto;
-
-    margin-bottom: .5rem;
 }
 
 .emoji {
@@ -44,6 +53,24 @@
     background-color: var(--menu);
     
     border-radius: 2rem;
+}
+
+#hover{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 2rem;
+}
+
+#hover img{
+    height: 2rem;
+}
+
+#hover span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* ========= Scrollbar ========= */

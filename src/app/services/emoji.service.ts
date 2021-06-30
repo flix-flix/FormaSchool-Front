@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { EmojisSelectorComponent } from '../components/messages/emojis-selector/emojis-selector.component';
 import { CreatedEmoji } from '../models/emoji/createdEmoji';
+import { EmojiDesc } from '../models/emoji/emojiDesc';
 import { EmojiNamePict } from '../models/emoji/emojiNamePict';
 
 @Injectable({
@@ -13,7 +15,24 @@ export class EmojiService {
   /** path to the folder of the emojis [default, organization, team] */
   static path = ["emojis/", "emojisOrga/", "emojisTeams/"];
 
-  constructor(private http: HttpClient) { }
+  url = environment.apiUrl + "/emojis/";
+
+  json: EmojiDesc[] = [];
+  nextEmojiId = 1_000_000;
+  selectors: EmojisSelectorComponent[] = [];
+
+  constructor(private http: HttpClient) {
+    this.http.get<any[]>(this.url + "json").subscribe(json => {
+      json.forEach(item => item.order = (item.order == "" ? this.nextEmojiId++ : item.order));
+
+      this.json = <EmojiDesc[]>json;
+      this.json.sort((a, b) => a.order - b.order);
+      this.json.forEach(item => item.annotation = item.annotation.substr(0, item.annotation.length - 2));
+      this.json = this.json.filter(item => !item.annotation.includes("skin"))
+
+      this.selectors.forEach(select => select.emojis = this.json.slice(0, 50));
+    });
+  }
 
   //========================================= Emoji Created ======================================
 
@@ -60,6 +79,15 @@ export class EmojiService {
   }
 
   // ================================================================================================
+
+  register(selector: EmojisSelectorComponent) {
+    if (this.json.length == 0)
+      this.selectors.push(selector);
+    else
+      selector.emojis = this.json.slice(0, 200);
+  }
+
+  // ================================================================================================
   // Smart
 
   /**
@@ -70,7 +98,7 @@ export class EmojiService {
   static processEmoji = (content: string, teamId: string): string => {
     let html = ""; // return string
     let search = ":"; // TODO regex
-    let first = 0, second = 0, prev = 0; // first ':', second ':', prev: current char index
+    let first, second, prev = 0; // first ':', second ':', prev: current char index
 
     while ((first = EmojiService.indexOf(content, search, prev)) != -1
       && (second = EmojiService.indexOf(content, search, first + 1)) != -1) {
@@ -81,7 +109,6 @@ export class EmojiService {
         html += ":";
         prev = first + 1;
       } else {
-        // html += `<img class="inline_emoji" src="${"../".repeat(deep)}assets/images/${emoji.picture}" alt=":${emoji.name}:">`;
         html += `<img class="inline_emoji" src="${environment.apiUrl}/files/${emoji.picture}" alt=":${emoji.name}:">`;
         prev = second + 1;
       }
@@ -91,8 +118,12 @@ export class EmojiService {
     return html + content.substring(prev);
   }
 
+  static getEmoji(name: string, teamId = "orga"): EmojiNamePict {
+    return
+  }
+
   /** Returns the matching emoji if it exits, undefined otherwise */
-  static getEmoji = (name: string, teamId = "orga"): EmojiNamePict => {
+  static _getEmoji = (name: string, teamId = "orga"): EmojiNamePict => {
     let _emojis = [emojisBase, emojisOrga/*, emojisTeam[teamId]*/];
 
     for (let index in _emojis) {
@@ -136,6 +167,11 @@ let emojisOrga: { [id: number]: { id: number, name: string, picture: string } } 
 
 /** Default emojis */
 let emojisBase: { [id: number]: { id: number, name: string, picture: string } } = {
+  1000: {
+    id: 1,
+    name: "middle_finger",
+    picture: "middle_finger.png"
+  },
   1: {
     id: 1,
     name: "bagel",

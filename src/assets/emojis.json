@@ -576,7 +576,7 @@
         "tags": "BJ, flag"
     },
     {
-        "annotation": "flag_St._BarthÃ©lemy_9",
+        "annotation": "flag_St_BarthÃ©lemy_9",
         "group": "flags",
         "hexcode": "1F1E7-1F1F1",
         "openmoji_tags": "",
@@ -1467,7 +1467,7 @@
         "tags": "KM, flag"
     },
     {
-        "annotation": "flag_St._Kitts_&_Nevis_9",
+        "annotation": "flag_St_Kitts_&_Nevis_9",
         "group": "flags",
         "hexcode": "1F1F0-1F1F3",
         "openmoji_tags": "",
@@ -1539,7 +1539,7 @@
         "tags": "LB, flag"
     },
     {
-        "annotation": "flag_St._Lucia_9",
+        "annotation": "flag_St_Lucia_9",
         "group": "flags",
         "hexcode": "1F1F1-1F1E8",
         "openmoji_tags": "",
@@ -1656,7 +1656,7 @@
         "tags": "ME, flag"
     },
     {
-        "annotation": "flag_St._Martin_9",
+        "annotation": "flag_St_Martin_9",
         "group": "flags",
         "hexcode": "1F1F2-1F1EB",
         "openmoji_tags": "",
@@ -2007,7 +2007,7 @@
         "tags": "PL, flag"
     },
     {
-        "annotation": "flag_St._Pierre_&_Miquelon_9",
+        "annotation": "flag_St_Pierre_&_Miquelon_9",
         "group": "flags",
         "hexcode": "1F1F5-1F1F2",
         "openmoji_tags": "",
@@ -2178,7 +2178,7 @@
         "tags": "SG, flag"
     },
     {
-        "annotation": "flag_St._Helena_9",
+        "annotation": "flag_St_Helena_9",
         "group": "flags",
         "hexcode": "1F1F8-1F1ED",
         "openmoji_tags": "",
@@ -2484,7 +2484,7 @@
         "tags": "UG, flag"
     },
     {
-        "annotation": "flag_U.S._Outlying_Islands_9",
+        "annotation": "flag_US_Outlying_Islands_9",
         "group": "flags",
         "hexcode": "1F1FA-1F1F2",
         "openmoji_tags": "usa, united states, us, america",
@@ -2538,7 +2538,7 @@
         "tags": "VA, flag"
     },
     {
-        "annotation": "flag_St._Vincent_&_Grenadines_9",
+        "annotation": "flag_St_Vincent_&_Grenadines_9",
         "group": "flags",
         "hexcode": "1F1FB-1F1E8",
         "openmoji_tags": "",
@@ -2565,7 +2565,7 @@
         "tags": "VG, flag"
     },
     {
-        "annotation": "flag_U.S._Virgin_Islands_9",
+        "annotation": "flag_US_Virgin_Islands_9",
         "group": "flags",
         "hexcode": "1F1FB-1F1EE",
         "openmoji_tags": "",
@@ -20925,7 +20925,7 @@
         "tags": "groom, person, tuxedo"
     },
     {
-        "annotation": "Mrs._Claus_light_skin_tone_9",
+        "annotation": "Mrs_Claus_light_skin_tone_9",
         "group": "people-body",
         "hexcode": "1F936-1F3FB",
         "openmoji_tags": "",
@@ -20934,7 +20934,7 @@
         "tags": ""
     },
     {
-        "annotation": "Mrs._Claus_medium-light_skin_tone_9",
+        "annotation": "Mrs_Claus_medium-light_skin_tone_9",
         "group": "people-body",
         "hexcode": "1F936-1F3FC",
         "openmoji_tags": "",
@@ -20943,7 +20943,7 @@
         "tags": ""
     },
     {
-        "annotation": "Mrs._Claus_medium_skin_tone_9",
+        "annotation": "Mrs_Claus_medium_skin_tone_9",
         "group": "people-body",
         "hexcode": "1F936-1F3FD",
         "openmoji_tags": "",
@@ -20952,7 +20952,7 @@
         "tags": ""
     },
     {
-        "annotation": "Mrs._Claus_medium-dark_skin_tone_9",
+        "annotation": "Mrs_Claus_medium-dark_skin_tone_9",
         "group": "people-body",
         "hexcode": "1F936-1F3FE",
         "openmoji_tags": "",
@@ -20961,7 +20961,7 @@
         "tags": ""
     },
     {
-        "annotation": "Mrs._Claus_dark_skin_tone_9",
+        "annotation": "Mrs_Claus_dark_skin_tone_9",
         "group": "people-body",
         "hexcode": "1F936-1F3FF",
         "openmoji_tags": "",
@@ -20970,7 +20970,7 @@
         "tags": ""
     },
     {
-        "annotation": "Mrs._Claus_9",
+        "annotation": "Mrs_Claus_9",
         "group": "people-body",
         "hexcode": "1F936",
         "openmoji_tags": "christmas, holiday, jolly, happy, mrs. clause, xmas, celebration",
