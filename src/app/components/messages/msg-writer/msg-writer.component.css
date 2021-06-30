@@ -74,6 +74,11 @@
     right: .5rem;
 }
 
+/* ========= Emoji selector ========= */
+app-emojis-selector {
+    
+}
+
 /* ========= File ========= */
 #file_name {
     position: absolute;

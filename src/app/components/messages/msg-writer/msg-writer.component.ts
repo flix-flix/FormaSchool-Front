@@ -15,6 +15,8 @@ export class MsgWriterComponent implements OnInit {
   content = "";
   fileUrl = "";
 
+  hideSelector = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -45,6 +47,6 @@ export class MsgWriterComponent implements OnInit {
   }
 
   openCloseEmojiSelector = () => {
-    alert("TODO add emoji");
+    this.hideSelector = !this.hideSelector;
   }
 }

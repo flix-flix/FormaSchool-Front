@@ -1,0 +1,6 @@
+<div id="all">
+    <input type="text" [(ngModel)]="search" id="search">
+    <div id="emojis">
+        <div *ngFor="let emoji of emojis" class="emoji" (click)="emoji()">{{emoji}}</div>
+    </div>
+</div>

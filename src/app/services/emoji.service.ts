@@ -20,6 +20,7 @@ export class EmojiService {
   findCreatedEmojiByTeamId = (teamId: string): Observable<CreatedEmoji[]> => {
     return this.http.get<CreatedEmoji[]>(`${environment.apiUrl}/emojis/createdEmojis/${teamId}`);
   }
+
   findCreatedEmojiOrga = (): Observable<CreatedEmoji[]> => {
     return this.http.get<CreatedEmoji[]>(`${environment.apiUrl}/emojis/createdEmojisOrga`);
   }
@@ -114,52 +115,6 @@ export class EmojiService {
     return index < 0 ? index : index + start; // return -1
   }
 }
-
-// ================================================================================================
-// TODO [back]
-
-/** Emojis added in each team */
-let emojisTeam: { [id: number]: { [id: number]: { id: number, name: string, picture: string } } } = {
-  "-1": {},// If no teamId given
-  1: {
-    100_001: {
-      id: 100_001,
-      name: "bob",
-      picture: "team_1_1.png"
-    },
-    100_002: {
-      id: 100_002,
-      name: "rl",
-      picture: "team_1_2.png"
-    },
-    100_003: {
-      id: 100_003,
-      name: "ibm",
-      picture: "team_1_3.png"
-    },
-  },
-  2: {
-    100_101: {
-      id: 100_101,
-      name: "pe",
-      picture: "2/ba.png"
-    },
-  },
-  3: {
-    100_201: {
-      id: 100_201,
-      name: "nike",
-      picture: "3/ca.png"
-    },
-  },
-  10: {
-    100_301: {
-      id: 100_301,
-      name: "bmw",
-      picture: "10/da.png"
-    },
-  }
-};
 
 // ================================================================================================
 
