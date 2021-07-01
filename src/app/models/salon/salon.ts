@@ -1,12 +1,13 @@
 import { MsgThreadComponent } from "src/app/components/messages/msg-thread/msg-thread.component";
 import { Message } from "src/app/models/messages/message";
 import { Member } from "../member/member";
+import { TeamNamePict } from "../team/teamNamePict";
 
-export class Salon {
+export interface Salon {
     id: string;
-    teamId: string;
+    team: TeamNamePict;
     name: string;
-    msgs: Message[];
+    messages: Message[];
     thread: MsgThreadComponent;
     member: Member;
 

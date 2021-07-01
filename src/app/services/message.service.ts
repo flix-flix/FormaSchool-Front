@@ -1,19 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import * as SockJS from 'sockjs-client';
 import { environment } from 'src/environments/environment';
-import * as Stomp from 'stompjs';
-import { MsgThreadComponent } from '../components/messages/msg-thread/msg-thread.component';
 import { FileModel } from '../models/file';
 import { Message } from '../models/messages/message';
-import { MessageEdit } from '../models/messages/MessageEdit';
-import { MessageSend } from '../models/messages/messageSend';
-import { Salon } from '../models/salon/salon';
-import { UserLocalStorage } from '../models/user/userLocalStorage';
 import { EmojiService } from './emoji.service';
-import { SalonService } from './salon.service';
-import { StorageService } from './storage.service';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -21,15 +12,7 @@ import { UtilsService } from './utils.service';
 })
 export class MessageService {
 
-  stompClient;
-  salons: { [salonId: string]: Salon } = {};
-  user: UserLocalStorage;
-
-  constructor(private http: HttpClient, storageService: StorageService, private salonService: SalonService,
-    private emojiService: EmojiService, private utilsService: UtilsService) {
-    storageService.subscribe("user", user => this.user = user);
-    this.connect();
-  }
+  constructor(private http: HttpClient, private emojiService: EmojiService, private utilsService: UtilsService) { }
 
   // =========================================================================================
 
@@ -97,103 +80,4 @@ export class MessageService {
 
   findAllMessageOfSalon = (salonId: string): Observable<Message[]> =>
     this.http.get<Message[]>(environment.apiUrl + "/messages/salonWithReacts/" + salonId);
-
-  // =========================================================================================
-  // WebSocket (settings)
-
-  connect() {
-    this.stompClient = Stomp.over(new SockJS(environment.apiUrl + "/wsMessages"));
-    this.stompClient.debug = null;
-    this.stompClient.connect({}, () => this.stompClient.subscribe('/topic/public', this.onMessageReceived));
-  }
-
-  registerThread(thread: MsgThreadComponent) {
-    if (thread.salonId in this.salons) {
-      this.salons[thread.salonId].thread = thread;
-      this.initThread(this.salons[thread.salonId]);
-    }
-    else
-      this.salonService.findById(thread.salonId).subscribe(_salon => {
-        this.salons[thread.salonId] = {
-          id: thread.salonId,
-          teamId: _salon.team.id,
-          name: _salon.name,
-          msgs: _salon.messages.map(msg => this.fromJson(msg)),
-          thread: thread,
-          member: this.user.members.find(member => member.team.id == _salon.team.id)
-        };
-
-        // TODO [GET]
-        let salon = this.salons[thread.salonId];
-        salon.msgs.forEach(msg => this.emojiService.processEmojiSetter(msg.content, salon.teamId, html => msg.content = html));
-        this.emojiService.processEmojiSetter(salon.name, salon.teamId, html => salon.html = html);
-        this.initThread(salon);
-      });
-  }
-
-  initThread(salon) {
-    salon.thread.setMessages(salon.msgs);
-    salon.thread.member = salon.member;
-    setTimeout(() => salon.thread.scrollToBottom(), 10);
-  }
-
-  // =========================================================================================
-  // WebSocket (request)
-
-  send(msg: MessageSend) {
-    msg.memberId = this.user.members.find(member => member.team.id == this.salons[msg.salonId].teamId).id;
-
-    if (msg.file == undefined)
-      this._send(msg);
-    else {
-      let reader = new FileReader();
-      reader.onloadend = () => this._send(msg, reader.result);
-      reader.readAsDataURL(msg.file);
-    }
-  }
-
-  private _send = (msg: MessageSend, fileContent = null) =>
-    this.stompClient.send("/app/chat.send", {}, JSON.stringify(fileContent ? { ...msg, file: fileContent } : msg));
-
-  edit = (msg: MessageEdit) => this.stompClient.send("/app/chat.edit", {}, JSON.stringify(msg));
-
-  delete = (msgId: string) => this.stompClient.send("/app/chat.delete", {}, msgId);
-
-  // =========================================================================================
-  // Messages management
-
-  private onMessageReceived = (obj) => {
-    let msg = JSON.parse(obj.body);
-
-    if ("content" in msg)
-      this.addOrEditMsg(this.salons[msg.salonId], this.fromJson(msg));
-    else
-      this.deleteMsg(this.salons[msg.salonId], msg);
-  }
-
-  private addOrEditMsg(salon, msg: Message) {
-    this.emojiService.processEmojiSetter(msg.content, salon.teamId, html => msg.content = html);
-
-    let edited = false;
-    for (let i = 0; i < salon.msgs.length; i++)
-      if (salon.msgs[i].id == msg.id) {
-        salon.msgs[i] = msg;
-        edited = true;
-        break;
-      }
-    if (!edited)
-      salon.msgs.push(msg);
-
-    salon.thread.setMessages(salon.msgs);
-
-    // TODO
-    // if (msg.sender. == this.memberId)
-    if (!edited)
-      setTimeout(() => salon.thread.scrollToBottom(), 250);
-  }
-
-  private deleteMsg(salon, msgDelete) {
-    salon.msgs = salon.msgs.filter(msg => msg.id !== msgDelete.messageId);
-    salon.thread.setMessages(salon.msgs);
-  }
 }

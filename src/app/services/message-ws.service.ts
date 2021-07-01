@@ -1,0 +1,124 @@
+import { Injectable } from '@angular/core';
+import * as SockJS from 'sockjs-client';
+import * as Stomp from 'stompjs';
+import { environment } from 'src/environments/environment';
+import { Salon } from '../models/salon/salon';
+import { UserLocalStorage } from '../models/user/userLocalStorage';
+import { EmojiService } from './emoji.service';
+import { SalonService } from './salon.service';
+import { StorageService } from './storage.service';
+import { MessageSend } from '../models/messages/messageSend';
+import { MessageEdit } from '../models/messages/MessageEdit';
+import { Message } from '../models/messages/message';
+import { MsgThreadComponent } from '../components/messages/msg-thread/msg-thread.component';
+import { MessageService } from './message.service';
+import { MessageDelete } from '../models/messages/messageDelete';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MessageWsService {
+
+  stompClient;
+  salons: { [salonId: string]: Salon } = {};
+  user: UserLocalStorage;
+
+  constructor(private msgService: MessageService, storageService: StorageService, private salonService: SalonService, private emojiService: EmojiService) {
+    storageService.subscribe("user", user => this.user = user);
+    this.connect();
+  }
+
+  // =========================================================================================
+
+  connect() {
+    this.stompClient = Stomp.over(new SockJS(environment.apiUrl + "/wsMessages"));
+    this.stompClient.debug = null;
+    this.stompClient.connect({}, () => this.stompClient.subscribe('/topic/public', this.onMessageReceived));
+  }
+
+  registerThread(thread: MsgThreadComponent) {
+    if (thread.salonId in this.salons) {
+      this.salons[thread.salonId].thread = thread;
+      this.initThread(this.salons[thread.salonId]);
+    }
+    else
+      this.salonService.findById(thread.salonId).subscribe(_salon => {
+        this.salons[thread.salonId] = {
+          ..._salon,
+          id: thread.salonId,
+          thread: thread,
+          member: this.user.members.find(member => member.team.id == _salon.team.id)
+        };
+
+        // TODO [GET]
+        let salon = this.salons[thread.salonId];
+        salon.messages.forEach(msg => this.emojiService.processEmojiSetter(msg.content, salon.team.id, html => msg.content = html));
+        this.emojiService.processEmojiSetter(salon.name, salon.team.id, html => salon.html = html);
+        this.initThread(salon);
+      });
+  }
+
+  initThread(salon: Salon) {
+    salon.thread.setMessages(salon.messages);
+    salon.thread.member = salon.member;
+    setTimeout(() => salon.thread.scrollToBottom(), 10);
+  }
+
+  // =========================================================================================
+  // WebSocket (request)
+
+  send(msg: MessageSend) {
+    msg.memberId = this.user.members.find(member => member.team.id == this.salons[msg.salonId].team.id).id;
+
+    if (msg.file == undefined)
+      this._send(msg);
+    else {
+      let reader = new FileReader();
+      reader.onloadend = () => this._send(msg, reader.result);
+      reader.readAsDataURL(msg.file);
+    }
+  }
+
+  private _send = (msg: MessageSend, fileContent = null) =>
+    this.stompClient.send("/app/chat.send", {}, JSON.stringify(fileContent ? { ...msg, file: fileContent } : msg));
+
+  edit = (msg: MessageEdit) => this.stompClient.send("/app/chat.edit", {}, JSON.stringify(msg));
+
+  delete = (msgId: string) => this.stompClient.send("/app/chat.delete", {}, msgId);
+
+  // =========================================================================================
+  // Messages management
+
+  private onMessageReceived = (obj: any) => {
+    let msg = JSON.parse(obj.body);
+
+    if ("content" in msg)
+      this.addOrEditMsg(this.salons[msg.salonId], this.msgService.fromJson(msg));
+    else
+      this.deleteMsg(this.salons[msg.salonId], msg);
+  }
+
+  private addOrEditMsg(salon: Salon, msg: Message) {
+    this.emojiService.processEmojiSetter(msg.content, salon.team.id, html => msg.content = html);
+
+    let edited = false;
+    for (let i = 0; i < salon.messages.length; i++)
+      if (salon.messages[i].id == msg.id) {
+        salon.messages[i] = msg;
+        edited = true;
+        break;
+      }
+    if (!edited)
+      salon.messages.push(msg);
+
+    salon.thread.setMessages(salon.messages);
+
+    if (!edited && msg.sender.user.id == this.user.id)
+      setTimeout(() => salon.thread.scrollToBottom(), 250);
+  }
+
+  private deleteMsg(salon: Salon, msgDelete: MessageDelete) {
+    salon.messages = salon.messages.filter(msg => msg.id !== msgDelete.messageId);
+    salon.thread.setMessages(salon.messages);
+  }
+}

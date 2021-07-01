@@ -2,8 +2,8 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/models/member/member';
 import { MessageEdit } from 'src/app/models/messages/MessageEdit';
 import { MessageSend } from 'src/app/models/messages/messageSend';
+import { MessageWsService } from 'src/app/services/message-ws.service';
 import { Message } from '../../../models/messages/message';
-import { MessageService } from '../../../services/message.service';
 
 @Component({
   selector: 'app-msg-thread',
@@ -19,7 +19,7 @@ export class MsgThreadComponent implements OnInit {
   msgs: Message[][];
   member: Member;
 
-  constructor(private msgService: MessageService) { }
+  constructor(private msgService: MessageWsService) { }
 
   ngOnInit(): void {
     this.msgService.registerThread(this);

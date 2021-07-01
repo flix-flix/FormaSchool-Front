@@ -7,13 +7,14 @@ import { SalonMessage } from '../models/salon/salonMessages';
 import { SalonNameDesc } from '../models/salon/salonNameDesc';
 import { SalonNameTeam } from '../models/salon/salonNameTeam';
 import { EmojiService } from './emoji.service';
+import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SalonService {
 
-  constructor(private http: HttpClient, private emojiService: EmojiService) { }
+  constructor(private http: HttpClient, private emojiService: EmojiService, private msgService: MessageService) { }
 
   // ================================================================================================
 
@@ -42,6 +43,9 @@ export class SalonService {
   // ================================================================================================
 
   findById(salonId): Observable<SalonMessage> {
-    return this.http.get<SalonMessage>(environment.apiUrl + "/salons/" + salonId);
+    return this.http.get<SalonMessage>(environment.apiUrl + "/salons/" + salonId).pipe(map(salon => {
+      salon.messages = salon.messages.map(msg => this.msgService.fromJson(msg));
+      return salon;
+    }));
   }
 }
