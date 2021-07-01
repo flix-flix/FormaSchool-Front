@@ -22,14 +22,14 @@
         </div>
 
         <div id="profil_menu" *ngIf="displayMenu">
-            <a class="menu_item" (click)="userSettings()">
+            <a class="menu_item" (mousedown)="userSettings()">
                 <img src="../../../../assets/images/feather-icons/settings.svg" alt="settings" class="menu_item_img">
                 <div class="item_name">
                     Paramètres
                 </div>
             </a>
 
-            <div class="menu_item" (click)="logout()">
+            <div class="menu_item" (mousedown)="logout()">
                 <img src="../../../../assets/images/feather-icons/log-out.svg" alt="logout" class="menu_item_img">
                 <div class="item_name">
                     Déconnexion

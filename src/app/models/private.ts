@@ -1,7 +1,7 @@
 import { MemberUserNamePict } from "./member/memberUserNamePict";
-import { SalonMessage } from "./salon/salonMessages";
+import { Salon } from "./salon/salon";
 
 export interface Private {
     members: MemberUserNamePict;
-    salon: SalonMessage;
+    salon: Salon;
 }

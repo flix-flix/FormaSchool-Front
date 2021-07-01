@@ -15,7 +15,7 @@
             <img src="{{fileUrl}}" alt="selected image">
         </div>
         {{file.name}}
-        <div id="remove_file" (click)="file=undefined; fileInput.value=''">
+        <div id="remove_file" (mousedown)="file=undefined; fileInput.value=''">
             <img src="../../../../assets/images/feather-icons/x-circle.svg" alt="unselect file" class="feather">
         </div>
     </span>

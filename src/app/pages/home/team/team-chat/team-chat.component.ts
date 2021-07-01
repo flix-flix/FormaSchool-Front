@@ -25,7 +25,7 @@ export class TeamChatComponent implements OnInit {
       this.salonId = params.get("salonId");
 
       // Redirect to default salon
-      this.salonService.findAllSalonNameOfTeam(this.teamId).subscribe(salons => {
+      this.salonService.findAllOfTeam(this.teamId).subscribe(salons => {
         if (this.salonId == "redirect")
           this.router.navigate([`/teamMessages/${this.teamId}/${salons[0].id}`]);
         else

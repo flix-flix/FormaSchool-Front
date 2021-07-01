@@ -24,6 +24,6 @@ export class TeamMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.teamService.findNamePictById(this.teamId).subscribe(team => this.team = team);
-    this.salonService.findAllSalonNameOfTeam(this.teamId).subscribe(salons => this.salons = salons);
+    this.salonService.findAllOfTeam(this.teamId).subscribe(salons => this.salons = salons);
   }
 }

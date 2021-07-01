@@ -2,9 +2,8 @@
     <input type="text" [(ngModel)]="search" class="search" spellcheck="false"
         [placeholder]="emojiHover ? ':' + emojiHover.annotation + ':' : 'recherche un emoji'">
     <div id="emojis">
-        <!-- <div *ngFor="let emoji of emojis" class="emoji" (click)="emoji()">{{emoji.annotation}}</div> -->
         <img *ngFor="let emoji of emojisSearch" [src]="url + emoji.annotation" [alt]="emoji.annotation" class="emoji"
-            (click)="emojiSelected(emoji)" (mouseenter)="hover(emoji)">
+            (mousedown)="emojiSelected(emoji)" (mouseenter)="hover(emoji)">
     </div>
     <div id="hover" *ngIf="emojiHover">
         <img [src]="url + emojiHover.annotation" [alt]="emojiHover.annotation">

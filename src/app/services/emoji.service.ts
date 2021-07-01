@@ -30,7 +30,7 @@ export class EmojiService {
       this.json = <EmojiDesc[]>json;
       this.json.sort((a, b) => a.order - b.order);
       this.json.forEach(item => item.annotation = item.annotation.substr(0, item.annotation.length - 2));
-      this.json = this.json.filter(item => !item.annotation.includes("skin"))
+      this.json = this.json.filter(item => !item.annotation.includes("skin"));
 
       // === Process the already loaded selectors ===
       this.waiting.forEach(process => process());
@@ -38,8 +38,8 @@ export class EmojiService {
 
       setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 50)), 1000);
       setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 100)), 4000);
-      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 150)), 8000);
-      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 200)), 12000);
+      // setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 150)), 8000);
+      // setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 200)), 12000);
     });
   }
 
@@ -100,8 +100,7 @@ export class EmojiService {
     const process = () => setter(this.processEmoji(content, teamId));
     if (this.json.length == 0)
       this.waiting.push(process);
-    else
-      process();
+    process();
   }
 
   // ================================================================================================
@@ -136,7 +135,7 @@ export class EmojiService {
   }
 
   /** Returns the matching emoji if it exits, undefined otherwise */
-  getEmoji(name: string, teamId = "orga"): EmojiNamePict {
+  private getEmoji(name: string, teamId = "orga"): EmojiNamePict {
     const emojis = [emojisOrga];
 
     let emoji;
@@ -151,6 +150,7 @@ export class EmojiService {
 }
 
 // ================================================================================================
+// TODO [Back]
 
 /** Emojis added by the organization (available for all the teams) */
 let emojisOrga = [

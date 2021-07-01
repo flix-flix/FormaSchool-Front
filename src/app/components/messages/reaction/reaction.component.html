@@ -1,5 +1,5 @@
 <div class="all">
-    <div class="react" [class.on]="on" (click)="addRemoveReact()">
+    <div class="react" [class.on]="on" (mousedown)="addRemoveReact()">
         <img class="emoji" src="{{env.apiUrl + '/files/' + reaction.emoji.picture}}" alt="">
         <span>{{reaction.members.length}}</span>
 

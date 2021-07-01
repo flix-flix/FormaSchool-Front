@@ -8,6 +8,7 @@ export interface Salon {
     team: TeamNamePict;
     name: string;
     messages: Message[];
+
     thread: MsgThreadComponent;
     member: Member;
 

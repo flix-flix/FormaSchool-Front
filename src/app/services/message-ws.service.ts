@@ -43,17 +43,11 @@ export class MessageWsService {
     }
     else
       this.salonService.findById(thread.salonId).subscribe(_salon => {
-        this.salons[thread.salonId] = {
+        let salon = this.salons[thread.salonId] = {
           ..._salon,
-          id: thread.salonId,
           thread: thread,
           member: this.user.members.find(member => member.team.id == _salon.team.id)
         };
-
-        // TODO [GET]
-        let salon = this.salons[thread.salonId];
-        salon.messages.forEach(msg => this.emojiService.processEmojiSetter(msg.content, salon.team.id, html => msg.content = html));
-        this.emojiService.processEmojiSetter(salon.name, salon.team.id, html => salon.html = html);
         this.initThread(salon);
       });
   }
@@ -93,14 +87,12 @@ export class MessageWsService {
     let msg = JSON.parse(obj.body);
 
     if ("content" in msg)
-      this.addOrEditMsg(this.salons[msg.salonId], this.msgService.fromJson(msg));
+      this.addOrEditMsg(this.salons[msg.salonId], this.msgService.fromJSON(msg));
     else
       this.deleteMsg(this.salons[msg.salonId], msg);
   }
 
   private addOrEditMsg(salon: Salon, msg: Message) {
-    this.emojiService.processEmojiSetter(msg.content, salon.team.id, html => msg.content = html);
-
     let edited = false;
     for (let i = 0; i < salon.messages.length; i++)
       if (salon.messages[i].id == msg.id) {

@@ -7,8 +7,11 @@
             <span class="time">{{getTimeStr()}}</span>
         </div>
 
-        <div class="text" [contentEditable]="editable" (keydown.enter)="pressEnter($event)"
-            (keydown.escape)="pressEscape($event)" [class.edit]="editable" #text></div>
+        <!-- Content -->
+        <div *ngIf="!editable" [innerHtml]="msg.html" class="text" #display></div>
+
+        <div *ngIf="editable" class="text edit" contentEditable="true" (input)="editContent=$event.target.innerText"
+            (keydown.enter)="pressEnter($event)" (keydown.escape)="pressEscape($event)" #edit></div>
 
         <!-- File -->
         <app-shared-file [file]="msg.file"></app-shared-file>
@@ -22,16 +25,11 @@
     <!-- Icons on hover -->
     <div id="icons">
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/smile.svg" alt="emoji"
-            (click)="emoji()">
+            (mousedown)="emoji()">
 
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/edit-3.svg" alt="edit"
-            *ngIf="msg.sender.user.id == user.id" (click)="edit()">
+            *ngIf="msg.sender.user.id == user.id" (mousedown)="editButton()">
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/trash-2.svg" alt="delete"
-            *ngIf="msg.sender.user.id == user.id" (click)="deleteClick()">
-
-        <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/corner-up-left.svg" alt="reply"
-            *ngIf="msg.sender.user.id != user.id" (click)="reply()">
-        <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/more-horizontal.svg" alt="other"
-            *ngIf="msg.sender.user.id != user.id" (click)="other()">
+            *ngIf="msg.sender.user.id == user.id" (mousedown)="deleteButton()">
     </div>
 </div>

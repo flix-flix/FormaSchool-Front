@@ -1,7 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { FileModel } from '../models/file';
 import { Message } from '../models/messages/message';
 import { EmojiService } from './emoji.service';
@@ -12,11 +9,11 @@ import { UtilsService } from './utils.service';
 })
 export class MessageService {
 
-  constructor(private http: HttpClient, private emojiService: EmojiService, private utilsService: UtilsService) { }
+  constructor(private emojiService: EmojiService, private utilsService: UtilsService) { }
 
   // =========================================================================================
 
-  fromJson(msg: Message): Message {
+  fromJSON(msg: Message): Message {
     msg.file = FileModel.fromJSON(msg.file);
     msg.send = new Date(msg.send[0], msg.send[1] - 1, msg.send[2], msg.send[3], msg.send[4], msg.send[5]);
     if (msg.edit != null)
@@ -24,17 +21,16 @@ export class MessageService {
 
     msg.html = this.processHtml(msg.content);
 
-    //TODO teamID for msg emoji
+    //TODO teamId for msg emoji
     this.emojiService.processEmojiSetter(msg.html, "und3f1n3d", html => msg.html = html);
-
     return msg;
   }
 
   /** Generate an HTML representation of the content (with tags if markdown is used)
-       * @param content The original string
-       * @param replace true: remove the markdown markers
-       */
-  processHtml = (content: string, replace: boolean = true): string => {
+   * @param content The original string
+   * @param replace true: remove the markdown markers
+   */
+  private processHtml = (content: string, replace: boolean = true): string => {
     let html = content.replace(/\n/g, "<br>");
     html = html.replace(/  /g, " &nbsp;");//TODO [Improve] space -> &nbsp;
 
@@ -58,7 +54,7 @@ export class MessageService {
   * @param replace true: remove the markdown markers
   * @returns A new string with the HTML tags
   */
-  processHtmlSpan = (content: string, search: string | RegExp, clas: string, replace: boolean = true): string => {
+  private processHtmlSpan = (content: string, search: string | RegExp, clas: string, replace: boolean = true): string => {
     let html = "";
     let first = 0, second = 0, prev = 0;
     let len = typeof search === "string" ? search.length : (["italic", "md_bloc_inline"].includes(clas) ? 1 : 2);
@@ -74,10 +70,4 @@ export class MessageService {
     // Add the remaining content
     return html + content.substring(prev);
   }
-
-  // =========================================================================================
-  // REST
-
-  findAllMessageOfSalon = (salonId: string): Observable<Message[]> =>
-    this.http.get<Message[]>(environment.apiUrl + "/messages/salonWithReacts/" + salonId);
 }
