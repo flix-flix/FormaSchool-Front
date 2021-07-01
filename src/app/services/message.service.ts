@@ -31,7 +31,8 @@ export class MessageService {
    * @param replace true: remove the markdown markers
    */
   private processHtml = (content: string, replace: boolean = true): string => {
-    let html = content.replace(/\n/g, "<br>");
+    let html = content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    html = html.replace(/\n/g, "<br>");
     html = html.replace(/  /g, " &nbsp;");//TODO [Improve] space -> &nbsp;
 
     html = this.processHtmlSpan(html, "**", "bold", replace);
