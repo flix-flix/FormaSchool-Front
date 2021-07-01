@@ -6,6 +6,7 @@ import { EmojisSelectorComponent } from '../components/messages/emojis-selector/
 import { EmojiCreate } from '../models/emoji/emojiCreate';
 import { EmojiDesc } from '../models/emoji/emojiDesc';
 import { EmojiNamePict } from '../models/emoji/emojiNamePict';
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class EmojiService {
   /** Store the texts/setters to be processed till the emojis are downloaded */
   waiting: Function[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private utilsService: UtilsService) {
     this.http.get<any[]>(this.url + "json").subscribe(json => {
       json.forEach(item => item.order = (item.order == "" ? this.nextEmojiId++ : item.order));
 
@@ -116,8 +117,8 @@ export class EmojiService {
     let search = ":"; // TODO regex
     let first, second, prev = 0; // first ':', second ':', prev: current char index
 
-    while ((first = this.indexOf(content, search, prev)) != -1
-      && (second = this.indexOf(content, search, first + 1)) != -1) {
+    while ((first = this.utilsService.indexOf(content, search, prev)) != -1
+      && (second = this.utilsService.indexOf(content, search, first + 1)) != -1) {
       html += content.substring(prev, first);
 
       let emoji = this.getEmoji(content.substring(first + 1, second), teamId);
@@ -146,17 +147,6 @@ export class EmojiService {
     if (this.json.find(emoji => emoji.annotation == name))
       return { id: undefined, name: name, picture: "emojis/" + name };
     return undefined;
-  }
-
-  // ================================================================================================
-  // TODO [Utils]
-
-  /** indexOf (string and regex) */
-  indexOf = (text: string, search: string | RegExp, start: number) => {
-    if (typeof search === "string")
-      return text.indexOf(<string>search, start); // string
-    let index = text.slice(start).search(search); // regex
-    return index == -1 ? -1 : index + start; // not found
   }
 }
 

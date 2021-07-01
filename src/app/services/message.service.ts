@@ -14,6 +14,7 @@ import { UserLocalStorage } from '../models/user/userLocalStorage';
 import { EmojiService } from './emoji.service';
 import { SalonService } from './salon.service';
 import { StorageService } from './storage.service';
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class MessageService {
   salons: { [salonId: string]: Salon } = {};
   user: UserLocalStorage;
 
-  constructor(private http: HttpClient, storageService: StorageService, private salonService: SalonService, private emojiService: EmojiService) {
+  constructor(private http: HttpClient, storageService: StorageService, private salonService: SalonService,
+    private emojiService: EmojiService, private utilsService: UtilsService) {
     storageService.subscribe("user", user => this.user = user);
     this.connect();
   }
@@ -79,8 +81,8 @@ export class MessageService {
     let len = typeof search === "string" ? search.length : (["italic", "md_bloc_inline"].includes(clas) ? 1 : 2);
 
     // If contains 2 occurences of the given "md marker"
-    while ((first = this.indexOf(content, search, prev)) != -1
-      && (second = this.indexOf(content, search, first + len)) != -1) {
+    while ((first = this.utilsService.indexOf(content, search, prev)) != -1
+      && (second = this.utilsService.indexOf(content, search, first + len)) != -1) {
       html += content.substring(prev, first);
       html += `<span class="${clas}">${content.substring(first + (replace ? len : 0), second + (replace ? 0 : len))}</span>`;
       prev = second + len;
@@ -88,17 +90,6 @@ export class MessageService {
 
     // Add the remaining content
     return html + content.substring(prev);
-  }
-
-  // ================================================================================================
-  // TODO [Utils]
-
-  /** indexOf (string and regex) */
-  indexOf = (text: string, search: string | RegExp, start: number) => {
-    if (typeof search === "string")
-      return text.indexOf(<string>search, start); // string
-    let index = text.slice(start).search(search); // regex
-    return index < 0 ? index : index + start; // return -1
   }
 
   // =========================================================================================
