@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MemberUsersPseudo } from 'src/app/models/member/MemberUsersPseudo';
+import { MemberUsersPseudo } from 'src/app/models/member/memberPseudoUser';
 import { environment } from 'src/environments/environment';
 import { Reaction } from '../../../models/reaction';
 

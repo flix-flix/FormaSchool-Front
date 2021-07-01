@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { createRole } from 'src/app/models/role/createRole';
+import { RoleCreate } from 'src/app/models/role/roleCreate';
 import { Role } from 'src/app/models/role/role';
 import { RoleWithoutRights } from 'src/app/models/role/roleWithoutRights';
 import { RoleService } from 'src/app/services/role.service';
@@ -55,7 +55,7 @@ export class TeamRolesComponent implements OnInit {
    * This function allows you to create a new role
    */
   addNewRole = () => {
-    this.roleService.save(this.teamId, new createRole("nouveau role", "#A2D0EA")).subscribe(role => {
+    this.roleService.save(this.teamId, { name: "nouveau role", color: "#A2D0EA" }).subscribe(role => {
       this.refreshRoles();
     });
   }

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { createRole } from '../models/role/createRole';
+import { RoleCreate } from '../models/role/roleCreate';
 import { Role } from '../models/role/role';
 import { RoleWithoutRights } from '../models/role/roleWithoutRights';
 
@@ -18,9 +18,7 @@ export class RoleService {
     { desc: "Supprimer les messages des autres", value: false }
   ];
 
-
   constructor(private http: HttpClient) { }
-
 
   findRoleWithoutRightsInTeamWithoutPermission = (salonId): Observable<RoleWithoutRights[]> => {
     return this.http.get<RoleWithoutRights[]>(`${environment.apiUrl}/roles/withoutPermission/${salonId}`);
@@ -39,7 +37,6 @@ export class RoleService {
     return this.http.get<Role>(`${environment.apiUrl}/roles/withDesc/${roleId}`);
   }
 
-
   /**
    * This function allows you to update a role 
    * @param role the role with updated info you want to push
@@ -48,9 +45,8 @@ export class RoleService {
     return this.http.patch<Role>(`${environment.apiUrl}/roles/update`, role);
   }
 
-
-  save = (teamId: string, createRole: createRole): Observable<Role> => {
-    return this.http.post<Role>(`${environment.apiUrl}/roles/createRole/${teamId}`, createRole.toJSON());
+  save = (teamId: string, createRole: RoleCreate): Observable<Role> => {
+    return this.http.post<Role>(`${environment.apiUrl}/roles/createRole/${teamId}`, createRole);
   }
 
   /**
@@ -60,6 +56,4 @@ export class RoleService {
   delete = (teamId: string, roleId: string): Observable<any> => {
     return this.http.delete(`${environment.apiUrl}/roles/delete/${teamId}/${roleId}`);
   }
-
-
 }

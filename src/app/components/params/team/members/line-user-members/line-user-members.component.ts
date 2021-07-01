@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Member } from 'src/app/models/member/member';
 import { MemberRoles } from 'src/app/models/member/memberRoles';
-import { createRole } from 'src/app/models/role/createRole';
 import { Role } from 'src/app/models/role/role';
 
 import { RoleWithoutRights } from 'src/app/models/role/roleWithoutRights';

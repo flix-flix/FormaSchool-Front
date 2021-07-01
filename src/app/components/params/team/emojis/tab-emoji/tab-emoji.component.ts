@@ -1,11 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NumberValueAccessor } from '@angular/forms';
-import { CreatedEmoji } from 'src/app/models/emoji/createdEmoji';
+import { EmojiCreate } from 'src/app/models/emoji/emojiCreate';
 import { UserLocalStorage } from 'src/app/models/user/userLocalStorage';
-import { UserNamePict } from 'src/app/models/user/userNamePict';
 import { EmojiService } from 'src/app/services/emoji.service';
 import { StorageService } from 'src/app/services/storage.service';
-import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,20 +13,16 @@ import { environment } from 'src/environments/environment';
 export default class TabEmojiComponent implements OnInit {
   env = environment;
 
-  @Input() emojis: CreatedEmoji[];
-
+  @Input() emojis: EmojiCreate[];
   @Input() teamId: string;
 
-  emoji: CreatedEmoji;
+  emoji: EmojiCreate;
 
   emojiDialog: boolean;
-
-  selectedEmojis: CreatedEmoji[];
-
+  selectedEmojis: EmojiCreate[];
   submitted: boolean;
 
-  constructor(private service: EmojiService, private userService: UserService, private storageService: StorageService) {
-  }
+  constructor(private service: EmojiService, private storageService: StorageService) { }
 
   ngOnInit(): void {
     if (!this.teamId) {
@@ -61,7 +54,7 @@ export default class TabEmojiComponent implements OnInit {
     let user: UserLocalStorage;
     this.storageService.subscribe("user", userStorage => {
       user = userStorage
-      this.emoji = new CreatedEmoji(null, this.teamId, null, null, new UserNamePict(user.id, user.firstname, user.lastname, user.picture));
+      this.emoji = { teamId: this.teamId, user: { ...user } };
     });
     this.submitted = false;
     this.emojiDialog = true;
@@ -93,7 +86,7 @@ export default class TabEmojiComponent implements OnInit {
           this.service.updateCreatedEmoji(this.emoji).subscribe();
         }
         this.emojiDialog = false;
-        this.emoji = new CreatedEmoji(null, this.teamId, null, null, null);
+        this.emoji = { teamId: this.teamId };
       }
       else {
         alert("Alias deja utiliser");
@@ -105,7 +98,7 @@ export default class TabEmojiComponent implements OnInit {
    * This function open the pop-up with information of the emoji selected
    * @param emoji A CreatedEmoji that you want to update
    */
-  editEmoji = (emoji: CreatedEmoji) => {
+  editEmoji = (emoji: EmojiCreate) => {
     this.emoji = emoji;
     this.emojiDialog = true;
   }
@@ -125,7 +118,7 @@ export default class TabEmojiComponent implements OnInit {
    */
   deleteEmoji = (emojiId: string) => {
     this.service.deleteById(emojiId).subscribe(() => {
-      this.emoji = new CreatedEmoji(null, this.teamId, null, null, null);
+      this.emoji = { teamId: this.teamId };
       this.refreshEmoji();
     });
   }

@@ -11,7 +11,7 @@ import { SalonService } from 'src/app/services/salon.service';
 })
 export class UpdateSalonFormComponent implements OnInit {
 
-  salonUpdate: SalonNameDesc = new SalonNameDesc(" ", " ", " ");
+  salonUpdate: SalonNameDesc = { id: " ", name: " ", desc: " " };
   salonUpdateForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     desc: new FormControl('')

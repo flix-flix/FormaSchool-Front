@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { EmojisSelectorComponent } from '../components/messages/emojis-selector/emojis-selector.component';
-import { CreatedEmoji } from '../models/emoji/createdEmoji';
+import { EmojiCreate } from '../models/emoji/emojiCreate';
 import { EmojiDesc } from '../models/emoji/emojiDesc';
 import { EmojiNamePict } from '../models/emoji/emojiNamePict';
 
@@ -32,18 +32,23 @@ export class EmojiService {
       this.json = this.json.filter(item => !item.annotation.includes("skin"))
       EmojiService._json = this.json;
 
-      this.selectors.forEach(select => select.emojis = this.json.slice(0, 50));
+      this.selectors.forEach(select => select.emojis = this.json.slice(0, 15));
+
+      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 50)), 1000);
+      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 100)), 2000);
+      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 150)), 3000);
+      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 200)), 4000);
     });
   }
 
   //========================================= Emoji Created ======================================
 
-  findCreatedEmojiByTeamId = (teamId: string): Observable<CreatedEmoji[]> => {
-    return this.http.get<CreatedEmoji[]>(`${environment.apiUrl}/emojis/createdEmojis/${teamId}`);
+  findCreatedEmojiByTeamId = (teamId: string): Observable<EmojiCreate[]> => {
+    return this.http.get<EmojiCreate[]>(`${environment.apiUrl}/emojis/createdEmojis/${teamId}`);
   }
 
-  findCreatedEmojiOrga = (): Observable<CreatedEmoji[]> => {
-    return this.http.get<CreatedEmoji[]>(`${environment.apiUrl}/emojis/createdEmojisOrga`);
+  findCreatedEmojiOrga = (): Observable<EmojiCreate[]> => {
+    return this.http.get<EmojiCreate[]>(`${environment.apiUrl}/emojis/createdEmojisOrga`);
   }
 
   /**
@@ -51,16 +56,16 @@ export class EmojiService {
    * @param emoji the CreatedEmoji you want to add 
    * @returns the emoji created 
    */
-  addEmoji = (emoji: CreatedEmoji): Observable<CreatedEmoji> => {
-    return this.http.post<CreatedEmoji>(`${environment.apiUrl}/emojis/createdEmojis`, emoji.toJSON());
+  addEmoji = (emoji: EmojiCreate): Observable<EmojiCreate> => {
+    return this.http.post<EmojiCreate>(`${environment.apiUrl}/emojis/createdEmojis`, emoji);
   }
 
   /**
    * This function allws you to update the emoji
    * @param emoji a Created Emoji that you want to update
    */
-  updateCreatedEmoji = (emoji: CreatedEmoji): Observable<CreatedEmoji> => {
-    return this.http.patch<CreatedEmoji>(`${environment.apiUrl}/emojis/createdEmojis`, emoji);
+  updateCreatedEmoji = (emoji: EmojiCreate): Observable<EmojiCreate> => {
+    return this.http.patch<EmojiCreate>(`${environment.apiUrl}/emojis/createdEmojis`, emoji);
   }
 
   /**

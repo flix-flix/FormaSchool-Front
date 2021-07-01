@@ -1,5 +1,5 @@
 import { FileModel } from "src/app/models/file";
-import { MemberUsersPseudo } from "src/app/models/member/MemberUsersPseudo";
+import { MemberUsersPseudo } from "src/app/models/member/memberPseudoUser";
 import { EmojiService } from "src/app/services/emoji.service";
 import { Reaction } from "../reaction";
 

@@ -4,7 +4,7 @@ import { TeamNamePict } from "../team/teamNamePict";
 export class SalonNameTeam {
     private _html: string;
 
-    constructor(private _id: number, private _name: string, private _team: TeamNamePict) {
+    constructor(private _id: string, private _name: string, private _team: TeamNamePict) {
         this._html = EmojiService.processEmoji(this.name, this.team.id);
     }
 
@@ -16,11 +16,11 @@ export class SalonNameTeam {
 
     // ===============================================
 
-    public get id(): number {
+    public get id(): string {
         return this._id;
     }
 
-    public set id(id: number) {
+    public set id(id: string) {
         this._id = id;
     }
 
