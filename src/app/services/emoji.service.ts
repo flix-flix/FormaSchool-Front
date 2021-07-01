@@ -14,13 +14,13 @@ export class EmojiService {
   url = environment.apiUrl + "/emojis/";
 
   /** path to the folder of the emojis [team, organization, default] */
-  static paths = [/*"emojisTeams/",*/ "emojisOrga/", "emojis/"];
-
-  static _json: EmojiDesc[] = [];
+  paths = [/*"emojisTeams/",*/ "emojisOrga/", "emojis/"];
 
   json: EmojiDesc[] = [];
   nextEmojiId = 1_000_000; // give id to the emoji without id
   selectors: EmojisSelectorComponent[] = [];
+  /** Store the texts/setters to be processed till the emojis are downloaded */
+  waiting: Function[] = [];
 
   constructor(private http: HttpClient) {
     this.http.get<any[]>(this.url + "json").subscribe(json => {
@@ -30,14 +30,15 @@ export class EmojiService {
       this.json.sort((a, b) => a.order - b.order);
       this.json.forEach(item => item.annotation = item.annotation.substr(0, item.annotation.length - 2));
       this.json = this.json.filter(item => !item.annotation.includes("skin"))
-      EmojiService._json = this.json;
 
+      // === Process the already loaded selectors ===
+      this.waiting.forEach(process => process());
       this.selectors.forEach(select => select.emojis = this.json.slice(0, 15));
 
       setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 50)), 1000);
-      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 100)), 2000);
-      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 150)), 3000);
-      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 200)), 4000);
+      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 100)), 4000);
+      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 150)), 8000);
+      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 200)), 12000);
     });
   }
 
@@ -94,6 +95,14 @@ export class EmojiService {
       selector.emojis = this.json.slice(0, 200);
   }
 
+  processEmojiSetter(content: string, teamId: string, setter: Function): void {
+    const process = () => setter(this.processEmoji(content, teamId));
+    if (this.json.length == 0)
+      this.waiting.push(process);
+    else
+      process();
+  }
+
   // ================================================================================================
   // Smart
 
@@ -102,16 +111,16 @@ export class EmojiService {
    * @param content The string to process
    * @param deep The number of folder deeper than /assets
    */
-  static processEmoji = (content: string, teamId: string): string => {
+  private processEmoji = (content: string, teamId: string): string => {
     let html = ""; // return string
     let search = ":"; // TODO regex
     let first, second, prev = 0; // first ':', second ':', prev: current char index
 
-    while ((first = EmojiService.indexOf(content, search, prev)) != -1
-      && (second = EmojiService.indexOf(content, search, first + 1)) != -1) {
+    while ((first = this.indexOf(content, search, prev)) != -1
+      && (second = this.indexOf(content, search, first + 1)) != -1) {
       html += content.substring(prev, first);
 
-      let emoji = EmojiService.getEmoji(content.substring(first + 1, second), teamId);
+      let emoji = this.getEmoji(content.substring(first + 1, second), teamId);
       if (emoji == undefined) {// skip current ':' (move 1 forward)
         html += ":";
         prev = first + 1;
@@ -126,7 +135,7 @@ export class EmojiService {
   }
 
   /** Returns the matching emoji if it exits, undefined otherwise */
-  static getEmoji(name: string, teamId = "orga"): EmojiNamePict {
+  getEmoji(name: string, teamId = "orga"): EmojiNamePict {
     const emojis = [emojisOrga];
 
     let emoji;
@@ -134,7 +143,7 @@ export class EmojiService {
       if (emoji = emojis[index].find(emoji => emoji.annotation == name))
         return { id: undefined, name: name, picture: this.paths[index] + emoji.path };
 
-    if (EmojiService._json.find(emoji => emoji.annotation == name))
+    if (this.json.find(emoji => emoji.annotation == name))
       return { id: undefined, name: name, picture: "emojis/" + name };
     return undefined;
   }
@@ -143,11 +152,11 @@ export class EmojiService {
   // TODO [Utils]
 
   /** indexOf (string and regex) */
-  static indexOf = (text: string, search: string | RegExp, start: number) => {
+  indexOf = (text: string, search: string | RegExp, start: number) => {
     if (typeof search === "string")
       return text.indexOf(<string>search, start); // string
     let index = text.slice(start).search(search); // regex
-    return index < 0 ? index : index + start; // return -1
+    return index == -1 ? -1 : index + start; // not found
   }
 }
 

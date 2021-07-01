@@ -1,24 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { SalonMessage } from '../models/salon/salonMessages';
 import { SalonNameDesc } from '../models/salon/salonNameDesc';
 import { SalonNameTeam } from '../models/salon/salonNameTeam';
-import { Team } from '../models/team/team';
+import { EmojiService } from './emoji.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SalonService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private emojiService: EmojiService) { }
 
   // ================================================================================================
 
   /** Returns the list of the salons for the given team */
-  findAllSalonsNameOfTeam = (teamId: string): Observable<SalonNameTeam[]> => {
-    return this.http.get<SalonNameTeam[]>(environment.apiUrl + "/salons/ofTeam/" + teamId);
+  findAllSalonNameOfTeam = (teamId: string): Observable<SalonNameTeam[]> => {
+    return this.http.get<SalonNameTeam[]>(environment.apiUrl + "/salons/ofTeam/" + teamId).pipe(map(salons => {
+      salons.forEach(salon => this.emojiService.processEmojiSetter(salon.name, salon.team.id, html => salon.html = html));
+      return salons;
+    }));
   }
 
   findNameDescById = (teamId: string): Observable<SalonNameDesc> => {

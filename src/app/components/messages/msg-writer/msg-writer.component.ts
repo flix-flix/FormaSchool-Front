@@ -16,8 +16,8 @@ export class MsgWriterComponent implements OnInit {
   fileUrl = "";
 
   hideSelector = true;
-  caretStart = 5;
-  caretEnd = 5;
+  caretStart = 0;
+  caretEnd = 0;
 
   constructor() { }
 

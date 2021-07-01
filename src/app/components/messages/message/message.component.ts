@@ -33,6 +33,12 @@ export class MessageComponent implements OnInit, AfterViewInit {
   }
 
   // =========================================================================================
+  // Display
+
+  getTimeStr = (): string => nf.format(this.msg.send.getHours()) + ":" + nf.format(this.msg.send.getMinutes());
+
+  // =========================================================================================
+  // Buttons
 
   /** Open the emoji selector */
   emoji = () => {
@@ -84,8 +90,9 @@ export class MessageComponent implements OnInit, AfterViewInit {
 
   sendMsg = () => {
     this.msg.content = this.text.nativeElement.innerText;
-    this.msg.html = Message.processHtml(this.msg.content);
-    this.msg.processEmoji("");
+    // TODO process msg HTML on send
+    //this.msg.html = Message.processHtml(this.msg.content);
+    //this.msg.processEmoji("");
 
     this.text.nativeElement.innerHTML = this.msg.html;
 
@@ -93,3 +100,5 @@ export class MessageComponent implements OnInit, AfterViewInit {
     this.editable = false;
   }
 }
+
+const nf = new Intl.NumberFormat("fr-FR", { minimumIntegerDigits: 2 });

@@ -37,7 +37,7 @@ export class TeamService {
   }
 
   /** Returns the name and the picture for the given team */
-  findNamePictureById = (teamId: string): Observable<TeamNamePict> => {
+  findNamePictById = (teamId: string): Observable<TeamNamePict> => {
     return this.http.get<TeamNamePict>(environment.apiUrl + "/teams/teamNamePict/" + teamId);
   }
 

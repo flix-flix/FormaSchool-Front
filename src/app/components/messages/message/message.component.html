@@ -4,7 +4,7 @@
     <div id="left">
         <div class="top">
             <span class="sender">{{msg.sender.user.firstname}} {{msg.sender.user.lastname}}</span>
-            <span class="time">{{msg.getTimeStr()}}</span>
+            <span class="time">{{getTimeStr()}}</span>
         </div>
 
         <div class="text" [contentEditable]="editable" (keydown.enter)="pressEnter($event)"

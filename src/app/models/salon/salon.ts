@@ -1,56 +1,14 @@
 import { MsgThreadComponent } from "src/app/components/messages/msg-thread/msg-thread.component";
 import { Message } from "src/app/models/messages/message";
-import { EmojiService } from "../../services/emoji.service";
 import { Member } from "../member/member";
 
 export class Salon {
-    html: string;
+    id: string;
+    teamId: string;
+    name: string;
+    msgs: Message[];
+    thread: MsgThreadComponent;
+    member: Member;
 
-    constructor(public id: string, public teamId: string, public name: string, public msgs: Message[], public thread: MsgThreadComponent, public member: Member) {
-        this.html = EmojiService.processEmoji(name, teamId);
-        msgs.forEach(msg => msg.processEmoji(teamId));
-
-        this.initThread();
-    }
-
-    // =========================================================================================
-
-    setThread(thread) {
-        this.thread = thread;
-        this.initThread();
-    }
-
-    initThread() {
-        this.thread.setMessages(this.msgs);
-        this.thread.member = this.member;
-        setTimeout(() => this.thread.scrollToBottom(), 10);
-    }
-
-    // =========================================================================================
-
-    addMsg(msg: Message) {
-        msg.processEmoji(this.teamId);
-
-        let edited = false;
-        for (let i = 0; i < this.msgs.length; i++)
-            if (this.msgs[i].id == msg.id) {
-                this.msgs[i] = msg;
-                edited = true;
-                break;
-            }
-        if (!edited)
-            this.msgs.push(msg);
-
-        this.thread.setMessages(this.msgs);
-
-        // TODO
-        // if (msg.sender. == this.memberId)
-        if (!edited)
-            setTimeout(() => this.thread.scrollToBottom(), 250);
-    }
-
-    deleteMsg(msgDelete) {
-        this.msgs = this.msgs.filter(msg => msg.id !== msgDelete.messageId);
-        this.thread.setMessages(this.msgs);
-    }
+    html?: string;
 }
