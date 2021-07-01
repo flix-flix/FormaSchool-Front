@@ -20,6 +20,7 @@ import { TeamService } from 'src/app/services/team.service';
 export class LineUserMembersComponent implements OnInit {
 
   teamId: string;
+  memberId: string;
   @Input() member: MemberRoles;
   selectedRole: RoleWithoutRights;
   roles: RoleWithoutRights[];
@@ -47,7 +48,6 @@ export class LineUserMembersComponent implements OnInit {
   */
   findRoleMissing = () => {
     this.roleService.findAllWithoutRightsByTeamId(this.teamId).subscribe(roles => {
-      console.log(roles);
       this.roles = roles.filter(role => !this.member.roles.find(r => r.id == role.id));
     });
   }
@@ -56,6 +56,14 @@ export class LineUserMembersComponent implements OnInit {
     this.memberService.addRoleToMember(this.member.id, this.selectedRole.id).subscribe(member => {
       this.refresh();
     });
+  }
 
+  deleteRole = (role: RoleWithoutRights) => {
+    this.memberService.deleteRoleToMember(this.member.id, role.id).subscribe(() => {
+      this.refresh();
+      this.roleService.findAllWithoutRightsByTeamId(this.teamId).subscribe(roles => {
+        this.roles = roles;
+      });
+    });
   }
 }

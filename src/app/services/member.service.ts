@@ -42,6 +42,10 @@ export class MemberService {
     return this.http.patch<MemberRoles>(`${environment.apiUrl}/members/addRolesMember/${idMember}/${idRole}`, "");
   }
 
+  deleteRoleToMember = (idMember: string, idRole: string): Observable<MemberRoles> => {
+    return this.http.delete<MemberRoles>(`${environment.apiUrl}/members/deleteRolesMember/${idMember}/${idRole}`);
+  }
+
   findRolesByMember = (idMember: string): Observable<RoleWithoutRights[]> => {
     return this.http.get<RoleWithoutRights[]>(`${environment.apiUrl}/members/rolesWhitoutRights/${idMember}`);
   }

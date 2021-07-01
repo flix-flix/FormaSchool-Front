@@ -4,7 +4,10 @@
 
     <div *ngFor="let role of member.roles">
         {{ role.name }}
+        <button type="button" (click)="deleteRole(role)">Delete Role</button>
     </div>
+
+
     <p-dropdown [options]="roles" [(ngModel)]="selectedRole" optionLabel="name">Search new role</p-dropdown>
     <button type="button" (click)="addRole()">Send Role</button>
 
