@@ -76,6 +76,10 @@ import { SenderProfileComponent } from './components/messages/sender-profile/sen
 import { EmojisSelectorComponent } from './components/messages/emojis-selector/emojis-selector.component';
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { ModaleAddSalonComponent } from './components/team/modale-add-salon/modale-add-salon.component';
+import { CalendarModule } from 'primeng/calendar';
+import { InputMaskModule } from 'primeng/inputmask';
+import { PasswordModule } from 'primeng/password';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -157,7 +161,11 @@ import { ModaleAddSalonComponent } from './components/team/modale-add-salon/moda
     DialogModule,
     ConfirmDialogModule,
     DropdownModule,
-    FullCalendarModule
+    FullCalendarModule,
+    CalendarModule,
+    InputMaskModule,
+    PasswordModule,
+    TranslateModule.forRoot()
   ],
   providers: [RxStompService,
     {

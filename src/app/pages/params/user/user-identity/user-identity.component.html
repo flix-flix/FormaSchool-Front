@@ -1,41 +1,48 @@
 <div id="all">
+    <img id="logo" src="../../../assets/images/logo.png" alt="logo">
 
     <form [formGroup]="userProfile" (ngSubmit)="save()">
-        <img src="../../../assets/images/logo.png" alt="">
-        <div>
-            <span id="firstname" class="p-float-label">
-                <input id="float-input" type="text" formControlName="firstname" required pInputText>
-                <label for="float-input"> Prénom </label>
-            </span>
+        <div id="identity">
+            <div id="identity_left">
+                <app-upload-with-preview (imageEvent)="getEvent($event)"></app-upload-with-preview>
+            </div>
 
-            <span id="lastname" class="p-float-label">
-                <input id="float-input" type="text" formControlName="lastname" required pInputText>
-                <label for="float-input"> Nom </label>
-            </span>
+            <div id="identity_right">
+                <div class="p-float-label">
+                    <input id="first" type="text" formControlName="firstname" required pInputText>
+                    <label for="first">Prénom</label>
+                </div>
 
-            <span id="email" class="p-float-label">
-                <input id="float-input" type="text" formControlName="email" required pInputText>
-                <label for="float-input"> email </label>
-            </span>
+                <div class="p-float-label">
+                    <input id="last" type="text" formControlName="lastname" required pInputText>
+                    <label for="last">Nom</label>
+                </div>
 
-            <span id="age" class="p-float-label">
-                <input id="float-input" type="text" formControlName="age" required pInputText>
-                <label for="float-input"> Age </label>
-            </span>
-
-            <span id="telephone" class="p-float-label">
-                <input id="float-input" type="text" formControlName="telephone" required pInputText>
-                <label for="float-input"> Téléphone </label>
-            </span>
-
-            <span id="password" class="p-float-label">
-                <input id="float-input" type="text" formControlName="password" required pInputText>
-                <label for="float-input">Mot de passe</label>
-            </span>
-
-            <button pButton pRipple type="submit" label="Envoyer" class="p-button-rounded p-button-info"></button>
+                <div class="p-float-label">
+                    <p-calendar id="date" formControlName="date" [monthNavigator]="true" [yearNavigator]="true"
+                        yearRange="1920:2010" dateFormat="d MM yy" required>
+                    </p-calendar>
+                    <label for="date">Naissance</label>
+                </div>
+            </div>
         </div>
 
-    </form>
+        <div class="p-float-label">
+            <input id="email" type="email" formControlName="email" required pInputText email>
+            <label for="email">Email</label>
+        </div>
 
+
+        <div class="p-float-label">
+            <p-inputMask formControlName="telephone" mask="99.99.99.99.99" required></p-inputMask>
+            <label for="tel">Téléphone</label>
+        </div>
+
+        <div class="p-float-label">
+            <p-password formControlName="password" toggleMask="true" required></p-password>
+            <label for="pass">Mot de passe</label>
+        </div>
+
+        <button pButton pRipple type="submit" label="Envoyer" class="p-button-rounded p-button-info"></button>
+    </form>
 </div>

@@ -1,45 +1,100 @@
 #all {
-    overflow-y: auto; 
     display:flex;
     flex-direction: column;
     align-items: center;
     justify-content:center ;
-    background-color: #6595B8;
+
     height: 100%;
-  } 
-  
-  form{
+    
+    overflow-y: auto; 
+    
+    background-color: var(--menu);
+} 
+
+#logo {
+    width: 8rem;
+    height: 8rem;
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+}
+
+form {
     display:flex;
     flex-direction: column;
     align-items: center;
-    color: springgreen;
-    background-color: #6595B8;
+    
     height: 100%;
     width: 100%;
-  }  
-  
-  input{
-    background-color:white;
-    border-color: #6595B8;
-    color: black;
+}  
+
+/* ========== Inputs ========== */
+input {
     font-size: 15px;
-  }
-  
-  span{
-    margin: 30px;
-  }
-  
-  input{
-    background-color: #A2D0EA;
-  }
-  
-  input:hover{
-    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2)
-  }
-  
-  label{
-    color: #10516D;
-  }
-  button{
-    margin: 10px;
-  }
+    
+    color: var(--font_2);
+    background-color: var(--background);
+    
+    border-color: var(--header);
+}
+
+.p-float-label {
+    margin: 15px;
+}
+
+input:hover {
+    border-color: var(--header);
+    box-shadow: 5px 5px 30px var(--font_2);
+}
+
+label {
+    color: var(--font_2);
+}
+
+::ng-deep.p-inputtext {
+    color: var(--font_2);
+    background-color: var(--background);
+    
+    border-color: var(--header);
+}
+
+/* ========== Identity ========== */
+#identity {
+    display: flex;
+    flex-direction: row;
+justify-content: center;
+align-items: center;
+
+}
+
+#identity_left {
+    display: flex;
+    flex-direction: column;
+}
+
+#identity_right {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========== Password ========== */
+::ng-deep.p-password-panel {
+    background-color: var(--background);
+}
+
+::ng-deep.pi-eye::before, ::ng-deep.pi-eye-slash::before {
+    color: var(--font_2);
+}
+
+/* ========== Date ========== */
+::ng-deep.p-datepicker table td > span {
+    width: 2rem;
+    height: 1.5rem;
+}
+
+::ng-deep.p-datepicker table td {
+    padding: 0px;
+}
+
+button {
+    background-color: var(--header);
+}

@@ -15,12 +15,14 @@ export class UserIdentityComponent implements OnInit {
   userProfile: FormGroup;
   file: File;
 
+  // date;
+
   constructor(private fb: FormBuilder, private userService: UserService, private logService: LogService) {
     this.userProfile = this.fb.group({
       firstname: [''],
       lastname: [''],
       email: [''],
-      age: [''],
+      date: [new Date()],
       telephone: [''],
       password: [''],
     })
@@ -50,5 +52,4 @@ export class UserIdentityComponent implements OnInit {
   getEvent = (element) => {
     this.file = element.file;
   }
-
 }

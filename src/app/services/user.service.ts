@@ -34,8 +34,15 @@ export class UserService {
     return this.http.get<UserNamePict>(environment.apiUrl + "/users/namePict/" + userId);
   }
 
+  // ================================================================================================
+  // Settings
+
   findSettingsById = (userId: string): Observable<UserNamePict> => {
     return this.http.get<UserNamePict>(environment.apiUrl + "/users/userSettings/" + userId);
+  }
+
+  update() {
+
   }
 
   // ================================================================================================
