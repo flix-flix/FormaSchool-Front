@@ -8,9 +8,9 @@
         </div>
 
         <!-- Content -->
-        <div *ngIf="!editable" [innerHtml]="msg.html" class="text" #display></div>
+        <div [hidden]="editable" [innerHtml]="msg.html" class="text" #display></div>
 
-        <div *ngIf="editable" class="text edit" contentEditable="true" (input)="editContent=$event.target.innerText"
+        <div [hidden]="!editable" class="text edit" contentEditable="true" (input)="editContent=$event.target.innerText"
             (keydown.enter)="pressEnter($event)" (keydown.escape)="pressEscape($event)" #edit></div>
 
         <!-- File -->

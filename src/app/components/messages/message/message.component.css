@@ -35,7 +35,8 @@
 }
 
 #left {
-    width: 100%;
+    width: calc(100% - 4rem);
+    min-width: 18rem;
 }
 
 .time {
@@ -49,8 +50,8 @@
 
 .text{
     line-height: 1.4rem;
-    word-wrap: break-word;
-
+    overflow-wrap: break-word;
+    
     color: var(--black);
 }
 

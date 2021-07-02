@@ -38,9 +38,9 @@ export class MessageComponent implements OnInit {
   /** Edit the message */
   editButton = () => {
     this.editable = true;
+    this.editRef.nativeElement.innerText = this.editContent = this.msg.content;
 
     setTimeout(() => { // Wait for view refresh (ugly)
-      this.editRef.nativeElement.innerText = this.editContent = this.msg.content;
       this.editRef.nativeElement.focus()
     }, 50);
   }
