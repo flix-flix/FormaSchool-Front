@@ -30,12 +30,14 @@ export class MessageWsService {
 
   // =========================================================================================
 
+  /** Open the WebSockets connections */
   connect() {
     this.stompClient = Stomp.over(new SockJS(environment.apiUrl + "/wsMessages"));
     this.stompClient.debug = null;
     this.stompClient.connect({}, () => this.stompClient.subscribe('/topic/public', this.onMessageReceived));
   }
 
+  /** Link the MsgThread component to its data */
   registerThread(thread: MsgThreadComponent) {
     if (thread.salonId in this.salons) {
       this.salons[thread.salonId].thread = thread;
@@ -52,7 +54,8 @@ export class MessageWsService {
       });
   }
 
-  initThread(salon: Salon) {
+  /** Gives the data to the MsgThread  */
+  private initThread(salon: Salon) {
     salon.thread.setMessages(salon.messages);
     salon.thread.member = salon.member;
     setTimeout(() => salon.thread.scrollToBottom(), 10);
@@ -61,6 +64,7 @@ export class MessageWsService {
   // =========================================================================================
   // WebSocket (request)
 
+  /** Send the message with the WebSocket */
   send(msg: MessageSend) {
     msg.memberId = this.user.members.find(member => member.team.id == this.salons[msg.salonId].team.id).id;
 
@@ -76,13 +80,16 @@ export class MessageWsService {
   private _send = (msg: MessageSend, fileContent = null) =>
     this.stompClient.send("/app/chat.send", {}, JSON.stringify(fileContent ? { ...msg, file: fileContent } : msg));
 
+  /** Send the edited content with the WebSocket */
   edit = (msg: MessageEdit) => this.stompClient.send("/app/chat.edit", {}, JSON.stringify(msg));
 
+  /** Send the message to delete with the WebSocket */
   delete = (msgId: string) => this.stompClient.send("/app/chat.delete", {}, msgId);
 
   // =========================================================================================
   // Messages management
 
+  /** Manage the different "messages" received from the WebSocket */
   private onMessageReceived = (obj: any) => {
     let msg = JSON.parse(obj.body);
 
@@ -92,6 +99,7 @@ export class MessageWsService {
       this.deleteMsg(this.salons[msg.salonId], msg);
   }
 
+  /** Process the new and edited messages */
   private addOrEditMsg(salon: Salon, msg: Message) {
     let edited = false;
     for (let i = 0; i < salon.messages.length; i++)
@@ -109,6 +117,7 @@ export class MessageWsService {
       setTimeout(() => salon.thread.scrollToBottom(), 250);
   }
 
+  /** Process the deleted messages */
   private deleteMsg(salon: Salon, msgDelete: MessageDelete) {
     salon.messages = salon.messages.filter(msg => msg.id !== msgDelete.messageId);
     salon.thread.setMessages(salon.messages);

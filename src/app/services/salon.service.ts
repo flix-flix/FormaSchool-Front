@@ -27,6 +27,7 @@ export class SalonService {
     }));
   }
 
+  /** Returns the Salon with the given id */
   findById(salonId): Observable<Salon> {
     return this.http.get<Salon>(this.url + salonId).pipe(map(salon => {
       this.emojiService.processEmojiSetter(salon.name, salon.team.id, html => salon.html = html);

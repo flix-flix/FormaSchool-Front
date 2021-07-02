@@ -13,6 +13,7 @@ export class MessageService {
 
   // =========================================================================================
 
+  /** Process the [JSON message] received from the server */
   fromJSON(msg: Message): Message {
     msg.file = FileModel.fromJSON(msg.file);
     msg.send = new Date(msg.send[0], msg.send[1] - 1, msg.send[2], msg.send[3], msg.send[4], msg.send[5]);

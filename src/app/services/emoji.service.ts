@@ -18,9 +18,11 @@ export class EmojiService {
   paths = [/*"emojisTeams/",*/ "emojisOrga/", "emojis/"];
 
   json: EmojiDesc[] = [];
-  nextEmojiId = 1_000_000; // give id to the emoji without id
+  /** give id to the emoji without id*/
+  nextEmojiId = 1_000_000;
+  /** selectors waiting to be filled with emojis */
   selectors: EmojisSelectorComponent[] = [];
-  /** Store the texts/setters to be processed till the emojis are downloaded */
+  /** string/setters waiting to be processed till the emojis are downloaded */
   waiting: Function[] = [];
 
   constructor(private http: HttpClient, private utilsService: UtilsService) {
@@ -44,6 +46,7 @@ export class EmojiService {
   }
 
   //========================================= Emoji Created ======================================
+  // REST
 
   findCreatedEmojiByTeamId = (teamId: string): Observable<EmojiCreate[]> => {
     return this.http.get<EmojiCreate[]>(`${environment.apiUrl}/emojis/createdEmojis/${teamId}`);
@@ -88,7 +91,9 @@ export class EmojiService {
   }
 
   // ================================================================================================
+  // Process
 
+  /** Set the emojis of the EmojiSelector (will be delayed if the service is still initializing) */
   register(selector: EmojisSelectorComponent) {
     if (this.json.length == 0)
       this.selectors.push(selector);
@@ -96,6 +101,7 @@ export class EmojiService {
       selector.emojis = this.json.slice(0, 200);
   }
 
+  /** Process the emoji-text into html (will be delayed if the service is still initializing) */
   processEmojiSetter(content: string, teamId: string, setter: Function): void {
     const process = () => setter(this.processEmoji(content, teamId));
     if (this.json.length == 0)

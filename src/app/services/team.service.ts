@@ -14,26 +14,13 @@ import { TeamLogsComponent } from '../pages/params/team/team-logs/team-logs.comp
 export class TeamService {
 
   constructor(private http: HttpClient) { }
+
   // ==============================================================================================
+  // Home
 
-  findTeamIdBySalonId = (salonId: string): Observable<Team> => {
-    return this.http.get<Team>(`${environment.apiUrl}/teams/bySalon/${salonId}`);
-  }
-
+  /** Returns all the teams of the given user */
   findAllTeamOfUser = (userId: string): Observable<TeamNamePict[]> => {
     return this.http.get<TeamNamePict[]>(environment.apiUrl + "/teams/ofUser/" + userId);
-  }
-
-  findNamePicDescById = (teamId: string): Observable<TeamNameDescPict> => {
-    return this.http.get<TeamNameDescPict>(environment.apiUrl + "/teams/teamNameDescPict/" + teamId)
-  }
-
-  /**
-   * This function return a quick presentation of each team. It contain name, picture and the id
-   * @returns an array of TeamLinkUser object
-   */
-  findAllPresentation = (): Observable<TeamNamePict[]> => {
-    return this.http.get<TeamNamePict[]>(`${environment.apiUrl}/teams/teamNamePict`);
   }
 
   /** Returns the name and the picture for the given team */
@@ -42,9 +29,18 @@ export class TeamService {
   }
 
   // ==============================================================================================
+  // Params
+
+  findNamePicDescById = (teamId: string): Observable<TeamNameDescPict> => {
+    return this.http.get<TeamNameDescPict>(environment.apiUrl + "/teams/teamNameDescPict/" + teamId)
+  }
+
   updateTeamNameDescPic = (team: TeamNameDescPict): Observable<TeamNameDescPict> => {
     return this.http.patch<TeamNameDescPict>(environment.apiUrl + "/teams/teamNameDescPict", team);
   }
+
+  // ==============================================================================================
+  // Admin
 
   send = (team: TeamNameDescFile) => {
     if (team.file != undefined) {
@@ -57,5 +53,19 @@ export class TeamService {
     else {
       this.http.post<Team>(`${environment.apiUrl}/teams/saveWithFile`, { ...team, file: null, filename: null }).subscribe();
     }
+  }
+
+  // TODO [Remove]
+  findTeamIdBySalonId = (salonId: string): Observable<Team> => {
+    return this.http.get<Team>(`${environment.apiUrl}/teams/bySalon/${salonId}`);
+  }
+
+  // TODO [Remove]
+  /**
+   * This function return a quick presentation of each team. It contain name, picture and the id
+   * @returns an array of TeamLinkUser object
+   */
+  findAllPresentation = (): Observable<TeamNamePict[]> => {
+    return this.http.get<TeamNamePict[]>(`${environment.apiUrl}/teams/teamNamePict`);
   }
 }

@@ -11,6 +11,7 @@ export class PrivateMsgService {
 
   constructor(private http: HttpClient) { }
 
+  /** Returns all the private groups of the given user */
   findAllPrivateOfUser(userId: string): Observable<Private[]> {
     return this.http.get<Private[]>(environment.apiUrl + "/private/ofUser/" + userId);
   }
