@@ -34,6 +34,7 @@ export class UploadWithPreviewComponent implements OnInit {
       file: this.file
     });
   }
+
   delete = () => {
     this.file = undefined;
     this.url = '';

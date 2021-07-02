@@ -1,22 +1,31 @@
-span{
+#upload {
+    display: flex;
+    justify-content: center;
+    
+    margin-top: 1rem;
+}
+
+span {
     margin: 35px;
 }
-div{
+
+div {
     display: flex;
     flex-wrap: wrap;
 }
-input{
+
+input {
     background-color: var(--background);
 }
 
-input:hover{
+input:hover {
     box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2)
 }
 
-label{
+label {
     color: var(--font_2);
 }
-button{
+
+button {
     margin: 35px;
 }
-
