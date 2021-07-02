@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EmojiDesc } from 'src/app/models/emoji/emojiDesc';
 import { EmojiService } from 'src/app/services/emoji.service';
 import { environment } from 'src/environments/environment';
-import { MsgWriterComponent } from '../msg-writer/msg-writer.component';
 
 @Component({
   selector: 'app-emojis-selector',
@@ -14,9 +13,13 @@ export class EmojisSelectorComponent implements OnInit {
 
   @Output() emojiEmit = new EventEmitter<string>();
 
+  /** List of all the emojis */
   _emojis: EmojiDesc[] = [];
+  /** The searched string */
   _search: string;
+  /** List of the emojis matching the search */
   emojisSearch: EmojiDesc[] = [];
+  /** Last emoji hovered */
   emojiHover: EmojiDesc;
 
   constructor(private emojiService: EmojiService) { }
@@ -32,9 +35,8 @@ export class EmojisSelectorComponent implements OnInit {
     this.emojiHover = this._emojis[0];
   }
 
-  hover(emoji: EmojiDesc) {
-    this.emojiHover = emoji;
-  }
+  /** Handle event [Hover] */
+  hover = (emoji: EmojiDesc) => this.emojiHover = emoji;
 
   // ====================================================================================================
 

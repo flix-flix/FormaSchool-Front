@@ -22,6 +22,7 @@ export class PrivateMenuComponent implements OnInit {
     this.storageService.subscribe("user", user => this.user = user);
   }
 
+  /** Returns the list of members except the current user */
   getMembers(members: MemberUserNamePict[]): MemberUserNamePict[] {
     return members.filter(member => member.user.id != this.user.id);
   }

@@ -34,5 +34,4 @@ export class PrivateMsgComponent implements OnInit {
       });
     });
   }
-
 }

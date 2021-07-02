@@ -21,6 +21,7 @@ export class SenderProfileComponent implements OnInit {
 
   // =========================================================================================
 
+  /** Redirect to the private thread with this user */
   privateMsg() {
     // TODO right salon OR new private
     this.router.navigate(["/privateMessages/redirect"]);

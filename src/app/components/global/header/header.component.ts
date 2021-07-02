@@ -12,6 +12,7 @@ import { StorageService } from 'src/app/services/storage.service';
 export class HeaderComponent implements OnInit {
   @Output() colors = new EventEmitter();
 
+  /** Header title */
   text = "";
 
   user: UserLocalStorage;
@@ -33,6 +34,7 @@ export class HeaderComponent implements OnInit {
 
   // =========================================================================================
 
+  /** Changes the header content depends on the given path */
   updateHeader(path: string) {
     if (path.startsWith("/teamSelect"))
       this.text = "Equipes";
@@ -58,7 +60,6 @@ export class HeaderComponent implements OnInit {
 
   // =========================================================================================
 
-  openColors = () => {
-    this.colors.emit("");
-  }
+  /** Open the modale to change the site colors */
+  openColors = () => this.colors.emit("");
 }

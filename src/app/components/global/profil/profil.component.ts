@@ -22,12 +22,16 @@ export class ProfilComponent implements OnInit {
     this.storageService.subscribe("user", user => this.user = user);
   }
 
+  /** Disconnect the user */
   logout = () => {
+    // TODO clear salons
     this.displayMenu = false;
     this.storageService.clear("user");
     this.router.navigate(["/login"]);
+    // TODO request to server
   }
 
+  /** Redirects to the user settings */
   userSettings() {
     this.displayMenu = false;
     this.router.navigate(["/user"]);

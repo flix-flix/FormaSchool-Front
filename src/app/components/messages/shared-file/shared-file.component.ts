@@ -17,7 +17,6 @@ export class SharedFileComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  download = () => {
-    this.fileService.download(this.file);
-  }
+  /** Download the file on the computer */
+  download = () => this.fileService.download(this.file);
 }

@@ -30,6 +30,7 @@ export class MessageComponent implements OnInit {
   // =========================================================================================
   // Display
 
+  /** Return the text representaion of the time */
   getTimeStr = (): string => nf.format(this.msg.send.getHours()) + ":" + nf.format(this.msg.send.getMinutes());
 
   // =========================================================================================
@@ -60,15 +61,17 @@ export class MessageComponent implements OnInit {
   // =========================================================================================
   // Edit
 
+  /** Handle event [Escape] */
   pressEscape = (event) => this.editable = false;
 
+  /** Handle event [Enter] */
   pressEnter = (event) => {
     event.preventDefault();
-
     if (this.editContent.length != 0)
       this.sendMsg();
   }
 
+  /** Send message outside of this component */
   sendMsg = () => {
     if (this.editContent != this.msg.content)
       this.edit.emit({ id: this.msg.id, content: this.editContent });

@@ -11,8 +11,11 @@ export class MsgWriterComponent implements OnInit {
 
   @Output() msgEmit = new EventEmitter<MessageSend>();
 
-  file: File;
+  /** Writen message */
   content = "";
+  /** Selected file */
+  file: File;
+  /** URL of the selected file */
   fileUrl = "";
 
   hideSelector = true;
@@ -26,12 +29,14 @@ export class MsgWriterComponent implements OnInit {
 
   // ====================================================================================================
 
+  /** Handle event [enter] */
   pressEnter = (event) => {
     event.preventDefault();
     if (this.content.length != 0 || this.file)
       this.sendMsg();
   }
 
+  /** Send the written message outside of this component */
   sendMsg = () => {
     this.msgEmit.emit({ content: this.content, file: this.file, fileName: this.file?.name });
     this.content = "";
@@ -39,6 +44,7 @@ export class MsgWriterComponent implements OnInit {
     this.msgWriter.nativeElement.innerText = "";
   }
 
+  /** Update the selected file */
   changeFile(event) {
     this.file = event.target.files[0];
     this.fileUrl = undefined;
@@ -55,6 +61,7 @@ export class MsgWriterComponent implements OnInit {
 
   openCloseEmojiSelector = () => this.hideSelector = !this.hideSelector;
 
+  /** Add the emoji-text at the cursor position */
   addEmoji(emoji: string) {
     const elem = this.msgWriter.nativeElement;
     const text = `${elem.innerText.substring(0, this.caretStart)}:${emoji}:${elem.innerText.substring(this.caretEnd, elem.innerText.length)}`;
@@ -62,6 +69,7 @@ export class MsgWriterComponent implements OnInit {
     this.content = text;
   }
 
+  /** Update the position of the cursor in the [text input] */
   updateCaret(elem) {
     const win = elem.ownerDocument.defaultView;
 
