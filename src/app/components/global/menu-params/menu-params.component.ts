@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { MenuButton } from 'src/app/models/_components/menu-button';
 
 @Component({
@@ -11,8 +12,20 @@ export class MenuParamsComponent implements OnInit {
   @Input() buttons: MenuButton[];
   @Input() previous: string = "";
 
-  constructor() { }
+  current: string;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd)
+        this.updateCurrent();
+    });
+    this.updateCurrent();
+  }
+
+  updateCurrent() {
+    const url = this.router.url.split("/");
+    this.current = url[url.length - 1];
   }
 }

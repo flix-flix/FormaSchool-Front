@@ -32,22 +32,19 @@ export class UserService {
   }
 
   // ================================================================================================
-
-  findNamePictById = (userId: string): Observable<UserNamePict> => {
-    return this.http.get<UserNamePict>(environment.apiUrl + "/users/namePict/" + userId);
-  }
-
-  // ================================================================================================
   // Settings
 
+  /** Get the informations of the user */
   findSettingsById = (userId: string): Observable<UserSettings> => {
     return this.http.get<UserSettings>(this.urlSettings + userId);
   }
 
+  /** Changes the informations of the user */
   updateSettings(settings: UserSettings) {
     return this.http.patch<UserSettings>(this.urlSettings, settings);
   }
 
+  /** Changes the password of the user */
   updatePassword(user: UserPassword) {
     return this.http.patch<UserPassword>(this.urlSettings + "password ", user);
   }

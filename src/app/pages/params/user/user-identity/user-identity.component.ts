@@ -18,7 +18,6 @@ export class UserIdentityComponent implements OnInit {
   userProfile: FormGroup;
   file: File;
 
-
   constructor(private fb: FormBuilder, private userService: UserService, private activatedRoute: ActivatedRoute) {
     this.userProfile = this.fb.group({
       firstname: [''],
@@ -36,42 +35,23 @@ export class UserIdentityComponent implements OnInit {
         console.log(settings);
 
         settings.birth = new Date(settings.birth[0], settings.birth[1] - 1, settings.birth[2]);
-
         if (settings.picture != null)
           this.img.setFileFromServer(settings.picture);
-
         this.userProfile.patchValue({ ...settings })
       });
     });
   }
 
+  /** Send the modifications to the server */
   save = () => {
     let user: UserSettings = this.userProfile.value;
     user.id = this.userId;
-
     this.userService.updateSettings(user).subscribe(user => {
       console.log("updateSettings terminé", user);
     });
   }
 
-  // save = () => {
-  //   if (this.file != null) {
-  //     this.saveWithFile();
-  //   }
-  //   else {
-  //     let user: UserCreation = this.userProfile.value;
-  //     this.userService.save(user).subscribe(user => {
-  //       alert(`Le profile a bien été modifié`)
-  //     });
-  //   }
-  // }
-
-  // saveWithFile = () => {
-  //   let user: UserCreationWithFile = this.userProfile.value;
-  //   user.file = this.file;
-  //   this.userService.saveWithFile(user);
-  // }
-
+  /** File changes */
   imgEvent = (element) => {
     this.file = element.file;
   }

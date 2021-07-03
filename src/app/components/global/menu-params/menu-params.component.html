@@ -1,9 +1,9 @@
 <div id="side_menu">
-    <div [routerLink]="previous" class="button" id="previous">
+    <a [routerLink]="previous" class="button" id="previous">
         Retour
-    </div>
+    </a>
 
-    <div *ngFor="let button of buttons" [routerLink]="button.link" class="button">
+    <a *ngFor="let button of buttons" [routerLink]="button.link" class="button" [class.current]="button.link==current">
         {{button.text}}
-    </div>
+    </a>
 </div>

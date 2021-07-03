@@ -16,11 +16,18 @@
     margin-bottom: 20px;
     margin-left: 10px;
 
+    text-decoration: none;
+
     color: var(--font_1);
 }
 
 .button:hover {
     background-color: var(--menu);
+}
+
+.current, .current:hover {
+    color: var(--font_1);
+    background-color: var(--font_2);
 }
 
 #previous {

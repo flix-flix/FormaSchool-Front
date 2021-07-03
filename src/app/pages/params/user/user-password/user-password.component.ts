@@ -19,9 +19,7 @@ export class UserPasswordComponent implements OnInit {
       password: '',
       passwordNew1: '',
       passwordNew2: ['', [Validators.required]],
-    },
-      { validators: this.validatePass }
-    );
+    }, { validators: this.validatePass });
   }
 
   ngOnInit(): void {
