@@ -52,6 +52,8 @@
     line-height: 1.4rem;
     overflow-wrap: break-word;
     
+    white-space: pre-wrap;
+
     color: var(--black);
 }
 

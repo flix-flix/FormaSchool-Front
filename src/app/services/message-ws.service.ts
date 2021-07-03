@@ -34,7 +34,7 @@ export class MessageWsService {
   connect() {
     this.stompClient = Stomp.over(new SockJS(environment.apiUrl + "/wsMessages"));
     this.stompClient.debug = null;
-    this.stompClient.connect({}, () => this.stompClient.subscribe('/topic/public', this.onMessageReceived));
+    this.stompClient.connect({}, () => this.stompClient.subscribe('/msg/public', this.onMessageReceived));
   }
 
   /** Link the MsgThread component to its data */
