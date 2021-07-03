@@ -41,7 +41,7 @@ export class ParamsTemplateComponent implements OnInit {
     user: {
       buttons: [
         { link: "general", text: "Resumé" },
-        // { link: "permissions", text: "Permissions" },
+        { link: "password", text: "Mot de passe" },
       ],
       previous: "/teamSelect"
     }

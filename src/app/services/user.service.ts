@@ -9,6 +9,7 @@ import { UserCreation } from '../models/user/userCreation';
 import { UserCreationWithFile } from '../models/user/userCreationWithFile';
 import { UserLocalStorage } from '../models/user/userLocalStorage';
 import { UserNamePict } from '../models/user/userNamePict';
+import { UserPassword } from '../models/user/userPassword';
 import { UserSettings } from '../models/user/userSettings';
 
 
@@ -43,9 +44,12 @@ export class UserService {
     return this.http.get<UserSettings>(this.urlSettings + userId);
   }
 
-  updateSettings(settings) {
+  updateSettings(settings: UserSettings) {
     return this.http.patch<UserSettings>(this.urlSettings, settings);
-    // TODO
+  }
+
+  updatePassword(user: UserPassword) {
+    return this.http.patch<UserPassword>(this.urlSettings + "password ", user);
   }
 
   // ================================================================================================

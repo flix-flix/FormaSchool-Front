@@ -1,9 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UploadWithPreviewComponent } from 'src/app/components/params/team/upload-with-preview/upload-with-preview.component';
-import { UserCreation } from 'src/app/models/user/userCreation';
-import { UserCreationWithFile } from 'src/app/models/user/userCreationWithFile';
 import { UserSettings } from 'src/app/models/user/userSettings';
 import { UserService } from 'src/app/services/user.service';
 

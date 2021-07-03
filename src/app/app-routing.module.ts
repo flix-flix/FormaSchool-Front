@@ -22,6 +22,7 @@ import { TeamMembersComponent } from './pages/params/team/team-members/team-memb
 import { TeamRolesComponent } from './pages/params/team/team-roles/team-roles.component';
 import { TeamSummaryComponent } from './pages/params/team/team-summary/team-summary.component';
 import { UserIdentityComponent } from './pages/params/user/user-identity/user-identity.component';
+import { UserPasswordComponent } from './pages/params/user/user-password/user-password.component';
 
 
 const routes: Routes = [
@@ -77,7 +78,7 @@ const routes: Routes = [
       {
         path: "user/:userId", component: ParamsTemplateComponent, children: [
           { path: "general", component: UserIdentityComponent },
-          // { path: "password", component: UpdateSalonFormComponent },
+          { path: "password", component: UserPasswordComponent },
           // { path: "additional", component: SalonPermissionsComponent },
           // { path: "files", component: SalonPermissionsComponent },
           { path: "**", redirectTo: "general" }

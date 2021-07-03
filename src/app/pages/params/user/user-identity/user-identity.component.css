@@ -61,9 +61,8 @@ label {
 #identity {
     display: flex;
     flex-direction: row;
-justify-content: center;
-align-items: center;
-
+    justify-content: center;
+    align-items: center;
 }
 
 #identity_left {
@@ -74,15 +73,6 @@ align-items: center;
 #identity_right {
     display: flex;
     flex-direction: column;
-}
-
-/* ========== Password ========== */
-::ng-deep.p-password-panel {
-    background-color: var(--background);
-}
-
-::ng-deep.pi-eye::before, ::ng-deep.pi-eye-slash::before {
-    color: var(--font_2);
 }
 
 /* ========== Date ========== */

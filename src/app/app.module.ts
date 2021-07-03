@@ -82,6 +82,9 @@ import { PasswordModule } from 'primeng/password';
 import { TranslateModule } from '@ngx-translate/core';
 import { MenuParamsComponent } from './components/global/menu-params/menu-params.component';
 import { ParamsTemplateComponent } from './pages/params/params-template/params-template.component';
+import { UserPasswordComponent } from './pages/params/user/user-password/user-password.component';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -143,7 +146,8 @@ import { ParamsTemplateComponent } from './pages/params/params-template/params-t
     EmojisSelectorComponent,
     ModaleAddSalonComponent,
     MenuParamsComponent,
-    ParamsTemplateComponent
+    ParamsTemplateComponent,
+    UserPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -169,9 +173,11 @@ import { ParamsTemplateComponent } from './pages/params/params-template/params-t
     CalendarModule,
     InputMaskModule,
     PasswordModule,
-    TranslateModule.forRoot()
+    TranslateModule.forRoot(),
+    ToastModule,
   ],
   providers: [RxStompService,
+    MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
