@@ -34,6 +34,6 @@ export class ProfilComponent implements OnInit {
   /** Redirects to the user settings */
   userSettings() {
     this.displayMenu = false;
-    this.router.navigate(["/user"]);
+    this.router.navigate([`/params/user/${this.user.id}/`]);
   }
 }

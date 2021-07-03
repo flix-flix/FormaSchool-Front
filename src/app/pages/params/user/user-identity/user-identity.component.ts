@@ -22,7 +22,8 @@ export class UserIdentityComponent implements OnInit {
       firstname: [''],
       lastname: [''],
       email: [''],
-      date: [new Date()],
+      // date: [new Date()],
+      date: [undefined],
       telephone: [''],
       password: [''],
     })

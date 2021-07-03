@@ -81,6 +81,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { PasswordModule } from 'primeng/password';
 import { TranslateModule } from '@ngx-translate/core';
 import { MenuParamsComponent } from './components/global/menu-params/menu-params.component';
+import { ParamsTemplateComponent } from './pages/params/params-template/params-template.component';
 
 @NgModule({
   declarations: [
@@ -141,7 +142,8 @@ import { MenuParamsComponent } from './components/global/menu-params/menu-params
     SenderProfileComponent,
     EmojisSelectorComponent,
     ModaleAddSalonComponent,
-    MenuParamsComponent
+    MenuParamsComponent,
+    ParamsTemplateComponent
   ],
   imports: [
     BrowserModule,
