@@ -42,8 +42,6 @@ export class HeaderComponent implements OnInit {
       this.text = "Connexion";
     else if (path.startsWith("/404"))
       this.text = "404";
-    else if (path.startsWith("/user"))
-      this.text = "Paramètres utilisateur";
     else if (path.startsWith("/privateMessages"))
       this.text = "Messages privés";
     else if (path.startsWith("/teamMessages")) {

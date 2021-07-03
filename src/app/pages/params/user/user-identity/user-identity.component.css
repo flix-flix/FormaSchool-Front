@@ -76,6 +76,7 @@ label {
 }
 
 /* ========== Date ========== */
+/* ==== Size ==== */
 ::ng-deep.p-datepicker table td > span {
     width: 2rem;
     height: 1.5rem;
@@ -83,6 +84,40 @@ label {
 
 ::ng-deep.p-datepicker table td {
     padding: 0px;
+}
+
+/* ==== Colors ==== */
+::ng-deep.p-calendar .p-datepicker {
+    color: var(--font_2);
+    background-color: var(--background);
+}
+
+::ng-deep.p-datepicker:not(.p-datepicker-inline) .p-datepicker-header {
+    color: var(--header);
+    background-color: var(--background);
+}
+
+::ng-deep.p-datepicker .p-datepicker-header .p-datepicker-title select {
+    background-color: var(--menu);
+}
+
+::ng-deep.p-datepicker table td > span.p-highlight {
+    background-color: var(--menu);
+}
+
+/* ==== Scrollbar ==== */
+::ng-deep::-webkit-scrollbar {
+    width: 9px;
+}
+
+::ng-deep::-webkit-scrollbar-track{
+    background-color: var(--menu);
+}
+
+::ng-deep::-webkit-scrollbar-thumb {
+    background: var(--header);
+    border: 2px solid var(--menu);
+    border-radius: 20px;
 }
 
 /* ========== Button ========== */
