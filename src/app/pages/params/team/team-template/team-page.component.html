@@ -1,7 +1,6 @@
 <section>
-    <div id="sidebar">
-        <app-team-sidebar></app-team-sidebar>
-    </div>
+    <app-menu-params [buttons]=buttons previous="/teamMessages/{{teamId}}/redirect"></app-menu-params>
+
     <div id="content">
         <router-outlet></router-outlet>
     </div>

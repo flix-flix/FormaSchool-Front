@@ -80,6 +80,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { InputMaskModule } from 'primeng/inputmask';
 import { PasswordModule } from 'primeng/password';
 import { TranslateModule } from '@ngx-translate/core';
+import { MenuParamsComponent } from './components/global/menu-params/menu-params.component';
 
 @NgModule({
   declarations: [
@@ -139,7 +140,8 @@ import { TranslateModule } from '@ngx-translate/core';
     UserButtonComponent,
     SenderProfileComponent,
     EmojisSelectorComponent,
-    ModaleAddSalonComponent
+    ModaleAddSalonComponent,
+    MenuParamsComponent
   ],
   imports: [
     BrowserModule,

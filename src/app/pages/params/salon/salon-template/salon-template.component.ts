@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParamsSalonTemplateComponent implements OnInit {
 
+  buttons = [
+    { link: "summary", text: "Resumé" },
+    { link: "permissions", text: "Permissions" },
+  ];
+  // TODO [Improve] Redirect to actual salon
+  previous = "/teamSelect";
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

@@ -1,7 +1,6 @@
 <section>
-    <div id="sidebar">
-        <app-salon-sidebar></app-salon-sidebar>
-    </div>
+    <app-menu-params [buttons]=buttons [previous]="previous"></app-menu-params>
+
     <div id="content">
         <router-outlet></router-outlet>
     </div>
