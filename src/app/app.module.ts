@@ -85,6 +85,8 @@ import { ParamsTemplateComponent } from './pages/params/params-template/params-t
 import { UserPasswordComponent } from './pages/params/user/user-password/user-password.component';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -147,7 +149,7 @@ import { MessageService } from 'primeng/api';
     ModaleAddSalonComponent,
     MenuParamsComponent,
     ParamsTemplateComponent,
-    UserPasswordComponent
+    UserPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -175,9 +177,12 @@ import { MessageService } from 'primeng/api';
     PasswordModule,
     TranslateModule.forRoot(),
     ToastModule,
+    ConfirmPopupModule,
   ],
-  providers: [RxStompService,
+  providers: [
+    RxStompService,
     MessageService,
+    ConfirmationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

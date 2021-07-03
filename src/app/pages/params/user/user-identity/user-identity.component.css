@@ -51,6 +51,8 @@ label {
 }
 
 ::ng-deep.p-inputtext {
+    width: 15rem;
+
     color: var(--font_2);
     background-color: var(--background);
     
@@ -77,6 +79,10 @@ label {
 
 /* ========== Date ========== */
 /* ==== Size ==== */
+::ng-deep.p-calendar {
+    width: 15rem;
+}
+
 ::ng-deep.p-datepicker table td > span {
     width: 2rem;
     height: 1.5rem;
