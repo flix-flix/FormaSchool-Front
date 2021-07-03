@@ -4,7 +4,7 @@
     <form [formGroup]="userProfile" (ngSubmit)="save()">
         <div id="identity">
             <div id="identity_left">
-                <app-upload-with-preview (imageEvent)="getEvent($event)"></app-upload-with-preview>
+                <app-upload-with-preview (imageEvent)="imgEvent($event)" #img></app-upload-with-preview>
             </div>
 
             <div id="identity_right">
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="p-float-label">
-                    <p-calendar id="date" formControlName="date" [monthNavigator]="true" [yearNavigator]="true"
+                    <p-calendar id="date" formControlName="birth" [monthNavigator]="true" [yearNavigator]="true"
                         yearRange="1920:2010" dateFormat="d MM yy" required>
                     </p-calendar>
                     <label for="date">Naissance</label>
@@ -32,17 +32,12 @@
             <label for="email">Email</label>
         </div>
 
-
         <div class="p-float-label">
-            <p-inputMask formControlName="telephone" mask="99.99.99.99.99" required></p-inputMask>
+            <p-inputMask formControlName="phone" mask="99.99.99.99.99" required></p-inputMask>
             <label for="tel">Téléphone</label>
         </div>
 
-        <div class="p-float-label">
-            <p-password formControlName="password" toggleMask="true" required></p-password>
-            <label for="pass">Mot de passe</label>
-        </div>
-
-        <button pButton pRipple type="submit" label="Envoyer" class="p-button-rounded p-button-info"></button>
+        <button pButton pRipple type="submit" label="Sauvegarder" class="p-button-rounded p-button-info"
+            id="save"></button>
     </form>
 </div>

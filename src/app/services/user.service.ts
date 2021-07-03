@@ -9,12 +9,14 @@ import { UserCreation } from '../models/user/userCreation';
 import { UserCreationWithFile } from '../models/user/userCreationWithFile';
 import { UserLocalStorage } from '../models/user/userLocalStorage';
 import { UserNamePict } from '../models/user/userNamePict';
+import { UserSettings } from '../models/user/userSettings';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  urlSettings = environment.apiUrl + "/userSettings/";
 
   constructor(private http: HttpClient) { }
 
@@ -37,12 +39,13 @@ export class UserService {
   // ================================================================================================
   // Settings
 
-  findSettingsById = (userId: string): Observable<UserNamePict> => {
-    return this.http.get<UserNamePict>(environment.apiUrl + "/users/userSettings/" + userId);
+  findSettingsById = (userId: string): Observable<UserSettings> => {
+    return this.http.get<UserSettings>(this.urlSettings + userId);
   }
 
-  update() {
-
+  updateSettings(settings) {
+    return this.http.patch<UserSettings>(this.urlSettings, settings);
+    // TODO
   }
 
   // ================================================================================================
