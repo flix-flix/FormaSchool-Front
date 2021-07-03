@@ -47,7 +47,7 @@ export class MessageComponent implements OnInit {
   }
 
   /** Delete the message */
-  deleteButton = () => {
+  deleteButton = (event) => {
     if (confirm("Voulez vous supprimer ce message"))
       this.delete.emit(this.msg.id);
   }

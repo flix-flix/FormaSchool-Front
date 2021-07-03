@@ -60,7 +60,8 @@
     flex-direction: row;
     align-items: center;
 
-    height: 2rem;
+    height: 2.4rem;
+    padding: .2rem;
 }
 
 #hover img{

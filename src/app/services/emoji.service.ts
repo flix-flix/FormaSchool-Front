@@ -6,6 +6,8 @@ import { EmojisSelectorComponent } from '../components/messages/emojis-selector/
 import { EmojiCreate } from '../models/emoji/emojiCreate';
 import { EmojiDesc } from '../models/emoji/emojiDesc';
 import { EmojiNamePict } from '../models/emoji/emojiNamePict';
+import { UserLocalStorage } from '../models/user/userLocalStorage';
+import { StorageService } from './storage.service';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -15,9 +17,17 @@ export class EmojiService {
   url = environment.apiUrl + "/emojis/";
 
   /** path to the folder of the emojis [team, organization, default] */
-  paths = [/*"emojisTeams/",*/ "emojisOrga/", "emojis/"];
+  paths = ["emojisTeams/", "emojisOrga/", "emojis/"];
 
   json: EmojiDesc[] = [];
+  emojisOrgaDesc: EmojiDesc[] = [];
+  emojisTeamDesc: { [teamId: string]: EmojiDesc[] } = { "und3f1n3d": [] };
+
+  /** Emojis added by the organization (available for all the teams) */
+  emojisOrga: EmojiNamePict[] = [];
+  /** Emojis of each team (available only in one team) */
+  emojisTeam: { [teamId: string]: EmojiNamePict[] } = { "und3f1n3d": [] };
+
   /** give id to the emoji without id*/
   nextEmojiId = 1_000_000;
   /** selectors waiting to be filled with emojis */
@@ -25,24 +35,64 @@ export class EmojiService {
   /** string/setters waiting to be processed till the emojis are downloaded */
   waiting: Function[] = [];
 
-  constructor(private http: HttpClient, private utilsService: UtilsService) {
+  constructor(private http: HttpClient, private utilsService: UtilsService, storageService: StorageService) {
+    this.updateBase();
+    this.updateOrga();
+
+    storageService.subscribe("user", user => {
+      if (user)
+        user.members.forEach(member => this.updateTeam(member.team.id));
+    });
+    // TODO Update the processed contents if requests take too much time (ugly)
+  }
+
+  // ================================================================================================
+  // Init
+
+  updateBase() {
     this.http.get<any[]>(this.url + "json").subscribe(json => {
       json.forEach(item => item.order = (item.order == "" ? this.nextEmojiId++ : item.order));
 
       this.json = <EmojiDesc[]>json;
       this.json.sort((a, b) => a.order - b.order);
       this.json.forEach(item => item.annotation = item.annotation.substr(0, item.annotation.length - 2));
+      this.json.forEach(item => item.path = "emojis/" + item.annotation);
       this.json = this.json.filter(item => !item.annotation.includes("skin"));
 
       // === Process the already loaded selectors ===
       this.waiting.forEach(process => process());
       this.selectors.forEach(select => select.emojis = this.json.slice(0, 15));
 
-      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 50)), 1000);
-      setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 100)), 4000);
+      setTimeout(() => this.selectors.forEach(select => select.emojis = this.getAllEmojis(select.teamId).slice(0, 50)), 1000);
+      setTimeout(() => this.selectors.forEach(select => select.emojis = this.getAllEmojis(select.teamId).slice(0, 100)), 4000);
       // setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 150)), 8000);
       // setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 200)), 12000);
     });
+  }
+
+  updateOrga() {
+    this.findEmojiOrga().subscribe(emojisOrga => {
+      this.emojisOrga = emojisOrga;
+      this.emojisOrgaDesc = emojisOrga.map(emoji => ({ annotation: emoji.name, group: "orga", path: emoji.picture }));
+    });
+  }
+
+  updateTeam(teamId: string) {
+    this.findEmojiTeam(teamId).subscribe(emojisTeam => {
+      this.emojisTeam[teamId] = emojisTeam;
+      this.emojisTeamDesc[teamId] = emojisTeam.map(emoji => ({ annotation: emoji.name, group: "team", path: emoji.picture }));
+    });
+  }
+
+  // ================================================================================================
+  // List emojis
+
+  findEmojiOrga = (): Observable<EmojiNamePict[]> => {
+    return this.http.get<EmojiNamePict[]>(this.url + "emojisOrga");
+  }
+
+  findEmojiTeam = (teamId: string): Observable<EmojiNamePict[]> => {
+    return this.http.get<EmojiNamePict[]>(this.url + "emojisTeam/" + teamId);
   }
 
   //========================================= Emoji Created ======================================
@@ -141,31 +191,24 @@ export class EmojiService {
   }
 
   /** Returns the matching emoji if it exits, undefined otherwise */
-  private getEmoji(name: string, teamId = "orga"): EmojiNamePict {
-    const emojis = [emojisOrga];
+  private getEmoji(name: string, teamId = "und3f1n3d"): EmojiNamePict {
+    const emojis = [this.emojisOrga];
+    if (this.emojisTeam[teamId])
+      emojis.unshift(this.emojisTeam[teamId]);
 
     let emoji;
     for (let index in emojis)
-      if (emoji = emojis[index].find(emoji => emoji.annotation == name))
-        return { id: undefined, name: name, picture: this.paths[index] + emoji.path };
+      if (emoji = emojis[index].find(emoji => emoji.name == name))
+        return emoji;
 
     if (this.json.find(emoji => emoji.annotation == name))
       return { id: undefined, name: name, picture: "emojis/" + name };
     return undefined;
   }
-}
 
-// ================================================================================================
-// TODO [Back]
+  // ================================================================================================
 
-/** Emojis added by the organization (available for all the teams) */
-let emojisOrga = [
-  {
-    annotation: "m2i",
-    path: "orga_1"
-  },
-  {
-    annotation: "semifir",
-    path: "orga_2"
+  getAllEmojis(teamId: string = "und3f1n3ed") {
+    return this.emojisTeamDesc[teamId].concat(this.emojisOrgaDesc).concat(this.json);
   }
-];
+}

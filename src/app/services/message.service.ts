@@ -21,9 +21,7 @@ export class MessageService {
       msg.edit = new Date(msg.edit[0], msg.edit[1] - 1, msg.edit[2], msg.edit[3], msg.edit[4], msg.edit[5]);
 
     msg.html = this.processHtml(msg.content);
-
-    //TODO teamId for msg emoji
-    this.emojiService.processEmojiSetter(msg.html, "und3f1n3d", html => msg.html = html);
+    this.emojiService.processEmojiSetter(msg.html, msg.teamId, html => msg.html = html);
     return msg;
   }
 

@@ -30,6 +30,7 @@
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/edit-3.svg" alt="edit"
             *ngIf="msg.sender.user.id == user.id" (mousedown)="editButton()">
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/trash-2.svg" alt="delete"
-            *ngIf="msg.sender.user.id == user.id" (mousedown)="deleteButton()">
+            *ngIf="msg.sender.user.id == user.id" (mousedown)="deleteButton($event)">
     </div>
+
 </div>

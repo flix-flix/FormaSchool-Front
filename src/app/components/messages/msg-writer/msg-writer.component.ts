@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MessageSend } from 'src/app/models/messages/messageSend';
 
 @Component({
@@ -10,6 +10,7 @@ export class MsgWriterComponent implements OnInit {
   @ViewChild("writer") private msgWriter: ElementRef;
 
   @Output() msgEmit = new EventEmitter<MessageSend>();
+  @Input() teamId: string;
 
   /** Writen message */
   content = "";
@@ -67,6 +68,7 @@ export class MsgWriterComponent implements OnInit {
     const text = `${elem.innerText.substring(0, this.caretStart)}:${emoji}:${elem.innerText.substring(this.caretEnd, elem.innerText.length)}`;
     this.msgWriter.nativeElement.innerText = text;
     this.content = text;
+    this.hideSelector = true;
   }
 
   /** Update the position of the cursor in the [text input] */

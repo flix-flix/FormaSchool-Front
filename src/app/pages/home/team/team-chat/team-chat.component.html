@@ -1,6 +1,7 @@
 <div id="row">
     <app-team-menu [teamId]="teamId" [salonId]="salonId"></app-team-menu>
 
-    <app-msg-thread *ngFor="let salon of salons" [salonId]="salon.id" [class.display]="salon.id == salonId">
+    <app-msg-thread *ngFor="let salon of salons" [teamId]="teamId" [salonId]="salon.id"
+        [class.display]="salon.id == salonId">
     </app-msg-thread>
 </div>

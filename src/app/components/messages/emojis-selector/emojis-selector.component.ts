@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EmojiDesc } from 'src/app/models/emoji/emojiDesc';
 import { EmojiService } from 'src/app/services/emoji.service';
 import { environment } from 'src/environments/environment';
@@ -9,9 +9,11 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./emojis-selector.component.css']
 })
 export class EmojisSelectorComponent implements OnInit {
-  url = environment.apiUrl + '/files/emojis/';
+  url = environment.apiUrl + '/files/';
 
   @Output() emojiEmit = new EventEmitter<string>();
+
+  @Input() teamId: string;
 
   /** List of all the emojis */
   _emojis: EmojiDesc[] = [];

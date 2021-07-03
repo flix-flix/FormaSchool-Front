@@ -13,6 +13,7 @@ import { Message } from '../../../models/messages/message';
 export class MsgThreadComponent implements OnInit {
   @ViewChild("scrollMe") private msgThread: ElementRef;
 
+  @Input() teamId: string;
   @Input() salonId: string;
 
   /** Messages grouped by date and sorted by time */

@@ -5,6 +5,7 @@ import { Reaction } from "../reaction";
 export interface Message {
     id: string;
     sender: MemberUsersPseudo;
+    teamId: string;
     salonId: string;
 
     content: string;

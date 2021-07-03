@@ -8,5 +8,5 @@
         </div>
     </div>
 
-    <app-msg-writer (msgEmit)="sendMsg($event)" #writer></app-msg-writer>
+    <app-msg-writer (msgEmit)="sendMsg($event)" [teamId]="teamId" #writer></app-msg-writer>
 </div>
