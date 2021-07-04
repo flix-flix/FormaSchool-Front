@@ -1,8 +1,8 @@
-import { MemberUsersPseudo } from "../member/memberPseudoUser";
+import { MemberUserPseudo } from "../member/memberPseudoUser";
 import { RoleWithoutRights } from "../role/roleWithoutRights";
 
 export interface PermissionMemberRoleWithoutRights {
     id: string;
-    member: MemberUsersPseudo;
+    member: MemberUserPseudo;
     role: RoleWithoutRights;
 }

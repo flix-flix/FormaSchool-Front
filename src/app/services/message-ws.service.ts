@@ -13,17 +13,18 @@ import { Message } from '../models/messages/message';
 import { MsgThreadComponent } from '../components/messages/msg-thread/msg-thread.component';
 import { MessageService } from './message.service';
 import { MessageDelete } from '../models/messages/messageDelete';
+import { ReactionModif } from '../models/reactions/reactionModif';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageWsService {
 
-  stompClient;
-  salons: { [salonId: string]: Salon } = {};
-  user: UserLocalStorage;
+  private stompClient;
+  private salons: { [salonId: string]: Salon } = {};
+  private user: UserLocalStorage;
 
-  constructor(private msgService: MessageService, storageService: StorageService, private salonService: SalonService, private emojiService: EmojiService) {
+  constructor(private msgService: MessageService, storageService: StorageService, private salonService: SalonService) {
     storageService.subscribe("user", user => this.user = user);
     this.connect();
   }
@@ -86,6 +87,9 @@ export class MessageWsService {
   /** Send the message to delete with the WebSocket */
   delete = (msgId: string) => this.stompClient.send("/app/chat.delete", {}, msgId);
 
+  /** Send the reaction to modify with the WebSocket */
+  react = (modif: ReactionModif) => this.stompClient.send("/app/chat.react", {}, JSON.stringify(modif));
+
   // =========================================================================================
   // Messages management
 
@@ -99,7 +103,7 @@ export class MessageWsService {
       this.deleteMsg(this.salons[msg.salonId], msg);
   }
 
-  /** Process the new and edited messages */
+  /** Process the new messages, the edited messages and the reactions changes */
   private addOrEditMsg(salon: Salon, msg: Message) {
     let edited = false;
     for (let i = 0; i < salon.messages.length; i++)

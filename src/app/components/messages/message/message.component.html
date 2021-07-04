@@ -18,7 +18,8 @@
 
         <!-- Reactions -->
         <div id="reactions">
-            <app-reaction *ngFor="let react of msg.reactions" [reaction]="react" [member]="member"></app-reaction>
+            <app-reaction *ngFor="let react of msg.reactions" [reaction]="react" [member]="member" [msgId]="msg.id">
+            </app-reaction>
         </div>
     </div>
 

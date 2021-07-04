@@ -1,10 +1,10 @@
 import { FileModel } from "src/app/models/file";
-import { MemberUsersPseudo } from "src/app/models/member/memberPseudoUser";
-import { Reaction } from "../reaction";
+import { MemberUserPseudo } from "src/app/models/member/memberPseudoUser";
+import { Reaction } from "../reactions/reaction";
 
 export interface Message {
     id: string;
-    sender: MemberUsersPseudo;
+    sender: MemberUserPseudo;
     teamId: string;
     salonId: string;
 

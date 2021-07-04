@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MemberUsersPseudo } from 'src/app/models/member/memberPseudoUser';
+import { MemberUserPseudo } from 'src/app/models/member/memberPseudoUser';
+import { MessageWsService } from 'src/app/services/message-ws.service';
 import { environment } from 'src/environments/environment';
-import { Reaction } from '../../../models/reaction';
+import { Reaction } from '../../../models/reactions/reaction';
 
 @Component({
   selector: 'app-reaction',
@@ -12,12 +13,13 @@ export class EmojiComponent implements OnInit {
   env = environment;
 
   @Input() reaction: Reaction;
-  _member: MemberUsersPseudo;
+  @Input() msgId: string;
+  _member: MemberUserPseudo;
 
   /** true: used by the user */
   on: boolean;
 
-  constructor() { }
+  constructor(private wsService: MessageWsService) { }
 
   ngOnInit(): void { }
 
@@ -25,13 +27,9 @@ export class EmojiComponent implements OnInit {
 
   /** Handle click on reaction emoji, either add/remove the reaction for the user */
   addRemoveReact = () => {
-    // TODO [Back] fake emoji counter
-    if (this.on)
-      this.reaction.members = this.reaction.members.filter(member => member.user.id != this.member.user.id);
-    else
-      this.reaction.members.push(this.member);
-
-    this.on = !this.on
+    // TODO ?? don't wait for the server
+    // this.on = !this.on
+    this.wsService.react({ msgId: this.msgId, memberId: this._member.id, emojiId: this.reaction.emoji.id, on: !this.on });
   }
 
   /** Returns the tooltip text (hover on emoji): "A, B, C and 7 others use this emoji" */
@@ -66,12 +64,12 @@ export class EmojiComponent implements OnInit {
 
   // =========================================================================================
 
-  @Input() set member(member: MemberUsersPseudo) {
+  @Input() set member(member: MemberUserPseudo) {
     this._member = member;
     this.on = this.reaction.members.find(member => member.user.id == this.member.user.id) != undefined;
   }
 
-  get member(): MemberUsersPseudo {
+  get member(): MemberUserPseudo {
     return this._member;
   }
 }

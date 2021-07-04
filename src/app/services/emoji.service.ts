@@ -6,7 +6,6 @@ import { EmojisSelectorComponent } from '../components/messages/emojis-selector/
 import { EmojiCreate } from '../models/emoji/emojiCreate';
 import { EmojiDesc } from '../models/emoji/emojiDesc';
 import { EmojiNamePict } from '../models/emoji/emojiNamePict';
-import { UserLocalStorage } from '../models/user/userLocalStorage';
 import { StorageService } from './storage.service';
 import { UtilsService } from './utils.service';
 
@@ -208,7 +207,7 @@ export class EmojiService {
 
   // ================================================================================================
 
-  getAllEmojis(teamId: string = "und3f1n3ed") {
+  getAllEmojis(teamId: string = "und3f1n3d") {
     return this.emojisTeamDesc[teamId].concat(this.emojisOrgaDesc).concat(this.json);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MemberUsersPseudo } from 'src/app/models/member/memberPseudoUser';
+import { MemberUserPseudo } from 'src/app/models/member/memberPseudoUser';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class SenderProfileComponent implements OnInit {
   env = environment;
 
-  @Input() member: MemberUsersPseudo;
+  @Input() member: MemberUserPseudo;
   @Input() show: boolean;
 
   constructor(private router: Router) { }
