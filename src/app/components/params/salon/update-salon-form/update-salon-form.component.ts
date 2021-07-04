@@ -34,20 +34,20 @@ export class UpdateSalonFormComponent implements OnInit {
         this.salonUpdateForm = this.fb.group({
           name: this.salonUpdate.name,
           desc: this.salonUpdate.desc,
-        })
-      })
+        });
+      });
     });
   }
 
   ngOnInit(): void {
     this.activatedRoute.parent.paramMap.subscribe(params => {
       this.salonId = params.get("salonId");
-    })
-    this.service.findNameDescById(this.salonId).subscribe(salon => {
-      this.salon = salon;
-    })
-
+      this.service.findNameDescById(this.salonId).subscribe(salon => {
+        this.salon = salon;
+      });
+    });
   }
+
   updateSalon = (salonId) => {
     this.salonUpdate.name = this.salonUpdateForm.value.name;
     this.salonUpdate.desc = this.salonUpdateForm.value.desc;
@@ -55,7 +55,6 @@ export class UpdateSalonFormComponent implements OnInit {
       this.salonUpdate = salonUpdate;
       const URL = `/params/salon/${salonId}/summary`;
       this.router.navigate([URL]);
-    })
+    });
   }
-
 }

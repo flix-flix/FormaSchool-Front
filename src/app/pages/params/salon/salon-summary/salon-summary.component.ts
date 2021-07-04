@@ -23,17 +23,14 @@ export class SalonSummaryComponent implements OnInit {
   ngOnInit(): void {
     this.route.parent.paramMap.subscribe(params => {
       this.salonId = params.get("salonId");
-    })
-    this.salonService.findNameDescById(this.salonId).subscribe(salon => {
-      this.salon = salon;
-    })
+      this.salonService.findNameDescById(this.salonId).subscribe(salon => {
+        this.salon = salon;
+      });
+    });
   }
 
   salonUpdate = (salonId: string) => {
-    console.log(salonId);
     const URL = `/params/salon/${salonId}/summaryUpdate`
     this.router.navigate([URL]);
-    console.log(URL);
-
   }
 }

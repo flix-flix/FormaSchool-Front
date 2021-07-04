@@ -12,12 +12,14 @@
     margin-right: .2rem;
     margin-bottom: .2rem;
     
-    border-radius: .7rem;
-
+    cursor: pointer;
+    
     font-weight: bold;
-
+    
     color: var(--font_2);
     background-color: var(--menu);
+    
+    border-radius: .7rem;
     border: 1px solid var(--menu);/* same size than .on */
 }
 
