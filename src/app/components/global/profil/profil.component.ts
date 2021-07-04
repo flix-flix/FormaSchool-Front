@@ -14,7 +14,7 @@ export class ProfilComponent implements OnInit {
 
   user: UserNamePict;
 
-  displayMenu = false;
+  hideMenu = true;
 
   constructor(private storageService: StorageService, private router: Router) { }
 
@@ -25,15 +25,15 @@ export class ProfilComponent implements OnInit {
   /** Disconnect the user */
   logout = () => {
     // TODO clear salons
-    this.displayMenu = false;
+    this.hideMenu = true;
     this.storageService.clear("user");
     this.router.navigate(["/login"]);
-    // TODO request to server
+    // TODO request logout to server
   }
 
   /** Redirects to the user settings */
   userSettings() {
-    this.displayMenu = false;
+    this.hideMenu = true;
     this.router.navigate([`/params/user/${this.user.id}/`]);
   }
 }
