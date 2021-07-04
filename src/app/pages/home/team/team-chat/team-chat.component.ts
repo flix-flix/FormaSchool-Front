@@ -24,13 +24,14 @@ export class TeamChatComponent implements OnInit {
       this.teamId = params.get("teamId");
       this.salonId = params.get("salonId");
 
-      // Redirect to default salon
-      this.salonService.findAllOfTeam(this.teamId).subscribe(salons => {
-        if (this.salonId == "redirect")
-          this.router.navigate([`/teamMessages/${this.teamId}/${salons[0].id}`]);
-        else
-          this.salons = salons
-      });
+      if (!this.salons)
+        // Redirect to default salon
+        this.salonService.findAllOfTeam(this.teamId).subscribe(salons => {
+          if (this.salonId == "redirect")
+            this.router.navigate([`/teamMessages/${this.teamId}/${salons[0].id}`]);
+          else
+            this.salons = salons
+        });
     });
   }
 }
