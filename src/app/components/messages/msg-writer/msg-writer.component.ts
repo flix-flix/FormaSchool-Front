@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { EmojiDesc } from 'src/app/models/emoji/emojiDesc';
 import { MessageSend } from 'src/app/models/messages/messageSend';
 
 @Component({
@@ -63,9 +64,9 @@ export class MsgWriterComponent implements OnInit {
   openCloseEmojiSelector = () => this.hideSelector = !this.hideSelector;
 
   /** Add the emoji-text at the cursor position */
-  addEmoji(emoji: string) {
+  addEmoji(emoji: EmojiDesc) {
     const elem = this.msgWriter.nativeElement;
-    const text = `${elem.innerText.substring(0, this.caretStart)}:${emoji}:${elem.innerText.substring(this.caretEnd, elem.innerText.length)}`;
+    const text = `${elem.innerText.substring(0, this.caretStart)}:${emoji.annotation}:${elem.innerText.substring(this.caretEnd, elem.innerText.length)}`;
     this.msgWriter.nativeElement.innerText = text;
     this.content = text;
     this.hideSelector = true;

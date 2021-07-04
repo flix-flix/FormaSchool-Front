@@ -34,4 +34,6 @@
             *ngIf="msg.sender.user.id == user.id" (mousedown)="deleteButton($event)">
     </div>
 
+    <app-emojis-selector [hidden]="hideSelector" [teamId]="msg.teamId" (emojiEmit)="addReaction($event)">
+    </app-emojis-selector>
 </div>

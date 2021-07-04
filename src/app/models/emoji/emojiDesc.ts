@@ -8,4 +8,5 @@ export interface EmojiDesc {
     tags?: string;
 
     path: string;
+    id: string;
 }

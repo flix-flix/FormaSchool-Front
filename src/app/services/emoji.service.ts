@@ -18,6 +18,8 @@ export class EmojiService {
   /** path to the folder of the emojis [team, organization, default] */
   paths = ["emojisTeams/", "emojisOrga/", "emojis/"];
 
+  allEmojis: { [teamId: string]: EmojiDesc[] } = { "und3f1n3d": [] };
+
   json: EmojiDesc[] = [];
   emojisOrgaDesc: EmojiDesc[] = [];
   emojisTeamDesc: { [teamId: string]: EmojiDesc[] } = { "und3f1n3d": [] };
@@ -56,6 +58,7 @@ export class EmojiService {
       this.json.sort((a, b) => a.order - b.order);
       this.json.forEach(item => item.annotation = item.annotation.substr(0, item.annotation.length - 2));
       this.json.forEach(item => item.path = "emojis/" + item.annotation);
+      this.json.forEach(item => item.id = item.annotation);
       this.json = this.json.filter(item => !item.annotation.includes("skin"));
 
       // === Process the already loaded selectors ===
@@ -63,7 +66,7 @@ export class EmojiService {
       this.selectors.forEach(select => select.emojis = this.json.slice(0, 15));
 
       setTimeout(() => this.selectors.forEach(select => select.emojis = this.getAllEmojis(select.teamId).slice(0, 50)), 1000);
-      setTimeout(() => this.selectors.forEach(select => select.emojis = this.getAllEmojis(select.teamId).slice(0, 100)), 4000);
+      // setTimeout(() => this.selectors.forEach(select => select.emojis = this.getAllEmojis(select.teamId).slice(0, 100)), 4000);
       // setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 150)), 8000);
       // setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 200)), 12000);
     });
@@ -72,14 +75,14 @@ export class EmojiService {
   updateOrga() {
     this.findEmojiOrga().subscribe(emojisOrga => {
       this.emojisOrga = emojisOrga;
-      this.emojisOrgaDesc = emojisOrga.map(emoji => ({ annotation: emoji.name, group: "orga", path: emoji.picture }));
+      this.emojisOrgaDesc = emojisOrga.map(emoji => ({ annotation: emoji.name, group: "orga", path: emoji.picture, id: emoji.id }));
     });
   }
 
   updateTeam(teamId: string) {
     this.findEmojiTeam(teamId).subscribe(emojisTeam => {
       this.emojisTeam[teamId] = emojisTeam;
-      this.emojisTeamDesc[teamId] = emojisTeam.map(emoji => ({ annotation: emoji.name, group: "team", path: emoji.picture }));
+      this.emojisTeamDesc[teamId] = emojisTeam.map(emoji => ({ annotation: emoji.name, group: "team", path: emoji.picture, id: emoji.id }));
     });
   }
 
@@ -208,6 +211,8 @@ export class EmojiService {
   // ================================================================================================
 
   getAllEmojis(teamId: string = "und3f1n3d") {
-    return this.emojisTeamDesc[teamId].concat(this.emojisOrgaDesc).concat(this.json);
+    if (!(teamId in this.allEmojis))
+      this.allEmojis[teamId] = this.emojisTeamDesc[teamId].concat(this.emojisOrgaDesc).concat(this.json);
+    return this.allEmojis[teamId];
   }
 }

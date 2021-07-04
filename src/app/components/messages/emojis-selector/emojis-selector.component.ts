@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class EmojisSelectorComponent implements OnInit {
   url = environment.apiUrl + '/files/';
 
-  @Output() emojiEmit = new EventEmitter<string>();
+  @Output() emojiEmit = new EventEmitter<EmojiDesc>();
 
   @Input() teamId: string;
 
@@ -33,7 +33,7 @@ export class EmojisSelectorComponent implements OnInit {
   // ====================================================================================================
 
   emojiSelected(emoji: EmojiDesc) {
-    this.emojiEmit.emit(emoji.annotation);
+    this.emojiEmit.emit(emoji);
     this.emojiHover = this._emojis[0];
   }
 

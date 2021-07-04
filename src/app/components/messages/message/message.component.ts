@@ -1,7 +1,10 @@
+import { SourceMapGenerator } from '@angular/compiler/src/output/source_map';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { EmojiDesc } from 'src/app/models/emoji/emojiDesc';
 import { Member } from 'src/app/models/member/member';
 import { MessageEdit } from 'src/app/models/messages/MessageEdit';
 import { UserLocalStorage } from 'src/app/models/user/userLocalStorage';
+import { MessageWsService } from 'src/app/services/message-ws.service';
 import { Message } from '../../../models/messages/message';
 
 @Component({
@@ -23,7 +26,9 @@ export class MessageComponent implements OnInit {
   editable = false;
   editContent = "";
 
-  constructor() { }
+  hideSelector = true;
+
+  constructor(private wsService: MessageWsService) { }
 
   ngOnInit(): void { }
 
@@ -52,11 +57,8 @@ export class MessageComponent implements OnInit {
       this.delete.emit(this.msg.id);
   }
 
-  /** Open the emoji selector */
-  emoji = () => {
-    // TODO Emoji selector
-    alert("TODO Emoji")
-  }
+  /** Open/Close the emoji selector */
+  emoji = () => this.hideSelector = !this.hideSelector;
 
   // =========================================================================================
   // Edit
@@ -76,6 +78,15 @@ export class MessageComponent implements OnInit {
     if (this.editContent != this.msg.content)
       this.edit.emit({ id: this.msg.id, content: this.editContent });
     this.editable = false;
+  }
+
+  // =========================================================================================
+  // Reactions
+
+  /** Add the reaction to the message */
+  addReaction(emoji: EmojiDesc) {
+    this.wsService.react({ msgId: this.msg.id, memberId: this.member.id, emojiId: emoji.id, on: true });
+    this.hideSelector = true;
   }
 }
 
