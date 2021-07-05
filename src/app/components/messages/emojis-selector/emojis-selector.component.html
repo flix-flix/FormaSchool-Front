@@ -6,7 +6,7 @@
             (mousedown)="emojiSelected(emoji)" (mouseenter)="hover(emoji)">
     </div>
     <div id="hover" *ngIf="emojiHover">
-        <img [src]="url + emojiHover.path" [alt]="emojiHover.annotation">
+        <img [src]="url + emojiHover.path" [alt]="emojiHover.annotation" id="hover_img">
         <span>:{{emojiHover.annotation}}:</span>
     </div>
 </div>

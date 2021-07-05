@@ -87,6 +87,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [
@@ -178,6 +179,7 @@ import { ConfirmationService } from 'primeng/api';
     TranslateModule.forRoot(),
     ToastModule,
     ConfirmPopupModule,
+    OverlayPanelModule,
   ],
   providers: [
     RxStompService,

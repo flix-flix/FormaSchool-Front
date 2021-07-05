@@ -97,10 +97,12 @@ export class MessageWsService {
   private onMessageReceived = (obj: any) => {
     let msg = JSON.parse(obj.body);
 
-    if ("content" in msg)
-      this.addOrEditMsg(this.salons[msg.salonId], this.msgService.fromJSON(msg));
-    else
-      this.deleteMsg(this.salons[msg.salonId], msg);
+
+    if (this.salons[msg.salonId])
+      if ("content" in msg)
+        this.addOrEditMsg(this.salons[msg.salonId], this.msgService.fromJSON(msg));
+      else
+        this.deleteMsg(this.salons[msg.salonId], msg);
   }
 
   /** Process the new messages, the edited messages and the reactions changes */

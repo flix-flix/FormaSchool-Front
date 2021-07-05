@@ -65,8 +65,8 @@ export class EmojiService {
       this.waiting.forEach(process => process());
       this.selectors.forEach(select => select.emojis = this.json.slice(0, 15));
 
-      setTimeout(() => this.selectors.forEach(select => select.emojis = this.getAllEmojis(select.teamId).slice(0, 50)), 1000);
-      // setTimeout(() => this.selectors.forEach(select => select.emojis = this.getAllEmojis(select.teamId).slice(0, 100)), 4000);
+      // setTimeout(() => this.selectors.forEach(select => select.emojis = this.getAllEmojis(select.teamId).slice(0, 50)), 1000);
+      setTimeout(() => this.selectors.forEach(select => select.emojis = this.getAllEmojis(select.teamId).slice(0, 100)), 4000);
       // setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 150)), 8000);
       // setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 200)), 12000);
     });
