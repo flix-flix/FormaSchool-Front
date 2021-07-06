@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/models/member/member';
-import { MessageEdit } from 'src/app/models/messages/MessageEdit';
+import { MessageEdit } from 'src/app/models/messages/messageEdit';
 import { MessageSend } from 'src/app/models/messages/messageSend';
 import { MessageWsService } from 'src/app/services/message-ws.service';
 import { Message } from '../../../models/messages/message';

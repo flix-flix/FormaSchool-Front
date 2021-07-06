@@ -8,7 +8,7 @@ import { EmojiService } from './emoji.service';
 import { SalonService } from './salon.service';
 import { StorageService } from './storage.service';
 import { MessageSend } from '../models/messages/messageSend';
-import { MessageEdit } from '../models/messages/MessageEdit';
+import { MessageEdit } from '../models/messages/messageEdit';
 import { Message } from '../models/messages/message';
 import { MsgThreadComponent } from '../components/messages/msg-thread/msg-thread.component';
 import { MessageService } from './message.service';

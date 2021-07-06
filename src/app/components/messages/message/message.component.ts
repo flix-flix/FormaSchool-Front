@@ -2,7 +2,7 @@ import { SourceMapGenerator } from '@angular/compiler/src/output/source_map';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { EmojiDesc } from 'src/app/models/emoji/emojiDesc';
 import { Member } from 'src/app/models/member/member';
-import { MessageEdit } from 'src/app/models/messages/MessageEdit';
+import { MessageEdit } from 'src/app/models/messages/messageEdit';
 import { UserLocalStorage } from 'src/app/models/user/userLocalStorage';
 import { MessageWsService } from 'src/app/services/message-ws.service';
 import { Message } from '../../../models/messages/message';
