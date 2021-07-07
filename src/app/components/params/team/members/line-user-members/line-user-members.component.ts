@@ -8,8 +8,6 @@ import { Role } from 'src/app/models/role/role';
 import { RoleWithoutRights } from 'src/app/models/role/roleWithoutRights';
 import { MemberService } from 'src/app/services/member.service';
 import { RoleService } from 'src/app/services/role.service';
-import { TeamService } from 'src/app/services/team.service';
-
 
 
 @Component({
@@ -53,6 +51,8 @@ export class LineUserMembersComponent implements OnInit {
   }
 
   addRole = () => {
+    console.log(this.member);
+    console.log(this.selectedRole);
     this.memberService.addRoleToMember(this.member.id, this.selectedRole.id).subscribe(member => {
       this.refresh();
     });
@@ -61,9 +61,6 @@ export class LineUserMembersComponent implements OnInit {
   deleteRole = (role: RoleWithoutRights) => {
     this.memberService.deleteRoleToMember(this.member.id, role.id).subscribe(() => {
       this.refresh();
-      this.roleService.findAllWithoutRightsByTeamId(this.teamId).subscribe(roles => {
-        this.roles = roles;
-      });
     });
   }
 }

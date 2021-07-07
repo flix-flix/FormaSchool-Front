@@ -1,15 +1,22 @@
 <div id="global">
-    <label>{{ member.user.lastname }}</label>
-    <label>{{ member.user.firstname }}</label>
-
-    <div *ngFor="let role of member.roles">
-        {{ role.name }}
-        <button type="button" (click)="deleteRole(role)">Delete Role</button>
-    </div>
-
-
-    <p-dropdown [options]="roles" [(ngModel)]="selectedRole" optionLabel="name">Search new role</p-dropdown>
-    <button type="button" (click)="addRole()">Send Role</button>
-
+      <div class="nameMember"> 
+         <label>{{ member.user.lastname }}</label>
+         <label>{{ member.user.firstname }}</label>
+       </div>
+      <div class="roles" *ngFor="let role of member.roles">
+            <div class="circle" style.backgroundColor={{role.color}} style="height: 15px;
+                        width: 15px;border-radius: 60%;"> 
+            </div>
+            <div class="roleName">
+                {{role.name}}
+            </div>
+            <img class="feather" src="../../../../../assets/images/feather-icons/x-circle.svg" alt="delete button"
+                (click)="deleteRole(role)">
+           
+        </div>
+        <div class="roles">
+         <p-dropdown [options]="roles" [(ngModel)]="selectedRole" optionLabel="name">Search new role</p-dropdown>
+             <button pButton type="button" class="p-button-raised p-button-rounded" (click)="addRole()">Add Role</button>
+        </div>
 
 </div>

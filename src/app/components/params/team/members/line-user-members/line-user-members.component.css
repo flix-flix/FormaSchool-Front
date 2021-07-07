@@ -25,8 +25,8 @@
 
 
 img {
-	width: 250px;
-	height: 250px;
+	width: 20px;
+	height: 20px;
     margin-bottom: 30px;
 }
 
@@ -59,3 +59,40 @@ label{
     font-size: large;
     color: var(--font_1);
 }
+
+.feather{
+    height:20px;
+    weight:20px;
+    margin-right: 50px;
+}
+
+.roles{
+    margin: 5px;
+    display: flex;
+    padding: 5px;
+    justify-content: space-around;
+}
+.roles:hover{
+    background-color: var(--menu);
+}
+
+.roleName{
+    margin-left: 15px;
+    margin-top: 5px;
+}
+.circle{
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+.p-button-raised p-button-rounded{
+    background-color: green;
+}
+
+.nameMember{
+    flex-direction: row-reverse;
+    padding: 10px;
+    justify-content: space-around;
+    text-align: right;
+}
+
+
