@@ -1,6 +1,7 @@
 <form [formGroup]="userForm" (ngSubmit)="save()">
-
-    <app-upload-with-preview (imageEvent)="getEvent($event)"></app-upload-with-preview>
+    <div id="upload">
+        <app-upload-with-preview (imageEvent)="getEvent($event)"></app-upload-with-preview>
+    </div>
 
     <div>
         <span id="firstname" class="p-float-label">
@@ -21,6 +22,4 @@
         </span>
         <button pButton pRipple type="submit" label="Créer" class="p-button-rounded p-button-info"></button>
     </div>
-
-
 </form>

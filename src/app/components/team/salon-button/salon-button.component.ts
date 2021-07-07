@@ -11,7 +11,7 @@ export class SalonButtonComponent implements OnInit {
   @Input() salon: SalonNameTeam;
   // TODO [Improve] ? on/off state (linked to other buttons and the display)
   /** Displayed salon */
-  @Input() salonId: number;
+  @Input() salonId: string;
 
   constructor() { }
 

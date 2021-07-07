@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreatedEmoji } from 'src/app/models/emoji/createdEmoji';
+import { EmojiCreate } from 'src/app/models/emoji/emojiCreate';
 import { EmojiService } from 'src/app/services/emoji.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { EmojiService } from 'src/app/services/emoji.service';
 })
 export class AdminEmojisComponent implements OnInit {
 
-  emojis: CreatedEmoji[];
+  emojis: EmojiCreate[];
 
   constructor(private service: EmojiService) { }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CreatedEmoji } from 'src/app/models/emoji/createdEmoji';
+import { EmojiCreate } from 'src/app/models/emoji/emojiCreate';
 import { EmojiService } from 'src/app/services/emoji.service';
 
 
@@ -11,7 +11,7 @@ import { EmojiService } from 'src/app/services/emoji.service';
 })
 export class TeamEmojisComponent implements OnInit {
 
-  emojis: CreatedEmoji[];
+  emojis: EmojiCreate[];
   teamId: string;
 
   constructor(private service: EmojiService, private router: ActivatedRoute) {

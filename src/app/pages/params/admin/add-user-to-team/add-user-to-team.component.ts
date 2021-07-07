@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MemberCreate } from 'src/app/models/member/memberCreate';
 import { TeamNamePict } from 'src/app/models/team/teamNamePict';
 import { UserNamePict } from 'src/app/models/user/userNamePict';
 import { MemberService } from 'src/app/services/member.service';
@@ -18,15 +17,12 @@ export class AddUserToTeamComponent implements OnInit {
   selectedUser: UserNamePict[] = []
   selectedTeam: TeamNamePict;
 
-
-
-  constructor(private userService: UserService, private teamService: TeamService, private memberService: MemberService) {
-  }
+  constructor(private userService: UserService, private teamService: TeamService, private memberService: MemberService) { }
 
   ngOnInit(): void {
     this.teamService.findAllPresentation().subscribe(teamList => {
       this.teams = teamList;
-    })
+    });
   }
 
   /**
@@ -36,7 +32,8 @@ export class AddUserToTeamComponent implements OnInit {
     if (this.selectedTeam != null) {
       this.userService.userNotInTheTeam(this.selectedTeam.id).subscribe(users => {
         this.users = users;
-      })
+        this.users.forEach(user => user._search = user.firstname + " " + user.lastname);
+      });
     }
   }
 
@@ -45,11 +42,10 @@ export class AddUserToTeamComponent implements OnInit {
    */
   save = () => {
     this.selectedUser.forEach(user => {
-      this.memberService.save(new MemberCreate(this.selectedTeam, user)).subscribe(membre => {
+      this.memberService.save({ team: this.selectedTeam, user: user }).subscribe(membre => {
         alert(`Membre bien creer avec l'id: ${membre.id}`);
         this.refreshUser();
       })
     });
   }
-
 }

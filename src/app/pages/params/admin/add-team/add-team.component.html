@@ -1,6 +1,7 @@
 <form [formGroup]="teamForm" (ngSubmit)="save()">
-
-    <app-upload-with-preview (imageEvent)="getEvent($event)"></app-upload-with-preview>
+    <div id="upload">
+        <app-upload-with-preview (imageEvent)="getEvent($event)"></app-upload-with-preview>
+    </div>
 
     <span class="p-float-label">
         <input id="float-input" type="text" formControlName="name" required pInputText>

@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class UpdateTeamFormComponent implements OnInit {
   env = environment;
 
-  teamUpdate: TeamNameDescPict = new TeamNameDescPict(" ", " ", " ", " ");
+  teamUpdate: TeamNameDescPict = { id: " ", name: " ", desc: " ", picture: " " };
   teamUpdateForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     desc: new FormControl(''),

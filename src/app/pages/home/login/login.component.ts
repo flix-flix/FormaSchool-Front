@@ -13,7 +13,6 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginComponent implements OnInit {
 
   userProfile: FormGroup;
-  value: string = '';
 
   constructor(private fb: FormBuilder, private userService: UserService, private storageService: StorageService, private router: Router) {
     this.userProfile = this.fb.group({
@@ -25,11 +24,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit = () => {
+  /** Try to connect to the API */
+  login = () => {
     this.userService.connect(this.userProfile.value)
       .subscribe(user => {
         this.storageService.store("user", user);
         this.router.navigate(["/teamSelect"]);
+        // TODO on error -> dialog
       });
   }
 }

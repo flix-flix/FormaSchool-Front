@@ -1,4 +1,5 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { EmojiDesc } from 'src/app/models/emoji/emojiDesc';
 import { MessageSend } from 'src/app/models/messages/messageSend';
 
 @Component({
@@ -10,16 +11,42 @@ export class MsgWriterComponent implements OnInit {
   @ViewChild("writer") private msgWriter: ElementRef;
 
   @Output() msgEmit = new EventEmitter<MessageSend>();
+  @Input() teamId: string;
 
-  file: File;
+  /** Writen message */
   content = "";
+  /** Selected file */
+  file: File;
+  /** URL of the selected file */
   fileUrl = "";
+
+  hideSelector = true;
+  caretStart = 0;
+  caretEnd = 0;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  // ====================================================================================================
+
+  /** Handle event [enter] */
+  pressEnter = (event) => {
+    event.preventDefault();
+    if (this.content.length != 0 || this.file)
+      this.sendMsg();
+  }
+
+  /** Send the written message outside of this component */
+  sendMsg = () => {
+    this.msgEmit.emit({ content: this.content, file: this.file, fileName: this.file?.name });
+    this.content = "";
+    this.file = undefined;
+    this.msgWriter.nativeElement.innerText = "";
+  }
+
+  /** Update the selected file */
   changeFile(event) {
     this.file = event.target.files[0];
     this.fileUrl = undefined;
@@ -31,20 +58,29 @@ export class MsgWriterComponent implements OnInit {
     }
   }
 
-  pressEnter = (event) => {
-    event.preventDefault();
-    if (this.content.length != 0 || this.file)
-      this.sendMsg();
+  // ====================================================================================================
+  // Emoji
+
+  openCloseEmojiSelector = () => this.hideSelector = !this.hideSelector;
+
+  /** Add the emoji-text at the cursor position */
+  addEmoji(emoji: EmojiDesc) {
+    const elem = this.msgWriter.nativeElement;
+    const text = `${elem.innerText.substring(0, this.caretStart)}:${emoji.annotation}:${elem.innerText.substring(this.caretEnd, elem.innerText.length)}`;
+    this.msgWriter.nativeElement.innerText = text;
+    this.content = text;
+    this.hideSelector = true;
   }
 
-  sendMsg = () => {
-    this.msgEmit.emit({ content: this.content, file: this.file, fileName: this.file?.name });
-    this.content = "";
-    this.file = undefined;
-    this.msgWriter.nativeElement.innerText = "";
-  }
+  /** Update the position of the cursor in the [text input] */
+  updateCaret(elem) {
+    const win = elem.ownerDocument.defaultView;
 
-  openCloseEmojiSelector = () => {
-    alert("TODO add emoji");
+    if (win.getSelection().rangeCount > 0) {
+      const range = win.getSelection().getRangeAt(0);
+
+      this.caretStart = range.startOffset;
+      this.caretEnd = range.endOffset;
+    }
   }
 }

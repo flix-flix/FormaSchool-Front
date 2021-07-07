@@ -12,7 +12,7 @@ export class LogComponent implements OnInit {
   env = environment;
 
   @Input() log: Log;
-  @Input() teamId: number;
+  @Input() teamId: string;
   user: UserNamePict;
 
   constructor() { }

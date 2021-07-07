@@ -27,10 +27,7 @@ export class TeamSummaryComponent implements OnInit {
   }
 
   teamUpdate = (teamId: string) => {
-    console.log(teamId);
     const URL = `/params/team/${teamId}/summaryUpdate`
     this.router.navigate([URL]);
-    console.log(URL);
-
   }
 }

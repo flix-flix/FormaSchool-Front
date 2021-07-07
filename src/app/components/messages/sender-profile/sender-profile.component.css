@@ -1,0 +1,59 @@
+#sender_img, #sender_img2 {
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1rem;
+
+    border-radius: 2rem;
+}
+
+#card {
+    position: absolute;
+    left: -0.5rem;
+    top: -0.5rem;
+    
+    display: none;
+    flex-direction: row;
+   
+    z-index: 3;
+
+    width: 20rem;
+    height: 6rem;
+    
+    font-weight: bold;
+
+    color: var(--font_2);
+    background-color: var(--menu);
+    
+    border-radius: 1rem;
+    box-shadow: 2px 4px 30px 10px var(--font_2);
+}
+
+#all:hover #card{
+    display: flex;
+}
+
+#sender_img2 {
+    margin-top: 1rem;
+    margin-left: 1.5rem;
+}
+
+#profile_col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#profile_name {
+    margin-bottom: .5rem;
+}
+
+#profile_icons {
+    display: flex;
+    flex-direction: row;
+
+    padding-left: .5rem;
+}
+
+.icon {
+    margin-right: .5rem;
+}

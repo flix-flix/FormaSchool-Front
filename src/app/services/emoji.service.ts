@@ -2,26 +2,110 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CreatedEmoji } from '../models/emoji/createdEmoji';
+import { EmojisSelectorComponent } from '../components/messages/emojis-selector/emojis-selector.component';
+import { EmojiCreate } from '../models/emoji/emojiCreate';
+import { EmojiDesc } from '../models/emoji/emojiDesc';
 import { EmojiNamePict } from '../models/emoji/emojiNamePict';
+import { StorageService } from './storage.service';
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmojiService {
+  url = environment.apiUrl + "/emojis/";
 
-  /** path to the folder of the emojis [default, organization, team] */
-  static path = ["emojis/", "emojisOrga/", "emojisTeams/"];
+  /** path to the folder of the emojis [team, organization, default] */
+  paths = ["emojisTeams/", "emojisOrga/", "emojis/"];
 
-  constructor(private http: HttpClient) { }
+  allEmojis: { [teamId: string]: EmojiDesc[] } = { "und3f1n3d": [] };
+
+  json: EmojiDesc[] = [];
+  emojisOrgaDesc: EmojiDesc[] = [];
+  emojisTeamDesc: { [teamId: string]: EmojiDesc[] } = { "und3f1n3d": [] };
+
+  /** Emojis added by the organization (available for all the teams) */
+  emojisOrga: EmojiNamePict[] = [];
+  /** Emojis of each team (available only in one team) */
+  emojisTeam: { [teamId: string]: EmojiNamePict[] } = { "und3f1n3d": [] };
+
+  /** give id to the emoji without id*/
+  nextEmojiId = 1_000_000;
+  /** selectors waiting to be filled with emojis */
+  selectors: EmojisSelectorComponent[] = [];
+  /** string/setters waiting to be processed till the emojis are downloaded */
+  waiting: Function[] = [];
+
+  constructor(private http: HttpClient, private utilsService: UtilsService, storageService: StorageService) {
+    this.updateBase();
+    this.updateOrga();
+
+    storageService.subscribe("user", user => {
+      if (user)
+        user.members.forEach(member => this.updateTeam(member.team.id));
+    });
+    // TODO Update the processed contents if requests take too much time (ugly)
+  }
+
+  // ================================================================================================
+  // Init
+
+  updateBase() {
+    this.http.get<any[]>(this.url + "json").subscribe(json => {
+      json.forEach(item => item.order = (item.order == "" ? this.nextEmojiId++ : item.order));
+
+      this.json = <EmojiDesc[]>json;
+      this.json.sort((a, b) => a.order - b.order);
+      this.json.forEach(item => item.annotation = item.annotation.substr(0, item.annotation.length - 2));
+      this.json.forEach(item => item.path = "emojis/" + item.annotation);
+      this.json.forEach(item => item.id = item.annotation);
+      this.json = this.json.filter(item => !item.annotation.includes("skin"));
+
+      // === Process the already loaded selectors ===
+      this.waiting.forEach(process => process());
+      this.selectors.forEach(select => select.emojis = this.json.slice(0, 15));
+
+      // setTimeout(() => this.selectors.forEach(select => select.emojis = this.getAllEmojis(select.teamId).slice(0, 50)), 1000);
+      setTimeout(() => this.selectors.forEach(select => select.emojis = this.getAllEmojis(select.teamId).slice(0, 100)), 4000);
+      // setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 150)), 8000);
+      // setTimeout(() => this.selectors.forEach(select => select.emojis = this.json.slice(0, 200)), 12000);
+    });
+  }
+
+  updateOrga() {
+    this.findEmojiOrga().subscribe(emojisOrga => {
+      this.emojisOrga = emojisOrga;
+      this.emojisOrgaDesc = emojisOrga.map(emoji => ({ annotation: emoji.name, group: "orga", path: emoji.picture, id: emoji.id }));
+    });
+  }
+
+  updateTeam(teamId: string) {
+    this.findEmojiTeam(teamId).subscribe(emojisTeam => {
+      this.emojisTeam[teamId] = emojisTeam;
+      this.emojisTeamDesc[teamId] = emojisTeam.map(emoji => ({ annotation: emoji.name, group: "team", path: emoji.picture, id: emoji.id }));
+    });
+  }
+
+  // ================================================================================================
+  // List emojis
+
+  findEmojiOrga = (): Observable<EmojiNamePict[]> => {
+    return this.http.get<EmojiNamePict[]>(this.url + "emojisOrga");
+  }
+
+  findEmojiTeam = (teamId: string): Observable<EmojiNamePict[]> => {
+    return this.http.get<EmojiNamePict[]>(this.url + "emojisTeam/" + teamId);
+  }
 
   //========================================= Emoji Created ======================================
+  // REST
 
-  findCreatedEmojiByTeamId = (teamId: string): Observable<CreatedEmoji[]> => {
-    return this.http.get<CreatedEmoji[]>(`${environment.apiUrl}/emojis/createdEmojis/${teamId}`);
+  findCreatedEmojiByTeamId = (teamId: string): Observable<EmojiCreate[]> => {
+    return this.http.get<EmojiCreate[]>(`${environment.apiUrl}/emojis/createdEmojis/${teamId}`);
   }
-  findCreatedEmojiOrga = (): Observable<CreatedEmoji[]> => {
-    return this.http.get<CreatedEmoji[]>(`${environment.apiUrl}/emojis/createdEmojisOrga`);
+
+  findCreatedEmojiOrga = (): Observable<EmojiCreate[]> => {
+    return this.http.get<EmojiCreate[]>(`${environment.apiUrl}/emojis/createdEmojisOrga`);
   }
 
   /**
@@ -29,16 +113,16 @@ export class EmojiService {
    * @param emoji the CreatedEmoji you want to add 
    * @returns the emoji created 
    */
-  addEmoji = (emoji: CreatedEmoji): Observable<CreatedEmoji> => {
-    return this.http.post<CreatedEmoji>(`${environment.apiUrl}/emojis/createdEmojis`, emoji.toJSON());
+  addEmoji = (emoji: EmojiCreate): Observable<EmojiCreate> => {
+    return this.http.post<EmojiCreate>(`${environment.apiUrl}/emojis/createdEmojis`, emoji);
   }
 
   /**
    * This function allws you to update the emoji
    * @param emoji a Created Emoji that you want to update
    */
-  updateCreatedEmoji = (emoji: CreatedEmoji): Observable<CreatedEmoji> => {
-    return this.http.patch<CreatedEmoji>(`${environment.apiUrl}/emojis/createdEmojis`, emoji);
+  updateCreatedEmoji = (emoji: EmojiCreate): Observable<EmojiCreate> => {
+    return this.http.patch<EmojiCreate>(`${environment.apiUrl}/emojis/createdEmojis`, emoji);
   }
 
   /**
@@ -59,6 +143,25 @@ export class EmojiService {
   }
 
   // ================================================================================================
+  // Process
+
+  /** Set the emojis of the EmojiSelector (will be delayed if the service is still initializing) */
+  register(selector: EmojisSelectorComponent) {
+    if (this.json.length == 0)
+      this.selectors.push(selector);
+    else
+      selector.emojis = this.json.slice(0, 200);
+  }
+
+  /** Process the emoji-text into html (will be delayed if the service is still initializing) */
+  processEmojiSetter(content: string, teamId: string, setter: Function): void {
+    const process = () => setter(this.processEmoji(content, teamId));
+    if (this.json.length == 0)
+      this.waiting.push(process);
+    process();
+  }
+
+  // ================================================================================================
   // Smart
 
   /**
@@ -66,21 +169,20 @@ export class EmojiService {
    * @param content The string to process
    * @param deep The number of folder deeper than /assets
    */
-  static processEmoji = (content: string, teamId: string): string => {
+  private processEmoji = (content: string, teamId: string): string => {
     let html = ""; // return string
     let search = ":"; // TODO regex
-    let first = 0, second = 0, prev = 0; // first ':', second ':', prev: current char index
+    let first, second, prev = 0; // first ':', second ':', prev: current char index
 
-    while ((first = EmojiService.indexOf(content, search, prev)) != -1
-      && (second = EmojiService.indexOf(content, search, first + 1)) != -1) {
+    while ((first = this.utilsService.indexOf(content, search, prev)) != -1
+      && (second = this.utilsService.indexOf(content, search, first + 1)) != -1) {
       html += content.substring(prev, first);
 
-      let emoji = EmojiService.getEmoji(content.substring(first + 1, second), teamId);
+      let emoji = this.getEmoji(content.substring(first + 1, second), teamId);
       if (emoji == undefined) {// skip current ':' (move 1 forward)
         html += ":";
         prev = first + 1;
       } else {
-        // html += `<img class="inline_emoji" src="${"../".repeat(deep)}assets/images/${emoji.picture}" alt=":${emoji.name}:">`;
         html += `<img class="inline_emoji" src="${environment.apiUrl}/files/${emoji.picture}" alt=":${emoji.name}:">`;
         prev = second + 1;
       }
@@ -91,324 +193,26 @@ export class EmojiService {
   }
 
   /** Returns the matching emoji if it exits, undefined otherwise */
-  static getEmoji = (name: string, teamId = "orga"): EmojiNamePict => {
-    let _emojis = [emojisBase, emojisOrga/*, emojisTeam[teamId]*/];
+  private getEmoji(name: string, teamId = "und3f1n3d"): EmojiNamePict {
+    const emojis = [this.emojisOrga];
+    if (this.emojisTeam[teamId])
+      emojis.unshift(this.emojisTeam[teamId]);
 
-    for (let index in _emojis) {
-      // TODO [Opti] -> search in dict
-      let emojis = Object.values(_emojis[index]).filter(emoji => emoji.name == name);
-      if (emojis.length != 0)
-        return new EmojiNamePict("" + emojis[0].id, emojis[0].name, EmojiService.path[index] + emojis[0].picture);
-    }
+    let emoji;
+    for (let index in emojis)
+      if (emoji = emojis[index].find(emoji => emoji.name == name))
+        return emoji;
+
+    if (this.json.find(emoji => emoji.annotation == name))
+      return { id: undefined, name: name, picture: "emojis/" + name };
     return undefined;
   }
 
   // ================================================================================================
-  // TODO [Utils]
 
-  /** indexOf (string and regex) */
-  static indexOf = (text: string, search: string | RegExp, start: number) => {
-    if (typeof search === "string")
-      return text.indexOf(<string>search, start); // string
-    let index = text.slice(start).search(search); // regex
-    return index < 0 ? index : index + start; // return -1
+  getAllEmojis(teamId: string = "und3f1n3d") {
+    if (!(teamId in this.allEmojis))
+      this.allEmojis[teamId] = this.emojisTeamDesc[teamId].concat(this.emojisOrgaDesc).concat(this.json);
+    return this.allEmojis[teamId];
   }
 }
-
-// ================================================================================================
-// TODO [back]
-
-/** Emojis added in each team */
-let emojisTeam: { [id: number]: { [id: number]: { id: number, name: string, picture: string } } } = {
-  "-1": {},// If no teamId given
-  1: {
-    100_001: {
-      id: 100_001,
-      name: "bob",
-      picture: "team_1_1.png"
-    },
-    100_002: {
-      id: 100_002,
-      name: "rl",
-      picture: "team_1_2.png"
-    },
-    100_003: {
-      id: 100_003,
-      name: "ibm",
-      picture: "team_1_3.png"
-    },
-  },
-  2: {
-    100_101: {
-      id: 100_101,
-      name: "pe",
-      picture: "2/ba.png"
-    },
-  },
-  3: {
-    100_201: {
-      id: 100_201,
-      name: "nike",
-      picture: "3/ca.png"
-    },
-  },
-  10: {
-    100_301: {
-      id: 100_301,
-      name: "bmw",
-      picture: "10/da.png"
-    },
-  }
-};
-
-// ================================================================================================
-
-/** Emojis added by the organization (available for all the teams) */
-let emojisOrga: { [id: number]: { id: number, name: string, picture: string } } = {
-  10_001: {
-    id: 10_001,
-    name: "m2i",
-    picture: "orga_1.png"
-  },
-  10_002: {
-    id: 10_002,
-    name: "semifir",
-    picture: "orga_2.png"
-  },
-};
-
-// ================================================================================================
-
-/** Default emojis */
-let emojisBase: { [id: number]: { id: number, name: string, picture: string } } = {
-  1: {
-    id: 1,
-    name: "bagel",
-    picture: "bagel.png"
-  },
-  2: {
-    id: 2,
-    name: "beer_mug",
-    picture: "beer_mug.png"
-  },
-  3: {
-    id: 3,
-    name: "beverage_box",
-    picture: "beverage_box.png"
-  },
-  4: {
-    id: 4,
-    name: "birthday_cake",
-    picture: "birthday_cake.png"
-  },
-  5: {
-    id: 5,
-    name: "broccoli",
-    picture: "broccoli.png"
-  },
-  6: {
-    id: 6,
-    name: "bubble_tea",
-    picture: "bubble_tea.png"
-  },
-  7: {
-    id: 7,
-    name: "burrito",
-    picture: "burrito.png"
-  },
-  8: {
-    id: 8,
-    name: "cherries",
-    picture: "cherries.png"
-  },
-  9: {
-    id: 9,
-    name: "chocolate_bar",
-    picture: "chocolate_bar.png"
-  },
-  10: {
-    id: 10,
-    name: "clinking_beer_mugs",
-    picture: "clinking_beer_mugs.png"
-  },
-  11: {
-    id: 11,
-    name: "cocktail_glass",
-    picture: "cocktail_glass.png"
-  },
-  12: {
-    id: 12,
-    name: "cookie",
-    picture: "cookie.png"
-  },
-  13: {
-    id: 13,
-    name: "croissant",
-    picture: "croissant.png"
-  },
-  14: {
-    id: 14,
-    name: "cut_of_meat",
-    picture: "cut_of_meat.png"
-  },
-  15: {
-    id: 15,
-    name: "fire",
-    picture: "fire.png"
-  },
-  16: {
-    id: 16,
-    name: "flexed_biceps",
-    picture: "flexed_biceps.png"
-  },
-  17: {
-    id: 17,
-    name: "french_fries",
-    picture: "french_fries.png"
-  },
-  18: {
-    id: 18,
-    name: "frowning_face",
-    picture: "frowning_face.png"
-  },
-  19: {
-    id: 19,
-    name: "frowning_face_with_open_mouth",
-    picture: "frowning_face_with_open_mouth.png"
-  },
-  20: {
-    id: 20,
-    name: "grimacing_face",
-    picture: "grimacing_face.png"
-  },
-  21: {
-    id: 21,
-    name: "grinning_face_with_smiling_eyes",
-    picture: "grinning_face_with_smiling_eyes.png"
-  },
-  22: {
-    id: 22,
-    name: "grinning_face_with_sweat",
-    picture: "grinning_face_with_sweat.png"
-  },
-  23: {
-    id: 23,
-    name: "hamburger",
-    picture: "hamburger.png"
-  },
-  24: {
-    id: 24,
-    name: "hundred_points",
-    picture: "hundred_points.png"
-  },
-  25: {
-    id: 25,
-    name: "microbe",
-    picture: "microbe.png"
-  },
-  26: {
-    id: 26,
-    name: "middle_finger",
-    picture: "middle_finger.png"
-  },
-  27: {
-    id: 27,
-    name: "OK_hand",
-    picture: "OK_hand.png"
-  },
-  28: {
-    id: 28,
-    name: "pineapple",
-    picture: "pineapple.png"
-  },
-  29: {
-    id: 29,
-    name: "pizza",
-    picture: "pizza.png"
-  },
-  30: {
-    id: 30,
-    name: "red_apple",
-    picture: "red_apple.png"
-  },
-  31: {
-    id: 31,
-    name: "sandwich",
-    picture: "sandwich.png"
-  },
-  32: {
-    id: 32,
-    name: "shamrock",
-    picture: "shamrock.png"
-  },
-  33: {
-    id: 33,
-    name: "sleeping_face",
-    picture: "sleeping_face.png"
-  },
-  34: {
-    id: 34,
-    name: "slot_machine",
-    picture: "slot_machine.png"
-  },
-  35: {
-    id: 35,
-    name: "smiling_face_with_halo",
-    picture: "smiling_face_with_halo.png"
-  },
-  36: {
-    id: 36,
-    name: "spaghetti",
-    picture: "spaghetti.png"
-  },
-  37: {
-    id: 37,
-    name: "stop_sign",
-    picture: "stop_sign.png"
-  },
-  38: {
-    id: 38,
-    name: "tangerine",
-    picture: "tangerine.png"
-  },
-  39: {
-    id: 39,
-    name: "tomato",
-    picture: "tomato.png"
-  },
-  40: {
-    id: 40,
-    name: "tropical_drink",
-    picture: "tropical_drink.png"
-  },
-  41: {
-    id: 41,
-    name: "upside-down_face",
-    picture: "upside-down_face.png"
-  },
-  42: {
-    id: 42,
-    name: "victory_hand",
-    picture: "victory_hand.png"
-  },
-  43: {
-    id: 43,
-    name: "vulcan_salute",
-    picture: "vulcan_salute.png"
-  },
-  44: {
-    id: 44,
-    name: "watermelon",
-    picture: "watermelon.png"
-  },
-  45: {
-    id: 45,
-    name: "wine_glass",
-    picture: "wine_glass.png"
-  },
-  46: {
-    id: 46,
-    name: "zipper-mouth_face",
-    picture: "zipper-mouth_face.png"
-  }
-};

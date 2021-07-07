@@ -22,7 +22,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/global/header/header.component';
 import { ProfilComponent } from './components/global/profil/profil.component';
 import { SidebarComponent } from './components/global/sidebar/sidebar.component';
-import { EmojiComponent } from './components/messages/emoji/emoji.component';
+import { EmojiComponent } from './components/messages/reaction/reaction.component';
 import { LineDateComponent } from './components/messages/line-date/line-date.component';
 import { MessageComponent } from './components/messages/message/message.component';
 import { MsgThreadComponent } from './components/messages/msg-thread/msg-thread.component';
@@ -72,8 +72,22 @@ import { UploadWithPreviewComponent } from './components/params/team/upload-with
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { PrivateMenuComponent } from './components/private-msg/private-menu/private-menu.component';
 import { UserButtonComponent } from './components/private-msg/user-button/user-button.component';
+import { SenderProfileComponent } from './components/messages/sender-profile/sender-profile.component';
+import { EmojisSelectorComponent } from './components/messages/emojis-selector/emojis-selector.component';
 import { FullCalendarModule } from 'primeng/fullcalendar';
-
+import { ModaleAddSalonComponent } from './components/team/modale-add-salon/modale-add-salon.component';
+import { CalendarModule } from 'primeng/calendar';
+import { InputMaskModule } from 'primeng/inputmask';
+import { PasswordModule } from 'primeng/password';
+import { TranslateModule } from '@ngx-translate/core';
+import { MenuParamsComponent } from './components/global/menu-params/menu-params.component';
+import { ParamsTemplateComponent } from './pages/params/params-template/params-template.component';
+import { UserPasswordComponent } from './pages/params/user/user-password/user-password.component';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [
@@ -130,7 +144,13 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
     DialogPermissionComponent,
     UploadWithPreviewComponent,
     PrivateMenuComponent,
-    UserButtonComponent
+    UserButtonComponent,
+    SenderProfileComponent,
+    EmojisSelectorComponent,
+    ModaleAddSalonComponent,
+    MenuParamsComponent,
+    ParamsTemplateComponent,
+    UserPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -152,9 +172,19 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
     DialogModule,
     ConfirmDialogModule,
     DropdownModule,
-    FullCalendarModule
+    FullCalendarModule,
+    CalendarModule,
+    InputMaskModule,
+    PasswordModule,
+    TranslateModule.forRoot(),
+    ToastModule,
+    ConfirmPopupModule,
+    OverlayPanelModule,
   ],
-  providers: [RxStompService,
+  providers: [
+    RxStompService,
+    MessageService,
+    ConfirmationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

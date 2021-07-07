@@ -8,16 +8,17 @@
     overflow-y: auto;
 }
 
-#side_menu div{
+#side_menu div {
     margin-bottom: 20px;
     margin-left: 10px;
     color: var(--font_1);
     padding:15px;
 }
 
-#side_menu div:first-child{
+#side_menu div:first-child {
     margin-top: 15px;
 }
+
 div:hover {
     background-color: var(--menu);
 }

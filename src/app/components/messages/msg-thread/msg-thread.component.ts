@@ -2,8 +2,8 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/models/member/member';
 import { MessageEdit } from 'src/app/models/messages/MessageEdit';
 import { MessageSend } from 'src/app/models/messages/messageSend';
+import { MessageWsService } from 'src/app/services/message-ws.service';
 import { Message } from '../../../models/messages/message';
-import { MessageService } from '../../../services/message.service';
 
 @Component({
   selector: 'app-msg-thread',
@@ -13,13 +13,14 @@ import { MessageService } from '../../../services/message.service';
 export class MsgThreadComponent implements OnInit {
   @ViewChild("scrollMe") private msgThread: ElementRef;
 
+  @Input() teamId: string;
   @Input() salonId: string;
 
   /** Messages grouped by date and sorted by time */
   msgs: Message[][];
   member: Member;
 
-  constructor(private msgService: MessageService) { }
+  constructor(private msgService: MessageWsService) { }
 
   ngOnInit(): void {
     this.msgService.registerThread(this);

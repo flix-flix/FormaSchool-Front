@@ -1,0 +1,36 @@
+#side_menu {
+    display: flex;
+    flex-direction: column;
+
+    width: 20rem;
+    height: 100%;
+    padding: 1rem;
+
+    overflow-y: auto;
+    
+    background-color: var(--header);
+}
+
+.button {
+    padding:15px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+
+    text-decoration: none;
+
+    color: var(--font_1);
+}
+
+.button:hover {
+    background-color: var(--menu);
+}
+
+.current, .current:hover {
+    color: var(--font_1);
+    background-color: var(--font_2);
+}
+
+#previous {
+    font-weight: bold;
+    color: var(--font_2);
+}

@@ -22,7 +22,7 @@ export class TeamMenuComponent implements OnInit {
   constructor(private teamService: TeamService, private salonService: SalonService) { }
 
   ngOnInit(): void {
-    this.teamService.findNamePictureById(this.teamId).subscribe(json => this.team = json);
-    this.salonService.findAllSalonsNameOfTeam(this.teamId).subscribe(json => this.salons = json.map(salon => SalonNameTeam.fromJSON(salon)));
+    this.teamService.findNamePictById(this.teamId).subscribe(team => this.team = team);
+    this.salonService.findAllOfTeam(this.teamId).subscribe(salons => this.salons = salons);
   }
 }

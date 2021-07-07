@@ -1,89 +1,74 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import * as SockJS from 'sockjs-client';
-import { environment } from 'src/environments/environment';
-import * as Stomp from 'stompjs';
-import { MsgThreadComponent } from '../components/messages/msg-thread/msg-thread.component';
+import { FileModel } from '../models/file';
 import { Message } from '../models/messages/message';
-import { MessageEdit } from '../models/messages/MessageEdit';
-import { MessageSend } from '../models/messages/messageSend';
-import { Salon } from '../models/salon/salon';
-import { UserLocalStorage } from '../models/user/userLocalStorage';
-import { SalonService } from './salon.service';
-import { StorageService } from './storage.service';
+import { EmojiService } from './emoji.service';
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
 
-  stompClient;
-  salons: { [salonId: string]: Salon } = {};
-  user: UserLocalStorage;
-
-  constructor(private http: HttpClient, storageService: StorageService, private salonService: SalonService) {
-    storageService.subscribe("user", user => this.user = user);
-    this.connect();
-  }
+  constructor(private emojiService: EmojiService, private utilsService: UtilsService) { }
 
   // =========================================================================================
-  // REST
 
-  findAllMessageOfSalon = (salonId: string): Observable<Message[]> =>
-    this.http.get<Message[]>(environment.apiUrl + "/messages/salonWithReacts/" + salonId);
+  /** Process the [JSON message] received from the server */
+  fromJSON(msg: Message): Message {
+    msg.file = FileModel.fromJSON(msg.file);
+    msg.send = new Date(msg.send[0], msg.send[1] - 1, msg.send[2], msg.send[3], msg.send[4], msg.send[5]);
+    if (msg.edit != null)
+      msg.edit = new Date(msg.edit[0], msg.edit[1] - 1, msg.edit[2], msg.edit[3], msg.edit[4], msg.edit[5]);
 
-  // =========================================================================================
-  // WebSocket (settings)
-
-  connect() {
-    this.stompClient = Stomp.over(new SockJS(environment.apiUrl + "/wsMessages"));
-    this.stompClient.debug = null;
-    this.stompClient.connect({}, () => this.stompClient.subscribe('/topic/public', this.onMessageReceived));
+    msg.html = this.processHtml(msg.content);
+    this.emojiService.processEmojiSetter(msg.html, msg.teamId, html => msg.html = html);
+    return msg;
   }
 
-  registerThread(thread: MsgThreadComponent) {
-    if (thread.salonId in this.salons)
-      this.salons[thread.salonId].setThread(thread);
-    else
-      this.salonService.findById(thread.salonId).subscribe(salon =>
-        this.salons[thread.salonId] = new Salon(thread.salonId, salon.team.id, salon.name, salon.messages.map(msg => Message.fromJSON(msg)), thread,
-          this.user.members.find(member => member.team.id == salon.team.id)));
-    // this.findAllMessageOfSalon(thread.salonId).subscribe(msgs =>
-    //   this.salons[thread.salonId] = new Salon(thread.salonId, "none", "no_name", msgs.map(msg => Message.fromJSON(msg)), thread));
+  /** Generate an HTML representation of the content (with tags if markdown is used)
+   * @param content The original string
+   * @param replace true: remove the markdown markers
+   */
+  private processHtml = (content: string, replace: boolean = true): string => {
+    let html = content;
+    html = html.replace(/&/g, "&amp;");
+    html = html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    html = html.replace(/\n/g, "<br>");
+
+    html = this.processHtmlSpan(html, "**", "bold", replace);
+    html = this.processHtmlSpan(html, /((?<!\*)\*{1}(?!\*))|\*{3}/, "italic", replace); // *italic* | ***italic***
+    html = this.processHtmlSpan(html, "__", "under", replace);
+    html = this.processHtmlSpan(html, "~~", "strike", replace);
+
+    html = this.processHtmlSpan(html, "```", "md_bloc", replace);
+    html = this.processHtmlSpan(html, /((?<!`)`{1}(?!`))/, "md_bloc_inline", replace);
+
+    return html;
   }
 
-  // =========================================================================================
-  // WebSocket (request)
+  /**
+  * Add HTML tags for the given md marker
+  * 
+  * @param content The original string
+  * @param search The markdown marker
+  * @param clas The HTML class
+  * @param replace true: remove the markdown markers
+  * @returns A new string with the HTML tags
+  */
+  private processHtmlSpan = (content: string, search: string | RegExp, clas: string, replace: boolean = true): string => {
+    let html = "";
+    let first = 0, second = 0, prev = 0;
+    let len = typeof search === "string" ? search.length : (["italic", "md_bloc_inline"].includes(clas) ? 1 : 2);
 
-  send(msg: MessageSend) {
-    msg.memberId = this.user.members.find(member => member.team.id == this.salons[msg.salonId].teamId).id;
-
-    if (msg.file == undefined)
-      this._send(msg);
-    else {
-      let reader = new FileReader();
-      reader.onloadend = () => this._send(msg, reader.result);
-      reader.readAsDataURL(msg.file);
+    // If contains 2 occurences of the given "md marker"
+    while ((first = this.utilsService.indexOf(content, search, prev)) != -1
+      && (second = this.utilsService.indexOf(content, search, first + len)) != -1) {
+      html += content.substring(prev, first);
+      html += `<span class="${clas}">${content.substring(first + (replace ? len : 0), second + (replace ? 0 : len))}</span>`;
+      prev = second + len;
     }
-  }
 
-  private _send = (msg: MessageSend, fileContent = null) =>
-    this.stompClient.send("/app/chat.send", {}, JSON.stringify(fileContent ? { ...msg, file: fileContent } : msg));
-
-  edit = (msg: MessageEdit) => this.stompClient.send("/app/chat.edit", {}, JSON.stringify(msg));
-
-  delete = (msgId: string) => this.stompClient.send("/app/chat.delete", {}, msgId);
-
-  // =========================================================================================
-  // Messages management
-
-  private onMessageReceived = (obj) => {
-    let msg = JSON.parse(obj.body);
-
-    if ("content" in msg)
-      this.salons[msg.salonId].addMsg(Message.fromJSON(msg));
-    else
-      this.salons[msg.salonId].deleteMsg(msg);
+    // Add the remaining content
+    return html + content.substring(prev);
   }
 }

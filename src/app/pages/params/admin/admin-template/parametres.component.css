@@ -1,15 +1,14 @@
-section{
+section {
     display: flex;
+
     height: 100%;
     width: 100%;
 }
-#content{
+
+#content {
     width: 100%;
     height: 100%;
-    background-color: var(--menu);
+
     overflow-y: auto;
-}
-#sidebar{
-    width: 20rem;
-    height: 100%;
+    background-color: var(--menu);
 }

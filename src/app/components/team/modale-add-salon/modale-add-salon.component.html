@@ -1,0 +1,22 @@
+<p-dialog modal="true" [(visible)]="displayDialog" id="dialogAddSalon">
+    <ng-template pTemplate="header">
+        <h1>Nouveau salon</h1>
+    </ng-template>
+
+    <form [formGroup]="form" (ngSubmit)="openAddSalon()">
+        <span class="p-float-label">
+            <input formControlName="name" id="float-input" type="text" pInputText>
+            <label for="float-input">Nom</label>
+        </span>
+
+        <span class="p-float-label">
+            <textarea formControlName="desc" pInputTextarea [rows]="5" [cols]="50" id="texta"></textarea>
+            <label for="texta">Description</label>
+        </span>
+    </form>
+
+    <p-footer>
+        <button (mousedown)="addSalon()" pButton type="button" label="Ajouter" icon="pi pi-plus" iconPos="left"
+            class="p-button-raised"></button>
+    </p-footer>
+</p-dialog>

@@ -16,5 +16,12 @@
     <div id="salons">
         <app-salon-button *ngFor="let salon of salons" [salon]="salon" [salonId]="salonId">
         </app-salon-button>
+
+        <div id="addSalon">
+            <img src="../../../../assets/images/feather-icons/plus-square.svg" alt="addSalon" class="feather"
+                (click)="modale.openAddSalon()">
+        </div>
     </div>
 </div>
+
+<app-modale-add-salon #modale></app-modale-add-salon>

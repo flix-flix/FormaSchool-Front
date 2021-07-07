@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { userCreation } from 'src/app/models/user/userCreation';
-import { UserCreationWithFile } from 'src/app/models/user/userCreationWithFile';
-import { LogService } from 'src/app/services/log.service';
+import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { UploadWithPreviewComponent } from 'src/app/components/params/team/upload-with-preview/upload-with-preview.component';
+import { UserSettings } from 'src/app/models/user/userSettings';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,44 +12,48 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-identity.component.css']
 })
 export class UserIdentityComponent implements OnInit {
+  @ViewChild("img") private img: UploadWithPreviewComponent;
 
-userProfile: FormGroup;
-file: File;
+  userId: string;
 
-constructor(private fb: FormBuilder, private userService: UserService, private logService: LogService) {
-  this.userProfile = this.fb.group({
-    firstname: [''],
-    lastname: [''],
-    email: [''],
-    age: [''],
-    telephone: [''],
-    password: [''],   
-  })
-}
+  userProfile: FormGroup;
+  file: File;
 
-ngOnInit(): void {
-}
-
-save = () => {
-  if (this.file != null) {
-    this.saveWithFile();
+  constructor(private fb: FormBuilder, private userService: UserService, private activatedRoute: ActivatedRoute, private messageService: MessageService) {
+    this.userProfile = this.fb.group({
+      firstname: [''],
+      lastname: [''],
+      birth: [undefined],
+      email: [''],
+      phone: [''],
+    })
   }
-  else {
-    let user: userCreation = this.userProfile.value;
-    this.userService.save(user).subscribe(user => {
-      alert(`Le profile a bien été modifié`)
+
+  ngOnInit(): void {
+    this.activatedRoute.parent.paramMap.subscribe(params => {
+      this.userId = params.get("userId");
+      this.userService.findSettingsById(this.userId).subscribe(settings => {
+        settings.birth = new Date(settings.birth[0], settings.birth[1] - 1, settings.birth[2] + 1);
+
+        if (settings.picture != null)
+          this.img.setFileFromServer(settings.picture);
+        this.userProfile.patchValue({ ...settings })
+      });
     });
   }
-}
 
-saveWithFile = () => {
-  let user: UserCreationWithFile = this.userProfile.value;
-  user.file = this.file;
-  this.userService.saveWithFile(user);
-}
+  /** Send the modifications to the server */
+  save = () => {
+    let user: UserSettings = this.userProfile.value;
+    user.id = this.userId;
+    this.userService.updateSettings(user).subscribe(user => {
+      // TODO [Improve] handle error
+      this.messageService.add({ severity: 'success', summary: 'Sauvegarde terminée', detail: 'Le profil à été mis à jour' })
+    });
+  }
 
-getEvent = (element) => {
-  this.file = element.file;
-}
-
+  /** File changes */
+  imgEvent = (element) => {
+    this.file = element.file;
+  }
 }

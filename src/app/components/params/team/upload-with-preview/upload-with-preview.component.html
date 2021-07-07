@@ -1,19 +1,16 @@
-<section>
-    <p>Choisir une image:</p>
-
-    <div id=divFile>
-        <img id="filechoosen" *ngIf="url" [src]="url">
+<div id="all">
+    <div id="file_frame" (mousedown)="fileInput.click()">
+        <span *ngIf="!url" id="file_empty">Choisit une image</span>
+        <img *ngIf="url" id="file_display" [src]="url">
     </div>
 
-    <div id="button_container">
-        <img id="plus" class="icon feather" src="../../../../../assets/images/feather-icons/upload-cloud.svg"
-            alt="joinFile" (mousedown)="fileInput.click()">
-        <span *ngIf="file != undefined" id="file_name">
-            <div id="remove_file" (click)="fileInput.value='';delete()">
-                <img src="../../../../assets/images/feather-icons/x-circle.svg" alt="remove_file" class="feather">
-            </div>
-        </span>
+    <div id="buttons">
+        <img src="../../../../../assets/images/feather-icons/upload-cloud.svg" alt="joinFile" class="feather"
+            (mousedown)="fileInput.click()">
+
+        <img *ngIf="file" src="../../../../assets/images/feather-icons/x-circle.svg" alt="remove_file" class="feather"
+            (mousedown)="fileInput.value=''; delete()">
     </div>
 
-    <input type="file" id="input_file" (change)="onChange($event)" accept="image/x-png,image/gif,image/jpeg" #fileInput>
-</section>
+    <input id="input_file" type="file" (change)="onChange($event)" accept="image/x-png,image/gif,image/jpeg" #fileInput>
+</div>

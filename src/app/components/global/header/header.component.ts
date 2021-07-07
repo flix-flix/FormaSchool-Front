@@ -12,6 +12,7 @@ import { StorageService } from 'src/app/services/storage.service';
 export class HeaderComponent implements OnInit {
   @Output() colors = new EventEmitter();
 
+  /** Header title */
   text = "";
 
   user: UserLocalStorage;
@@ -33,6 +34,7 @@ export class HeaderComponent implements OnInit {
 
   // =========================================================================================
 
+  /** Changes the header content depends on the given path */
   updateHeader(path: string) {
     if (path.startsWith("/teamSelect"))
       this.text = "Equipes";
@@ -40,8 +42,6 @@ export class HeaderComponent implements OnInit {
       this.text = "Connexion";
     else if (path.startsWith("/404"))
       this.text = "404";
-    else if (path.startsWith("/user"))
-      this.text = "Paramètres utilisateur";
     else if (path.startsWith("/privateMessages"))
       this.text = "Messages privés";
     else if (path.startsWith("/teamMessages")) {
@@ -58,7 +58,6 @@ export class HeaderComponent implements OnInit {
 
   // =========================================================================================
 
-  openColors = () => {
-    this.colors.emit("");
-  }
+  /** Open the modale to change the site colors */
+  openColors = () => this.colors.emit("");
 }

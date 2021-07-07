@@ -22,7 +22,7 @@ export class MemberService {
   * @returns It return -1 if the team does not exist in the base, else it return 0 if its ok !
   */
   save = (memberCreate: MemberCreate): Observable<Member> => {
-    return this.http.post<Member>(`${environment.apiUrl}/members`, memberCreate.toJSON());
+    return this.http.post<Member>(`${environment.apiUrl}/members`, memberCreate);
   }
 
   /**

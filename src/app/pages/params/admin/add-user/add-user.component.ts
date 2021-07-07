@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { userCreation } from 'src/app/models/user/userCreation';
+import { UserCreation } from 'src/app/models/user/userCreation';
 import { UserCreationWithFile } from 'src/app/models/user/userCreationWithFile';
 import { LogService } from 'src/app/services/log.service';
 import { UserService } from 'src/app/services/user.service';
@@ -35,7 +35,7 @@ export class AddUserComponent implements OnInit {
       this.saveWithFile();
     }
     else {
-      let user: userCreation = this.userForm.value;
+      let user: UserCreation = this.userForm.value;
       this.userService.save(user).subscribe(user => {
         alert(`L'utilisateur a bien été créé avec l'id ${user.id}`)
       });

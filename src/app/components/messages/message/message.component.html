@@ -1,54 +1,39 @@
 <div class="msg">
-    <!-- Profile -->
-    <div id="profile">
-        <img id="sender_img" src="{{env.apiUrl}}/files/users/{{msg.sender.user.picture}}" alt="">
-        <div id="profile_hover" *ngIf="msg.sender.user.id != user.id">
-            <div id="profile_top">
-                <img id="sender_img2" src="{{env.apiUrl}}/files/users/{{msg.sender.user.picture}}" alt="">
-                {{msg.sender.user.firstname}} {{msg.sender.user.lastname}}
-            </div>
-            <div id="profile_bottom" (click)="privateMsg()">
-                <div>
-                    <img src="../../../../assets/images/feather-icons/mail.svg" alt="mail" id="mail">
-                </div>
-                Message privé
-            </div>
-        </div>
-    </div>
+    <app-sender-profile [member]="msg.sender" [show]="msg.sender.user.id != user.id"></app-sender-profile>
 
     <div id="left">
         <div class="top">
             <span class="sender">{{msg.sender.user.firstname}} {{msg.sender.user.lastname}}</span>
-            <span class="time">{{msg.getTimeStr()}}</span>
+            <span class="time">{{getTimeStr()}}</span>
         </div>
 
-        <div class="text" [contentEditable]="editable" (keydown.enter)="pressEnter($event)"
-            (keydown.escape)="pressEscape($event)" [class.edit]="editable" #text></div>
+        <!-- Content -->
+        <div [hidden]="editable" [innerHtml]="msg.html" class="text" #display></div>
+
+        <div [hidden]="!editable" class="text edit" contentEditable="true" (input)="editContent=$event.target.innerText"
+            (keydown.enter)="pressEnter($event)" (keydown.escape)="pressEscape($event)" #edit></div>
 
         <!-- File -->
         <app-shared-file [file]="msg.file"></app-shared-file>
 
         <!-- Reactions -->
-        <div id="emojis">
-            <app-emoji *ngFor="let react of msg.reactions" [reaction]="react" [member]="member"></app-emoji>
+        <div id="reactions">
+            <app-reaction *ngFor="let react of msg.reactions" [reaction]="react" [member]="member" [msgId]="msg.id">
+            </app-reaction>
         </div>
     </div>
-
-
 
     <!-- Icons on hover -->
     <div id="icons">
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/smile.svg" alt="emoji"
-            (click)="emoji()">
+            (mousedown)="emoji()">
 
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/edit-3.svg" alt="edit"
-            *ngIf="msg.sender.user.id == user.id" (click)="edit()">
+            *ngIf="msg.sender.user.id == user.id" (mousedown)="editButton()">
         <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/trash-2.svg" alt="delete"
-            *ngIf="msg.sender.user.id == user.id" (click)="deleteClick()">
-
-        <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/corner-up-left.svg" alt="reply"
-            *ngIf="msg.sender.user.id != user.id" (click)="reply()">
-        <img class="msg_icon feather" src="../../../../../assets/images/feather-icons/more-horizontal.svg" alt="other"
-            *ngIf="msg.sender.user.id != user.id" (click)="other()">
+            *ngIf="msg.sender.user.id == user.id" (mousedown)="deleteButton($event)">
     </div>
+
+    <app-emojis-selector [hidden]="hideSelector" [teamId]="msg.teamId" (emojiEmit)="addReaction($event)">
+    </app-emojis-selector>
 </div>

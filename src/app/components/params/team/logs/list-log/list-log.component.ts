@@ -9,7 +9,7 @@ import { Log } from 'src/app/models/log';
 export class ListLogComponent implements OnInit {
 
   @Input() logs: Log[];
-  @Input() teamId: number;
+  @Input() teamId: string;
 
   constructor() { }
 

@@ -1,5 +1,5 @@
-<div class="salon" routerLink="../{{salon.id}}" [class.selected]="salonId == salon.id">
-    <div id="name" [innerHtml]="salon.html"></div>
+<div class="salon" [class.selected]="salonId==salon.id">
+    <a id="name" [innerHtml]="salon.html" routerLink="../{{salon.id}}"></a>
 
     <img class=" params feather" src="../../../../../assets/images/feather-icons/sliders.svg" alt="salon_settings"
         routerLink="/params/salon/{{salon.id}}">

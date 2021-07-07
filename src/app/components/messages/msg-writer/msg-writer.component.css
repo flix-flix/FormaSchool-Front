@@ -7,7 +7,7 @@
     margin: 0 auto;
 }
 
-#input_msg {
+.input_msg {
     display: block;
     
     width: 100%;
@@ -30,19 +30,19 @@
 }
 
 
-#input_msg:empty::before {
+.input_msg:empty::before {
     display: block;
     content: attr(data-placeholder);
     
     color: var(--font_1);
 }
 
-#input_msg::placeholder {
+.input_msg::placeholder {
     color: var(--font_1);
 }
 
 /* ========= Scrollbar ========= */
-#input_msg::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 9px;
 }
 
@@ -50,7 +50,7 @@
     background-color: var(--header);
 }
 
-#input_msg::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: var(--font_2);
     border: 2px solid var(--header);
     border-radius: 20px;

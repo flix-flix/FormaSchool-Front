@@ -576,7 +576,7 @@
         "tags": "BJ, flag"
     },
     {
-        "annotation": "flag_St._BarthÃ©lemy_9",
+        "annotation": "flag_St_BarthÃ©lemy_9",
         "group": "flags",
         "hexcode": "1F1E7-1F1F1",
         "openmoji_tags": "",
@@ -738,7 +738,7 @@
         "tags": "CH, flag"
     },
     {
-        "annotation": "flag_CÃ´te_dâ€™Ivoire_9",
+        "annotation": "flag_CÃ´te_dIvoire_9",
         "group": "flags",
         "hexcode": "1F1E8-1F1EE",
         "openmoji_tags": "",
@@ -1467,7 +1467,7 @@
         "tags": "KM, flag"
     },
     {
-        "annotation": "flag_St._Kitts_&_Nevis_9",
+        "annotation": "flag_St_Kitts_&_Nevis_9",
         "group": "flags",
         "hexcode": "1F1F0-1F1F3",
         "openmoji_tags": "",
@@ -1539,7 +1539,7 @@
         "tags": "LB, flag"
     },
     {
-        "annotation": "flag_St._Lucia_9",
+        "annotation": "flag_St_Lucia_9",
         "group": "flags",
         "hexcode": "1F1F1-1F1E8",
         "openmoji_tags": "",
@@ -1656,7 +1656,7 @@
         "tags": "ME, flag"
     },
     {
-        "annotation": "flag_St._Martin_9",
+        "annotation": "flag_St_Martin_9",
         "group": "flags",
         "hexcode": "1F1F2-1F1EB",
         "openmoji_tags": "",
@@ -2007,7 +2007,7 @@
         "tags": "PL, flag"
     },
     {
-        "annotation": "flag_St._Pierre_&_Miquelon_9",
+        "annotation": "flag_St_Pierre_&_Miquelon_9",
         "group": "flags",
         "hexcode": "1F1F5-1F1F2",
         "openmoji_tags": "",
@@ -2178,7 +2178,7 @@
         "tags": "SG, flag"
     },
     {
-        "annotation": "flag_St._Helena_9",
+        "annotation": "flag_St_Helena_9",
         "group": "flags",
         "hexcode": "1F1F8-1F1ED",
         "openmoji_tags": "",
@@ -2484,7 +2484,7 @@
         "tags": "UG, flag"
     },
     {
-        "annotation": "flag_U.S._Outlying_Islands_9",
+        "annotation": "flag_US_Outlying_Islands_9",
         "group": "flags",
         "hexcode": "1F1FA-1F1F2",
         "openmoji_tags": "usa, united states, us, america",
@@ -2538,7 +2538,7 @@
         "tags": "VA, flag"
     },
     {
-        "annotation": "flag_St._Vincent_&_Grenadines_9",
+        "annotation": "flag_St_Vincent_&_Grenadines_9",
         "group": "flags",
         "hexcode": "1F1FB-1F1E8",
         "openmoji_tags": "",
@@ -2565,7 +2565,7 @@
         "tags": "VG, flag"
     },
     {
-        "annotation": "flag_U.S._Virgin_Islands_9",
+        "annotation": "flag_US_Virgin_Islands_9",
         "group": "flags",
         "hexcode": "1F1FB-1F1EE",
         "openmoji_tags": "",
@@ -7479,7 +7479,7 @@
         "tags": "clothing, king, queen"
     },
     {
-        "annotation": "womanâ€™s_hat_9",
+        "annotation": "womans_hat_9",
         "group": "objects",
         "hexcode": "1F452",
         "openmoji_tags": "beautiful,",
@@ -7551,7 +7551,7 @@
         "tags": "clothing, swim"
     },
     {
-        "annotation": "womanâ€™s_clothes_9",
+        "annotation": "womans_clothes_9",
         "group": "objects",
         "hexcode": "1F45A",
         "openmoji_tags": "",
@@ -7587,7 +7587,7 @@
         "tags": "bag, clothing, pouch"
     },
     {
-        "annotation": "manâ€™s_shoe_9",
+        "annotation": "mans_shoe_9",
         "group": "objects",
         "hexcode": "1F45E",
         "openmoji_tags": "",
@@ -7614,7 +7614,7 @@
         "tags": "clothing, heel, shoe, woman"
     },
     {
-        "annotation": "womanâ€™s_sandal_9",
+        "annotation": "womans_sandal_9",
         "group": "objects",
         "hexcode": "1F461",
         "openmoji_tags": "",
@@ -7623,7 +7623,7 @@
         "tags": "clothing, sandal, shoe, woman"
     },
     {
-        "annotation": "womanâ€™s_boot_9",
+        "annotation": "womans_boot_9",
         "group": "objects",
         "hexcode": "1F462",
         "openmoji_tags": "",
@@ -15174,112 +15174,112 @@
         "tags": "candelabrum, candlestick, religion"
     },
     {
-        "annotation": "one_oâ€™clock_9",
+        "annotation": "one_oclock_9",
         "group": "travel-places",
         "hexcode": "1F550",
         "openmoji_tags": "time",
         "order": 3112,
         "subgroups": "time",
-        "tags": "00, 1, 1:00, clock, one, oâ€™clock"
+        "tags": "00, 1, 1:00, clock, one, oclock"
     },
     {
-        "annotation": "two_oâ€™clock_9",
+        "annotation": "two_oclock_9",
         "group": "travel-places",
         "hexcode": "1F551",
         "openmoji_tags": "time",
         "order": 3114,
         "subgroups": "time",
-        "tags": "00, 2, 2:00, clock, oâ€™clock, two"
+        "tags": "00, 2, 2:00, clock, oclock, two"
     },
     {
-        "annotation": "three_oâ€™clock_9",
+        "annotation": "three_oclock_9",
         "group": "travel-places",
         "hexcode": "1F552",
         "openmoji_tags": "time",
         "order": 3116,
         "subgroups": "time",
-        "tags": "00, 3, 3:00, clock, oâ€™clock, three"
+        "tags": "00, 3, 3:00, clock, oclock, three"
     },
     {
-        "annotation": "four_oâ€™clock_9",
+        "annotation": "four_oclock_9",
         "group": "travel-places",
         "hexcode": "1F553",
         "openmoji_tags": "time",
         "order": 3118,
         "subgroups": "time",
-        "tags": "00, 4, 4:00, clock, four, oâ€™clock"
+        "tags": "00, 4, 4:00, clock, four, oclock"
     },
     {
-        "annotation": "five_oâ€™clock_9",
+        "annotation": "five_oclock_9",
         "group": "travel-places",
         "hexcode": "1F554",
         "openmoji_tags": "time",
         "order": 3120,
         "subgroups": "time",
-        "tags": "00, 5, 5:00, clock, five, oâ€™clock"
+        "tags": "00, 5, 5:00, clock, five, oclock"
     },
     {
-        "annotation": "six_oâ€™clock_9",
+        "annotation": "six_oclock_9",
         "group": "travel-places",
         "hexcode": "1F555",
         "openmoji_tags": "time",
         "order": 3122,
         "subgroups": "time",
-        "tags": "00, 6, 6:00, clock, oâ€™clock, six"
+        "tags": "00, 6, 6:00, clock, oclock, six"
     },
     {
-        "annotation": "seven_oâ€™clock_9",
+        "annotation": "seven_oclock_9",
         "group": "travel-places",
         "hexcode": "1F556",
         "openmoji_tags": "time",
         "order": 3124,
         "subgroups": "time",
-        "tags": "00, 7, 7:00, clock, oâ€™clock, seven"
+        "tags": "00, 7, 7:00, clock, oclock, seven"
     },
     {
-        "annotation": "eight_oâ€™clock_9",
+        "annotation": "eight_oclock_9",
         "group": "travel-places",
         "hexcode": "1F557",
         "openmoji_tags": "time",
         "order": 3126,
         "subgroups": "time",
-        "tags": "00, 8, 8:00, clock, eight, oâ€™clock"
+        "tags": "00, 8, 8:00, clock, eight, oclock"
     },
     {
-        "annotation": "nine_oâ€™clock_9",
+        "annotation": "nine_oclock_9",
         "group": "travel-places",
         "hexcode": "1F558",
         "openmoji_tags": "time",
         "order": 3128,
         "subgroups": "time",
-        "tags": "00, 9, 9:00, clock, nine, oâ€™clock"
+        "tags": "00, 9, 9:00, clock, nine, oclock"
     },
     {
-        "annotation": "ten_oâ€™clock_9",
+        "annotation": "ten_oclock_9",
         "group": "travel-places",
         "hexcode": "1F559",
         "openmoji_tags": "time",
         "order": 3130,
         "subgroups": "time",
-        "tags": "00, 10, 10:00, clock, oâ€™clock, ten"
+        "tags": "00, 10, 10:00, clock, oclock, ten"
     },
     {
-        "annotation": "eleven_oâ€™clock_9",
+        "annotation": "eleven_oclock_9",
         "group": "travel-places",
         "hexcode": "1F55A",
         "openmoji_tags": "time",
         "order": 3132,
         "subgroups": "time",
-        "tags": "00, 11, 11:00, clock, eleven, oâ€™clock"
+        "tags": "00, 11, 11:00, clock, eleven, oclock"
     },
     {
-        "annotation": "twelve_oâ€™clock_9",
+        "annotation": "twelve_oclock_9",
         "group": "travel-places",
         "hexcode": "1F55B",
         "openmoji_tags": "time",
         "order": 3110,
         "subgroups": "time",
-        "tags": "00, 12, 12:00, clock, oâ€™clock, twelve"
+        "tags": "00, 12, 12:00, clock, oclock, twelve"
     },
     {
         "annotation": "one-thirty_9",
@@ -19017,7 +19017,7 @@
         "tags": "child, crossing, pedestrian, traffic"
     },
     {
-        "annotation": "menâ€™s_room_9",
+        "annotation": "mens_room_9",
         "group": "symbols",
         "hexcode": "1F6B9",
         "openmoji_tags": "man, restroom, guy, dude, male, toilet",
@@ -19026,7 +19026,7 @@
         "tags": "lavatory, man, restroom, wc"
     },
     {
-        "annotation": "womenâ€™s_room_9",
+        "annotation": "womens_room_9",
         "group": "symbols",
         "hexcode": "1F6BA",
         "openmoji_tags": "woman, female, restroom, chick, women, toilet",
@@ -20925,7 +20925,7 @@
         "tags": "groom, person, tuxedo"
     },
     {
-        "annotation": "Mrs._Claus_light_skin_tone_9",
+        "annotation": "Mrs_Claus_light_skin_tone_9",
         "group": "people-body",
         "hexcode": "1F936-1F3FB",
         "openmoji_tags": "",
@@ -20934,7 +20934,7 @@
         "tags": ""
     },
     {
-        "annotation": "Mrs._Claus_medium-light_skin_tone_9",
+        "annotation": "Mrs_Claus_medium-light_skin_tone_9",
         "group": "people-body",
         "hexcode": "1F936-1F3FC",
         "openmoji_tags": "",
@@ -20943,7 +20943,7 @@
         "tags": ""
     },
     {
-        "annotation": "Mrs._Claus_medium_skin_tone_9",
+        "annotation": "Mrs_Claus_medium_skin_tone_9",
         "group": "people-body",
         "hexcode": "1F936-1F3FD",
         "openmoji_tags": "",
@@ -20952,7 +20952,7 @@
         "tags": ""
     },
     {
-        "annotation": "Mrs._Claus_medium-dark_skin_tone_9",
+        "annotation": "Mrs_Claus_medium-dark_skin_tone_9",
         "group": "people-body",
         "hexcode": "1F936-1F3FE",
         "openmoji_tags": "",
@@ -20961,7 +20961,7 @@
         "tags": ""
     },
     {
-        "annotation": "Mrs._Claus_dark_skin_tone_9",
+        "annotation": "Mrs_Claus_dark_skin_tone_9",
         "group": "people-body",
         "hexcode": "1F936-1F3FF",
         "openmoji_tags": "",
@@ -20970,7 +20970,7 @@
         "tags": ""
     },
     {
-        "annotation": "Mrs._Claus_9",
+        "annotation": "Mrs_Claus_9",
         "group": "people-body",
         "hexcode": "1F936",
         "openmoji_tags": "christmas, holiday, jolly, happy, mrs. clause, xmas, celebration",
@@ -29385,7 +29385,7 @@
         "tags": "mining, tool"
     },
     {
-        "annotation": "rescue_workerâ€™s_helmet_9",
+        "annotation": "rescue_workers_helmet_9",
         "group": "objects",
         "hexcode": "26D1",
         "openmoji_tags": "",
