@@ -1,21 +1,42 @@
-#upload {
+form{
     display: flex;
     justify-content: center;
-    
-    margin-top: 1rem;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
 }
 
-span {
-    margin: 35px;
-}
-
-div {
+#profil {
     display: flex;
-    flex-wrap: wrap;
 }
 
-input {
+.profil_inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.profil_inputs span{
+    margin:4.5%;
+}
+.mail_pwd{
+    display: flex;
+    flex-direction: column;
+}
+
+.mail_pwd span{
+    margin: 10%;
+}
+.mail_pwd span input{
+    width: 15rem;
+}
+
+::ng-deep.p-inputtext {
+    width: 15rem;
+
+    color: var(--font_2);
     background-color: var(--background);
+    
+    border-color: var(--header);
 }
 
 input:hover {
@@ -26,6 +47,7 @@ label {
     color: var(--font_2);
 }
 
-button {
-    margin: 35px;
+#button {
+    width: 10%;
+    background-color: var(--header);
 }
